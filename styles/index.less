@@ -1,0 +1,50 @@
+@import '~antd/dist/antd.less';
+// @import '~antd/es/style/themes/index';
+// @import '~antd/es/style/mixins/index';
+
+body {
+  font-family: Chinese Quote,-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,PingFang SC,Hiragino Sans GB,Microsoft YaHei,Helvetica Neue,Helvetica,Arial,sans-serif;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.user-button-popover .ant-popover-inner-content {
+  padding: 0;
+}
+
+.creatorsdaily {
+  #__next {
+    overflow: hidden;
+  }
+  @menu-prefix-cls: ~'@{ant-prefix}-menu';
+  .@{menu-prefix-cls} {
+    &-horizontal {
+      border-bottom: 0;
+      > .@{menu-prefix-cls}-item {
+        // padding: 0;
+        // margin: 0 16px;
+        border: 0;
+        &-open,
+        &-selected {
+          font-weight: bold;
+        }
+      }
+    }
+  }
+  .ant-tooltip {
+    font-size: 12px !important;
+  }
+  .preview-modal {
+    .ant-modal-confirm-body-wrapper {
+      align-items: center;
+      display: flex;
+      flex-direction: column;
+    }
+    .ant-modal-confirm-content {
+      margin: 0;
+    }
+    .ant-modal-confirm-btns {
+      display: none;
+    }
+  }
+}

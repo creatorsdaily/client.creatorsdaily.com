@@ -1,0 +1,18 @@
+{
+  "env": {
+    "browser": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+        "jsx": true
+    }
+  },
+  "parser": "babel-eslint",
+  "extends": ["standard", "standard-jsx", "plugin:import/errors", "plugin:import/warnings"],
+  "rules": {
+    "sort-imports": [2, {
+      "ignoreDeclarationSort": true
+    }],
+    "import/order": 2
+  }
+}

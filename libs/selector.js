@@ -1,0 +1,1 @@
+export const userSelector = ({ user }) => user.data
