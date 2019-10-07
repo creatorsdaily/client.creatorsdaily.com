@@ -48,7 +48,7 @@ export default () => {
         </Row>
         <Row type='flex' gutter={24}>
           <Col xl={12} lg={15} md={14} sm={24} xs={24}>
-            <SmallTitle>聊一聊</SmallTitle>
+            <SmallTitle id='comments' name='comments'>聊一聊</SmallTitle>
             <Comments productId={id} product={product} />
           </Col>
         </Row>

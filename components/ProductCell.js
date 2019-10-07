@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import Link from 'next/link'
+import { Button, Icon } from 'antd'
 import useProductMeta from '../hooks/useProductMeta'
 import { TopicsBar } from './Topics'
 import Box from './Box'
@@ -29,11 +30,15 @@ const StyledLink = styled.a`
   padding: ${({ size }) => size === 'small' ? 8 : 16}px;
 `
 
-const StyledTopicsBar = styled(TopicsBar)`
-  position: absolute;
-  bottom: 16px;
+const ProductMeta = styled.div`
+position: absolute;
+bottom: 16px;
+margin: 0;
+left: 112px;
+display: flex;
+>div {
   margin: 0;
-  left: 112px;
+}
 `
 
 const Container = styled(Box)`
@@ -64,28 +69,60 @@ const ProductIcon = styled(IPFSImage)`
 `
 
 const Description = styled.p`
-  color: #6f6f6f;
-  font-size: ${({ size }) => size === 'small' ? 12 : 13}px;
-  line-height: 20px;
-  overflow: hidden;
-  text-overflow:ellipsis;
-  white-space: nowrap;
-  display: block;
+color: #6f6f6f;
+font-size: ${({ size }) => size === 'small' ? 12 : 13}px;
+line-height: 20px;
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
+display: block;
+`
+
+const CommentsButton = styled(Button)`
+color: #6f6f6f;
+// margin-right: 8px;
+margin-right: 18px;
+display: flex;
+align-items: center;
+padding: 0 7px !important;
+width: initial !important;
+font-weight: bold;
+font-size: 12px;
+i {
+  font-size: 12px;
+  margin-top: 1px;
+}
+`
+
+const CommentsCount = styled.span`
+margin-left: 5px !important;
+display: block;
+height: 22px;
+line-height: 22px;
 `
 
 export default ({
   id, disabled = false, topics = [], size = 'normal',
-  likeCount, isLike, icon, name, description,
+  likeCount, commentCount, isLike, icon, name, description,
   ...rest
 }) => {
   const {
     hash,
     topics: newTopics
   } = useProductMeta({ icon, topics })
-  const renderTopics = () => {
-    if (!newTopics.length || size === 'small') return null
+  const renderMeta = () => {
+    if (size === 'small') return null
     return (
-      <StyledTopicsBar disabled={disabled} href='/' list={newTopics} checkable />
+      <ProductMeta>
+        <Link href='/[id]' as={`/${id}#comments`}>
+          <a>
+            <CommentsButton icon='message' size='small'>
+              {!!commentCount && (<CommentsCount>{commentCount}</CommentsCount>)}
+            </CommentsButton>
+          </a>
+        </Link>
+        {!!newTopics.length && (<TopicsBar disabled={disabled} href='/' list={newTopics} checkable />)}
+      </ProductMeta>
     )
   }
   const renderCell = () => (
@@ -117,7 +154,7 @@ export default ({
   return (
     <Container {...rest} size={size}>
       {renderContent()}
-      {renderTopics()}
+      {renderMeta()}
       {renderLikes()}
     </Container>
   )

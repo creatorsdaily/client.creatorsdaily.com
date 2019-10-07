@@ -42,6 +42,7 @@ query($id: String!) {
     isCreator
     isDiscoverer
     likeCount
+    commentCount
     discovererId
     icon {
       id
@@ -80,6 +81,7 @@ query($page: Int, $size: Int, $topic: [String!], $keyword: [String!]) {
       description
       isLike
       likeCount
+      commentCount
       topics {
         id
         name

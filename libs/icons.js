@@ -116,6 +116,14 @@ export {
 } from '@ant-design/icons/lib/outline/BarsOutline'
 
 export {
+  default as MessageOutline
+} from '@ant-design/icons/lib/outline/MessageOutline'
+
+export {
+  default as MessageFill
+} from '@ant-design/icons/lib/fill/MessageFill'
+
+export {
   default as LikeFill
 } from '@ant-design/icons/lib/fill/LikeFill'
 
