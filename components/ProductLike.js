@@ -5,6 +5,7 @@ import gql from 'graphql-tag'
 import { useEffect, useState } from 'react'
 import useToggle from 'react-use/lib/useToggle'
 import formError from '../libs/form-error'
+import { GET_PRODUCT } from '../queries'
 
 const StyledButton = styled(Button)`
   min-height: 50px;
@@ -31,27 +32,21 @@ mutation($id: String!, $dislike: Boolean) {
 `
 
 export default ({ title = '我喜欢', id, likeCount, isLike, ...rest }) => {
-  const [count, setCount] = useState(likeCount)
-  const [isCurrentLike, setLike] = useToggle(isLike)
   const [like, { loading }] = useMutation(LIKE, {
-    onCompleted: data => {
-      setCount(count + (isCurrentLike ? -1 : 1))
-      setLike(!isCurrentLike)
-    },
     onError: error => {
       const errors = formError(null, error)
       message.error(errors[0].message)
-    }
+    },
+    refetchQueries: () => [{
+      query: GET_PRODUCT,
+      variables: { id }
+    }]
   })
-  useEffect(() => {
-    setCount(likeCount)
-    setLike(isLike)
-  }, [likeCount, isLike])
   const handleClick = () => {
     like({
       variables: {
         id,
-        dislike: isCurrentLike
+        dislike: isLike
       }
     })
   }
@@ -62,11 +57,11 @@ export default ({ title = '我喜欢', id, likeCount, isLike, ...rest }) => {
       size='large'
       icon='caret-up'
       onClick={handleClick}
-      islike={(!!isCurrentLike).toString()}
+      islike={(!!isLike).toString()}
       {...rest}
     >
       {title}
-      <Count>{count || '' }</Count>
+      <Count>{likeCount || '' }</Count>
     </StyledButton>
   )
 }

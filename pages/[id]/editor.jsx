@@ -50,7 +50,11 @@ export default () => {
       const { form } = ref.current.props
       const errors = formError(form, error)
       message.error(errors[0].message)
-    }
+    },
+    refetchQueries: () => [{
+      query: GET_PRODUCT,
+      variables: { id: query.id }
+    }]
   })
   const { data, loading: getLoading } = useQuery(GET_PRODUCT, {
     variables: {
