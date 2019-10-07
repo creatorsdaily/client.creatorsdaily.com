@@ -99,7 +99,7 @@ const CommentCell = ({ product, comment, loading, onReply = noop }) => {
     return (
       <ReplyBox>
         <EditorBox>
-          <StyledEditor value={reply} placeholder={`回复 ${comment.user.nickname}`} onChange={setReply} />
+          <StyledEditor value={reply} type='mini' placeholder={`回复 ${comment.user.nickname}`} onChange={setReply} />
         </EditorBox>
         <ReplyButton loading={loading} type='primary' onClick={handleReply}>回复</ReplyButton>
       </ReplyBox>

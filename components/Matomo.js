@@ -1,8 +1,4 @@
-import { useAmp } from 'next/amp'
-
 export default () => {
-  const isAmp = useAmp()
-  if (isAmp) return null
   return (
     <script dangerouslySetInnerHTML={{ __html: `
     var _paq = window._paq || [];

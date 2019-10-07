@@ -6,7 +6,7 @@ import theme from '../libs/codeTheme'
 
 const StyledEditor = styled(Editor)`
   line-height: 24px;
-  min-height: 56px;
+  min-height: ${({ type }) => type === 'mini' ? 32 : 56}px;
   textarea {
     border-radius: 4px;
     border: 1px solid #E8E8E8 !important;

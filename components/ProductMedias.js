@@ -35,6 +35,7 @@ margin-right: 10px;
 border: 1px dashed #d9d9d9;
 border-radius: 3px;
 cursor: pointer;
+object-fit: cover;
 `
 
 const CREATE_MEDIA = gql`

@@ -132,7 +132,6 @@ export default ({ productId, product }) => {
         page: page + 1
       },
       updateQuery (prev, { fetchMoreResult }) {
-        console.log(111)
         if (!fetchMoreResult) return prev
         setPage(page + 1)
         return {
@@ -173,7 +172,7 @@ export default ({ productId, product }) => {
     <StyledBox>
       <CommentBox>
         <EditorBox>
-          <StyledEditor value={content} placeholder='你觉着这个产品怎么样？' onChange={setContent} />
+          <StyledEditor value={content} type='mini' placeholder='你觉着这个产品怎么样？' onChange={setContent} />
         </EditorBox>
         <StyledButton loading={createLoading} type='primary' onClick={() => handleReply()}>来一发</StyledButton>
       </CommentBox>
