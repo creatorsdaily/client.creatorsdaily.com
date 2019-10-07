@@ -76,8 +76,8 @@ export default () => {
   return (
     <Page>
       <StyledContainer>
-        <Row type='flex' gutter={24}>
-          <Col span={12} offset={6}>
+        <Row type='flex' gutter={24} justify='center'>
+          <Col md={12} xs={24}>
             <StyledTypography>
               <StyledTitle level={4}>提交产品</StyledTitle>
               <Paragraph>

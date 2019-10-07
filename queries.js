@@ -11,16 +11,6 @@ query {
 }
 `
 
-export const GET_LINK = gql`
-query($id: String!) {
-  getLink(id: $id) {
-    id
-    url
-    name
-  }
-}
-`
-
 export const GET_MEDIA = gql`
 query($id: String!) {
   getMedia(id: $id) {
@@ -75,10 +65,7 @@ query($id: String!) {
       id
       hash
     }
-    links {
-      id
-      url
-    }
+    links
   }
 }
 `

@@ -9,6 +9,7 @@ import TopicSelect from './TopicSelect'
 import Editor from './Editor'
 import ProductIcon from './ProductIcon'
 import ProductMedias from './ProductMedias'
+import { Inputs } from './ProductLinks'
 
 const { Item } = Form
 
@@ -19,14 +20,14 @@ export const productToForm = product => {
   if (data.icon) {
     data.icon = data.icon.id
   }
-  if (data.links.length) {
-    data.links = data.links[0].url
-  }
   if (data.topics.length) {
     data.topics = data.topics.map(x => x.id)
   }
   if (data.medias.length) {
     data.medias = data.medias.map(x => x.id)
+  }
+  if (data.links) {
+    data.links = data.links.filter(x => !!x)
   }
   return data
 }
@@ -38,15 +39,6 @@ export const formToProduct = form => {
       id: data.icon
     }
   }
-  if (!isUndefined(data.links)) {
-    if (data.links) {
-      data.links = (Array.isArray(data.links) ? data.links : [data.links]).map(x => ({
-        url: x
-      }))
-    } else {
-      data.links = []
-    }
-  }
   if (data.topics) {
     data.topics = data.topics.map(x => ({
       id: x
@@ -56,6 +48,9 @@ export const formToProduct = form => {
     data.medias = data.medias.map(x => ({
       id: x
     }))
+  }
+  if (data.links) {
+    data.links = data.links.filter(x => !!x)
   }
   return data
 }
@@ -101,7 +96,7 @@ export default forwardRef((props, ref) => {
         </Item>
         <Item label='链接地址' colon={false}>
           {getFieldDecorator('links')(
-            <Input placeholder='产品的访问链接' />
+            <Inputs placeholder='产品的访问链接' />
           )}
         </Item>
       </Fragment>

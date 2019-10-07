@@ -72,11 +72,11 @@ export default ({ step, product = {}, ...rest }) => {
     return null
   }
   return (
-    <Row type='flex' gutter={24}>
-      <Col span={12} offset={step === 1 ? 6 : 0}>
+    <Row type='flex' gutter={24} justify='center'>
+      <Col md={12} xs={24}>
         <ProductEditorForm {...rest} {...formItemLayout} step={step} product={preview} setPreview={setPreview} />
       </Col>
-      <Col span={step === 1 ? 0 : 12}>
+      <Col md={step === 1 ? 0 : 12} xs={step === 1 ? 0 : 24}>
         {renderStep2Preview()}
         {renderStep3Preview()}
       </Col>

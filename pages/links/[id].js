@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react'
 import { Alert } from 'antd'
 import styled from 'styled-components'
-import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
-import get from 'lodash/get'
 import Page from '../../layouts/Page'
-import { GET_LINK } from '../../queries'
 
 const Container = styled.div`
   width: 500px;
@@ -16,15 +13,9 @@ export default () => {
   const { query: {
     id
   } } = useRouter()
-  const { data } = useQuery(GET_LINK, {
-    variables: {
-      id
-    }
-  })
-  const url = get(data, 'getLink.url', '/')
   useEffect(() => {
     const timer = setTimeout(() => {
-      location.href = url
+      location.href = id
     }, 3000)
     return () => {
       clearTimeout(timer)
@@ -35,7 +26,7 @@ export default () => {
       <Container>
         <Alert
           message='请注意'
-          description={`您即将离开天机前往 ${url}`}
+          description={`您即将离开天机前往 ${id}`}
           type='warning'
           showIcon
         />
