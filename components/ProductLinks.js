@@ -5,7 +5,6 @@ import { forwardRef, useEffect, useState } from 'react'
 import noop from 'lodash/noop'
 
 const Links = styled.div`
-  margin-bottom: 24px;
 `
 
 const StyledButton = styled(Button)`

@@ -57,9 +57,10 @@ const TopicLi = styled.li`
   margin-bottom: 4px;
   a {
     display: flex;
-    font-size: 13px;
+    font-size: 12px;
     height: 40px;
     line-height: 30px;
+    font-weight: bold;
     border: 1px solid rgba(0, 0, 0, ${({ active }) => active ? 0.1 : 0});
     border-radius: 3px;
     padding: 4px;

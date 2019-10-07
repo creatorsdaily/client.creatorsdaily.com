@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 import useToggle from 'react-use/lib/useToggle'
 import { useEffect, useRef } from 'react'
-import Article from './Article'
+import Article from './Article.dd'
 
 const More = styled.div`
   position: absolute;
