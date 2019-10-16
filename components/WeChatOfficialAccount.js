@@ -17,7 +17,7 @@ text-align: center;
 export default ({ title }) => {
   return (
     <Fragment>
-      <Image alt={title} src='/static/wechat-official-account.png' />
+      <Image alt={title} src='/wechat-official-account.png' />
       {title && (<Title>{title}</Title>)}
     </Fragment>
   )
