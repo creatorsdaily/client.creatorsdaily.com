@@ -56,3 +56,4 @@ log.txt
 .next
 .env
 bundles/*
+public/service-worker.js

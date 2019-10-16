@@ -25,8 +25,12 @@ const {
   KEYWORDS
 } = process.env
 module.exports = withPlugins([
-  withOffline,
   withMDX,
+  [withOffline, {
+    workboxOpts: {
+      swDest: path.join(__dirname, 'public/service-worker.js')
+    }
+  }],
   [withLess, {
     lessLoaderOptions: {
       javascriptEnabled: true,
