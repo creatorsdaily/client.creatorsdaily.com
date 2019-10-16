@@ -30,6 +30,7 @@ FROM base
 WORKDIR /app
 COPY . .
 COPY --from=builder /app/.next ./.next
+COPY --from=builder /app/public/service-worker.js ./public/service-worker.js
 EXPOSE 3000
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
 CMD ["yarn", "start"]
