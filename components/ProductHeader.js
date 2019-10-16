@@ -60,7 +60,7 @@ export default ({ id, name, description, icon, topics = [], ...rest }) => {
   return (
     <Container>
       <ProductIcon>
-        <IPFSImage hash={hash} />
+        <IPFSImage alt={name} hash={hash} />
       </ProductIcon>
       <div>
         <ProductName>

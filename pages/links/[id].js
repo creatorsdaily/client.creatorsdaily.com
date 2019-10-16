@@ -26,7 +26,7 @@ export default () => {
       <Container>
         <Alert
           message='请注意'
-          description={`您即将离开天机前往 ${id}`}
+          description={`您即将离开${process.env.NAME}前往 ${id}`}
           type='warning'
           showIcon
         />

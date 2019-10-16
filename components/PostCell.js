@@ -81,8 +81,8 @@ export default ({ id, products, description, createdAt, disabled = false, media,
       <Row type='flex' gutter={24} style={{ height: '100%' }}>
         <Col md={9} sm={11} xs={24}>
           <Link href='/posts/[id]' as={`/posts/${id}`} passHref>
-            <a>
-              <PostMedia hash={media && media.hash} />
+            <a aria-label={title}>
+              <PostMedia alt={title} hash={media && media.hash} />
             </a>
           </Link>
         </Col>

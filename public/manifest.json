@@ -1,5 +1,11 @@
 {
- "name": "App",
+ "name": "创造者日报",
+ "short_name": "创造者日报",
+ "description": "让灵感完美爆炸",
+ "theme_color": "#ffffff",
+ "background_color": "#ffffff",
+ "start_url": "/",
+ "display": "standalone",
  "icons": [
   {
    "src": "\/android-icon-36x36.png",

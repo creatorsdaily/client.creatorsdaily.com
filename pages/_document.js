@@ -29,7 +29,7 @@ export default class extends Document {
 
   render () {
     return (
-      <Html>
+      <Html lang='zh-cmn-Hans'>
         <Head />
         <body className='creatorsdaily'>
           <Main />

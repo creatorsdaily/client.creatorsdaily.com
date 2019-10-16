@@ -10,14 +10,14 @@ margin: 0 auto;
 
 const Title = styled.div`
 font-size: 12px;
-color: #999;
+color: #707070;
 text-align: center;
 `
 
 export default ({ title }) => {
   return (
     <Fragment>
-      <Image src='/static/wechat-official-account.png' />
+      <Image alt={title} src='/static/wechat-official-account.png' />
       {title && (<Title>{title}</Title>)}
     </Fragment>
   )

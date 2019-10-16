@@ -6,7 +6,7 @@ export default () => {
     _paq.push(['trackPageView']);
     _paq.push(['enableLinkTracking']);
     (function() {
-      var u="//matomo.tengfei.fun/";
+      var u="https://matomo.tengfei.fun/";
       _paq.push(['setTrackerUrl', u+'matomo.php']);
       _paq.push(['setSiteId', '2']);
       var d=document, g=d.createElement('script'), s=d.getElementsByTagName('script')[0];

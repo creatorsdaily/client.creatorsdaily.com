@@ -5,11 +5,11 @@ import Container from './Container'
 
 const StyledContainer = styled(Container)`
   padding: 24px 0;
-  color: #8c8c8c;
+  color: #6C6C6C;
   text-align: center;
   font-size: 12px;
   a {
-    color: #8c8c8c;
+    color: #6C6C6C;
     &:hover {
       color: #262626;
     }

@@ -7,6 +7,7 @@ const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/
 })
 const lessToJS = require('less-vars-to-js')
+const withOffline = require('next-offline')
 require('dotenv').config()
 
 const themeVariables = lessToJS(
@@ -24,6 +25,7 @@ const {
   KEYWORDS
 } = process.env
 module.exports = withPlugins([
+  withOffline,
   withMDX,
   [withLess, {
     lessLoaderOptions: {
