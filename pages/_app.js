@@ -30,13 +30,12 @@ const renderEmpty = () => (
 class Creators extends App {
   constructor (props) {
     super(props)
-    if (!process.browser) return
-    const OneSignal = window.OneSignal || []
     const { viewer } = props
+    if (!process.browser || !viewer) return
+    const OneSignal = window.OneSignal || []
     OneSignal.push(function () {
       OneSignal.setExternalUserId(viewer.id)
       OneSignal.getUserId(id => {
-        console.log(id)
         if (id === viewer.oneSignal) return
         props.apolloClient.mutate({
           mutation: UPDATE_USER,
@@ -53,9 +52,10 @@ class Creators extends App {
 
   static async getInitialProps (appContext) {
     const appProps = await App.getInitialProps(appContext)
-    const { data: { viewer } } = await appContext.ctx.apolloClient.query({
+    const { data } = await appContext.ctx.apolloClient.query({
       query: VIEWER
-    })
+    }).catch(() => ({}))
+    const viewer = data && data.viewer
     return {
       ...appProps,
       pageProps: {
