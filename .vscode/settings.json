@@ -3,5 +3,6 @@
     ".next": true,
     "node_modules": true,
     "bundles": true
-  }
+  },
+  "eslint.autoFixOnSave": true
 }

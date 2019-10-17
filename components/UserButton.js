@@ -6,6 +6,9 @@ import UserCell from './UserCell'
 const StyledButton = styled(Button)`
 padding: 0;
 border: 0;
+div {
+  letter-spacing: 0 !important;
+}
 `
 
 export default ({ user, back = '/', ...rest }) => {

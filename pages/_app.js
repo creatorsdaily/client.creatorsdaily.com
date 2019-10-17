@@ -7,6 +7,7 @@ import { RouterContext } from 'next/dist/next-server/lib/router-context'
 import { Router, makePublicRouterInstance } from 'next/router'
 import withApollo from '../libs/with-apollo'
 import Matomo from '../components/Matomo'
+import OneSignal from '../components/OneSignal'
 import Error from './_error'
 import '../libs/day'
 import '../styles/index.less'
@@ -16,6 +17,23 @@ const renderEmpty = () => (
 )
 
 class Creators extends App {
+  // constructor (props) {
+  //   super(props)
+  //   if (!process.browser) return
+  //   const { user } = props.pageProps
+  //   // OneSignal.push(function () {
+  //   //   OneSignal.setExternalUserId(user.id)
+  //   // })
+  //   // OneSignal.push(function () {
+  //   //   OneSignal.getUserId(id => {
+  //   //     console.log(id)
+  //   //     // axios.patch(`/users/${user.id}`, {
+  //   //     //   oneSignalWeb: id,
+  //   //     //   userAgent: navigator.userAgent
+  //   //     // })
+  //   //   })
+  //   // })
+  // }
   componentDidMount () {
     Router.events.on('routeChangeStart', url => {
       if (window && window._paq) {
@@ -40,6 +58,7 @@ class Creators extends App {
           <title>{process.env.NAME} | {process.env.SLOGAN}</title>
           <meta key='description' name='description' content={process.env.DESCRIPTION} />
           <meta key='keywords' name='keywords' content={process.env.KEYWORDS} />
+          <meta name='viewport' content='width=device-width, initial-scale=1.0' />
           <link rel='apple-touch-icon' sizes='57x57' href='/apple-icon-57x57.png' />
           <link rel='apple-touch-icon' sizes='60x60' href='/apple-icon-60x60.png' />
           <link rel='apple-touch-icon' sizes='72x72' href='/apple-icon-72x72.png' />
@@ -58,6 +77,7 @@ class Creators extends App {
           <meta name='msapplication-TileImage' content='/ms-icon-144x144.png' />
           <meta name='theme-color' content='#ffffff' />
           <Matomo />
+          <OneSignal />
         </Head>
         <ApolloProvider client={apolloClient}>
           {/* TODO: https://github.com/zeit/next.js/issues/7479 */}
