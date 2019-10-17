@@ -11,11 +11,14 @@ import Brand from './Brand'
 const { Header } = Layout
 
 const menu = [{
+  name: '首页',
+  href: '/'
+}, {
   name: '日报',
   href: '/posts'
 }, {
   name: '创造者们',
-  href: '/',
+  href: '/creators',
   disabled: true
 }, {
   name: '关于',
