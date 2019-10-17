@@ -50,6 +50,7 @@ mutation($comment: IComment!) {
       id
       nickname
       email
+      oneSignal
     }
   }
 }

@@ -1,6 +1,7 @@
 import App from 'next/app'
 import Head from 'next/head'
 import { ConfigProvider, Empty } from 'antd'
+import gql from 'graphql-tag'
 import { ApolloProvider } from '@apollo/react-common'
 import zhCN from 'antd/lib/locale-provider/zh_CN'
 import { RouterContext } from 'next/dist/next-server/lib/router-context'
@@ -8,32 +9,63 @@ import { Router, makePublicRouterInstance } from 'next/router'
 import withApollo from '../libs/with-apollo'
 import Matomo from '../components/Matomo'
 import OneSignal from '../components/OneSignal'
+import { VIEWER } from '../queries'
 import Error from './_error'
 import '../libs/day'
 import '../styles/index.less'
+
+const UPDATE_USER = gql`
+mutation($user: IUser!) {
+  updateUser(user: $IUser) {
+    id
+    oneSignal
+  }
+}
+`
 
 const renderEmpty = () => (
   <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
 )
 
 class Creators extends App {
-  // constructor (props) {
-  //   super(props)
-  //   if (!process.browser) return
-  //   const { user } = props.pageProps
-  //   // OneSignal.push(function () {
-  //   //   OneSignal.setExternalUserId(user.id)
-  //   // })
-  //   // OneSignal.push(function () {
-  //   //   OneSignal.getUserId(id => {
-  //   //     console.log(id)
-  //   //     // axios.patch(`/users/${user.id}`, {
-  //   //     //   oneSignalWeb: id,
-  //   //     //   userAgent: navigator.userAgent
-  //   //     // })
-  //   //   })
-  //   // })
-  // }
+  constructor (props) {
+    super(props)
+    if (!process.browser) return
+    const OneSignal = window.OneSignal || []
+    const { viewer } = props
+    OneSignal.push(function () {
+      OneSignal.setExternalUserId(viewer.id)
+      OneSignal.getUserId(id => {
+        console.log(id)
+        if (id === viewer.oneSignal) return
+        props.apolloClient.mutate({
+          mutation: UPDATE_USER,
+          variables: {
+            user: {
+              id: viewer.id,
+              oneSignal: id
+            }
+          }
+        })
+      })
+    })
+  }
+
+  static async getInitialProps (appContext) {
+    const appProps = await App.getInitialProps(appContext)
+    const { data: { viewer } } = await appContext.ctx.apolloClient.query({
+      query: VIEWER
+    })
+    return {
+      ...appProps,
+      pageProps: {
+        ...appProps.pageProps,
+        viewer
+      },
+      viewer
+    }
+  }
+
   componentDidMount () {
     Router.events.on('routeChangeStart', url => {
       if (window && window._paq) {

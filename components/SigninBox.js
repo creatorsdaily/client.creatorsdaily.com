@@ -13,9 +13,11 @@ const PageSigninForm = Form.create()(SigninForm)
 const SIGNIN = gql`
 mutation($username: String!, $password: String!) {
   signin(username: $username, password: $password) {
-    id,
-    username,
+    id
+    username
+    nickname
     token
+    oneSignal
   }
 }
 `
