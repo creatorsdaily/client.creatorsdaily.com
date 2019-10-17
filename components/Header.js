@@ -36,7 +36,9 @@ const Logo = styled.div`
 
 export default withRouter(({ router }) => {
   const { viewer: user } = useViewer()
-  const matched = menu.filter(({ href }) => router.asPath.indexOf(href) === 0).map(x => x.href)
+  const matched = menu
+    .filter(({ href }) => href === '/' ? router.asPath === '/' : router.asPath.indexOf(href) === 0)
+    .map(x => x.href)
   return (
     <Header>
       <Container>

@@ -49,6 +49,7 @@ mutation($comment: IComment!) {
     user {
       id
       nickname
+      email
     }
   }
 }

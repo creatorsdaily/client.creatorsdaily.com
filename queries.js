@@ -7,6 +7,7 @@ query {
     nickname
     username
     token
+    email
   }
 }
 `
@@ -52,11 +53,13 @@ query($id: String!) {
       id
       nickname
       username
+      email
     }
     creators {
       id
       nickname
       username
+      email
     }
     topics {
       id
@@ -182,6 +185,7 @@ fragment CommentFields on Comment {
   user {
     id
     nickname
+    email
   }
 }
 query($page: Int, $size: Int, $productId: String!) {
