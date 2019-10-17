@@ -107,6 +107,7 @@ query($page: Int, $size: Int) {
       id
       title
       description
+      createdAt
       media {
         id
         hash

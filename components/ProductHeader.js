@@ -2,11 +2,16 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import IPFSImage from '../components/IPFSImage'
 import useProductMeta from '../hooks/useProductMeta'
+import media from '../libs/media'
 import { TopicsBar } from './Topics'
 
 const Container = styled.div`
   margin-bottom: 24px;
   height: 92px;
+  padding: 0 16px;
+  ${media.sm`
+    padding: 0;
+  `}
 `
 
 const ProductIcon = styled.div`
@@ -58,7 +63,7 @@ export default ({ id, name, description, icon, topics = [], ...rest }) => {
     topics: newTopics
   } = useProductMeta({ icon, topics })
   return (
-    <Container>
+    <Container {...rest}>
       <ProductIcon>
         <IPFSImage alt={name} hash={hash} />
       </ProductIcon>

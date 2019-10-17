@@ -1,4 +1,5 @@
-import React from 'react'
+import React, { Fragment } from 'react'
+import Head from 'next/head'
 import { Col, Empty, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import styled from 'styled-components'
@@ -8,6 +9,7 @@ import { GET_POSTS } from '../../queries'
 import usePagination from '../../hooks/usePagination'
 import media from '../../libs/media'
 import PostCell from '../../components/PostCell'
+import Time from '../../components/Time'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
@@ -19,6 +21,14 @@ margin-bottom: 24px;
 ${media.sm`
   padding: 0;
 `}
+`
+
+const TimeContainer = styled.div`
+line-height: 30px;
+font-size: 12px;
+font-weight: bold;
+text-align: center;
+margin-bottom: 24px;
 `
 
 export default () => {
@@ -38,7 +48,12 @@ export default () => {
   const renderList = () => {
     if (posts.length) {
       return posts.map(post => (
-        <PostCell {...post} key={post.id} />
+        <Fragment key={post.id}>
+          <TimeContainer>
+            <Time time={post.createdAt} format='YYYY 年 M 月 D 日' />
+          </TimeContainer>
+          <PostCell {...post} />
+        </Fragment>
       ))
     }
     return (
@@ -47,6 +62,9 @@ export default () => {
   }
   return (
     <Page>
+      <Head>
+        <title>日报 | {process.env.NAME}</title>
+      </Head>
       <StyledContainer>
         <Row type='flex' gutter={24} justify='center'>
           <Col xl={14} lg={16} md={22} sm={24} xs={24}>
