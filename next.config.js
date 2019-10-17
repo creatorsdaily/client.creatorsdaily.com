@@ -22,7 +22,8 @@ const {
   NAME,
   SLOGAN,
   DESCRIPTION,
-  KEYWORDS
+  KEYWORDS,
+  ONE_SIGNAL_APP_ID
 } = process.env
 module.exports = withPlugins([
   withMDX,
@@ -91,6 +92,7 @@ module.exports = withPlugins([
     SLOGAN,
     DESCRIPTION,
     KEYWORDS,
+    ONE_SIGNAL_APP_ID,
     VERSION: require('./package.json').version
   }
 })
