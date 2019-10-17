@@ -6,7 +6,7 @@ export default () => {
       OneSignal.init({
         appId: '${process.env.ONE_SIGNAL_APP_ID}',
         notifyButton: {
-          enable: true,
+          enable: false,
         },
         welcomeNotification: {
           disable: false,

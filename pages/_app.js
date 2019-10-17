@@ -16,7 +16,7 @@ import '../styles/index.less'
 
 const UPDATE_USER = gql`
 mutation($user: IUser!) {
-  updateUser(user: $IUser) {
+  updateUser(user: $user) {
     id
     oneSignal
   }
