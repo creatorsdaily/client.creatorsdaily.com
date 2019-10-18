@@ -108,6 +108,7 @@ class Creators extends App {
           <meta name='msapplication-TileColor' content='#ffffff' />
           <meta name='msapplication-TileImage' content='/ms-icon-144x144.png' />
           <meta name='theme-color' content='#ffffff' />
+          <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
           <Matomo />
           <OneSignal />
         </Head>
