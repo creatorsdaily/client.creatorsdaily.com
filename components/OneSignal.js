@@ -14,7 +14,7 @@ export default () => {
           message: '感谢订阅！'
         },
         persistNotification: true,
-        autoRegister: true,
+        autoRegister: false,
         autoResubscribe: true
       })
       OneSignal.showNativePrompt();

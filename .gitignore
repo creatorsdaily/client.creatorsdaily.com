@@ -57,3 +57,5 @@ log.txt
 .env
 bundles/*
 public/service-worker.js
+*.pem
+public/service-worker.js.map

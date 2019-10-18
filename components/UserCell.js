@@ -19,10 +19,10 @@ margin-right: 8px;
 
 export default ({ user, ...rest }) => {
   let url = `https://www.gravatar.com/avatar/${user.email ? md5(user.email) : ''}`
-  url = `${url}?size=${64 * 2}&d=robohash`
+  url = `${url}?size=${64 * 2}&d=monsterid`
   return (
     <Container {...rest}>
-      <CommentAvatar shape='square' icon='user' src={url} />
+      <CommentAvatar shape='square' icon='user' src={url} alt={user.nickname} />
       <CommentUsername>{user.nickname}</CommentUsername>
     </Container>
   )

@@ -1,6 +1,9 @@
 import styled from 'styled-components'
 
 export default styled.div`
+color: rgba(0, 0, 0, 0.75);
+font-size: 15px;
+
 pre, code {
   font-size: 14px;
   font-family: Roboto, 'Courier New', Consolas, Inconsolata, Courier, monospace;
@@ -32,7 +35,7 @@ strong, b{
 }
 
 em, i {
-  color: #009688;
+  color: #606060;
 }
 
 hr {
@@ -87,7 +90,7 @@ dl dd {
 blockquote, q {
   border-left: 2px solid #009688;
   padding: 0 10px;
-  color: #777;
+  color: #606060;
   quotes: none;
   margin-left: 1em;
 }
@@ -100,7 +103,7 @@ h1, h2, h3, h4, h5, h6 {
   margin: 20px 0 10px;
   padding: 0;
   font-style: bold !important;
-  color: #009688 !important;
+  color: rgba(0, 0, 0, 0.9);
   text-align: center !important;
   margin: 1.5em 5px !important;
   padding: 0.5em 1em !important;

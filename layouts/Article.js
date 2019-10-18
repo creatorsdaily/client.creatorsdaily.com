@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Col, Row } from 'antd'
 import Container from '../components/Container'
 import Article from '../components/Article'
+import media from '../libs/media'
 import Page from './Page'
 
 const StyledContainer = styled(Container)`
@@ -10,7 +11,10 @@ margin: 24px auto;
 
 const StyledArticle = styled(Article)`
 background: #FFF;
-padding: 24px 32px;
+padding: 24px;
+${media.sm`
+  padding: 24px 32px;
+`}
 `
 
 export default ({ children, footer = null }) => {

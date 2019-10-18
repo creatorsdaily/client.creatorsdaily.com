@@ -146,3 +146,11 @@ export {
 export {
   default as CompassFill
 } from '@ant-design/icons/lib/fill/CompassFill'
+
+export {
+  default as BellFill
+} from '@ant-design/icons/lib/fill/BellFill'
+
+export {
+  default as ChromeFill
+} from '@ant-design/icons/lib/fill/ChromeFill'
