@@ -122,7 +122,7 @@ export default ({ productId, product }) => {
       comment.parentId = replyId
       comment.content = reply
     }
-    create({
+    return create({
       variables: {
         comment
       }
