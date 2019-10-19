@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useState } from 'react'
 import { Alert, Col, Divider, Form, Row, Typography } from 'antd'
 import styled from 'styled-components'
 import ProductForm, { formToProduct } from '../components/ProductForm'
