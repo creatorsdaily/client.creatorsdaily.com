@@ -107,7 +107,7 @@ const CommentCell = ({ product, comment, loading, onReply = noop }) => {
   }
   return (
     <Comment hasParent={!!comment.parentId} hasChildren={!!comment.children.length}>
-      <CommentHeader>
+      <CommentHeader id={`comments-${comment.id}`} name={`comments-${comment.id}`}>
         <UserCell user={comment.user} />
         {isDiscoverer && (<StyledTag color='gold'>发现者</StyledTag>)}
         {isCreator && (<StyledTag color='volcano'>创造者</StyledTag>)}
