@@ -29,6 +29,7 @@ module.exports = withPlugins([
   withMDX,
   [withOffline, {
     // generateInDevMode: true,
+    dontAutoRegisterSw: true,
     workboxOpts: {
       swDest: path.join(__dirname, 'public/service-worker.js')
     }

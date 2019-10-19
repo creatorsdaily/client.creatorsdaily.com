@@ -1,1 +1,2 @@
-importScripts('/OneSignalSDKWorker.js')
+importScripts('/OneSignalWorker.js')
+importScripts('/service-worker.js')
