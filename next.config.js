@@ -28,7 +28,7 @@ const {
 module.exports = withPlugins([
   withMDX,
   [withOffline, {
-    generateInDevMode: true,
+    // generateInDevMode: true,
     workboxOpts: {
       swDest: path.join(__dirname, 'public/service-worker.js')
     }
@@ -79,6 +79,16 @@ module.exports = withPlugins([
         test: antStyles,
         use: 'null-loader'
       })
+    }
+    if (!isServer) {
+      const cacheGroups = config.optimization.splitChunks.cacheGroups
+      delete cacheGroups.react
+      cacheGroups.default = false
+      cacheGroups.commons = {
+        name: 'commons',
+        minChunks: 3,
+        priority: 10
+      }
     }
     return config
   },

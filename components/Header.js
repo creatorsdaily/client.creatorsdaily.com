@@ -20,6 +20,10 @@ const menu = [{
   name: '创造者们',
   href: '/creators',
   disabled: true
+}, {
+  name: 'APP',
+  href: '/app',
+  disabled: true
 }]
 
 const Logo = styled.div`

@@ -64,6 +64,7 @@ export default App => {
           // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
           const { graphQLErrors = [], networkError } = error
           const errors = [
+            error,
             ...graphQLErrors.map(x => {
               if (typeof x.message === 'string') {
                 return x

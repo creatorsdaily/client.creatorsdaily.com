@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Alert, Col, Divider, Form, Row, Typography } from 'antd'
 import styled from 'styled-components'
 import ProductForm, { formToProduct } from '../components/ProductForm'
@@ -74,7 +74,7 @@ export default ({ step, product = {}, ...rest }) => {
   return (
     <Row type='flex' gutter={24} justify='center'>
       <Col md={12} xs={24}>
-        <ProductEditorForm {...rest} {...formItemLayout} step={step} product={preview} setPreview={setPreview} />
+        <ProductEditorForm {...rest} {...formItemLayout} step={step} product={product} setPreview={setPreview} />
       </Col>
       <Col md={step === 1 ? 0 : 12} xs={step === 1 ? 0 : 24}>
         {renderStep2Preview()}
