@@ -120,6 +120,10 @@ export {
 } from '@ant-design/icons/lib/outline/MessageOutline'
 
 export {
+  default as RocketOutline
+} from '@ant-design/icons/lib/outline/RocketOutline'
+
+export {
   default as MessageFill
 } from '@ant-design/icons/lib/fill/MessageFill'
 
@@ -154,3 +158,7 @@ export {
 export {
   default as ChromeFill
 } from '@ant-design/icons/lib/fill/ChromeFill'
+
+export {
+  default as RocketFill
+} from '@ant-design/icons/lib/fill/RocketFill'

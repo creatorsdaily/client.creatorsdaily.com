@@ -34,6 +34,10 @@ export default props => {
                 <a>{process.env.NAME}</a>
               </Link>
               <Divider type='vertical' />
+              <Link href='/about'>
+                <a>关于</a>
+              </Link>
+              <Divider type='vertical' />
               {process.env.SLOGAN} <span style={{ display: 'none' }}>v{process.env.VERSION}</span>
             </Content>
           </Col>

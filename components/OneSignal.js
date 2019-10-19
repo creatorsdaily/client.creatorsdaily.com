@@ -15,9 +15,14 @@ export default () => {
         },
         persistNotification: true,
         autoRegister: false,
-        autoResubscribe: true
+        autoResubscribe: true,
+        promptOptions: {
+          actionMessage: '建议您订阅我们的通知，您有新动态时将通知您。',
+          acceptButtonText: '订阅通知',
+          cancelButtonText: '暂时不需要'
+        }
       })
-      OneSignal.showNativePrompt();
+      // OneSignal.showNativePrompt();
     });
     ` }} />
   )

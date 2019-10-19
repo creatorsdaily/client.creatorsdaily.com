@@ -51,17 +51,6 @@ const CreatorsApp = ({ pageProps, router, Component, apolloClient }) => {
     return () => window.removeEventListener('appinstalled', handleAppInstalled)
   }, [])
 
-  useEffect(() => {
-    const OneSignal = window.OneSignal
-    OneSignal.push(async () => {
-      const isPushSupported = OneSignal.isPushNotificationsSupported()
-      if (!isPushSupported) return
-      const permission = await OneSignal.getNotificationPermission()
-      if (permission === 'granted') return
-      console.log(111)
-    })
-  }, [])
-
   const handleRouteChangeStart = url => {
     if (window && window._paq) {
       window._paq.push(['setCustomUrl', url])
