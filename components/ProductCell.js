@@ -127,7 +127,7 @@ export default ({
   }
   const renderCell = () => (
     <StyledLink size={size}>
-      <ProductIcon alt={name} size={size} hash={hash} />
+      <ProductIcon alt={name} size={size} hash={`${hash}-160-160-contain`} />
       <ProductContent size={size}>
         <ProductName size={size}>
           {name}

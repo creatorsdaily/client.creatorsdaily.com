@@ -161,7 +161,7 @@ export const TopicList = ({
           <Link key={key} href={handleCheck(key, !checked)}>
             <a>
               <TopicIcon>
-                <TopicImage alt={name} hash={icon && icon.hash} size='small' />
+                <TopicImage alt={name} hash={icon && `${icon.hash}-60-60`} size='small' />
               </TopicIcon>
               {name}
             </a>

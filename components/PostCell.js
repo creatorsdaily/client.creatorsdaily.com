@@ -82,7 +82,7 @@ export default ({ id, products, description, createdAt, disabled = false, media,
         <Col md={9} sm={11} xs={24}>
           <Link href='/posts/[id]' as={`/posts/${id}`} passHref>
             <a aria-label={title}>
-              <PostMedia alt={title} hash={media && media.hash} />
+              <PostMedia alt={title} hash={media && `${media.hash}-400-200`} />
             </a>
           </Link>
         </Col>
