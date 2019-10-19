@@ -38,7 +38,6 @@ export default () => {
     OneSignal.push(async () => {
       const _isPushSupported = OneSignal.isPushNotificationsSupported()
       setIsPushSupported(_isPushSupported)
-      console.log(1, _isPushSupported)
       if (!_isPushSupported) return
       const _permission = await OneSignal.getNotificationPermission()
       setPermission(_permission)
@@ -59,7 +58,6 @@ export default () => {
     if (!isPushSupported) {
       return null
     }
-    console.log(permission)
     switch (permission) {
       case 'default':
         return (
