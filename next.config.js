@@ -23,12 +23,13 @@ const {
   SLOGAN,
   DESCRIPTION,
   KEYWORDS,
-  ONE_SIGNAL_APP_ID
+  ONE_SIGNAL_APP_ID,
+  DOMAIN
 } = process.env
 module.exports = withPlugins([
   withMDX,
   [withOffline, {
-    // generateInDevMode: true,
+    generateInDevMode: true,
     dontAutoRegisterSw: true,
     workboxOpts: {
       swDest: path.join(__dirname, 'public/service-worker.js')
@@ -105,6 +106,7 @@ module.exports = withPlugins([
     DESCRIPTION,
     KEYWORDS,
     ONE_SIGNAL_APP_ID,
+    DOMAIN,
     VERSION: require('./package.json').version
   }
 })

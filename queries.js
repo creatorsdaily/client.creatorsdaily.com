@@ -86,6 +86,13 @@ query($page: Int, $size: Int, $topic: [String!], $keyword: [String!]) {
       isLike
       likeCount
       commentCount
+      createdAt
+      discoverer {
+        id
+        nickname
+        username
+        email
+      }
       topics {
         id
         name
@@ -111,6 +118,12 @@ query($page: Int, $size: Int) {
       media {
         id
         hash
+      }
+      user {
+        id
+        nickname
+        username
+        email
       }
       products {
         id

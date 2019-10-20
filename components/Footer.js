@@ -17,7 +17,6 @@ const StyledContainer = styled(Container)`
 `
 
 const Content = styled.div`
-  height: 32px;
   line-height: 32px;
 `
 
@@ -32,6 +31,14 @@ export default props => {
             <Content>
               <Link href='/'>
                 <a>{process.env.NAME}</a>
+              </Link>
+              <Divider type='vertical' />
+              <Link href='/api/atom'>
+                <a>ATOM</a>
+              </Link>
+              <Divider type='vertical' />
+              <Link href='/api/rss'>
+                <a>RSS</a>
               </Link>
               <Divider type='vertical' />
               <Link href='/about'>

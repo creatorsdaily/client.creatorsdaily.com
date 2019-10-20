@@ -1,6 +1,6 @@
 import React, { Fragment } from 'react'
 import Head from 'next/head'
-import { Col, Empty, Row, Spin } from 'antd'
+import { Button, Col, Empty, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import styled from 'styled-components'
 import Page from '../../layouts/Page'
@@ -21,6 +21,12 @@ margin-bottom: 24px;
 ${media.sm`
   padding: 0;
 `}
+`
+
+const StyledFeed = styled.a`
+  margin: 0 auto 24px;
+  display: block;
+  width: 160px;
 `
 
 const TimeContainer = styled.div`
@@ -71,6 +77,9 @@ export default () => {
             <Spin spinning={loading}>
               {renderList()}
             </Spin>
+            <StyledFeed href='/api/atom'>
+              <Button icon='link' block>订阅日报</Button>
+            </StyledFeed>
             <Pagination>
               {pagination}
             </Pagination>

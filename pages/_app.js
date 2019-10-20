@@ -1,13 +1,12 @@
 import App from 'next/app'
 import Head from 'next/head'
 import { useEffect } from 'react'
-import { ConfigProvider, Empty, notification } from 'antd'
+import { ConfigProvider, Empty } from 'antd'
 import gql from 'graphql-tag'
 import { ApolloProvider } from '@apollo/react-common'
 import zhCN from 'antd/lib/locale-provider/zh_CN'
 import { RouterContext } from 'next/dist/next-server/lib/router-context'
 import { Router, makePublicRouterInstance } from 'next/router'
-import styled from 'styled-components'
 import withApollo from '../libs/with-apollo'
 import Matomo from '../components/Matomo'
 import OneSignal from '../components/OneSignal'
@@ -15,12 +14,6 @@ import { VIEWER } from '../queries'
 import Error from './_error'
 import '../libs/day'
 import '../styles/index.less'
-
-const StyledIcon = styled.img`
-  width: 49px;
-  height: 49px;
-  margin-left: -10px;
-`
 
 const UPDATE_USER = gql`
 mutation($user: IUser!) {
@@ -41,48 +34,12 @@ const CreatorsApp = ({ pageProps, router, Component, apolloClient }) => {
     return () => Router.events.off('routeChangeStart', handleRouteChangeStart)
   }, [])
 
-  useEffect(() => {
-    window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
-    return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
-  }, [])
-
-  useEffect(() => {
-    window.addEventListener('appinstalled', handleAppInstalled)
-    return () => window.removeEventListener('appinstalled', handleAppInstalled)
-  }, [])
-
   const handleRouteChangeStart = url => {
     if (window && window._paq) {
       window._paq.push(['setCustomUrl', url])
       window._paq.push(['setDocumentTitle', document.title])
       window._paq.push(['trackPageView'])
     }
-  }
-
-  const handleBeforeInstallPrompt = e => {
-    const key = 'installAppNotification'
-    notification.open({
-      message: '安装应用',
-      description: `点击安装「${process.env.NAME}」应用`,
-      icon: (<StyledIcon src='/apple-icon-180x180.png' />),
-      duration: 0,
-      placement: 'bottomRight',
-      key,
-      onClick () {
-        e.prompt()
-        notification.close(key)
-      }
-    })
-  }
-
-  const handleAppInstalled = () => {
-    notification.open({
-      message: '应用安装成功',
-      description: `安装成功，点击图标直接打开「${process.env.NAME}」`,
-      icon: (<StyledIcon src='/apple-icon-180x180.png' />),
-      duration: 3000,
-      placement: 'bottomRight'
-    })
   }
 
   if (pageProps.statusCode) {
@@ -110,6 +67,7 @@ const CreatorsApp = ({ pageProps, router, Component, apolloClient }) => {
         <link rel='icon' type='image/png' sizes='96x96' href='/favicon-96x96.png' />
         <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
         <link rel='manifest' href='/manifest.json' />
+        <link href='/api/atom' type='application/atom+xml' rel='alternate' title={`${process.env.NAME} ATOM Feed`} />
         <meta name='msapplication-TileColor' content='#ffffff' />
         <meta name='msapplication-TileImage' content='/ms-icon-144x144.png' />
         <meta name='theme-color' content='#ffffff' />
