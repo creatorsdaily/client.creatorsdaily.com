@@ -66,7 +66,7 @@ const ProductFiles = React.forwardRef(({ children, height = 300, medias = [], on
   }
   const list = get(data, 'getMedias.data', medias)
   return (
-    <StyledCarousel autoplay infinite variableWidth centerMode focusOnSelect slidesToScroll={1} slidesToShow={3} height={height} {...rest} ref={ref}>
+    <StyledCarousel autoplay infinite variableWidth centerMode slidesToScroll={1} slidesToShow={1} height={height} {...rest} ref={ref}>
       {list.map(x => (
         <FileContainer key={x.id} height={height} onClick={() => handleClick(x.hash)}>
           <IPFSImage hash={x.hash} key={x.id} />
