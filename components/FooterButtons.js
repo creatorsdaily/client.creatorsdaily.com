@@ -92,6 +92,7 @@ export default () => {
   }
 
   const handleAppInstalled = () => {
+    setCanInstall(false)
     notification.open({
       message: '应用安装成功',
       description: `安装成功，点击图标直接打开「${process.env.NAME}」`,
