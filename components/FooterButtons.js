@@ -136,13 +136,14 @@ export default () => {
           </Tooltip>
         )
       case 'granted':
-        return (
-          <Tooltip placement='top' title='通知已开启'>
-            <Button shape='circle'>
-              <ActiveBell type='bell' theme='filled' />
-            </Button>
-          </Tooltip>
-        )
+        return null
+        // return (
+        //   <Tooltip placement='top' title='通知已开启'>
+        //     <Button shape='circle'>
+        //       <ActiveBell type='bell' theme='filled' />
+        //     </Button>
+        //   </Tooltip>
+        // )
     }
   }
   const renderInstallButton = () => {

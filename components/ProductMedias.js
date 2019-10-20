@@ -2,7 +2,7 @@ import { Icon, Upload } from 'antd'
 import styled from 'styled-components'
 import { useToggle } from 'react-use'
 import noop from 'lodash/noop'
-import { forwardRef, useEffect, useState } from 'react'
+import { forwardRef, useEffect, useRef, useState } from 'react'
 import gql from 'graphql-tag'
 import get from 'lodash/get'
 import { useMutation } from '@apollo/react-hooks'
@@ -13,6 +13,13 @@ const StyledFiles = styled.div`
 display: flex;
 align-items: center;
 margin-top: 10px;
+`
+
+const StyledProductFiles = styled(ProductFiles)`
+  img {
+    width: 100%;
+    object-fit: contain;
+  }
 `
 
 const StyledUpload = styled(Upload)`
@@ -48,6 +55,7 @@ mutation($media: IMedia!) {
 `
 
 export default forwardRef(({ value = [], onChange = noop, onError = noop }, ref) => {
+  const filesRef = useRef()
   const [loading, setLoading] = useToggle(false)
   const [ids, setIds] = useState(value)
   const [files, setFiles] = useState(value.map(x => ({ id: x })))
@@ -91,12 +99,25 @@ export default forwardRef(({ value = [], onChange = noop, onError = noop }, ref)
       <div className='ant-upload-text'>点击上传</div>
     </div>
   )
+  const handleSelect = index => {
+    filesRef.current.slick.slickGoTo(index)
+  }
   return (
     <div>
-      <ProductFiles autoplay={false} medias={ids.map(x => ({ id: x }))} onLoad={setFiles} />
+      <StyledProductFiles
+        ref={filesRef}
+        autoplay={false}
+        infinite={false}
+        variableWidth={false}
+        centerMode={false}
+        focusOnSelect={false}
+        slidesToScroll={1}
+        slidesToShow={1}
+        medias={ids.map(x => ({ id: x }))}
+        onLoad={setFiles} />
       <StyledFiles>
-        {files.map(x => (
-          <SmallImage key={x.id} hash={x.hash} />
+        {files.map((x, i) => (
+          <SmallImage key={x.id} hash={x.hash} onClick={() => handleSelect(i)} />
         ))}
         <StyledUpload
           listType='picture-card'

@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const withPlugins = require('next-compose-plugins')
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
+// const withCSS = require('@zeit/next-css')
 const withLess = require('@zeit/next-less')
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/
@@ -28,6 +29,12 @@ const {
 } = process.env
 module.exports = withPlugins([
   withMDX,
+  // [withCSS, {
+  //   cssModules: false,
+  //   cssLoaderOptions: {
+  //     url: false
+  //   }
+  // }],
   [withOffline, {
     generateInDevMode: true,
     dontAutoRegisterSw: true,

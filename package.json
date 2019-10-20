@@ -15,6 +15,7 @@
     "@mdx-js/mdx": "^1.5.0",
     "@nestjsx/crud-request": "^4.2.0",
     "@zeit/next-bundle-analyzer": "^0.1.2",
+    "@zeit/next-css": "^1.0.1",
     "@zeit/next-less": "^1.0.1",
     "@zeit/next-mdx": "^1.2.0",
     "antd": "^3.20.7",

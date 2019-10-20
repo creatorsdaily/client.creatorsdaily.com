@@ -120,7 +120,7 @@ const CommentCell = ({ product, comment, loading, onReply = noop }) => {
         </CommentMeta>
         {renderReplyBox(comment)}
         {comment.children.map(x => (
-          <CommentCell key={x.id} comment={x} loading={loading} onReply={onReply} />
+          <CommentCell key={x.id} product={product} comment={x} loading={loading} onReply={onReply} />
         ))}
       </CommentContent>
     </Comment>

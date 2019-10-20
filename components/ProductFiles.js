@@ -7,23 +7,24 @@ import { GET_MEDIAS } from '../queries'
 import IPFSImage from './IPFSImage'
 
 const StyledCarousel = styled(Carousel)`
+  height: ${({ height }) => height}px;
+  overflow: hidden;
   .slick-slide {
-    text-align: center;
-    height: ${({ height }) => height}px;
-    background: #F5F5F5;
-    overflow: hidden;
+    opacity: 0.5;
+    transition: opacity 0.25s;
   }
-  .slick-slide h3 {
-    color: #fff;
+  .slick-slide.slick-active {
+    opacity: 1;
   }
 `
 
 const FileContainer = styled.div`
   height: ${({ height }) => height}px;
+  overflow: hidden;
   img {
-    width: 100%;
     height: 100%;
     object-fit: cover;
+    margin: 0 6px;
   }
 `
 
@@ -32,10 +33,11 @@ const StyledIPFSImage = styled(IPFSImage)`
 `
 
 const PreviewIPFSImage = styled(IPFSImage)`
-  width: 100%;
+  max-width: 100%;
+  margin: 0 auto;
 `
 
-const ProductFiles = ({ children, height = 300, medias = [], onLoad = noop, ...rest }) => {
+const ProductFiles = React.forwardRef(({ children, height = 300, medias = [], onLoad = noop, ...rest }, ref) => {
   const { data, loading, refetch } = useQuery(GET_MEDIAS, {
     variables: { ids: medias.map(x => x.id) },
     skip: !medias.length || !medias.some(x => !x.hash),
@@ -56,7 +58,7 @@ const ProductFiles = ({ children, height = 300, medias = [], onLoad = noop, ...r
       icon: null,
       maskClosable: true,
       autoFocusButton: null,
-      width: 500,
+      width: 1000,
       content: (
         <PreviewIPFSImage hash={hash} />
       )
@@ -64,15 +66,15 @@ const ProductFiles = ({ children, height = 300, medias = [], onLoad = noop, ...r
   }
   const list = get(data, 'getMedias.data', medias)
   return (
-    <StyledCarousel autoplay height={height} effect='fade' {...rest}>
+    <StyledCarousel autoplay infinite variableWidth centerMode focusOnSelect slidesToScroll={1} slidesToShow={3} height={height} {...rest} ref={ref}>
       {list.map(x => (
-        <FileContainer key={x.id} height={height}>
-          <IPFSImage hash={x.hash} onClick={() => handleClick(x.hash)} />
+        <FileContainer key={x.id} height={height} onClick={() => handleClick(x.hash)}>
+          <IPFSImage hash={x.hash} key={x.id} />
         </FileContainer>
       ))}
       {children}
     </StyledCarousel>
   )
-}
+})
 
 export default ProductFiles

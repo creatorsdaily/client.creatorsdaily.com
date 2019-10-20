@@ -7,7 +7,7 @@ import { TopicsBar } from './Topics'
 
 const Container = styled.div`
   margin-bottom: 24px;
-  height: 92px;
+  height: 80px;
   padding: 0 16px;
   ${media.sm`
     padding: 0;
@@ -16,8 +16,8 @@ const Container = styled.div`
 
 const ProductIcon = styled.div`
   float: left;
-  width: 92px;
-  height: 92px;
+  width: 80px;
+  height: 80px;
   margin-right: 16px;
   img {
     width: 100%;
@@ -28,9 +28,8 @@ const ProductIcon = styled.div`
 
 const ProductName = styled.h1`
   margin: 0;
-  line-height: 32px;
+  line-height: 28px;
   font-size: 20px;
-  margin-bottom: 8px;
   a {
     color: rgba(0, 0, 0, 0.85);
     :hover {
@@ -65,7 +64,7 @@ export default ({ id, name, description, icon, topics = [], ...rest }) => {
   return (
     <Container {...rest}>
       <ProductIcon>
-        <IPFSImage alt={name} hash={hash} />
+        <IPFSImage alt={name} hash={hash && `${hash}-160-160-contain`} />
       </ProductIcon>
       <div>
         <ProductName>
