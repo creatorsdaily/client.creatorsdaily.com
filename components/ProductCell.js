@@ -36,8 +36,11 @@ bottom: 16px;
 margin: 0;
 left: 112px;
 display: flex;
+right: 100px;
 >div {
   margin: 0;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 }
 `
 
@@ -56,6 +59,10 @@ const ProductName = styled.h3`
   font-size: ${({ size }) => size === 'small' ? 14 : 16}px;
   margin: 0;
   line-height: 24px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+  display: block;
   a {
     color: #303030;
   }

@@ -33,13 +33,9 @@ export default props => {
                 <a>{process.env.NAME}</a>
               </Link>
               <Divider type='vertical' />
-              <Link href='/api/atom'>
-                <a>ATOM</a>
-              </Link>
+              <a href='/api/atom'>ATOM</a>
               <Divider type='vertical' />
-              <Link href='/api/rss'>
-                <a>RSS</a>
-              </Link>
+              <a href='/api/rss'>RSS</a>
               <Divider type='vertical' />
               <Link href='/about'>
                 <a>关于</a>
