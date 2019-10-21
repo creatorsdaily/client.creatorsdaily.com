@@ -34,7 +34,7 @@ mutation($product: IProduct!) {
 
 export default () => {
   const ref = useRef()
-  useAuth()
+  // useAuth()
   const { replace, query } = useRouter()
   const step = Number(query.step) || 'all'
   const [update, { loading }] = useMutation(UPDATE_PRODUCT, {

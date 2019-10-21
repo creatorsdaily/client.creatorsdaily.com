@@ -1,4 +1,4 @@
-import { Affix, Button, Divider, Modal } from 'antd'
+import { Affix, Button, Divider, Modal, Tooltip } from 'antd'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
 import Box from './Box'
@@ -53,9 +53,11 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
       </StyledBox>
       <Buttons>
         <div>
-          <SmallButton size='small' type='link' onClick={handleWeChat}>
-          微信
-          </SmallButton>
+          <Tooltip placement='top' title='加好友邀请入群'>
+            <SmallButton size='small' type='link' onClick={handleWeChat}>
+            微信
+            </SmallButton>
+          </Tooltip>
           <Divider type='vertical' />
           <a href='https://t.me/creatorsdaily' target='_blank'>
             <SmallButton size='small' type='link'>

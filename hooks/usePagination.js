@@ -5,7 +5,7 @@ import { stringify } from 'qs'
 import { useQuery } from '@apollo/react-hooks'
 import noop from 'lodash/noop'
 
-const defaultPageSize = 30
+const defaultPageSize = 15
 
 export default ({
   path,
