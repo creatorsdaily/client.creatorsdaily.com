@@ -117,7 +117,7 @@ export const Inputs = forwardRef(({ value = [''], onChange = noop, placeholder =
 export default ({ links, ...rest }) => {
   if (!links.length) return null
   const list = links.map(x => (
-    <Link key={x} href='/links/[id]' as={`/links/${encodeURIComponent(x)}`}>
+    <a key={x} href={x} target='_blank'>
       <StyledButton block>
         <Icon type='compass' theme='filled' />
         <ButtonContent>
@@ -126,7 +126,7 @@ export default ({ links, ...rest }) => {
         </ButtonContent>
         <Icon type='right' />
       </StyledButton>
-    </Link>
+    </a>
   ))
   return (
     <Links {...rest}>
