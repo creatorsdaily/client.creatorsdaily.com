@@ -117,7 +117,7 @@ export const Inputs = forwardRef(({ value = [''], onChange = noop, placeholder =
 export default ({ links, ...rest }) => {
   if (!links.length) return null
   const list = links.map(x => (
-    <a key={x} href={x} target='_blank'>
+    <a key={x} href={x} rel='noreferrer' target='_blank'>
       <StyledButton block>
         <Icon type='compass' theme='filled' />
         <ButtonContent>

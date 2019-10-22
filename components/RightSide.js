@@ -59,7 +59,7 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
             </SmallButton>
           </Tooltip>
           <Divider type='vertical' />
-          <a href='https://t.me/creatorsdaily' target='_blank'>
+          <a href='https://t.me/creatorsdaily' rel='noreferrer' target='_blank'>
             <SmallButton size='small' type='link'>
             Telegram
             </SmallButton>
