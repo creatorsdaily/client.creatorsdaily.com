@@ -8,7 +8,7 @@ html {
 body {
     font-family: "Open Sans","Clear Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     color: rgb(51, 51, 51);
-    line-height: 1.8;
+    line-height: 2;
 }
 
 #write{
@@ -120,7 +120,7 @@ li>ul {
     margin: 0 0;
 }
 hr {
-    border: 1px solid #BF360C;
+    border-top: 1px solid #666;
     margin: 1.5em auto;
 }
 
