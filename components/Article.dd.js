@@ -8,7 +8,7 @@ html {
 body {
     font-family: "Open Sans","Clear Sans","Helvetica Neue",Helvetica,Arial,sans-serif;
     color: rgb(51, 51, 51);
-    line-height: 1.6;
+    line-height: 1.8;
 }
 
 #write{
@@ -120,14 +120,8 @@ li>ul {
     margin: 0 0;
 }
 hr {
-    height: 4px;
-    padding: 0;
-    margin: 16px 0;
-    background-color: #e7e7e7;
-    border: 0 none;
-    overflow: hidden;
-    box-sizing: content-box;
-    border-bottom: 1px solid #ddd;
+    border: 1px solid #BF360C;
+    margin: 1.5em auto;
 }
 
 body > h2:first-child {
