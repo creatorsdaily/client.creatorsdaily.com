@@ -4,6 +4,10 @@ export default styled.div`
 color: rgba(0, 0, 0, 0.75);
 font-size: 15px;
 
+img {
+  max-width: 100%;
+}
+
 pre, code {
   font-size: 14px;
   font-family: Roboto, 'Courier New', Consolas, Inconsolata, Courier, monospace;

@@ -77,7 +77,7 @@ export default () => {
             <Spin spinning={loading}>
               {renderList()}
             </Spin>
-            <StyledFeed href='/api/atom'>
+            <StyledFeed href='/api/posts.atom' target='_blank'>
               <Button icon='link' block>订阅日报</Button>
             </StyledFeed>
             <Pagination>
