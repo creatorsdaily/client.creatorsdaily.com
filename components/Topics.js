@@ -48,7 +48,7 @@ const TopicTitle = styled.h6`
 `
 
 const TopicUl = styled.ul`
-  margin: 0;
+  margin: 0 0 24px;
   padding: 0;
 `
 
