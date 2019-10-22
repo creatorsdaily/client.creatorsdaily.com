@@ -7,6 +7,7 @@ import gql from 'graphql-tag'
 import get from 'lodash/get'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { GET_MEDIA } from '../queries'
+import useViewer from '../hooks/useViewer'
 import IPFSImage from './IPFSImage'
 
 const StyledUpload = styled(Upload)`
@@ -38,6 +39,7 @@ mutation($media: IMedia!) {
 `
 
 export default forwardRef(({ value, onChange = noop, onError = noop }, ref) => {
+  const { viewer: user } = useViewer()
   const [loading, setLoading] = useToggle(false)
   const [id, setId] = useState(value)
   const [create, { loading: createLoading }] = useMutation(CREATE_MEDIA, {
@@ -89,6 +91,9 @@ export default forwardRef(({ value, onChange = noop, onError = noop }, ref) => {
       showUploadList={false}
       action={process.env.UPLOAD}
       onChange={handleChange}
+      headers={{
+        authorization: `Bearer ${user && user.token}`
+      }}
       ref={ref}
     >
       {hash ? <StyledIPFSImage hash={hash} /> : uploadButton}

@@ -162,3 +162,7 @@ export {
 export {
   default as RocketFill
 } from '@ant-design/icons/lib/fill/RocketFill'
+
+export {
+  default as ExclamationCircleFill
+} from '@ant-design/icons/lib/fill/ExclamationCircleFill'

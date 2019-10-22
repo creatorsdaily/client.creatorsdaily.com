@@ -92,6 +92,9 @@ class Creators extends App {
     if (!process.browser || !viewer) return
     const OneSignal = window.OneSignal || []
     OneSignal.push(function () {
+      if (viewer.email) {
+        OneSignal.setEmail(viewer.email)
+      }
       OneSignal.setExternalUserId(viewer.id)
       OneSignal.getUserId(id => {
         if (id === viewer.oneSignal) return
