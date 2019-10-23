@@ -8,7 +8,12 @@ query {
     username
     token
     email
+    number
     oneSignal
+    avatar {
+      id
+      hash
+    }
   }
 }
 `

@@ -1,6 +1,7 @@
 import Link from 'next/link'
 import styled from 'styled-components'
 import { Button, Divider, Icon, Menu, Popover } from 'antd'
+import { useRouter } from 'next/router'
 import UserCell from './UserCell'
 
 const StyledButton = styled(Button)`
@@ -12,6 +13,7 @@ div {
 `
 
 export default ({ user, back = '/', ...rest }) => {
+  const router = useRouter()
   if (!user) {
     return (
       <div {...rest}>
@@ -30,16 +32,16 @@ export default ({ user, back = '/', ...rest }) => {
     )
   }
   const menu = (
-    <Menu>
-      {/* <Menu.Item key='logout'>
-        <Link href={`/auth/signout?back=${encodeURIComponent(back)}`}>
+    <Menu selectedKeys={[router.pathname]}>
+      <Menu.Item key='/settings/profile'>
+        <Link href='/settings/profile'>
           <a>
             <Icon type='setting' />
             设置
           </a>
         </Link>
       </Menu.Item>
-      <Menu.Divider /> */}
+      <Menu.Divider />
       <Menu.Item key='signout'>
         <Link href={`/auth/signout?back=${encodeURIComponent(back)}`}>
           <a>

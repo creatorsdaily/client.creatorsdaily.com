@@ -2,9 +2,10 @@ import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import { VIEWER } from '../queries'
 
-export default () => {
+export default ({ ...rest }) => {
   const { data, loading } = useQuery(VIEWER, {
-    errorPolicy: 'ignore'
+    errorPolicy: 'ignore',
+    ...rest
   })
   return {
     loading,

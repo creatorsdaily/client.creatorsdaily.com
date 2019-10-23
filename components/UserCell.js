@@ -1,6 +1,5 @@
-import { Avatar } from 'antd'
 import styled from 'styled-components'
-import md5 from 'crypto-js/md5'
+import Avatar from './Avatar'
 
 const Container = styled.div`
   display: flex;
@@ -18,11 +17,9 @@ margin-right: 8px;
 `
 
 export default ({ user, ...rest }) => {
-  let url = `https://www.gravatar.com/avatar/${user.email ? md5(user.email) : ''}`
-  url = `${url}?size=${64 * 2}&d=monsterid`
   return (
     <Container {...rest}>
-      <CommentAvatar shape='square' icon='user' src={url} alt={user.nickname} />
+      <CommentAvatar user={user} />
       <CommentUsername>{user.nickname}</CommentUsername>
     </Container>
   )

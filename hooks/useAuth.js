@@ -2,8 +2,10 @@ import { useEffect } from 'react'
 import Router, { useRouter } from 'next/router'
 import useViewer from './useViewer'
 
-export default () => {
-  const { viewer, loading } = useViewer()
+export default ({ ...rest }) => {
+  const { viewer, loading } = useViewer({
+    ...rest
+  })
   const { asPath } = useRouter()
   useEffect(() => {
     if (!viewer) {
