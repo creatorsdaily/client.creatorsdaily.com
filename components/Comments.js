@@ -4,6 +4,7 @@ import { useState } from 'react'
 import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
+import noop from 'lodash/noop'
 import formError from '../libs/form-error'
 import { GET_COMMENTS } from '../queries'
 import Box from './Box'
@@ -56,14 +57,54 @@ mutation($comment: IComment!) {
 }
 `
 
-export default ({ productId, product }) => {
-  const size = 10
-  const [page, setPage] = useState(1)
+export const updateComments = (cache, { data: { createComment } }, query, product) => {
+  const { getComments } = cache.readQuery({
+    query: query[0],
+    variables: query[1]
+  })
+  const addComment = (comment, current) => {
+    if (current.parentId === comment.id) {
+      return {
+        ...comment,
+        children: [
+          ...comment.children,
+          current
+        ]
+      }
+    } else {
+      comment.children = comment.children.map(x => addComment(x, current))
+    }
+    return comment
+  }
+  cache.writeQuery({
+    query: query[0],
+    variables: query[1],
+    data: {
+      getComments: {
+        ...getComments,
+        total: getComments.total + 1,
+        data: !createComment.parentId
+          ? [{
+            product,
+            ...createComment
+          }].concat(getComments.data)
+          : getComments.data.map(x => addComment(x, createComment))
+      }
+    }
+  })
+}
+
+export const CommentsBox = ({
+  loading,
+  list,
+  productId,
+  product,
+  query,
+  renderFooter = noop,
+  renderHeader = noop,
+  ...rest
+}) => {
   const [content, setContent] = useState('')
-  const query = [GET_COMMENTS, {
-    size,
-    productId
-  }]
   const [create, { loading: createLoading }] = useMutation(CREATE_COMMENT, {
     onCompleted: data => {
       message.success('提交成功')
@@ -73,46 +114,10 @@ export default ({ productId, product }) => {
       const errors = formError(null, error)
       message.error(errors[0].message)
     },
-    update (cache, { data: { createComment } }) {
-      const { getComments } = cache.readQuery({
-        query: query[0],
-        variables: query[1]
-      })
-      const addComment = (comment, current) => {
-        if (current.parentId === comment.id) {
-          return {
-            ...comment,
-            children: [
-              ...comment.children,
-              current
-            ]
-          }
-        } else {
-          comment.children = comment.children.map(x => addComment(x, current))
-        }
-        return comment
-      }
-      cache.writeQuery({
-        query: query[0],
-        variables: query[1],
-        data: {
-          getComments: {
-            ...getComments,
-            total: getComments.total + 1,
-            data: !createComment.parentId
-              ? [createComment].concat(getComments.data)
-              : getComments.data.map(x => addComment(x, createComment))
-          }
-        }
-      })
+    update (cache, data) {
+      updateComments(cache, data, query, product)
     }
   })
-  const { data, loading, fetchMore } = useQuery(query[0], {
-    variables: query[1],
-    notifyOnNetworkStatusChange: true
-  })
-  const list = get(data, 'getComments.data', [])
-  const total = get(data, 'getComments.total', 0)
   const handleReply = (replyId, reply) => {
     const comment = {
       productId,
@@ -128,6 +133,53 @@ export default ({ productId, product }) => {
       }
     })
   }
+  const renderList = () => {
+    if (!list.length) {
+      return (
+        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='暂无评论' />
+      )
+    }
+    return list.map(x => (
+      <CommentCell
+        product={product}
+        loading={createLoading}
+        key={x.id}
+        comment={x}
+        onReply={handleReply} />
+    ))
+  }
+  return (
+    <StyledBox {...rest}>
+      {renderHeader()}
+      <CommentBox>
+        <EditorBox>
+          <StyledEditor value={content} type='mini' placeholder='你觉着这个产品怎么样？' onChange={setContent} />
+        </EditorBox>
+        <StyledButton loading={createLoading} type='primary' onClick={() => handleReply()}>来一发</StyledButton>
+      </CommentBox>
+      <Spin spinning={loading}>
+        {renderList()}
+      </Spin>
+      {renderFooter()}
+    </StyledBox>
+  )
+}
+
+export default ({ productId, ...rest }) => {
+  const size = 10
+  const [page, setPage] = useState(1)
+  const query = [GET_COMMENTS, {
+    size,
+    productId
+  }]
+
+  const { data, loading, fetchMore } = useQuery(query[0], {
+    variables: query[1],
+    notifyOnNetworkStatusChange: true
+  })
+  const list = get(data, 'getComments.data', [])
+  const total = get(data, 'getComments.total', 0)
+
   const handleFetchMore = () => {
     fetchMore({
       variables: {
@@ -149,21 +201,7 @@ export default ({ productId, product }) => {
       }
     })
   }
-  const renderList = () => {
-    if (!list.length) {
-      return (
-        <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} description='暂无评论' />
-      )
-    }
-    return list.map(x => (
-      <CommentCell
-        product={product}
-        loading={createLoading}
-        key={x.id}
-        comment={x}
-        onReply={handleReply} />
-    ))
-  }
+
   const renderMore = () => {
     if (page * size >= total) return null
     return (
@@ -171,17 +209,13 @@ export default ({ productId, product }) => {
     )
   }
   return (
-    <StyledBox>
-      <CommentBox>
-        <EditorBox>
-          <StyledEditor value={content} type='mini' placeholder='你觉着这个产品怎么样？' onChange={setContent} />
-        </EditorBox>
-        <StyledButton loading={createLoading} type='primary' onClick={() => handleReply()}>来一发</StyledButton>
-      </CommentBox>
-      <Spin spinning={loading}>
-        {renderList()}
-      </Spin>
-      {renderMore()}
-    </StyledBox>
+    <CommentsBox
+      list={list}
+      query={query}
+      loading={loading}
+      renderFooter={renderMore}
+      productId={productId}
+      {...rest}
+    />
   )
 }

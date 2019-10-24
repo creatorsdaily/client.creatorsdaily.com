@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import { Spin } from 'antd'
 import { useQuery } from '@apollo/react-hooks'
+import get from 'lodash/get'
 import { GET_PRODUCT } from '../queries'
 import ProductHeader from './ProductHeader'
 import ProductContent from './ProductContent'
@@ -29,7 +30,8 @@ export const ProductContainer = ({ id, full = false }) => {
       id
     }
   })
-  const product = data.product || {}
+
+  const product = get(data, 'product', {})
   return (
     <Spin spinning={loading}>
       <Product {...product} full={full} />

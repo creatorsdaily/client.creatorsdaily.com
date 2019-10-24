@@ -1,5 +1,22 @@
 import gql from 'graphql-tag'
 
+const productFragment = `
+id
+name
+description
+isLike
+likeCount
+commentCount
+createdAt
+topics {
+  id
+  name
+}
+icon {
+  id
+  hash
+}`
+
 export const VIEWER = gql`
 query {
   viewer {
@@ -41,20 +58,11 @@ query($ids: [String!]) {
 export const GET_PRODUCT = gql`
 query($id: String!) {
   product(id: $id) {
-    id
-    name
-    description
+    ${productFragment}
     content
-    isLike
     isCreator
     isDiscoverer
-    likeCount
-    commentCount
     discovererId
-    icon {
-      id
-      hash
-    }
     discoverer {
       id
       nickname
@@ -66,10 +74,6 @@ query($id: String!) {
       nickname
       username
       email
-    }
-    topics {
-      id
-      name
     }
     medias {
       id
@@ -85,27 +89,7 @@ query($page: Int, $size: Int, $topic: [String!], $keyword: [String!]) {
   getProducts(page: $page, size: $size, topic: $topic, keyword: $keyword) {
     total
     data {
-      id
-      name
-      description
-      isLike
-      likeCount
-      commentCount
-      createdAt
-      discoverer {
-        id
-        nickname
-        username
-        email
-      }
-      topics {
-        id
-        name
-      }
-      icon {
-        id
-        hash
-      }
+      ${productFragment}
     }
   }
 }
@@ -204,13 +188,20 @@ fragment CommentFields on Comment {
   parentId
   user {
     id
+    avatar {
+      id
+      hash
+    }
     nickname
     email
   }
 }
-query($page: Int, $size: Int, $productId: String!) {
+query($page: Int, $size: Int, $productId: String) {
   getComments(page: $page, size: $size, productId: $productId) {
     data {
+      product {
+        ${productFragment}
+      }
       ...CommentFields
       children {
         ...CommentFields
