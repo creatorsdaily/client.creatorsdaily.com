@@ -49,7 +49,7 @@ const CreatorsApp = ({ pageProps, router, Component, apolloClient }) => {
   return (
     <ConfigProvider locale={zhCN} renderEmpty={renderEmpty}>
       <Head>
-        <title>{process.env.NAME} | {process.env.SLOGAN}</title>
+        <title>{process.env.NAME} - {process.env.SLOGAN}</title>
         <meta key='description' name='description' content={process.env.DESCRIPTION} />
         <meta key='keywords' name='keywords' content={process.env.KEYWORDS} />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />

@@ -31,7 +31,7 @@ export default () => {
   return (
     <Page>
       <Head>
-        <title>{product.name} | {process.env.NAME}</title>
+        <title>{product.name} - {process.env.NAME}</title>
         <meta key='description' name='description' content={description} />
         <meta key='keywords' name='keywords' content={keywords} />
       </Head>

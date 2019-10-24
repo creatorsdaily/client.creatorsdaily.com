@@ -69,7 +69,8 @@ export default () => {
   return (
     <Page>
       <Head>
-        <title>日报 | {process.env.NAME}</title>
+        <title>日报 - {process.env.NAME}</title>
+        <meta key='description' name='description' content='每天发现一款有趣产品' />
       </Head>
       <StyledContainer>
         <Row type='flex' gutter={24} justify='center'>

@@ -86,7 +86,7 @@ export default () => {
             </StyledTypography>
           </Col>
         </Row>
-        <ProductEditor step={1} onSubmit={handleSubmit} wrappedComponentRef={ref} renderFooter={() => (
+        <ProductEditor step={1} product={{}} onSubmit={handleSubmit} wrappedComponentRef={ref} renderFooter={() => (
           <StyledButton loading={loading} htmlType='submit' type='primary'>提交产品</StyledButton>
         )} />
       </StyledContainer>

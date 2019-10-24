@@ -2,7 +2,7 @@ import React, { useRef } from 'react'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/react-hooks'
-import { Button, Col, Row, message } from 'antd'
+import { Button, Col, Row, Spin, message } from 'antd'
 import get from 'lodash/get'
 import pick from 'lodash/pick'
 import { useRouter } from 'next/router'
@@ -93,23 +93,33 @@ export default () => {
       </Col>
     )
   }
-  const product = get(data, 'product', {})
+  const product = get(data, 'product')
+  const renderProduct = () => {
+    if (!product) {
+      return (
+        <Spin />
+      )
+    }
+    return (
+      <ProductEditor
+        step={step}
+        product={product}
+        onSubmit={handleSubmit}
+        wrappedComponentRef={ref}
+        renderFooter={() => (
+          <Row type='flex' justify='center' gutter={24}>
+            {renderCancelButton()}
+            <Col span={6}>
+              <Button block loading={getLoading || loading} htmlType='submit' type='primary'>保存</Button>
+            </Col>
+          </Row>
+        )} />
+    )
+  }
   return (
     <Page>
       <StyledContainer>
-        <ProductEditor
-          step={step}
-          product={product}
-          onSubmit={handleSubmit}
-          wrappedComponentRef={ref}
-          renderFooter={() => (
-            <Row type='flex' justify='center' gutter={24}>
-              {renderCancelButton()}
-              <Col span={6}>
-                <Button block loading={getLoading || loading} htmlType='submit' type='primary'>保存</Button>
-              </Col>
-            </Row>
-          )} />
+        {renderProduct()}
       </StyledContainer>
     </Page>
   )

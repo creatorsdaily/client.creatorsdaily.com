@@ -97,7 +97,7 @@ export default () => {
   return (
     <Page>
       <Head>
-        <title>编辑 | {process.env.NAME}</title>
+        <title>编辑 - {process.env.NAME}</title>
       </Head>
       <StyledContainer>
         <Row gutter={24}>

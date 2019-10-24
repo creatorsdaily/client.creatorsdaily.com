@@ -4,6 +4,7 @@ import { useState } from 'react'
 import { Affix, Button, Col, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import Link from 'next/link'
+import Head from 'next/head'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
 import { GET_COMMENTS } from '../queries'
@@ -27,6 +28,7 @@ margin: -16px -16px 0;
 export default () => {
   const size = 10
   const [hoverProduct, setHoverProduct] = useState()
+  const [focusProduct, setFocusProduct] = useState()
   const query = [GET_COMMENTS, {
     size
   }]
@@ -37,9 +39,9 @@ export default () => {
   const list = get(data, 'getComments.data', [])
   const total = get(data, 'getComments.total', 0)
   const renderProduct = () => {
-    if (!hoverProduct) return null
+    if (!hoverProduct && !focusProduct) return null
     return (
-      <ProductContainer id={hoverProduct} full />
+      <ProductContainer id={hoverProduct || focusProduct} full />
     )
   }
   const handleFetchMore = () => {
@@ -71,6 +73,10 @@ export default () => {
   }
   return (
     <Page>
+      <Head>
+        <title>聊产品 - {process.env.NAME}</title>
+        <meta key='description' name='description' content='快来和各位创造者们聊一聊～' />
+      </Head>
       <StyledContainer>
         <Row gutter={24}>
           <Col md={12} xs={24}>
@@ -78,6 +84,8 @@ export default () => {
               { list.map(x => (
                 <CommentsBox
                   key={x.id}
+                  onFocus={() => setFocusProduct(x.product.id)}
+                  onBlur={() => setFocusProduct(null)}
                   onMouseEnter={() => setHoverProduct(x.product.id)}
                   onMouseLeave={() => setHoverProduct(null)}
                   list={[x]}

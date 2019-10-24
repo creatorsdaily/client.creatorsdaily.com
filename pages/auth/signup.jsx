@@ -19,7 +19,7 @@ export default () => {
   return (
     <Page header={null}>
       <Head>
-        <title>注册 | {process.env.NAME}</title>
+        <title>注册 - {process.env.NAME}</title>
       </Head>
       <AuthBox>
         <SignupBox back={back} />

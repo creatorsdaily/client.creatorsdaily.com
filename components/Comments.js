@@ -100,6 +100,8 @@ export const CommentsBox = ({
   productId,
   product,
   query,
+  onFocus = noop,
+  onBlur = noop,
   renderFooter = noop,
   renderHeader = noop,
   ...rest
@@ -153,7 +155,7 @@ export const CommentsBox = ({
       {renderHeader()}
       <CommentBox>
         <EditorBox>
-          <StyledEditor value={content} type='mini' placeholder='你觉着这个产品怎么样？' onChange={setContent} />
+          <StyledEditor value={content} type='mini' placeholder='你觉着这个产品怎么样？' onChange={setContent} onFocus={onFocus} onBlur={onBlur} />
         </EditorBox>
         <StyledButton loading={createLoading} type='primary' onClick={() => handleReply()}>来一发</StyledButton>
       </CommentBox>

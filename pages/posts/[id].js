@@ -47,7 +47,7 @@ export default () => {
       </Fragment>
     )}>
       <Head>
-        <title>{post.title} | {process.env.NAME}</title>
+        <title>{post.title} - {process.env.NAME}</title>
         <meta key='description' name='description' content={post.description} />
       </Head>
       <Spin spinning={loading}>
