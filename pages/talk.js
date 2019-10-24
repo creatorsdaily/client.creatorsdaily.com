@@ -77,6 +77,7 @@ export default () => {
             <Spin spinning={loading}>
               { list.map(x => (
                 <CommentsBox
+                  key={x.id}
                   onMouseEnter={() => setHoverProduct(x.product.id)}
                   onMouseLeave={() => setHoverProduct(null)}
                   list={[x]}
