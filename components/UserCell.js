@@ -3,6 +3,7 @@ import Avatar from './Avatar'
 
 const Container = styled.div`
   display: flex;
+  color: #333;
 `
 
 const CommentAvatar = styled(Avatar)`

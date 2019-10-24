@@ -54,9 +54,13 @@ export default ({ user, back = '/', ...rest }) => {
   )
   return (
     <Popover content={menu} overlayClassName='user-button-popover'>
-      <StyledButton {...rest}>
-        <UserCell user={user} />
-      </StyledButton>
+      <Link href='/users/[id]' as={`/users/${user.id}`}>
+        <a>
+          <StyledButton {...rest}>
+            <UserCell user={user} />
+          </StyledButton>
+        </a>
+      </Link>
     </Popover>
   )
 }

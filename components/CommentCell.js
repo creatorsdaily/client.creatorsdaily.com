@@ -5,6 +5,7 @@ import { useState } from 'react'
 import noop from 'lodash/noop'
 import get from 'lodash/get'
 import useToggle from 'react-use/lib/useToggle'
+import Link from 'next/link'
 import Time from './Time'
 import { Mini } from './Editor'
 import UserCell from './UserCell'
@@ -108,7 +109,11 @@ const CommentCell = ({ product, comment, loading, onReply = noop }) => {
   return (
     <Comment hasParent={!!comment.parentId} hasChildren={!!comment.children.length}>
       <CommentHeader id={`comments-${comment.id}`} name={`comments-${comment.id}`}>
-        <UserCell user={comment.user} />
+        <Link href='/users/[id]' as={`/users/${comment.user.id}`}>
+          <a>
+            <UserCell user={comment.user} />
+          </a>
+        </Link>
         {isDiscoverer && (<StyledTag color='gold'>发现者</StyledTag>)}
         {isCreator && (<StyledTag color='volcano'>创造者</StyledTag>)}
       </CommentHeader>

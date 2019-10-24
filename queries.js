@@ -27,6 +27,24 @@ query {
     email
     number
     oneSignal
+    createdAt
+    avatar {
+      id
+      hash
+    }
+  }
+}
+`
+
+export const GET_USER = gql`
+query($id: String!) {
+  user(id: $id) {
+    id
+    nickname
+    username
+    email
+    number
+    createdAt
     avatar {
       id
       hash
