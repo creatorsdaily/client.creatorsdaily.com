@@ -201,6 +201,13 @@ query($page: Int, $size: Int, $productId: String) {
     data {
       product {
         ${productFragment}
+        discovererId
+        creators {
+          id
+          nickname
+          username
+          email
+        }
       }
       ...CommentFields
       children {
