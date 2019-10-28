@@ -38,6 +38,10 @@ export default props => {
               <a href='/api/rss' rel='noreferrer' target='_blank'>RSS</a>
               <Divider type='vertical' />
               <Link href='/about'>
+                <a>友情链接</a>
+              </Link>
+              <Divider type='vertical' />
+              <Link href='/about'>
                 <a>关于</a>
               </Link>
               <Divider type='vertical' />

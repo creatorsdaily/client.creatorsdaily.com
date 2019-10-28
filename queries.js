@@ -152,6 +152,23 @@ query($page: Int, $size: Int) {
 }
 `
 
+export const GET_LINKS = gql`
+query($page: Int, $size: Int) {
+  getLinks(page: $page, size: $size) {
+    total
+    data {
+      id
+      name
+      url
+      media {
+        id
+        hash
+      }
+    }
+  }
+}
+`
+
 export const GET_POST = gql`
 query($id: String!) {
   getPost(id: $id) {
