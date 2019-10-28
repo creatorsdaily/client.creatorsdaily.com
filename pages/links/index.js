@@ -27,6 +27,7 @@ const StyledIPFSImage = styled(IPFSImage)`
   width: 100px;
   height: 100px;
   margin: 16px auto;
+  display: block;
 `
 
 export default () => {

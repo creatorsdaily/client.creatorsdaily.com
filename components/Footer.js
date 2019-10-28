@@ -37,7 +37,7 @@ export default props => {
               <Divider type='vertical' />
               <a href='/api/rss' rel='noreferrer' target='_blank'>RSS</a>
               <Divider type='vertical' />
-              <Link href='/about'>
+              <Link href='/links'>
                 <a>友情链接</a>
               </Link>
               <Divider type='vertical' />
