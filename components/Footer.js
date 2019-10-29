@@ -41,6 +41,10 @@ export default props => {
                 <a>友情链接</a>
               </Link>
               <Divider type='vertical' />
+              <Link href='/likes'>
+                <a>喜欢</a>
+              </Link>
+              <Divider type='vertical' />
               <Link href='/about'>
                 <a>关于</a>
               </Link>

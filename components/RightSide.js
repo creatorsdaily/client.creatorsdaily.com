@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import noop from 'lodash/noop'
 import Box from './Box'
 import WeChatOfficialAccount from './WeChatOfficialAccount'
+import ZSXQ from './ZSXQ'
 
 const StyledBox = styled(Box)`
 padding: 16px;
@@ -45,6 +46,19 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
       )
     })
   }
+  const handleZSXQ = () => {
+    Modal.info({
+      okText: '关闭',
+      className: 'preview-modal',
+      icon: null,
+      maskClosable: true,
+      autoFocusButton: null,
+      width: 500,
+      content: (
+        <ZSXQ title='知识星球' hideTitle />
+      )
+    })
+  }
   return (
     <Affix offsetTop={24}>
       <StyledBox>
@@ -64,6 +78,12 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
             Telegram
             </SmallButton>
           </a>
+          <Divider type='vertical' />
+          <Tooltip placement='top' title='加入我的星球'>
+            <SmallButton size='small' type='link' onClick={handleZSXQ}>
+            知识星球
+            </SmallButton>
+          </Tooltip>
         </div>
       </Buttons>
     </Affix>
