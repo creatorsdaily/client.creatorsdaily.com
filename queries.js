@@ -86,12 +86,20 @@ query($id: String!) {
       nickname
       username
       email
+      avatar {
+        id
+        hash
+      }
     }
     creators {
       id
       nickname
       username
       email
+      avatar {
+        id
+        hash
+      }
     }
     medias {
       id
