@@ -109,7 +109,7 @@ export const CommentsBox = ({
   const [content, setContent] = useState('')
   const [create, { loading: createLoading }] = useMutation(CREATE_COMMENT, {
     onCompleted: data => {
-      message.success('提交成功')
+      message.success('推荐成功')
       setContent('')
     },
     onError: error => {

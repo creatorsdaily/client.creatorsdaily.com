@@ -51,7 +51,7 @@ export default () => {
     onCompleted: data => {
       const id = get(data, 'createProduct.id')
       const step = 2
-      message.success('提交成功')
+      message.success('推荐成功')
       replace({
         pathname: '/[id]/editor',
         query: {
@@ -79,7 +79,7 @@ export default () => {
         <Row type='flex' gutter={24} justify='center'>
           <Col md={12} xs={24}>
             <StyledTypography>
-              <StyledTitle level={4}>提交产品</StyledTitle>
+              <StyledTitle level={4}>推荐新产品</StyledTitle>
               <Paragraph>
                 这里是爱意满满的作品展示区，无论您是产品的 <Text strong>创造者</Text> ，还是产品的 <Text strong>发现者</Text> ，都可以在这里将它展示给全世界。
               </Paragraph>
@@ -87,7 +87,7 @@ export default () => {
           </Col>
         </Row>
         <ProductEditor step={1} product={{}} onSubmit={handleSubmit} wrappedComponentRef={ref} renderFooter={() => (
-          <StyledButton loading={loading} htmlType='submit' type='primary'>提交产品</StyledButton>
+          <StyledButton loading={loading} htmlType='submit' type='primary'>推荐产品</StyledButton>
         )} />
       </StyledContainer>
     </Page>

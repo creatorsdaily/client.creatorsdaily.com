@@ -91,7 +91,7 @@ export default forwardRef((props, ref) => {
               required: true, message: '必须输入产品名！'
             }]
           })(
-            <Input placeholder='输入要提交的产品名称' />
+            <Input placeholder='输入要推荐的产品名称' />
           )}
         </Item>
         <Item label='链接地址' colon={false}>

@@ -132,7 +132,7 @@ export default () => {
           <Col lg={6} md={7} xs={24}>
             <Link href='/create' passHref>
               <CreateButton>
-                <Button type='primary' size='large' block>提交新产品</Button>
+                <Button type='primary' size='large' block>推荐新产品</Button>
               </CreateButton>
             </Link>
             <RightSide />
