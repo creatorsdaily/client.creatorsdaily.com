@@ -29,6 +29,7 @@ const StyledIPFSImage = styled(IPFSImage)`
   height: 100px;
   margin: 16px auto;
   display: block;
+  object-fit: contain;
 `
 
 const LinkContent = styled.div`

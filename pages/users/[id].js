@@ -9,9 +9,13 @@ import Container from '../../components/Container'
 import { GET_USER } from '../../queries'
 import Time from '../../components/Time'
 import Avatar from '../../components/Avatar'
+import media from '../../libs/media'
 
 const StyledContainer = styled(Container)`
-margin: 24px auto;
+margin: 24px;
+${media.sm`
+  margin: 24px auto;
+`}
 `
 
 const UserContainer = styled.div`

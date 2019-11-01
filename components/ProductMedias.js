@@ -126,6 +126,7 @@ export default forwardRef(({ value = [], onChange = noop, onError = noop }, ref)
     if (files.length >= 6) return null
     return (
       <StyledUpload
+        style={{ display: files.length >= 6 ? 'null' : 'table-cell' }}
         listType='picture-card'
         className='avatar-uploader'
         showUploadList={false}
