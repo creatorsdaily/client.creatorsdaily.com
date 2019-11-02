@@ -37,7 +37,7 @@ query {
 `
 
 export const GET_USER = gql`
-query($id: String!) {
+query($id: String!, $createdPage: Int, $createdSize: Int, $discoveredPage: Int, $discoveredSize: Int) {
   user(id: $id) {
     id
     nickname
@@ -48,6 +48,18 @@ query($id: String!) {
     avatar {
       id
       hash
+    }
+    createdProducts(page: $createdPage, size: $createdSize) {
+      total
+      data {
+        ${productFragment}
+      }
+    }
+    discoveredProducts(page: $discoveredPage, size: $discoveredSize) {
+      total
+      data {
+        ${productFragment}
+      }
     }
   }
 }

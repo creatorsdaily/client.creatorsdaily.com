@@ -25,6 +25,11 @@ box-shadow: none;
 margin: -16px -16px 0;
 `
 
+const MoreButton = styled(Button)`
+  font-size: 12px;
+  color: #606060;
+`
+
 export default () => {
   const size = 10
   const [hoverProduct, setHoverProduct] = useState()
@@ -34,7 +39,8 @@ export default () => {
   }]
   const [page, setPage] = useState(1)
   const { data, loading, fetchMore } = useQuery(query[0], {
-    variables: query[1]
+    variables: query[1],
+    notifyOnNetworkStatusChange: true
   })
   const list = get(data, 'getComments.data', [])
   const total = get(data, 'getComments.total', 0)
@@ -95,7 +101,7 @@ export default () => {
                   renderFooter={() => (
                     <Link href='/[id]' as={`/${x.product.id}#comments`}>
                       <a>
-                        <Button type='link' block>更多「{x.product.name}」的评论</Button>
+                        <MoreButton size='small' type='link' block>更多「{x.product.name}」的评论</MoreButton>
                       </a>
                     </Link>
                   )}

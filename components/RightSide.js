@@ -4,6 +4,7 @@ import noop from 'lodash/noop'
 import Box from './Box'
 import WeChatOfficialAccount from './WeChatOfficialAccount'
 import ZSXQ from './ZSXQ'
+import WeChatButton from './WeChatButton'
 
 const StyledBox = styled(Box)`
 padding: 16px;
@@ -67,11 +68,7 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
       </StyledBox>
       <Buttons>
         <div>
-          <Tooltip placement='top' title='加好友邀请入群'>
-            <SmallButton size='small' type='link' onClick={handleWeChat}>
-            微信
-            </SmallButton>
-          </Tooltip>
+          <WeChatButton tooltip='加好友邀请入群'>微信</WeChatButton>
           <Divider type='vertical' />
           <a href='https://t.me/creatorsdaily' rel='noreferrer' target='_blank'>
             <SmallButton size='small' type='link'>

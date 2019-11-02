@@ -5,6 +5,7 @@ import media from '../libs/media'
 import ProductLinks from './ProductLinks'
 import ProductLike from './ProductLike'
 import ProductUsers from './ProductUsers'
+import WeChatButton from './WeChatButton'
 
 const Container = styled.div`
 padding: 0 16px;
@@ -16,7 +17,12 @@ ${media.sm`
 `}
 `
 
-export default ({ id, isDiscoverer, isCreator, isLike, likeCount, links = [], discoverer, creators = [] }) => {
+const StyledWeChatButton = styled(WeChatButton)`
+  margin: 0 auto 24px;
+  display: block;
+`
+
+export default ({ id, name, isDiscoverer, isCreator, isLike, likeCount, links = [], discoverer, creators = [] }) => {
   const renderButton = () => {
     if (isCreator || (isDiscoverer && !creators.length)) {
       return (
@@ -36,12 +42,23 @@ export default ({ id, isDiscoverer, isCreator, isLike, likeCount, links = [], di
     }
     return null
   }
+  const renderWeChat = () => {
+    if (!creators.length) {
+      return (
+        <StyledWeChatButton tooltip={`「${name}」暂无创造者，如果您是产品的创造者，请联系微信认领`}>
+          认领产品
+        </StyledWeChatButton>
+      )
+    }
+  }
+
   return (
     <Container>
       {renderButton()}
       <ProductLike id={id} likeCount={likeCount} isLike={isLike} />
       <ProductLinks links={links} />
       <ProductUsers discoverer={discoverer} creators={creators} />
+      {renderWeChat()}
     </Container>
   )
 }
