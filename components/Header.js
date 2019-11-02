@@ -11,6 +11,9 @@ import Brand from './Brand'
 const { Header } = Layout
 
 const menu = [{
+  name: '里程碑',
+  href: '/milestones'
+}, {
   name: '聊产品',
   href: '/talk'
 }, {

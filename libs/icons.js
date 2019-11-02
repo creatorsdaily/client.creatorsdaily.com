@@ -116,12 +116,28 @@ export {
 } from '@ant-design/icons/lib/outline/BarsOutline'
 
 export {
+  default as FlagOutline
+} from '@ant-design/icons/lib/outline/FlagOutline'
+
+export {
   default as MessageOutline
 } from '@ant-design/icons/lib/outline/MessageOutline'
 
 export {
+  default as ClockCircleOutline
+} from '@ant-design/icons/lib/outline/ClockCircleOutline'
+
+export {
+  default as QuestionCircleOutline
+} from '@ant-design/icons/lib/outline/QuestionCircleOutline'
+
+export {
   default as RocketOutline
 } from '@ant-design/icons/lib/outline/RocketOutline'
+
+export {
+  default as InfoCircleOutline
+} from '@ant-design/icons/lib/outline/InfoCircleOutline'
 
 export {
   default as MessageFill
@@ -166,3 +182,7 @@ export {
 export {
   default as ExclamationCircleFill
 } from '@ant-design/icons/lib/fill/ExclamationCircleFill'
+
+export {
+  default as InfoCircleFill
+} from '@ant-design/icons/lib/fill/InfoCircleFill'

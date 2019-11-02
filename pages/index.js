@@ -15,6 +15,7 @@ import RightSide from '../components/RightSide'
 import media from '../libs/media'
 import PostCell from '../components/PostCell'
 import SmallTitle from '../components/SmallTitle'
+import Milestones from '../components/Milestones'
 
 const StyledContainer = styled(Container)`
 ${media.lg`
@@ -107,6 +108,21 @@ export default () => {
       </Fragment>
     )
   }
+  const renderMilestones = () => {
+    if (!!topic || !!Number(page)) return null
+    return (
+      <>
+        <SmallTitle>
+          <Link href='/milestones'>
+            <a>
+            里程碑
+            </a>
+          </Link>
+        </SmallTitle>
+        <Milestones size={5} />
+      </>
+    )
+  }
   return (
     <Page>
       <StyledContainer>
@@ -121,8 +137,9 @@ export default () => {
             <Spin spinning={postsLoading}>
               {renderPosts()}
             </Spin>
+            {renderMilestones()}
+            <SmallTitle>产品展区</SmallTitle>
             <Spin spinning={loading}>
-              <SmallTitle>产品展区</SmallTitle>
               {renderList()}
             </Spin>
             <Pagination>

@@ -98,6 +98,7 @@ export const CommentsBox = ({
   loading,
   list,
   productId,
+  milestoneId,
   product,
   query,
   onFocus = noop,
@@ -109,7 +110,7 @@ export const CommentsBox = ({
   const [content, setContent] = useState('')
   const [create, { loading: createLoading }] = useMutation(CREATE_COMMENT, {
     onCompleted: data => {
-      message.success('推荐成功')
+      message.success('提交成功')
       setContent('')
     },
     onError: error => {
@@ -123,6 +124,7 @@ export const CommentsBox = ({
   const handleReply = (replyId, reply) => {
     const comment = {
       productId,
+      milestoneId,
       content
     }
     if (replyId) {
@@ -167,12 +169,13 @@ export const CommentsBox = ({
   )
 }
 
-export default ({ productId, ...rest }) => {
+export default ({ productId, milestoneId, ...rest }) => {
   const size = 10
   const [page, setPage] = useState(1)
   const query = [GET_COMMENTS, {
     size,
-    productId
+    productId,
+    milestoneId
   }]
 
   const { data, loading, fetchMore } = useQuery(query[0], {
@@ -217,6 +220,7 @@ export default ({ productId, ...rest }) => {
       loading={loading}
       renderFooter={renderMore}
       productId={productId}
+      milestoneId={milestoneId}
       {...rest}
     />
   )

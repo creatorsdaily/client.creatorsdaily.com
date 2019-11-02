@@ -93,6 +93,7 @@ query($id: String!) {
     isCreator
     isDiscoverer
     discovererId
+    links
     discoverer {
       id
       nickname
@@ -117,7 +118,14 @@ query($id: String!) {
       id
       hash
     }
-    links
+    milestones {
+      data {
+        id
+        title
+        content
+        createdAt
+      }
+    }
   }
 }
 `
@@ -229,8 +237,39 @@ query($page: Int, $size: Int, $keyword: [String!]) {
         id
         hash
       }
-    },
+    }
     count
+  }
+}
+`
+
+export const GET_MILESTONES = gql`
+query($page: Int, $size: Int, $productId: String) {
+  getMilestones(page: $page, size: $size, productId: $productId) {
+    total
+    data {
+      id
+      title
+      content
+      createdAt
+      product {
+        ${productFragment}
+      }
+    }
+  }
+}
+`
+
+export const GET_MILESTONE = gql`
+query($id: String!) {
+  getMilestone(id: $id) {
+    id
+    title
+    content
+    createdAt
+    product {
+      ${productFragment}
+    }
   }
 }
 `
@@ -251,8 +290,8 @@ fragment CommentFields on Comment {
     email
   }
 }
-query($page: Int, $size: Int, $productId: String) {
-  getComments(page: $page, size: $size, productId: $productId) {
+query($page: Int, $size: Int, $productId: String, $milestoneId: String) {
+  getComments(page: $page, size: $size, productId: $productId, milestoneId: $milestoneId) {
     data {
       product {
         ${productFragment}

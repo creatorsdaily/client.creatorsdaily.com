@@ -11,6 +11,7 @@ import useAuth from '../hooks/useAuth'
 import ProductEditor from '../components/ProductEditor'
 import formError from '../libs/form-error'
 import { formToProduct } from '../components/ProductForm'
+import { GET_PRODUCTS } from '../queries'
 
 const { Title, Paragraph, Text } = Typography
 
@@ -64,7 +65,14 @@ export default () => {
       const { form } = ref.current.props
       const errors = formError(form, error)
       message.error(errors[0].message)
-    }
+    },
+    refetchQueries: () => [{
+      query: GET_PRODUCTS,
+      variables: {
+        page: 1,
+        size: 15
+      }
+    }]
   })
   const handleSubmit = values => {
     create({
