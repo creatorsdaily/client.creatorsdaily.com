@@ -102,7 +102,7 @@ export default ({ productId, size = 15 }) => {
           >
             <a>
               <ProductCell>
-                <ProductIcon size='small' alt={product.name} hash={product.hash && `${product.hash}-160-160-contain`} />
+                <ProductIcon size='small' alt={product.name} hash={product.icon.hash && `${product.icon.hash}-160-160-contain`} />
                 <ProductName>{product.name}</ProductName>
                 <div>
                   <Divider type='vertical' />
