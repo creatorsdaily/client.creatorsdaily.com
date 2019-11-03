@@ -90,8 +90,6 @@ query($id: String!) {
   product(id: $id) {
     ${productFragment}
     content
-    isCreator
-    isDiscoverer
     discovererId
     links
     discoverer {

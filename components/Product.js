@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { GET_PRODUCT } from '../queries'
 import media from '../libs/media'
 import useCreateMilestoneModal from '../hooks/useCreateMilestoneModal'
+import useCanEditProduct from '../hooks/useCanEditProduct'
 import ProductHeader from './ProductHeader'
 import ProductContent from './ProductContent'
 import ProductFiles from './ProductFiles'
@@ -50,30 +51,28 @@ font-size: 12px;
 `
 
 const Product = ({
-  id, name, isCreator, isDiscoverer,
+  id, name, discovererId,
   milestones, creators,
   createdAt, description, content, topics, icon, medias = [], full = false
 }) => {
+  const canEdit = useCanEditProduct({ creators, discovererId })
+
   const [modal, show] = useCreateMilestoneModal(id, {
     refetchQueries: () => [{
       query: GET_PRODUCT,
-      variables: {
-        id
-      }
+      variables: { id }
     }]
   })
   const renderCreatorMilestone = () => {
-    if (isCreator || (isDiscoverer && !creators.length)) {
-      return (
-        <Timeline.Item color='red' dot={<Icon type='clock-circle' />}>
-          <MilestoneTime>现在，立刻发布新动态</MilestoneTime>
-          <MilestoneButton icon='plus' onClick={show}>
-            发布新里程碑
-          </MilestoneButton>
-        </Timeline.Item>
-      )
-    }
-    return null
+    if (!canEdit) return null
+    return (
+      <Timeline.Item color='red' dot={<Icon type='clock-circle' />}>
+        <MilestoneTime>现在，立刻发布新动态</MilestoneTime>
+        <MilestoneButton icon='plus' onClick={show}>
+          发布新里程碑
+        </MilestoneButton>
+      </Timeline.Item>
+    )
   }
   const milestonesList = get(milestones, 'data', [])
   return (

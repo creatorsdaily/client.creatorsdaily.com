@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Button, Col, Row } from 'antd'
 import Link from 'next/link'
 import media from '../libs/media'
+import useCanEditProduct from '../hooks/useCanEditProduct'
 import ProductLinks from './ProductLinks'
 import ProductLike from './ProductLike'
 import ProductUsers from './ProductUsers'
@@ -22,25 +23,25 @@ const StyledWeChatButton = styled(WeChatButton)`
   display: block;
 `
 
-export default ({ id, name, isDiscoverer, isCreator, isLike, likeCount, links = [], discoverer, creators = [] }) => {
+export default ({ id, name, discovererId, isLike, likeCount, links = [], discoverer, creators = [] }) => {
+  const canEdit = useCanEditProduct({ creators, discovererId })
+
   const renderButton = () => {
-    if (isCreator || (isDiscoverer && !creators.length)) {
-      return (
-        <Row gutter={8} style={{ marginBottom: 24 }}>
-          <Col span={16}>
-            <Link href='/[id]/editor' as={`/${id}/editor`}>
-              <a>
-                <Button block icon='edit'>编辑</Button>
-              </a>
-            </Link>
-          </Col>
-          <Col span={8}>
-            <Button block type='danger' icon='delete' disabled>删除</Button>
-          </Col>
-        </Row>
-      )
-    }
-    return null
+    if (!canEdit) return null
+    return (
+      <Row gutter={8} style={{ marginBottom: 24 }}>
+        <Col span={16}>
+          <Link href='/[id]/editor' as={`/${id}/editor`}>
+            <a>
+              <Button block icon='edit'>编辑</Button>
+            </a>
+          </Link>
+        </Col>
+        <Col span={8}>
+          <Button block type='danger' icon='delete' disabled>删除</Button>
+        </Col>
+      </Row>
+    )
   }
   const renderWeChat = () => {
     if (!creators.length) {
