@@ -269,6 +269,17 @@ query($id: String!) {
     createdAt
     product {
       ${productFragment}
+      discovererId
+      creators {
+        id
+        nickname
+        username
+        email
+        avatar {
+          id
+          hash
+        }
+      }
     }
   }
 }
