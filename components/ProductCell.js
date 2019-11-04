@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import Link from 'next/link'
-import { Button, Icon } from 'antd'
+import { Button } from 'antd'
 import useProductMeta from '../hooks/useProductMeta'
 import { TopicsBar } from './Topics'
 import Box from './Box'

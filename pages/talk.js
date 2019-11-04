@@ -19,10 +19,14 @@ margin: 24px auto;
 const StyledProductCell = styled(ProductCell)`
 border: 0px;
 box-shadow: none;
+height: 44px;
+margin-bottom: 16px;
 :hover {
   border: 0px;
 }
-margin: -16px -16px 0;
+a {
+  padding: 0;
+}
 `
 
 const MoreButton = styled(Button)`
@@ -96,7 +100,7 @@ export default () => {
                   onMouseLeave={() => setHoverProduct(null)}
                   list={[x]}
                   renderHeader={() => (
-                    <StyledProductCell {...x.product} />
+                    <StyledProductCell {...x.product} size='small' />
                   )}
                   renderFooter={() => (
                     <Link href='/[id]' as={`/${x.product.id}#comments`}>

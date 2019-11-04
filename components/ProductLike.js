@@ -2,19 +2,25 @@ import { Button, message } from 'antd'
 import styled from 'styled-components'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import { useEffect, useState } from 'react'
-import useToggle from 'react-use/lib/useToggle'
 import formError from '../libs/form-error'
 import { GET_PRODUCT } from '../queries'
 
 const StyledButton = styled(Button)`
   min-height: 50px;
   ${({ islike }) => islike === 'true' ? `
-    background: #FFF;
+    background: #FFFF99;
     color: #DE7B76;
     border-color: #DE7B76;
+    :active, :focus {
+      background: #FFFFF0;
+      color: #DE7B76;
+      border-color: #DE7B76;
+    }
   ` : ''}
-  
+  :active, :focus {
+    color: rgba(0, 0, 0, 0.65);
+    border-color: #d9d9d9;
+  }
 `
 
 const Count = styled.span`

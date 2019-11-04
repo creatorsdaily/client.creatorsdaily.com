@@ -96,15 +96,16 @@ export default () => {
     }
     return (
       <Fragment>
-        <SmallTitle>今日推荐</SmallTitle>
+        <SmallTitle>
+          <Link href='/posts'>
+            <a>
+            今日推荐
+            </a>
+          </Link>
+        </SmallTitle>
         {posts.map(post => (
           <StyledPostCell {...post} key={post.id} />
         ))}
-        <Link href='/posts'>
-          <a>
-            <MoreButton icon='down' type='dashed' block>更多</MoreButton>
-          </a>
-        </Link>
       </Fragment>
     )
   }

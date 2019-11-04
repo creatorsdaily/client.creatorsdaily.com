@@ -8,7 +8,7 @@ import WeChatOfficialAccount from '../components/WeChatOfficialAccount'
 export default Article
 
 <Head>
-  <title>关于 - {process.env.NAME}</title>
+  <title>关于{process.env.NAME} - {process.env.NAME}</title>
 </Head>
 
 # 关于创造者日报
@@ -19,9 +19,41 @@ export default Article
 >
 > `-- Romain Rolland`
 
-创造者日报是一个创造者社区，这里是爱意满满的作品展示平台，希望打造一个成功的 ProductHunt 中文版社区。
+首先，非常感谢你可以关注到这个社区。
 
-### 角色
+如你所见，她还是一个正在成长中的产品，若您不幸踩雷，恳请在[这里](/b256ab69-e72a-4491-bd3b-13da969f6c0c#comments)留言，我会尽快修复。
+
+#### 她叫「创造者日报」
+
+是的，就如她的名字一般，我们希望打造一个服务于产品 **创造者** 和 **爱好者** 的分享和交流社区。如果恰巧你就是这样的人，那么欢迎你可以加入并留在这里。
+
+而之所以叫「日报」，是因为我们还会**每天**在社区挑选出一款优秀产品，并通过「[日报](/posts)」栏目和「[一群创造者](/wechat-official-account.png)」公众号推荐给所有人。当然，你也可以通过「[RSS](/api/posts.atom)」订阅日报的所有内容。
+
+就这样，希望你会喜欢她。
+
+<WeChatOfficialAccount title="（公众号：一群创造者）" />
+
+#### 为什么要做这样的社区？
+
+首先，我是一个产品创造者，其次，我也是一个产品爱好者。所以，创造这个社区很大原因是因为自己有这样的需求。
+
+##### 作为一个产品创造者，我需要：
+
+1. **发布**我的产品，分享给所有人，获取第一批高质量**种子用户**
+2. 收集到**用户反馈**，并从中成长，并获得正向鼓励
+3. **持续迭代**产品并告知用户
+
+##### 作为一个产品爱好者，我需要：
+
+1. 一个好用的产品，我希望**第一时间**可以使用到她
+2. 当我使用产品遇到问题时，我希望**有渠道可以和创造者沟通**
+3. 我希望知道创造者在为这个产品**持续更新**
+
+因为有上面这样的需求，所以我们创造了这个社区，并持续为满足这些需求而努力。同时我们相信，在中国互联网上，有这样需求的应该不止我们，我们也相信正在做的事情是有价值的。
+
+在社区初期的设计上，从 `ProductHunt` 和 `IndieHackers` 上模仿了很多，在这里向这些产品致敬，同时也希望我们可以逐渐走出自己的特色。
+
+#### 你的角色是？
 
 在这里，用户有两个角色，`“发现者”`和`“创造者”`。
 
@@ -31,14 +63,25 @@ export default Article
 
 两个角色都会有特殊的身份标签。
 
-### 内容
+#### 她是怎么被打造出来的？
 
-除了用户主动推荐的产品外，我们会每天寻找一个有趣的产品，并将其推送至以下公众号，欢迎大家关注。
+有不少朋友问到社区的代码是否开源，以及开发实现。
 
-<WeChatOfficialAccount title="（公众号：一群创造者）" />
+简单回答下，目前还并没有开源的计划，但是实现她却使用了非常多的开源作品，在这里非常感谢以下这些作品。
 
-内容除了推送至公众号外，“[日报](/posts)”也会同步更新。
+开源产品|前/后端|用做
+--|--|--
+[React.js](https://github.com/facebook/react)|前|前端实现
+[Next.js](https://github.com/zeit/next.js)|前|React 同构方案、SEO
+[Styled Components](https://github.com/styled-components/styled-components)|前|样式
+[Ant Design](https://ant.design)|前|渲染组件
+[MDX](https://github.com/mdx-js/mdx)|前|文章渲染
+[Apollo GraphQL 全家桶](https://github.com/apollographql)|前/后|GraphQL 实现
+[Nest](https://github.com/nestjs/nest)|后|后端实现
+[TypeORM](https://github.com/typeorm/typeorm)|后|ORM
 
-如果你有自己的网站，同时也非常喜欢创造者日报，那么我们特别欢迎你和创造者日报交换「[友情链接](/links)」。
+#### 最后
+
+如果你有自己的网站，同时也非常喜欢创造者日报，那么我们特别欢迎你和创造者日报交换「[友情链接](/links)」，我们会珍惜每一位朋友。
 
 也非常欢迎你来「[喜欢](/likes)」我。

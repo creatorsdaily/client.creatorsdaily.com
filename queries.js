@@ -265,6 +265,15 @@ query($id: String!) {
     title
     content
     createdAt
+    user {
+      id
+      avatar {
+        id
+        hash
+      }
+      nickname
+      email
+    }
     product {
       ${productFragment}
       discovererId
@@ -308,6 +317,10 @@ query($page: Int, $size: Int, $productId: String, $milestoneId: String) {
         creators {
           id
           nickname
+          avatar {
+            id
+            hash
+          }
           username
           email
         }

@@ -2,7 +2,8 @@ import styled from 'styled-components'
 
 export default styled.div`
 color: rgba(0, 0, 0, 0.75);
-font-size: 15px;
+font-size: 14px;
+line-height: 1.8em;
 
 img {
   max-width: 100%;
@@ -108,14 +109,14 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   font-style: bold !important;
   color: rgba(0, 0, 0, 0.9);
-  text-align: center !important;
   margin: 1.5em 5px !important;
-  padding: 0.5em 1em !important;
+  padding: 0.5em 0 !important;
 }
 
 h1 {
   font-size: 26px !important;
   border-bottom: 1px solid #ddd !important;
+  text-align: center;
 }
 
 h2 {
@@ -129,6 +130,8 @@ h3 {
 
 h4 {
   font-size: 16px;
+  border-left: 5px solid #009688;
+  padding: 0 0.5em !important;
 }
 
 
