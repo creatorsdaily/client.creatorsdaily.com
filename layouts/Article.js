@@ -3,6 +3,7 @@ import { Col, Row } from 'antd'
 import Container from '../components/Container'
 import Article from '../components/Article'
 import media from '../libs/media'
+import RightSide from '../components/RightSide'
 import Page from './Page'
 
 const StyledContainer = styled(Container)`
@@ -24,12 +25,15 @@ export default ({ children, footer = null }) => {
   return (
     <Page>
       <StyledContainer>
-        <Row type='flex' justify='center' gutter={24}>
-          <Col xl={14} lg={16} md={20} xs={24}>
+        <Row type='flex' gutter={24}>
+          <Col lg={14} md={17} xs={24}>
             <StyledArticle>
               {children}
             </StyledArticle>
             {footer}
+          </Col>
+          <Col lg={6} md={7} xs={24}>
+            <RightSide />
           </Col>
         </Row>
       </StyledContainer>

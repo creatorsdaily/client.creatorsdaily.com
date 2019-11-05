@@ -8,11 +8,11 @@ import { GET_PRODUCT } from '../queries'
 const StyledButton = styled(Button)`
   min-height: 50px;
   ${({ islike }) => islike === 'true' ? `
-    background: #FFFF99;
+    background: rgba(222, 123, 118, 0.1);
     color: #DE7B76;
     border-color: #DE7B76;
     :active, :focus {
-      background: #FFFFF0;
+      background: rgba(222, 123, 118, 0.1);
       color: #DE7B76;
       border-color: #DE7B76;
     }

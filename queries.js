@@ -17,21 +17,25 @@ icon {
   hash
 }`
 
+const userFragment = `
+id
+nickname
+username
+email
+number
+avatar {
+  id
+  hash
+}
+`
+
 export const VIEWER = gql`
 query {
   viewer {
-    id
-    nickname
-    username
+    ${userFragment}
     token
-    email
-    number
     oneSignal
     createdAt
-    avatar {
-      id
-      hash
-    }
   }
 }
 `
@@ -39,16 +43,8 @@ query {
 export const GET_USER = gql`
 query($id: String!, $createdPage: Int, $createdSize: Int, $discoveredPage: Int, $discoveredSize: Int) {
   user(id: $id) {
-    id
-    nickname
-    username
-    email
-    number
+    ${userFragment}
     createdAt
-    avatar {
-      id
-      hash
-    }
     createdProducts(page: $createdPage, size: $createdSize) {
       total
       data {
@@ -93,24 +89,10 @@ query($id: String!) {
     discovererId
     links
     discoverer {
-      id
-      nickname
-      username
-      email
-      avatar {
-        id
-        hash
-      }
+      ${userFragment}
     }
     creators {
-      id
-      nickname
-      username
-      email
-      avatar {
-        id
-        hash
-      }
+      ${userFragment}
     }
     medias {
       id
@@ -153,10 +135,7 @@ query($page: Int, $size: Int) {
         hash
       }
       user {
-        id
-        nickname
-        username
-        email
+        ${userFragment}
       }
       products {
         id
@@ -266,26 +245,13 @@ query($id: String!) {
     content
     createdAt
     user {
-      id
-      avatar {
-        id
-        hash
-      }
-      nickname
-      email
+      ${userFragment}
     }
     product {
       ${productFragment}
       discovererId
       creators {
-        id
-        nickname
-        username
-        email
-        avatar {
-          id
-          hash
-        }
+        ${userFragment}
       }
     }
   }
@@ -299,13 +265,7 @@ fragment CommentFields on Comment {
   createdAt
   parentId
   user {
-    id
-    avatar {
-      id
-      hash
-    }
-    nickname
-    email
+    ${userFragment}
   }
 }
 query($page: Int, $size: Int, $productId: String, $milestoneId: String) {
@@ -315,14 +275,7 @@ query($page: Int, $size: Int, $productId: String, $milestoneId: String) {
         ${productFragment}
         discovererId
         creators {
-          id
-          nickname
-          avatar {
-            id
-            hash
-          }
-          username
-          email
+          ${userFragment}
         }
       }
       ...CommentFields

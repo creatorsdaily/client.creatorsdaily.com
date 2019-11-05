@@ -113,7 +113,7 @@ export default forwardRef(({ value = [], onChange = noop, onError = noop }, ref)
       })
     }
   }
-  const uploadButton = (
+  const uploadButton = files.length >= 6 ? null : (
     <div>
       <Icon type={(loading || createLoading) ? 'loading' : 'plus'} />
       <div className='ant-upload-text'>点击上传</div>
@@ -123,10 +123,8 @@ export default forwardRef(({ value = [], onChange = noop, onError = noop }, ref)
     filesRef.current.slick.slickGoTo(index)
   }
   const renderUpload = () => {
-    if (files.length >= 6) return null
     return (
       <StyledUpload
-        style={{ display: files.length >= 6 ? 'null' : 'table-cell' }}
         listType='picture-card'
         className='avatar-uploader'
         showUploadList={false}

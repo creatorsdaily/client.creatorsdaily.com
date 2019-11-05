@@ -10,6 +10,7 @@ import usePagination from '../../hooks/usePagination'
 import media from '../../libs/media'
 import PostCell from '../../components/PostCell'
 import Time from '../../components/Time'
+import RightSide from '../../components/RightSide'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
@@ -73,8 +74,8 @@ export default () => {
         <meta key='description' name='description' content='每天发现一款有趣产品' />
       </Head>
       <StyledContainer>
-        <Row type='flex' gutter={24} justify='center'>
-          <Col xl={14} lg={16} md={22} sm={24} xs={24}>
+        <Row type='flex' gutter={24}>
+          <Col lg={14} md={17} xs={24}>
             <Spin spinning={loading}>
               {renderList()}
             </Spin>
@@ -84,6 +85,9 @@ export default () => {
             <Pagination>
               {pagination}
             </Pagination>
+          </Col>
+          <Col lg={6} md={7} xs={24}>
+            <RightSide />
           </Col>
         </Row>
       </StyledContainer>

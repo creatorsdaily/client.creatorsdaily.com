@@ -34,6 +34,13 @@ const MoreButton = styled(Button)`
   color: #606060;
 `
 
+const Tip = styled.h1`
+  font-size: 32px;
+  color: rgba(0,0,0,0.1);
+  text-align: center;
+  line-height: 400px;
+`
+
 export default () => {
   const size = 10
   const [hoverProduct, setHoverProduct] = useState()
@@ -49,7 +56,11 @@ export default () => {
   const list = get(data, 'getComments.data', [])
   const total = get(data, 'getComments.total', 0)
   const renderProduct = () => {
-    if (!hoverProduct && !focusProduct) return null
+    if (!hoverProduct && !focusProduct) {
+      return (
+        <Tip>快来和创造者们聊聊</Tip>
+      )
+    }
     return (
       <ProductContainer id={hoverProduct || focusProduct} full />
     )

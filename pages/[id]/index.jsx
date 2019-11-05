@@ -20,11 +20,7 @@ const StyledContainer = styled(Container)`
 
 export default () => {
   const { query: { id } } = useRouter()
-  const { loading, data } = useQuery(GET_PRODUCT, {
-    variables: {
-      id
-    }
-  })
+  const { loading, data } = useQuery(GET_PRODUCT, { variables: { id } })
   const product = get(data, 'product', {})
   const keywords = (product.topics || []).map(x => x.name).join(',')
   const description = (product.description || '').slice(0, 120) + '...'
