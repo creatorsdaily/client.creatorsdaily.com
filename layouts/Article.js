@@ -4,7 +4,6 @@ import Container from '../components/Container'
 import Article from '../components/Article'
 import media from '../libs/media'
 import RightSide from '../components/RightSide'
-import withApollo from '../libs/with-apollo'
 import Page from './Page'
 
 const StyledContainer = styled(Container)`
@@ -19,7 +18,7 @@ ${media.sm`
 `}
 `
 
-export default withApollo(({ children, footer = null }) => {
+export default ({ children, footer = null }) => {
   if (typeof footer === 'function') {
     footer = footer()
   }
@@ -40,4 +39,4 @@ export default withApollo(({ children, footer = null }) => {
       </StyledContainer>
     </Page>
   )
-})
+}
