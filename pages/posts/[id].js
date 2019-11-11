@@ -11,6 +11,7 @@ import Article from '../../layouts/Article'
 import ProductCell from '../../components/ProductCell'
 import SmallTitle from '../../components/SmallTitle'
 import IPFSImage from '../../components/IPFSImage'
+import withApollo from '../../libs/with-apollo'
 
 const StyledProductCell = styled(ProductCell)`
 margin-top: 10px;
@@ -30,7 +31,7 @@ margin: 0 auto 32px;
 display: block;
 `
 
-export default () => {
+export default withApollo(() => {
   const { query: { id } } = useRouter()
   const { loading, data } = useQuery(GET_POST, {
     variables: {
@@ -57,4 +58,4 @@ export default () => {
       </Spin>
     </Article>
   )
-}
+})

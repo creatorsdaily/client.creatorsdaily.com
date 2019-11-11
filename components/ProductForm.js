@@ -1,5 +1,5 @@
 import { Fragment, forwardRef } from 'react'
-import { Button, Checkbox, Form, Input } from 'antd'
+import { Button, Checkbox, Form, Input, Radio } from 'antd'
 import noop from 'lodash/noop'
 import isUndefined from 'lodash/isUndefined'
 import omitBy from 'lodash/omitBy'
@@ -15,10 +15,13 @@ const { Item } = Form
 
 export const productToForm = product => {
   const data = pick(omitBy(product, isUndefined), [
-    'name', 'description', 'topics', 'medias', 'content', 'icon', 'links'
+    'name', 'description', 'topics', 'medias', 'content', 'icon', 'links', 'isMiniProgram', 'miniProgramQRCode'
   ])
   if (data.icon) {
     data.icon = data.icon.id
+  }
+  if (data.miniProgramQRCode) {
+    data.miniProgramQRCode = data.miniProgramQRCode.id
   }
   if (data.topics.length) {
     data.topics = data.topics.map(x => x.id)
@@ -37,6 +40,11 @@ export const formToProduct = form => {
   if (data.icon) {
     data.icon = {
       id: data.icon
+    }
+  }
+  if (data.miniProgramQRCode) {
+    data.miniProgramQRCode = {
+      id: data.miniProgramQRCode
     }
   }
   if (data.topics) {
@@ -81,6 +89,19 @@ export default forwardRef((props, ref) => {
   const handleIconError = error => {
     formError(form, error, 'icon')
   }
+  const handleQRCodeError = error => {
+    formError(form, error, 'miniProgramQRCode')
+  }
+  const renderQRCode = () => {
+    const isMiniProgram = getFieldValue('isMiniProgram')
+    return (
+      <Item label='小程序码' colon={false} style={{ display: isMiniProgram ? 'block' : 'none' }}>
+        {getFieldDecorator('miniProgramQRCode')(
+          <ProductIcon onError={handleQRCodeError} />
+        )}
+      </Item>
+    )
+  }
   const renderStep1 = () => {
     if (step !== 1 && step !== 'all') return null
     return (
@@ -99,6 +120,17 @@ export default forwardRef((props, ref) => {
             <Inputs placeholder='产品的访问链接' />
           )}
         </Item>
+        <Item label='是否微信小程序？' colon={false}>
+          {getFieldDecorator('isMiniProgram', {
+            initialValue: false
+          })(
+            <Radio.Group>
+              <Radio value>是</Radio>
+              <Radio value={false}>否</Radio>
+            </Radio.Group>
+          )}
+        </Item>
+        {renderQRCode()}
       </Fragment>
     )
   }

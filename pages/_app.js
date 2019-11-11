@@ -3,11 +3,8 @@ import Head from 'next/head'
 import { useEffect } from 'react'
 import { ConfigProvider, Empty } from 'antd'
 import gql from 'graphql-tag'
-import { ApolloProvider } from '@apollo/react-common'
 import zhCN from 'antd/lib/locale-provider/zh_CN'
-import { RouterContext } from 'next/dist/next-server/lib/router-context'
-import { Router, makePublicRouterInstance } from 'next/router'
-import withApollo from '../libs/with-apollo'
+import { Router } from 'next/router'
 import Matomo from '../components/Matomo'
 import OneSignal from '../components/OneSignal'
 import { VIEWER } from '../queries'
@@ -28,7 +25,7 @@ const renderEmpty = () => (
   <Empty image={Empty.PRESENTED_IMAGE_SIMPLE} />
 )
 
-const CreatorsApp = ({ pageProps, router, Component, apolloClient }) => {
+const CreatorsApp = ({ pageProps, Component }) => {
   useEffect(() => {
     Router.events.on('routeChangeStart', handleRouteChangeStart)
     return () => Router.events.off('routeChangeStart', handleRouteChangeStart)
@@ -75,12 +72,7 @@ const CreatorsApp = ({ pageProps, router, Component, apolloClient }) => {
         <Matomo />
         <OneSignal />
       </Head>
-      <ApolloProvider client={apolloClient}>
-        {/* TODO: https://github.com/zeit/next.js/issues/7479 */}
-        <RouterContext.Provider value={makePublicRouterInstance(router)}>
-          <Component {...pageProps} />
-        </RouterContext.Provider>
-      </ApolloProvider>
+      <Component {...pageProps} />
     </ConfigProvider>
   )
 }
@@ -88,43 +80,34 @@ const CreatorsApp = ({ pageProps, router, Component, apolloClient }) => {
 class Creators extends App {
   constructor (props) {
     super(props)
-    const { viewer } = props
-    if (!process.browser || !viewer) return
-    const OneSignal = window.OneSignal || []
-    OneSignal.push(function () {
-      if (viewer.email) {
-        OneSignal.setEmail(viewer.email)
-      }
-      OneSignal.setExternalUserId(viewer.id)
-      OneSignal.getUserId(id => {
-        if (id === viewer.oneSignal) return
-        props.apolloClient.mutate({
-          mutation: UPDATE_USER,
-          variables: {
-            user: {
-              id: viewer.id,
-              oneSignal: id
-            }
+    if (!props.pageProps.apolloClient) return
+    props.pageProps.apolloClient.query({
+      query: VIEWER
+    })
+      .catch(() => ({}))
+      .then(({ data }) => {
+        const viewer = data && data.viewer
+        if (!process.browser || !viewer) return
+        const OneSignal = window.OneSignal || []
+        OneSignal.push(function () {
+          if (viewer.email) {
+            OneSignal.setEmail(viewer.email)
           }
+          OneSignal.setExternalUserId(viewer.id)
+          OneSignal.getUserId(id => {
+            if (id === viewer.oneSignal) return
+            props.apolloClient.mutate({
+              mutation: UPDATE_USER,
+              variables: {
+                user: {
+                  id: viewer.id,
+                  oneSignal: id
+                }
+              }
+            })
+          })
         })
       })
-    })
-  }
-
-  static async getInitialProps (appContext) {
-    const appProps = await App.getInitialProps(appContext)
-    const { data } = await appContext.ctx.apolloClient.query({
-      query: VIEWER
-    }).catch(() => ({}))
-    const viewer = data && data.viewer
-    return {
-      ...appProps,
-      pageProps: {
-        ...appProps.pageProps,
-        viewer
-      },
-      viewer
-    }
   }
 
   render () {
@@ -134,4 +117,4 @@ class Creators extends App {
   }
 }
 
-export default withApollo(Creators)
+export default Creators

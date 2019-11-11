@@ -13,6 +13,7 @@ import ProductEditor from '../../components/ProductEditor'
 import formError from '../../libs/form-error'
 import { GET_PRODUCT } from '../../queries'
 import { formToProduct, productToForm } from '../../components/ProductForm'
+import withApollo from '../../libs/with-apollo'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
@@ -32,7 +33,7 @@ mutation($product: IProduct!) {
 }
 `
 
-export default () => {
+export default withApollo(() => {
   const ref = useRef()
   useAuth()
   const { replace, query } = useRouter()
@@ -62,6 +63,7 @@ export default () => {
     },
     onCompleted (data) {
       const product = productToForm(get(data, 'product', {}))
+      console.log(product)
       const { form } = ref.current.props
       form.setFieldsValue(pick(product, Object.keys(form.getFieldsValue())))
     }
@@ -123,4 +125,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})

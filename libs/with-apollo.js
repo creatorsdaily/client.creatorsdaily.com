@@ -1,80 +1,92 @@
-
 import React from 'react'
-import cookie from 'cookie'
 import PropTypes from 'prop-types'
-import { getDataFromTree } from '@apollo/react-ssr'
+import cookie from 'cookie'
 import Head from 'next/head'
-import get from 'lodash/get'
+import { ApolloProvider } from '@apollo/react-hooks'
 import initApollo from './init-apollo'
 
-function parseCookies (req, options = {}) {
-  return cookie.parse(req ? req.headers.cookie || '' : document.cookie, options)
-}
+/**
+ * Creates and provides the apolloContext
+ * to a next.js PageTree. Use it by wrapping
+ * your PageComponent via HOC pattern.
+ * @param {Function|Class} PageComponent
+ * @param {Object} [config]
+ * @param {Boolean} [config.ssr=true]
+ */
+export default (PageComponent, { ssr = true } = {}) => {
+  const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
+    const client = apolloClient || initApollo(apolloState, { getToken })
+    return (
+      <ApolloProvider client={client}>
+        <PageComponent {...pageProps} />
+      </ApolloProvider>
+    )
+  }
 
-export default App => {
-  return class WithData extends React.Component {
-    static displayName = `WithData(${App.displayName})`
+  if (process.env.NODE_ENV !== 'production') {
+    // Find correct display name
+    const displayName =
+      PageComponent.displayName || PageComponent.name || 'Component'
 
-    static propTypes = {
-      apolloState: PropTypes.object.isRequired
+    // Warn if old way of installing apollo is used
+    if (displayName === 'App') {
+      console.warn('This withApollo HOC only works with PageComponents.')
     }
 
-    static async getInitialProps (ctx) {
-      const {
-        Component,
-        router,
-        ctx: { req, res }
-      } = ctx
-      const apollo = initApollo(
+    // Set correct display name for devtools
+    WithApollo.displayName = `withApollo(${displayName})`
+
+    // Add some prop types
+    WithApollo.propTypes = {
+      // Used for getDataFromTree rendering
+      apolloClient: PropTypes.object,
+      // Used for client/server rendering
+      apolloState: PropTypes.object
+    }
+  }
+
+  if (ssr || PageComponent.getInitialProps) {
+    WithApollo.getInitialProps = async ctx => {
+      const { AppTree } = ctx
+
+      // Run all GraphQL queries in the component tree
+      // and extract the resulting data
+      const apolloClient = (ctx.apolloClient = initApollo(
         {},
         {
-          getToken: () => parseCookies(req).token
+          getToken: () => getToken(ctx.req)
         }
-      )
+      ))
+      const pageProps = PageComponent.getInitialProps
+        ? await PageComponent.getInitialProps(ctx)
+        : {}
 
-      ctx.ctx.apolloClient = apollo
-
-      let appProps = {}
-      if (App.getInitialProps) {
-        appProps = await App.getInitialProps(ctx)
-      }
-
-      if (res && res.finished) {
+      // Only on the server
+      if (typeof window === 'undefined') {
         // When redirecting, the response is finished.
         // No point in continuing to render
-        return {}
-      }
+        if (ctx.res && ctx.res.finished) {
+          return {}
+        }
 
-      if (typeof window === 'undefined') {
-        // Run all graphql queries in the component tree
-        // and extract the resulting data
-        try {
-          // Run all GraphQL queries
-          await getDataFromTree(
-            <App
-              {...appProps}
-              Component={Component}
-              router={router}
-              apolloClient={apollo}
-            />
-          )
-        } catch (error) {
-          // Prevent Apollo Client GraphQL errors from crashing SSR.
-          // Handle them in components via the data.error prop:
-          // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
-          const { graphQLErrors = [], networkError } = error
-          const errors = [
-            error,
-            ...graphQLErrors.map(x => {
-              if (typeof x.message === 'string') {
-                return x
-              }
-              return new Error(x.message.error)
-            }),
-            ...get(networkError, 'result.errors', [])
-          ]
-          console.error('Error while running `getDataFromTree`', errors)
-          appProps.pageProps.statusCode = 400
+        if (ssr) {
+          try {
+            // Run all GraphQL queries
+            const { getDataFromTree } = await import('@apollo/react-ssr')
+            await getDataFromTree(
+              <AppTree
+                pageProps={{
+                  ...pageProps,
+                  apolloClient
+                }}
+              />
+            )
+          } catch (error) {
+            // Prevent Apollo Client GraphQL errors from crashing SSR.
+            // Handle them in components via the data.error prop:
+            // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
+            console.error('Error while running `getDataFromTree`', error)
+          }
         }
 
         // getDataFromTree does not call componentWillUnmount
@@ -82,28 +94,23 @@ export default App => {
         Head.rewind()
       }
 
-      // Extract query data from the Apollo's store
-      const apolloState = apollo.cache.extract()
-
+      // Extract query data from the Apollo store
+      const apolloState = apolloClient.cache.extract()
       return {
-        ...appProps,
+        ...pageProps,
         apolloState
       }
     }
-
-    constructor (props) {
-      super(props)
-      // `getDataFromTree` renders the component first, the client is passed off as a property.
-      // After that rendering is done using Next's normal rendering pipeline
-      this.apolloClient = initApollo(props.apolloState, {
-        getToken: () => {
-          return parseCookies().token
-        }
-      })
-    }
-
-    render () {
-      return <App {...this.props} apolloClient={this.apolloClient} />
-    }
   }
+
+  return WithApollo
+}
+
+/**
+ * Get the user token from cookie
+ * @param {Object} req
+ */
+function getToken (req) {
+  const cookies = cookie.parse(req ? req.headers.cookie || '' : document.cookie)
+  return cookies.token
 }

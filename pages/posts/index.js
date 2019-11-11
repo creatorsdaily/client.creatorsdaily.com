@@ -11,6 +11,7 @@ import media from '../../libs/media'
 import PostCell from '../../components/PostCell'
 import Time from '../../components/Time'
 import RightSide from '../../components/RightSide'
+import withApollo from '../../libs/with-apollo'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
@@ -38,7 +39,7 @@ text-align: center;
 margin-bottom: 24px;
 `
 
-export default () => {
+export default withApollo(() => {
   const {
     result: {
       loading,
@@ -93,4 +94,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})

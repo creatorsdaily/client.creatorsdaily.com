@@ -5,6 +5,7 @@ import Page from '../layouts/Page'
 import Container from '../components/Container'
 import Milestones from '../components/Milestones'
 import media from '../libs/media'
+import withApollo from '../libs/with-apollo'
 
 const StyledContainer = styled(Container)`
   margin-top: 24px;
@@ -19,7 +20,7 @@ ${media.sm`
 `}
 `
 
-export default () => {
+export default withApollo(() => {
   return (
     <Page>
       <Head>
@@ -38,4 +39,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})

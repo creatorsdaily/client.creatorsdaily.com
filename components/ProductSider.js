@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Col, Row } from 'antd'
+import { Button, Col, Divider, Row } from 'antd'
 import Link from 'next/link'
 import media from '../libs/media'
 import useCanEditProduct from '../hooks/useCanEditProduct'
@@ -7,6 +7,7 @@ import ProductLinks from './ProductLinks'
 import ProductLike from './ProductLike'
 import ProductUsers from './ProductUsers'
 import WeChatButton from './WeChatButton'
+import MiniProgram from './MiniProgram'
 
 const Container = styled.div`
 padding: 0 16px;
@@ -23,7 +24,7 @@ const StyledWeChatButton = styled(WeChatButton)`
   display: block;
 `
 
-export default ({ id, name, discovererId, isLike, likeCount, links = [], discoverer, creators = [] }) => {
+export default ({ id, name, isMiniProgram, miniProgramQRCode, discovererId, isLike, likeCount, links = [], discoverer, creators = [] }) => {
   const canEdit = useCanEditProduct({ creators, discovererId })
 
   const renderButton = () => {
@@ -43,6 +44,15 @@ export default ({ id, name, discovererId, isLike, likeCount, links = [], discove
       </Row>
     )
   }
+  const renderMiniProgram = () => {
+    if (!isMiniProgram) return null
+    return (
+      <>
+        <Divider orientation='left'>微信小程序</Divider>
+        <MiniProgram hash={miniProgramQRCode && miniProgramQRCode.hash} />
+      </>
+    )
+  }
   const renderWeChat = () => {
     if (!creators.length) {
       return (
@@ -58,6 +68,7 @@ export default ({ id, name, discovererId, isLike, likeCount, links = [], discove
       {renderButton()}
       <ProductLike id={id} likeCount={likeCount} isLike={isLike} />
       <ProductLinks links={links} />
+      {renderMiniProgram()}
       <ProductUsers discoverer={discoverer} creators={creators} />
       {renderWeChat()}
     </Container>

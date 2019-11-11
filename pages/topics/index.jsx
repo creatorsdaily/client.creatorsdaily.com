@@ -1,11 +1,13 @@
 import React from 'react'
-import { withRouter } from 'next/router'
+import { useRouter } from 'next/router'
 import qs from 'qs'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import { TopicsBar } from '../../components/Topics'
+import withApollo from '../../libs/with-apollo'
 
-export default withRouter(({ router }) => {
+export default withApollo(() => {
+  const router = useRouter()
   let { id = [] } = router.query
   if (id && !Array.isArray(id)) {
     id = [id]

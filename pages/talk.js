@@ -11,6 +11,7 @@ import { GET_COMMENTS } from '../queries'
 import { CommentsBox } from '../components/Comments'
 import ProductCell from '../components/ProductCell'
 import { ProductContainer } from '../components/Product'
+import withApollo from '../libs/with-apollo'
 
 const StyledContainer = styled(Container)`
 margin: 24px auto;
@@ -41,7 +42,7 @@ const Tip = styled.h1`
   line-height: 400px;
 `
 
-export default () => {
+export default withApollo(() => {
   const size = 10
   const [hoverProduct, setHoverProduct] = useState()
   const [focusProduct, setFocusProduct] = useState()
@@ -138,4 +139,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})

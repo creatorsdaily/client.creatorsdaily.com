@@ -13,6 +13,7 @@ import Avatar from '../../components/Avatar'
 import media from '../../libs/media'
 import ProductCell from '../../components/ProductCell'
 import SmallTitle from '../../components/SmallTitle'
+import withApollo from '../../libs/with-apollo'
 
 const StyledContainer = styled(Container)`
 margin: 24px auto;
@@ -34,7 +35,7 @@ const UserBox = styled.div`
   `}
 `
 
-export default () => {
+export default withApollo(() => {
   const size = 15
   const [discoveredPage, setDiscoveredPage] = useState(1)
   const { query: { id } } = useRouter()
@@ -132,4 +133,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})

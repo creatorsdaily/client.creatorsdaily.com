@@ -8,6 +8,7 @@ isLike
 likeCount
 commentCount
 createdAt
+isMiniProgram
 topics {
   id
   name
@@ -88,6 +89,10 @@ query($id: String!) {
     content
     discovererId
     links
+    miniProgramQRCode {
+      id
+      hash
+    }
     discoverer {
       ${userFragment}
     }

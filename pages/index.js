@@ -16,6 +16,7 @@ import media from '../libs/media'
 import PostCell from '../components/PostCell'
 import SmallTitle from '../components/SmallTitle'
 import Milestones from '../components/Milestones'
+import withApollo from '../libs/with-apollo'
 
 const StyledContainer = styled(Container)`
 ${media.lg`
@@ -57,7 +58,7 @@ ${media.sm`
 `}
 `
 
-export default () => {
+export default withApollo(() => {
   const { query: { topic, page } } = useRouter()
   const {
     result: {
@@ -159,4 +160,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})

@@ -6,6 +6,7 @@ import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import RightSide from '../../components/RightSide'
 import media from '../../libs/media'
+import withApollo from '../../libs/with-apollo'
 
 const StyledContainer = styled(Container)`
 margin: 24px auto;
@@ -25,7 +26,7 @@ margin: 24px auto;
 display: block;
 `
 
-export default () => {
+export default withApollo(() => {
   return (
     <Page>
       <Head>
@@ -57,4 +58,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})

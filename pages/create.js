@@ -12,6 +12,7 @@ import ProductEditor from '../components/ProductEditor'
 import formError from '../libs/form-error'
 import { formToProduct } from '../components/ProductForm'
 import { GET_PRODUCTS } from '../queries'
+import withApollo from '../libs/with-apollo'
 
 const { Title, Paragraph, Text } = Typography
 
@@ -44,7 +45,7 @@ mutation($product: IProduct!) {
 }
 `
 
-export default () => {
+export default withApollo(() => {
   const ref = useRef()
   useAuth()
   const { replace } = useRouter()
@@ -100,4 +101,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})

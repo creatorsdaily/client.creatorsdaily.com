@@ -14,6 +14,7 @@ import Avatar from '../../components/Avatar'
 import SmallTitle from '../../components/SmallTitle'
 import formError from '../../libs/form-error'
 import { VIEWER } from '../../queries'
+import withApollo from '../../libs/with-apollo'
 
 const UPDATE_USER = gql`
 mutation($user: IUser!) {
@@ -63,7 +64,7 @@ const MenuContainer = styled.div`
   margin-bottom: 24px;
 `
 
-export default () => {
+export default withApollo(() => {
   const ref = useRef()
   const { viewer, loading: userLoading } = useAuth({
     onCompleted (data) {
@@ -129,4 +130,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})
