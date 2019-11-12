@@ -12,13 +12,14 @@ import PorductSider from '../../components/ProductSider'
 import Comments from '../../components/Comments'
 import { GET_PRODUCT } from '../../queries'
 import SmallTitle from '../../components/SmallTitle'
+import withApollo from '../../libs/with-apollo'
 
 const StyledContainer = styled(Container)`
   margin-top: 24px;
   margin-bottom: 24px;
 `
 
-export default () => {
+export default withApollo(() => {
   const { query: { id } } = useRouter()
   const { loading, data } = useQuery(GET_PRODUCT, { variables: { id } })
   const product = get(data, 'product', {})
@@ -51,4 +52,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})

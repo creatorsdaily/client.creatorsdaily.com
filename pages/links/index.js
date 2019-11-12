@@ -11,6 +11,7 @@ import { GET_LINKS } from '../../queries'
 import Box from '../../components/Box'
 import IPFSImage from '../../components/IPFSImage'
 import media from '../../libs/media'
+import withApollo from '../../libs/with-apollo'
 
 const StyledContainer = styled(Container)`
 margin: 24px auto;
@@ -40,7 +41,7 @@ ${media.sm`
 `}
 `
 
-export default () => {
+export default withApollo(() => {
   const { data, loading } = useQuery(GET_LINKS)
   const links = get(data, 'getLinks.data', [])
   return (
@@ -79,4 +80,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})

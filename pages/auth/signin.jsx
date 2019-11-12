@@ -6,8 +6,9 @@ import AuthBox from '../../components/AuthBox'
 import SigninBox from '../../components/SigninBox'
 import redirect from '../../libs/redirect'
 import useViewer from '../../hooks/useViewer'
+import withApollo from '../../libs/with-apollo'
 
-export default () => {
+export default withApollo(() => {
   const { query } = useRouter()
   const back = query.back || '/'
   const { viewer, loading } = useViewer()
@@ -26,4 +27,4 @@ export default () => {
       </AuthBox>
     </Page>
   )
-}
+})

@@ -3,13 +3,14 @@ import { Alert } from 'antd'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import Page from '../../layouts/Page'
+import withApollo from '../../libs/with-apollo'
 
 const Container = styled.div`
   width: 500px;
   margin: 200px auto 0;
 `
 
-export default () => {
+export default withApollo(() => {
   const { query: {
     id
   } } = useRouter()
@@ -33,4 +34,4 @@ export default () => {
       </Container>
     </Page>
   )
-}
+})

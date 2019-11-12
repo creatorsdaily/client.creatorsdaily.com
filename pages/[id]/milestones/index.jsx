@@ -9,13 +9,14 @@ import Container from '../../../components/Container'
 import Milestones from '../../../components/Milestones'
 import { GET_PRODUCT } from '../../../queries'
 import ProductCell from '../../../components/ProductCell'
+import withApollo from '../../../libs/with-apollo'
 
 const StyledContainer = styled(Container)`
   margin-top: 24px;
   margin-bottom: 24px;
 `
 
-export default () => {
+export default withApollo(() => {
   const { query: { id } } = useRouter()
   const { data, loading } = useQuery(GET_PRODUCT, {
     variables: {
@@ -40,4 +41,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})

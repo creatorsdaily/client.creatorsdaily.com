@@ -15,6 +15,7 @@ import SmallTitle from '../../../components/SmallTitle'
 import media from '../../../libs/media'
 import Time from '../../../components/Time'
 import UserCell from '../../../components/UserCell'
+import withApollo from '../../../libs/with-apollo'
 
 const StyledContainer = styled(Container)`
   margin-top: 24px;
@@ -59,7 +60,7 @@ padding: 24px;
 margin-bottom: 24px;
 `
 
-export default () => {
+export default withApollo(() => {
   const { query: { id, milestoneId } } = useRouter()
   const { data } = useQuery(GET_MILESTONE, {
     variables: {
@@ -110,4 +111,4 @@ export default () => {
       </StyledContainer>
     </Page>
   )
-}
+})

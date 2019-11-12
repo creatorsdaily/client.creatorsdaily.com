@@ -3,8 +3,9 @@ import { useRouter } from 'next/router'
 import { useApolloClient } from '@apollo/react-hooks'
 import setCookie from '../../libs/setCookie'
 import redirect from '../../libs/redirect'
+import withApollo from '../../libs/with-apollo'
 
-export default () => {
+export default withApollo(() => {
   const { query } = useRouter()
   const client = useApolloClient()
   const back = query.back || '/'
@@ -19,4 +20,4 @@ export default () => {
     })
   }, [])
   return null
-}
+})
