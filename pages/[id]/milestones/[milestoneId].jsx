@@ -94,11 +94,11 @@ export default () => {
               </Link>
               <div>在 <strong>
                 <Time time={milestone.createdAt} />
-              </strong> 发布当前里程碑
+              </strong> 发布
               </div>
               <Link href='/[id]' as={`/${product.id}#milestones`}>
                 <a>
-                  <Button type='link'>所有里程碑</Button>
+                  <Button type='link'>查看所有里程碑</Button>
                 </a>
               </Link>
             </MilestoneMeta>

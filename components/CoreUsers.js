@@ -19,7 +19,10 @@ const StyledLink = styled.a`
 `
 
 const UserCellContainer = ({ id }) => {
-  const { data } = useQuery(GET_USER, { variables: { id } })
+  const { data } = useQuery(GET_USER, {
+    variables: { id },
+    errorPolicy: 'ignore'
+  })
   const user = get(data, 'user', {})
   return (
     <Link href='/users/[id]' as={`/users/${user.id}`} passHref>
