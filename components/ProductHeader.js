@@ -30,6 +30,9 @@ const ProductName = styled.h1`
   margin: 0;
   line-height: 28px;
   font-size: 20px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
   a {
     color: rgba(0, 0, 0, 0.85);
     :hover {

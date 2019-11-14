@@ -121,7 +121,7 @@ export default withApollo(() => {
             </a>
           </Link>
         </SmallTitle>
-        <Milestones size={5} />
+        <Milestones size={3} />
       </>
     )
   }

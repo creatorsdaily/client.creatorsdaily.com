@@ -121,6 +121,9 @@ query($page: Int, $size: Int, $topic: [String!], $keyword: [String!]) {
     total
     data {
       ${productFragment}
+      discoverer {
+        ${userFragment}
+      }
     }
   }
 }

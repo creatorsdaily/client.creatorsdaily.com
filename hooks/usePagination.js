@@ -53,6 +53,7 @@ export default ({
     result,
     pagination: (
       <Pagination
+        size='small'
         hideOnSinglePage
         current={page}
         onChange={noop}

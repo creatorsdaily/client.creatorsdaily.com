@@ -99,7 +99,7 @@ export default withApollo(() => {
               </div>
               <Link href='/[id]' as={`/${product.id}#milestones`}>
                 <a>
-                  <Button type='link'>查看所有里程碑</Button>
+                  <Button type='link'>全部</Button>
                 </a>
               </Link>
             </MilestoneMeta>

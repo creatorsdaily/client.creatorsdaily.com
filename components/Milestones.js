@@ -13,7 +13,7 @@ const ProductIcon = styled(IPFSImage)`
   width: 40px;
   height: 40px;
   object-fit: contain;
-  margin-right: 8px;
+  margin-right: 10px;
 `
 
 const ProductCell = styled.div`
@@ -25,7 +25,7 @@ const ProductCell = styled.div`
 const ProductName = styled.div`
   font-weight: bold;
   font-size: 12px;
-  color: #606060;
+  color: #505050;
 `
 
 const MilestoneContent = styled.div`
@@ -33,7 +33,7 @@ font-size: 12px;
 overflow: hidden;
 text-overflow:ellipsis;
 white-space: nowrap;
-color: #303030;
+color: #333;
 span {
   color: #606060;
 }
@@ -45,11 +45,11 @@ margin: 0;
 `
 
 const MilestoneBox = styled(Box)`
-padding: 12px;
+padding: 10px;
 `
 
 const StyledDivider = styled(Divider)`
-margin: 12px 0;
+margin: 10px 0;
 `
 
 export default ({ productId, size = 15 }) => {
