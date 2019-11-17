@@ -42,7 +42,12 @@ query {
 `
 
 export const GET_USER = gql`
-query($id: String!, $createdPage: Int, $createdSize: Int, $discoveredPage: Int, $discoveredSize: Int) {
+query(
+  $id: String!,
+  $createdPage: Int, $createdSize: Int,
+  $discoveredPage: Int, $discoveredSize: Int,
+  $likedPage: Int, $likedSize: Int
+) {
   user(id: $id) {
     ${userFragment}
     createdAt
@@ -53,6 +58,12 @@ query($id: String!, $createdPage: Int, $createdSize: Int, $discoveredPage: Int, 
       }
     }
     discoveredProducts(page: $discoveredPage, size: $discoveredSize) {
+      total
+      data {
+        ${productFragment}
+      }
+    }
+    likedProducts(page: $likedPage, size: $likedSize) {
       total
       data {
         ${productFragment}

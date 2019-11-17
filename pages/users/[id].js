@@ -38,6 +38,7 @@ const UserBox = styled.div`
 export default withApollo(() => {
   const size = 15
   const [discoveredPage, setDiscoveredPage] = useState(1)
+  const [likedPage, setLikedPage] = useState(1)
   const { query: { id } } = useRouter()
   const query = [GET_USER, {
     id,
@@ -51,6 +52,8 @@ export default withApollo(() => {
   const createdProducts = get(user, 'createdProducts.data', [])
   const discoveredProducts = get(user, 'discoveredProducts.data', [])
   const discoveredTotal = get(user, 'discoveredProducts.total', 0)
+  const likedProducts = get(user, 'likedProducts.data', [])
+  const likedTotal = get(user, 'likedProducts.total', 0)
   const renderList = list => {
     if (list.length) {
       return list.map(product => (
@@ -78,7 +81,6 @@ export default withApollo(() => {
       updateQuery (prev, { fetchMoreResult }) {
         if (!fetchMoreResult) return prev
         setDiscoveredPage(discoveredPage + 1)
-        console.log(fetchMoreResult)
         return {
           ...prev,
           user: {
@@ -101,6 +103,36 @@ export default withApollo(() => {
       <Button type='link' block loading={loading} onClick={handleFetchMoreDiscovered}>加载更多</Button>
     )
   }
+  const handleFetchMoreLiked = () => {
+    fetchMore({
+      variables: {
+        likedPage: likedPage + 1
+      },
+      updateQuery (prev, { fetchMoreResult }) {
+        if (!fetchMoreResult) return prev
+        setLikedPage(likedPage + 1)
+        return {
+          ...prev,
+          user: {
+            ...prev.user,
+            likedProducts: {
+              ...prev.user.likedProducts,
+              data: [
+                ...prev.user.likedProducts.data,
+                ...fetchMoreResult.user.likedProducts.data
+              ]
+            }
+          }
+        }
+      }
+    })
+  }
+  const renderMoreLiked = () => {
+    if (likedPage * size >= likedTotal) return null
+    return (
+      <Button type='link' block loading={loading} onClick={handleFetchMoreLiked}>加载更多</Button>
+    )
+  }
   return (
     <Page>
       <Head>
@@ -110,25 +142,33 @@ export default withApollo(() => {
       <StyledContainer>
         <Row gutter={24}>
           <Col md={12} xs={24}>
-            <Spin spinning={loading}>
-              <UserBox>
-                <UserContainer>
-                  <Avatar user={user} />
-                  <div>
-                    <b>{user.nickname}</b> 是{process.env.NAME}第 <b>{user.number}</b> 位成员
-                  </div>
-                </UserContainer>
+            <UserBox>
+              <UserContainer>
+                <Avatar user={user} />
                 <div>
-                  <b><Time time={user.createdAt} format='YYYY年M月D日' /></b> 加入社区
+                  <b>{user.nickname}</b> 是{process.env.NAME}第 <b>{user.number}</b> 位成员
                 </div>
-              </UserBox>
+              </UserContainer>
+              <div>
+                <b><Time time={user.createdAt} format='YYYY年M月D日' /></b> 加入社区
+              </div>
+            </UserBox>
+          </Col>
+        </Row>
+        <Row gutter={24}>
+          <Col md={12} xs={24}>
+            <SmallTitle>{user.nickname} 喜欢的产品</SmallTitle>
+            {renderList(likedProducts)}
+            {renderMoreLiked()}
+          </Col>
+          <Col md={12} xs={24}>
+            <Spin spinning={loading}>
               {renderCreateds()}
               <SmallTitle>{user.nickname} 发现的产品</SmallTitle>
               {renderList(discoveredProducts)}
               {renderMoreDiscovered()}
             </Spin>
           </Col>
-          <Col md={12} xs={0} />
         </Row>
       </StyledContainer>
     </Page>

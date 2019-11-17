@@ -116,7 +116,22 @@ export default forwardRef((props, ref) => {
           )}
         </Item>
         <Item label='链接地址' colon={false}>
-          {getFieldDecorator('links')(
+          {getFieldDecorator('links', {
+            rules: [{
+              transform (v) {
+                return v.filter(x => !!x)
+              },
+              validator (rule, value, callback) {
+                if (!Array.isArray(value)) {
+                  callback(new Error('链接地址必须为数组'))
+                } else if (value.length && value.some(x => !/^(https?:\/\/(([a-zA-Z0-9]+-?)+[a-zA-Z0-9]+\.)+[a-zA-Z]+)(:\d+)?(\/.*)?(\?.*)?(#.*)?$/.test(x))) {
+                  callback(new Error('地址格式不正确！'))
+                } else {
+                  callback()
+                }
+              }
+            }]
+          })(
             <Inputs placeholder='产品的访问链接' />
           )}
         </Item>
