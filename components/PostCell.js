@@ -10,10 +10,14 @@ import Time from './Time'
 const Container = styled(Box)`
 margin-bottom: 24px;
 position: relative;
-height: 324px;
-padding: 16px;
+height: 320px;
+border: 0;
+overflow: hidden;
+&:hover {
+  border: 0;
+}
 ${media.sm`
-  height: 168px;
+  height: 160px;
 `}
 `
 
@@ -24,7 +28,10 @@ const PostDescription = styled.div`
 overflow: hidden;
 text-overflow:ellipsis;
 white-space: nowrap;
-margin-bottom: 15px;
+margin-bottom: 16px;
+font-size: 13px;
+height: 20px;
+line-height: 20px;
 `
 
 const StyledTime = styled.div`
@@ -42,25 +49,34 @@ border: 1px solid #F0F0F0;
 
 const PostTitle = styled.h3`
 font-size: 18px;
-margin: 20px 0 12px;
+margin: 0 0 6px;
 line-height: 24px;
 height: 24px;
 overflow: hidden;
 text-overflow:ellipsis;
 white-space: nowrap;
-${media.sm`
-  margin-top: 0;
-`}
 a {
   color: #303030;
 }
 `
 
-const PostMedia = styled(IPFSImage)`
+const PostMedia = styled.a`
 width: 100%;
-height: 134px;
-object-fit: cover;
+height: 160px;
 box-shadow: 0 0 1px rgba(0,0,0,0.2);
+display: block;
+overflow: hidden;
+&:hover {
+  img {
+    transform: scale(1.2);
+  }
+}
+img {
+  object-fit: cover;
+  height: 100%;
+  width: 100%;
+  transition: transform 0.6s;
+}
 `
 
 export default ({ id, products, description, createdAt, disabled = false, media, title, ...rest }) => {
@@ -78,15 +94,15 @@ export default ({ id, products, description, createdAt, disabled = false, media,
   }
   return (
     <Container {...rest}>
-      <Row type='flex' gutter={24} style={{ height: '100%' }}>
-        <Col md={9} sm={11} xs={24}>
+      <Row type='flex' style={{ height: '100%' }}>
+        <Col xl={10} lg={11} md={11} sm={11} xs={24}>
           <Link href='/posts/[id]' as={`/posts/${id}`} passHref>
-            <a aria-label={title}>
-              <PostMedia alt={title} hash={media && `${media.hash}-400-200`} />
-            </a>
+            <PostMedia aria-label={title}>
+              <IPFSImage alt={title} hash={media && `${media.hash}-600-300`} />
+            </PostMedia>
           </Link>
         </Col>
-        <Col md={15} sm={13} xs={24}>
+        <Col xl={14} lg={13} md={13} sm={13} xs={24} style={{ padding: 16 }}>
           <PostContent>
             <PostTitle>
               <Link href='/posts/[id]' as={`/posts/${id}`} passHref>

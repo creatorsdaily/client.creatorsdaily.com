@@ -36,13 +36,6 @@ const StyledPostCell = styled(PostCell)`
 margin-bottom: 12px;
 `
 
-const MoreButton = styled(Button)`
-margin: 0 auto 12px;
-width: 160px;
-display: block;
-line-height: 30px;
-`
-
 const CreateButton = styled.a`
 margin: 0 24px 24px;
 display: block;
@@ -135,7 +128,7 @@ export default withApollo(() => {
           <Col lg={5} xs={0}>
             <TopicList href='/' />
           </Col>
-          <Col lg={13} md={17} xs={24}>
+          <Col lg={13} md={16} xs={24}>
             <Spin spinning={postsLoading}>
               {renderPosts()}
             </Spin>
@@ -148,7 +141,7 @@ export default withApollo(() => {
               {pagination}
             </Pagination>
           </Col>
-          <Col lg={6} md={7} xs={24}>
+          <Col lg={6} md={8} xs={24}>
             <Link href='/create' passHref>
               <CreateButton>
                 <Button type='primary' size='large' block>推荐新产品</Button>

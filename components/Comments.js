@@ -10,6 +10,7 @@ import { GET_COMMENTS } from '../queries'
 import Box from './Box'
 import { Mini } from './Editor'
 import CommentCell from './CommentCell'
+import MoreButton from './MoreButton'
 
 const StyledEditor = styled(Mini)`
 min-height: 32px;
@@ -210,7 +211,7 @@ export default ({ productId, milestoneId, ...rest }) => {
   const renderMore = () => {
     if (page * size >= total) return null
     return (
-      <Button type='link' block loading={loading} onClick={handleFetchMore}>加载更多</Button>
+      <MoreButton size='small' type='link' block loading={loading} onClick={handleFetchMore}>加载更多</MoreButton>
     )
   }
   return (

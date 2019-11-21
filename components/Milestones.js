@@ -1,6 +1,6 @@
 import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
-import { Button, Divider, Spin } from 'antd'
+import { Divider, Spin } from 'antd'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useState } from 'react'
@@ -8,6 +8,7 @@ import { GET_MILESTONES } from '../queries'
 import IPFSImage from './IPFSImage'
 import Box from './Box'
 import Time from './Time'
+import MoreButton from './MoreButton'
 
 const ProductIcon = styled(IPFSImage)`
   width: 40px;
@@ -26,6 +27,7 @@ const ProductName = styled.div`
   font-weight: bold;
   font-size: 12px;
   color: #505050;
+  word-break: keep-all;
 `
 
 const MilestoneContent = styled.div`
@@ -42,6 +44,9 @@ span {
 const MilestoneTitle = styled.h3`
 font-size: 16px;
 margin: 0;
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
 `
 
 const MilestoneBox = styled(Box)`
@@ -88,7 +93,7 @@ export default ({ productId, size = 15 }) => {
   const renderMore = () => {
     if (page * size >= total) return null
     return (
-      <Button style={{ marginBottom: 24 }} type='link' block loading={loading} onClick={handleFetchMore}>加载更多</Button>
+      <MoreButton size='small' style={{ marginBottom: 24 }} type='link' block loading={loading} onClick={handleFetchMore}>加载更多</MoreButton>
     )
   }
   const renderMilestones = () => {
@@ -107,7 +112,9 @@ export default ({ productId, size = 15 }) => {
                 <div>
                   <Divider type='vertical' />
                 </div>
-                <MilestoneTitle>{x.title}</MilestoneTitle>
+                <div style={{ flex: 1, width: 0 }}>
+                  <MilestoneTitle>{x.title}</MilestoneTitle>
+                </div>
               </ProductCell>
               <StyledDivider />
               <MilestoneContent>

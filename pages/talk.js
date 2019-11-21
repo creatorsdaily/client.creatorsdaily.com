@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useQuery } from '@apollo/react-hooks'
 import { useState } from 'react'
-import { Affix, Button, Col, Row, Spin } from 'antd'
+import { Affix, Col, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import Link from 'next/link'
 import Head from 'next/head'
@@ -12,6 +12,7 @@ import { CommentsBox } from '../components/Comments'
 import ProductCell from '../components/ProductCell'
 import { ProductContainer } from '../components/Product'
 import withApollo from '../libs/with-apollo'
+import MoreButton from '../components/MoreButton'
 
 const StyledContainer = styled(Container)`
 margin: 24px auto;
@@ -28,11 +29,6 @@ margin-bottom: 16px;
 a {
   padding: 0;
 }
-`
-
-const MoreButton = styled(Button)`
-  font-size: 12px;
-  color: #606060;
 `
 
 const Tip = styled.h1`
@@ -90,7 +86,7 @@ export default withApollo(() => {
   const renderMore = () => {
     if (page * size >= total) return null
     return (
-      <Button type='link' block loading={loading} onClick={handleFetchMore}>加载更多</Button>
+      <MoreButton size='small' type='link' block loading={loading} onClick={handleFetchMore}>加载更多</MoreButton>
     )
   }
   return (

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Col, Empty, Row, Spin } from 'antd'
+import { Col, Empty, Row, Spin } from 'antd'
 import Head from 'next/head'
 import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
@@ -14,6 +14,7 @@ import media from '../../libs/media'
 import ProductCell from '../../components/ProductCell'
 import SmallTitle from '../../components/SmallTitle'
 import withApollo from '../../libs/with-apollo'
+import MoreButton from '../../components/MoreButton'
 
 const StyledContainer = styled(Container)`
 margin: 24px auto;
@@ -100,7 +101,7 @@ export default withApollo(() => {
   const renderMoreDiscovered = () => {
     if (discoveredPage * size >= discoveredTotal) return null
     return (
-      <Button type='link' block loading={loading} onClick={handleFetchMoreDiscovered}>加载更多</Button>
+      <MoreButton size='small' type='link' block loading={loading} onClick={handleFetchMoreDiscovered}>加载更多</MoreButton>
     )
   }
   const handleFetchMoreLiked = () => {
@@ -130,7 +131,7 @@ export default withApollo(() => {
   const renderMoreLiked = () => {
     if (likedPage * size >= likedTotal) return null
     return (
-      <Button type='link' block loading={loading} onClick={handleFetchMoreLiked}>加载更多</Button>
+      <MoreButton size='small' type='link' block loading={loading} onClick={handleFetchMoreLiked}>加载更多</MoreButton>
     )
   }
   return (
@@ -157,9 +158,11 @@ export default withApollo(() => {
         </Row>
         <Row gutter={24}>
           <Col md={12} xs={24}>
-            <SmallTitle>{user.nickname} 喜欢的产品</SmallTitle>
-            {renderList(likedProducts)}
-            {renderMoreLiked()}
+            <Spin spinning={loading}>
+              <SmallTitle>{user.nickname} 喜欢的产品</SmallTitle>
+              {renderList(likedProducts)}
+              {renderMoreLiked()}
+            </Spin>
           </Col>
           <Col md={12} xs={24}>
             <Spin spinning={loading}>

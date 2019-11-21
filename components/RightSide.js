@@ -57,18 +57,21 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
         <Buttons>
           <div>
             <WeChatButton tooltip='加好友邀请入群'>微信</WeChatButton>
-            <Divider type='vertical' />
             <a href='https://t.me/creatorsdaily' rel='noreferrer' target='_blank'>
               <SmallButton size='small' type='link'>
               Telegram
               </SmallButton>
             </a>
-            <Divider type='vertical' />
             <Tooltip placement='top' title='加入我的星球'>
               <SmallButton size='small' type='link' onClick={handleZSXQ}>
               知识星球
               </SmallButton>
             </Tooltip>
+            <a href='https://kz.sync163.com/web/topic/vqNzr253b46Yk?uid=ZNlYrg5BAReny' rel='noreferrer' target='_blank'>
+              <SmallButton size='small' type='link'>
+                快知
+              </SmallButton>
+            </a>
           </div>
         </Buttons>
       </Affix>

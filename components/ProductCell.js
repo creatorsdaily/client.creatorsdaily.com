@@ -12,7 +12,7 @@ const StyledProductLike = styled(ProductLike)`
   position: absolute !important;
   padding: 0 15px !important;
   top: 18px;
-  right: 24px;
+  right: 16px;
   height: 74px;
   justify-content: center;
   align-items: center;
@@ -47,7 +47,7 @@ right: 100px;
 const Container = styled(Box)`
   margin-bottom: 24px;
   position: relative;
-  padding-right: 90px;
+  padding-right: ${({ size }) => size === 'small' ? 0 : 80}px;
   height: ${({ size }) => size === 'small' ? 62 : 112}px;
 `
 
@@ -83,6 +83,7 @@ overflow: hidden;
 text-overflow:ellipsis;
 white-space: nowrap;
 display: block;
+margin: 0;
 `
 
 const CommentsButton = styled(Button)`
