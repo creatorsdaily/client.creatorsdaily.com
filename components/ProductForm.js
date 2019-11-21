@@ -124,7 +124,7 @@ export default forwardRef((props, ref) => {
               validator (rule, value, callback) {
                 if (!Array.isArray(value)) {
                   callback(new Error('链接地址必须为数组'))
-                } else if (value.length && value.some(x => !/^(https?:\/\/(([a-zA-Z0-9]+-?)+[a-zA-Z0-9]+\.)+[a-zA-Z]+)(:\d+)?(\/.*)?(\?.*)?(#.*)?$/.test(x))) {
+                } else if (value.length && value.some(x => !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(x))) {
                   callback(new Error('地址格式不正确！'))
                 } else {
                   callback()
