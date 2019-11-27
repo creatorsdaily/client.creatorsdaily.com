@@ -23,6 +23,7 @@ height: 30px;
 text-align: center;
 color: #333;
 margin-bottom: 16px;
+font-weight: bold;
 `
 
 const StyledIPFSImage = styled(IPFSImage)`

@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { Col, Row, Typography } from 'antd'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
-import Milestones from '../components/Milestones'
+import MilestoneList from '../components/MilestoneList'
 import media from '../libs/media'
 import withApollo from '../libs/with-apollo'
 
@@ -33,7 +33,7 @@ export default withApollo(() => {
               <Typography.Title level={4}>里程碑</Typography.Title>
               产品新动态
             </Content>
-            <Milestones />
+            <MilestoneList />
           </Col>
         </Row>
       </StyledContainer>

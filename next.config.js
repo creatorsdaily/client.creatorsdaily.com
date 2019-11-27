@@ -67,6 +67,7 @@ module.exports = withPlugins([
     config.resolve.alias = {
       ...config.resolve.alias,
       '@ant-design/icons/lib/dist$': path.resolve(__dirname, './libs/icons.js'),
+      url: 'native-url',
       moment: 'dayjs'
     }
     if (isServer) {

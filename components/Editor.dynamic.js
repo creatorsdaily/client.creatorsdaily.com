@@ -1,64 +1,115 @@
-import Editor from 'react-simple-code-editor'
-import Highlight, { Prism } from 'prism-react-renderer'
-import { Fragment, forwardRef } from 'react'
+// import Editor from 'react-simple-code-editor'
+// import Highlight, { Prism } from 'prism-react-renderer'
+import { Fragment, forwardRef, useState } from 'react'
 import styled from 'styled-components'
-import theme from '../libs/codeTheme'
+import SimpleMDE from 'react-simplemde-editor'
+// import theme from '../libs/codeTheme'
 
-const StyledEditor = styled(Editor)`
-  line-height: 24px;
-  min-height: ${({ type }) => type === 'mini' ? 32 : 56}px;
-  textarea {
+const StyledEditor = styled(SimpleMDE)`
+  line-height: 22px;
+  .CodeMirror-wrap {
     border-radius: 4px;
     border: 1px solid #E8E8E8 !important;
     transition: border 0.35s ease;
-    padding: 4px 10px;
+    padding: 0 5px;
   }
   pre {
     padding: 4px 10px;
   }
-  textarea:focus {
-    outline: none;
+  .CodeMirror-focused {
     border: 1px solid #e06c72 !important;
   }
-  textarea::placeholder {
+  .CodeMirror-wrap::placeholder {
     color: #bfbfbf;
+  }
+
+  .cm-s-easymde {
+    .cm-formatting,
+    .cm-formatting-header,
+    .cm-formatting-strong,
+    .cm-formatting-link,
+    .cm-hr {
+      // color: rgba(0,0,0,.28);
+      color: #efb73f;
+      font-weight: normal;
+      padding: 0 2px;
+    }
+    .cm-formatting-list-ol,
+    .cm-formatting-list-ul {
+      padding-left: 16px;
+    }
+    .cm-header-1,
+    .cm-header-2,
+    .cm-header-3,
+    .cm-header-4,
+    .cm-header-5,
+    .cm-header-6 {
+      font-size: 14px;
+      line-height: 22px;
+    }
+    .cm-quote {
+      font-style: normal;
+      color: rgba(0,0,0,.48);
+    }
+    .cm-link:not(.cm-formatting-link):not(.cm-formatting-image) {
+      color: #000;
+    }
+    .cm-url:not(.cm-formatting-link-string) {
+      color: #1971c2;
+      letter-spacing: normal;
+    }
+    .cm-comment:not(.cm-formatting-code) {
+      box-shadow: 0 0 0 2px rgba(0,0,0,.05);
+    }
+    .cm-comment.cm-formatting-code {
+      background: none;
+    }
   }
 `
 
-const highlightCode = code => (
-  <Highlight
-    Prism={Prism}
-    code={code}
-    theme={theme}
-    language='markdown'
-  >
-    {({ tokens, getLineProps, getTokenProps }) => (
-      <Fragment>
-        {tokens.map((line, i) => (
-          <div {...getLineProps({ line, key: i })}>
-            {line.map((token, key) => (
-              <span {...getTokenProps({ token, key })} />
-            ))}
-          </div>
-        ))}
-      </Fragment>
-    )}
-  </Highlight>
-)
+// const highlightCode = code => (
+//   <Highlight
+//     Prism={Prism}
+//     code={code}
+//     theme={theme}
+//     language='markdown'
+//   >
+//     {({ tokens, getLineProps, getTokenProps }) => (
+//       <Fragment>
+//         {tokens.map((line, i) => (
+//           <div {...getLineProps({ line, key: i })}>
+//             {line.map((token, key) => (
+//               <span {...getTokenProps({ token, key })} />
+//             ))}
+//           </div>
+//         ))}
+//       </Fragment>
+//     )}
+//   </Highlight>
+// )
 
-export default forwardRef(({ onChange, ...rest }, ref) => {
+export default forwardRef(({ id, type, delay = 1000, options/*, value */, ...rest }, ref) => {
+  // useState(localStorage.getItem(`smde_${id}`) || value)
   return (
     <StyledEditor
-      {...rest}
-      onValueChange={onChange}
-      highlight={highlightCode}
-      padding={'2px 4px'}
-      style={{
-        ...theme.plain
-        // minHeight: 40,
-        // whiteSpace: 'pre',
-        // fontFamily: 'monospace'
+      id={id}
+      options={{
+        minHeight: `${type === 'mini' ? 30 : 54}px`,
+        spellChecker: false,
+        autoDownloadFontAwesome: false,
+        indentWithTabs: false,
+        showIcons: [],
+        status: false,
+        toolbar: false,
+        toolbarTips: false,
+        // autosave: {
+        //   enabled: true,
+        //   uniqueId: id,
+        //   delay
+        // },
+        ...options
       }}
+      {...rest}
     />
   )
 })

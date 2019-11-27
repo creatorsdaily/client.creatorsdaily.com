@@ -63,7 +63,6 @@ a {
 const PostMedia = styled.a`
 width: 100%;
 height: 160px;
-box-shadow: 0 0 1px rgba(0,0,0,0.2);
 display: block;
 overflow: hidden;
 &:hover {

@@ -11,14 +11,14 @@ import Brand from './Brand'
 const { Header } = Layout
 
 const menu = [{
-  name: '里程碑',
-  href: '/milestones'
+  name: '日报',
+  href: '/posts'
 }, {
   name: '聊产品',
   href: '/talk'
 }, {
-  name: '日报',
-  href: '/posts'
+  name: '里程碑',
+  href: '/milestones'
 }, {
   name: '创造者们',
   href: '/creators',

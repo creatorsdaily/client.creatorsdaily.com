@@ -15,7 +15,7 @@ import RightSide from '../components/RightSide'
 import media from '../libs/media'
 import PostCell from '../components/PostCell'
 import SmallTitle from '../components/SmallTitle'
-import Milestones from '../components/Milestones'
+import MilestoneList from '../components/MilestoneList'
 import withApollo from '../libs/with-apollo'
 
 const StyledContainer = styled(Container)`
@@ -114,7 +114,7 @@ export default withApollo(() => {
             </a>
           </Link>
         </SmallTitle>
-        <Milestones size={3} />
+        <MilestoneList size={3} />
       </>
     )
   }

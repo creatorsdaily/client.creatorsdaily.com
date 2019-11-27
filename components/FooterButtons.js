@@ -76,19 +76,6 @@ export default () => {
   const handleBeforeInstallPrompt = e => {
     setCanInstall(true)
     installPrompt = e
-    // const key = 'installAppNotification'
-    // notification.open({
-    //   message: '安装应用',
-    //   description: `点击安装「${process.env.NAME}」应用`,
-    //   icon: (<StyledIcon src='/apple-icon-180x180.png' />),
-    //   duration: 0,
-    //   placement: 'bottomRight',
-    //   key,
-    //   onClick () {
-    //     e.prompt()
-    //     notification.close(key)
-    //   }
-    // })
   }
 
   const handleAppInstalled = () => {
@@ -164,7 +151,9 @@ export default () => {
       {renderBellButton()}
       <BackTop visibilityHeight={600}>
         <Tooltip placement='top' title='回到顶部'>
-          <Button shape='circle'><Icon type='rocket' theme='filled' /></Button>
+          <Button shape='circle' style={{ marginLeft: 0 }}>
+            <Icon type='rocket' theme='filled' />
+          </Button>
         </Tooltip>
       </BackTop>
     </Container>

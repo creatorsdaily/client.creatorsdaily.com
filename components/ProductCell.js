@@ -8,12 +8,12 @@ import IPFSImage from './IPFSImage'
 import ProductLike from './ProductLike'
 
 const StyledProductLike = styled(ProductLike)`
-  width: 64px;
+  width: 58px;
   position: absolute !important;
   padding: 0 15px !important;
   top: 18px;
   right: 16px;
-  height: 74px;
+  height: 76px;
   justify-content: center;
   align-items: center;
   display: flex;
@@ -48,7 +48,7 @@ const Container = styled(Box)`
   margin-bottom: 24px;
   position: relative;
   padding-right: ${({ size }) => size === 'small' ? 0 : 80}px;
-  height: ${({ size }) => size === 'small' ? 62 : 112}px;
+  height: ${({ size }) => size === 'small' ? 62 : 114}px;
 `
 
 const ProductContent = styled.div`

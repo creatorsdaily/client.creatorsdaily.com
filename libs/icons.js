@@ -136,6 +136,14 @@ export {
 } from '@ant-design/icons/lib/outline/RocketOutline'
 
 export {
+  default as AppleOutline
+} from '@ant-design/icons/lib/outline/AppleOutline'
+
+export {
+  default as AndroidOutline
+} from '@ant-design/icons/lib/outline/AndroidOutline'
+
+export {
   default as InfoCircleOutline
 } from '@ant-design/icons/lib/outline/InfoCircleOutline'
 
@@ -186,3 +194,15 @@ export {
 export {
   default as InfoCircleFill
 } from '@ant-design/icons/lib/fill/InfoCircleFill'
+
+export {
+  default as AppleFill
+} from '@ant-design/icons/lib/fill/AppleFill'
+
+export {
+  default as GithubFill
+} from '@ant-design/icons/lib/fill/GithubFill'
+
+export {
+  default as AndroidFill
+} from '@ant-design/icons/lib/fill/AndroidFill'

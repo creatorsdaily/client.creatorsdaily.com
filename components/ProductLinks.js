@@ -1,3 +1,4 @@
+import * as url from 'native-url'
 import styled from 'styled-components'
 import { Button, Divider, Icon, Input } from 'antd'
 import { forwardRef, useEffect, useState } from 'react'
@@ -7,7 +8,6 @@ const Links = styled.div`
 `
 
 const StyledButton = styled(Button)`
-  font-family: monospace;
   height: 60px;
   display: flex;
   align-items: center;
@@ -17,11 +17,19 @@ const StyledButton = styled(Button)`
     line-height: 34px;
     font-size: 34px;
     color: #999;
+    svg {
+      transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
+    }
   }
   .anticon-right {
     height: 20px;
     line-height: 20px;
     font-size: 20px;
+  }
+  :hover {
+    i {
+      color: #DE7B76;
+    }
   }
 `
 
@@ -45,6 +53,7 @@ const ButtonLink = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+  font-family: monospace;
 `
 
 const InputsContainer = styled.div`
@@ -115,18 +124,35 @@ export const Inputs = forwardRef(({ value = [''], onChange = noop, placeholder =
 
 export default ({ links, ...rest }) => {
   if (!links.length) return null
-  const list = links.map(x => (
-    <a key={x} href={x} rel='noreferrer' target='_blank'>
-      <StyledButton block>
-        <Icon type='compass' theme='filled' />
-        <ButtonContent>
-          <ButtonName>网址</ButtonName>
-          <ButtonLink>{x}</ButtonLink>
-        </ButtonContent>
-        <Icon type='right' />
-      </StyledButton>
-    </a>
-  ))
+  const list = links.map(x => {
+    const { host } = url.parse(x)
+    let name = '网址'
+    let icon = 'compass'
+    if (host === 'apps.apple.com') {
+      name = 'AppStore'
+      icon = 'apple'
+    }
+    if (host === 'github.com') {
+      name = 'GitHub'
+      icon = 'github'
+    }
+    if (host === 'www.coolapk.com') {
+      name = '酷安'
+      icon = 'android'
+    }
+    return (
+      <a key={x} href={x} rel='noreferrer' target='_blank'>
+        <StyledButton block>
+          <Icon type={icon} theme='filled' />
+          <ButtonContent>
+            <ButtonName>{name}</ButtonName>
+            <ButtonLink>{x}</ButtonLink>
+          </ButtonContent>
+          <Icon type='right' />
+        </StyledButton>
+      </a>
+    )
+  })
   return (
     <Links {...rest}>
       <Divider orientation='left'>链接</Divider>

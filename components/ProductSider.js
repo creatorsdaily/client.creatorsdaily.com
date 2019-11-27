@@ -19,6 +19,10 @@ ${media.sm`
 `}
 `
 
+const StyledProductLike = styled(ProductLike)`
+margin-bottom: 12px;
+`
+
 const StyledWeChatButton = styled(WeChatButton)`
   margin: 0 auto 24px;
   display: block;
@@ -66,7 +70,7 @@ export default ({ id, name, isMiniProgram, miniProgramQRCode, discovererId, isLi
   return (
     <Container>
       {renderButton()}
-      <ProductLike id={id} likeCount={likeCount} isLike={isLike} />
+      <StyledProductLike id={id} likeCount={likeCount} isLike={isLike} />
       <ProductLinks links={links} />
       {renderMiniProgram()}
       <ProductUsers discoverer={discoverer} creators={creators} />

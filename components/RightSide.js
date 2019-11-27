@@ -1,4 +1,4 @@
-import { Affix, Button, Divider, Modal, Tooltip } from 'antd'
+import { Affix, Button, Modal, Tooltip } from 'antd'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
 import Box from './Box'
@@ -68,9 +68,11 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
               </SmallButton>
             </Tooltip>
             <a href='https://kz.sync163.com/web/topic/vqNzr253b46Yk?uid=ZNlYrg5BAReny' rel='noreferrer' target='_blank'>
-              <SmallButton size='small' type='link'>
-                快知
-              </SmallButton>
+              <Tooltip placement='top' title='在快知订阅最新产品通知'>
+                <SmallButton size='small' type='link'>
+                  快知
+                </SmallButton>
+              </Tooltip>
             </a>
           </div>
         </Buttons>

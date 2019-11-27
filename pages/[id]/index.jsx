@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Head from 'next/head'
 import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
+import Link from 'next/link'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import Product from '../../components/Product'
@@ -13,6 +14,7 @@ import Comments from '../../components/Comments'
 import { GET_PRODUCT } from '../../queries'
 import SmallTitle from '../../components/SmallTitle'
 import withApollo from '../../libs/with-apollo'
+import Milestones from '../../components/Milestones'
 
 const StyledContainer = styled(Container)`
   margin-top: 24px;
@@ -45,6 +47,14 @@ export default withApollo(() => {
         </Row>
         <Row type='flex' gutter={24}>
           <Col xl={12} lg={15} md={14} sm={24} xs={24}>
+            <SmallTitle id='milestones' name='milestones'>
+              <Link href='/[id]/milestones' as={`/${id}/milestones`}>
+                <a>
+              里程碑
+                </a>
+              </Link>
+            </SmallTitle>
+            <Milestones productId={id} product={product} />
             <SmallTitle id='comments' name='comments'>聊一聊</SmallTitle>
             <Comments productId={id} product={product} />
           </Col>

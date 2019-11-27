@@ -6,7 +6,7 @@ import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import Page from '../../../layouts/Page'
 import Container from '../../../components/Container'
-import Milestones from '../../../components/Milestones'
+import MilestoneList from '../../../components/MilestoneList'
 import { GET_PRODUCT } from '../../../queries'
 import ProductCell from '../../../components/ProductCell'
 import withApollo from '../../../libs/with-apollo'
@@ -35,7 +35,7 @@ export default withApollo(() => {
             <Spin spinning={loading}>
               <ProductCell {...product} />
             </Spin>
-            <Milestones productId={id} />
+            <MilestoneList productId={id} />
           </Col>
         </Row>
       </StyledContainer>

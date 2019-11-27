@@ -1,137 +1,103 @@
-import { useQuery } from '@apollo/react-hooks'
-import get from 'lodash/get'
-import { Divider, Spin } from 'antd'
+import { Button, Icon, Timeline } from 'antd'
 import styled from 'styled-components'
+import get from 'lodash/get'
 import Link from 'next/link'
-import { useState } from 'react'
-import { GET_MILESTONES } from '../queries'
-import IPFSImage from './IPFSImage'
-import Box from './Box'
+import media from '../libs/media'
+import useCreateMilestoneModal from '../hooks/useCreateMilestoneModal'
+import useCanEditProduct from '../hooks/useCanEditProduct'
+import { GET_PRODUCT } from '../queries'
 import Time from './Time'
-import MoreButton from './MoreButton'
+import ProductContent from './ProductContent'
 
-const ProductIcon = styled(IPFSImage)`
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-  margin-right: 10px;
-`
-
-const ProductCell = styled.div`
-  height: 40px;
-  display: flex;
-  align-items: center;
-`
-
-const ProductName = styled.div`
-  font-weight: bold;
-  font-size: 12px;
-  color: #505050;
-  word-break: keep-all;
-`
-
-const MilestoneContent = styled.div`
-font-size: 12px;
-overflow: hidden;
-text-overflow:ellipsis;
-white-space: nowrap;
-color: #333;
-span {
-  color: #606060;
+const Milestones = styled.div`
+padding: 8px 8px 0;
+margin: 0 16px;
+${media.sm`
+  margin: 0;
+`}
+.ant-timeline-item-head {
+  background-color: #FAFAFA;
 }
 `
 
-const MilestoneTitle = styled.h3`
-font-size: 16px;
-margin: 0;
-overflow: hidden;
-text-overflow:ellipsis;
-white-space: nowrap;
+const MilestoneTime = styled.div`
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 24px;
+  margin-bottom: 8px;
 `
 
-const MilestoneBox = styled(Box)`
-padding: 10px;
+const MilestoneTitle = styled.h4`
+  margin-bottom: 0;
+  font-weight: bold;
 `
 
-const StyledDivider = styled(Divider)`
-margin: 10px 0;
+const MilestoneButton = styled(Button)`
+  margin: 0 auto;
 `
 
-export default ({ productId, size = 15 }) => {
-  const [page, setPage] = useState(1)
-  const query = [GET_MILESTONES, {
-    size,
-    productId
-  }]
-  const { data, loading, fetchMore } = useQuery(query[0], {
-    variables: query[1],
-    notifyOnNetworkStatusChange: true
-  })
-  const milestones = get(data, 'getMilestones.data', [])
-  const total = get(data, 'getMilestones.total', 0)
-  const handleFetchMore = () => {
-    fetchMore({
-      variables: {
-        page: page + 1
-      },
-      updateQuery (prev, { fetchMoreResult }) {
-        if (!fetchMoreResult) return prev
-        setPage(page + 1)
-        return {
-          ...prev,
-          getMilestones: {
-            ...prev.getMilestones,
-            data: [
-              ...prev.getMilestones.data,
-              ...fetchMoreResult.getMilestones.data
-            ]
-          }
-        }
-      }
-    })
-  }
-  const renderMore = () => {
-    if (page * size >= total) return null
+const MilestoneContent = styled(ProductContent)`
+font-size: 12px;
+`
+
+export default ({
+  productId,
+  product = {}
+}) => {
+  const {
+    discovererId,
+    milestones, creators,
+    createdAt
+  } = product
+  const canEdit = useCanEditProduct({ creators, discovererId })
+  const renderCreatorMilestone = () => {
+    if (!canEdit) return null
     return (
-      <MoreButton size='small' style={{ marginBottom: 24 }} type='link' block loading={loading} onClick={handleFetchMore}>加载更多</MoreButton>
+      <Timeline.Item color='red' dot={<Icon type='clock-circle' />}>
+        <MilestoneTime>现在，立刻发布新动态</MilestoneTime>
+        <MilestoneButton icon='plus' onClick={show}>
+          发布新里程碑
+        </MilestoneButton>
+      </Timeline.Item>
     )
   }
-  const renderMilestones = () => {
-    return milestones.map(x => {
-      const product = x.product
-      return (
-        <MilestoneBox key={x.id}>
-          <Link
-            href='/[id]/milestones/[milestoneId]'
-            as={`/${product.id}/milestones/${x.id}`}
-          >
-            <a>
-              <ProductCell>
-                <ProductIcon size='small' alt={product.name} hash={product.icon && product.icon.hash && `${product.icon.hash}-160-160-contain`} />
-                <ProductName>{product.name}</ProductName>
-                <div>
-                  <Divider type='vertical' />
-                </div>
-                <div style={{ flex: 1, width: 0 }}>
-                  <MilestoneTitle>{x.title}</MilestoneTitle>
-                </div>
-              </ProductCell>
-              <StyledDivider />
-              <MilestoneContent>
-                <span><Time time={x.createdAt} /></span>
-                <Divider type='vertical' />
-                {x.content}
-              </MilestoneContent>
-            </a>
-          </Link>
-        </MilestoneBox>
-      )
-    })
-  }
+  const milestonesList = get(milestones, 'data', [])
+  const [modal, show] = useCreateMilestoneModal(productId, {
+    refetchQueries: () => [{
+      query: GET_PRODUCT,
+      variables: { id: productId }
+    }]
+  })
   return (
-    <Spin spinning={loading}>
-      {renderMilestones()}
-      {renderMore()}
-    </Spin>
+    <Milestones>
+      {modal}
+      <Timeline>
+        {renderCreatorMilestone()}
+        {milestonesList.map(x => (
+          <Timeline.Item key={x.id}>
+            <MilestoneTime>
+              <Time time={x.createdAt} />
+            </MilestoneTime>
+            <MilestoneTitle>
+              <Link
+                href='/[id]/milestones/[milestoneId]'
+                as={`/${productId}/milestones/${x.id}`}
+              >
+                <a>
+                  {x.title}
+                </a>
+              </Link>
+            </MilestoneTitle>
+            <MilestoneContent height={80} full content={x.content} background='linear-gradient(rgba(250,250,250,0), rgba(250,250,250,1))' />
+          </Timeline.Item>
+        ))}
+        <Timeline.Item color='green' dot={<Icon type='flag' />}>
+          <MilestoneTime>
+            <Time time={createdAt} />
+          </MilestoneTime>
+          <MilestoneTitle style={{ fontWeight: 'normal' }}>在 <strong>{process.env.NAME}</strong> 首次发布</MilestoneTitle>
+        </Timeline.Item>
+      </Timeline>
+    </Milestones>
   )
 }
