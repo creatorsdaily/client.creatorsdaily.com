@@ -5,21 +5,36 @@ import gql from 'graphql-tag'
 import formError from '../libs/form-error'
 
 const StyledButton = styled(Button)`
-  min-height: 50px;
-  ${({ islike }) => islike === 'true' ? `
+width: 36px;
+padding: 0 !important;
+height: 44px;
+justify-content: center;
+align-items: center;
+display: flex;
+flex-direction: column;
+line-height: 18px;
+font-size: 13px;
+i {
+  margin-left: 0 !important;
+}
+${({ islike }) => islike === 'true' ? `
+  background: rgba(222, 123, 118, 0.1);
+  color: #DE7B76;
+  border-color: #DE7B76;
+  :active, :focus {
     background: rgba(222, 123, 118, 0.1);
     color: #DE7B76;
     border-color: #DE7B76;
-    :active, :focus {
-      background: rgba(222, 123, 118, 0.1);
-      color: #DE7B76;
-      border-color: #DE7B76;
-    }
-  ` : ''}
-  :active, :focus {
-    color: rgba(0, 0, 0, 0.65);
-    border-color: #d9d9d9;
   }
+` : ''}
+:active, :focus {
+  color: rgba(0, 0, 0, 0.65);
+  border-color: #d9d9d9;
+}
+
+.anticon + span {
+  margin: 0;
+}
 `
 
 const Count = styled.span`
@@ -30,7 +45,7 @@ font-weight: 600;
 
 const LIKE = gql`
 mutation($id: String!, $dislike: Boolean) {
-  likeProduct(id: $id, dislike: $dislike) {
+  likeWish(id: $id, dislike: $dislike) {
     id
     isLike
     likeCount
@@ -38,7 +53,7 @@ mutation($id: String!, $dislike: Boolean) {
 }
 `
 
-export default ({ title = '我喜欢', id, likeCount, isLike, ...rest }) => {
+export default ({ id, likeCount, isLike, ...rest }) => {
   const [like, { loading }] = useMutation(LIKE, {
     onError: error => {
       const errors = formError(null, error)
@@ -46,6 +61,7 @@ export default ({ title = '我喜欢', id, likeCount, isLike, ...rest }) => {
     }
   })
   const handleClick = () => {
+    console.log(id)
     like({
       variables: {
         id,
@@ -63,7 +79,6 @@ export default ({ title = '我喜欢', id, likeCount, isLike, ...rest }) => {
       islike={(!!isLike).toString()}
       {...rest}
     >
-      {title}
       <Count>{likeCount || '' }</Count>
     </StyledButton>
   )

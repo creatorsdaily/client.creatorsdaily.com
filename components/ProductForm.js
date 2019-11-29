@@ -109,7 +109,9 @@ export default forwardRef((props, ref) => {
         <Item label='名称' colon={false}>
           {getFieldDecorator('name', {
             rules: [{
-              required: true, message: '必须输入产品名！'
+              max: 15,
+              required: true,
+              message: '产品名需要大于 0 小于 15 个字符'
             }]
           })(
             <Input placeholder='输入要推荐的产品名称' />

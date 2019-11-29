@@ -15,6 +15,7 @@ import { GET_PRODUCT } from '../../queries'
 import SmallTitle from '../../components/SmallTitle'
 import withApollo from '../../libs/with-apollo'
 import Milestones from '../../components/Milestones'
+import Wishes from '../../components/Wishes'
 
 const StyledContainer = styled(Container)`
   margin-top: 24px;
@@ -55,6 +56,8 @@ export default withApollo(() => {
               </Link>
             </SmallTitle>
             <Milestones productId={id} product={product} />
+            <SmallTitle id='wishes' name='wishes'>新愿</SmallTitle>
+            <Wishes productId={id} product={product} />
             <SmallTitle id='comments' name='comments'>聊一聊</SmallTitle>
             <Comments productId={id} product={product} />
           </Col>

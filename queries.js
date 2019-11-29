@@ -122,6 +122,20 @@ query($id: String!) {
         createdAt
       }
     }
+    wishes {
+      data {
+        id
+        type
+        title
+        content
+        isLike
+        likeCount
+        createdAt
+        user {
+          ${userFragment}
+        }
+      }
+    }
   }
 }
 `
@@ -277,6 +291,30 @@ query($id: String!) {
 }
 `
 
+export const GET_WISH = gql`
+query($id: String!) {
+  getWish(id: $id) {
+    id
+    title
+    content
+    createdAt
+    type
+    isLike
+    likeCount
+    user {
+      ${userFragment}
+    }
+    product {
+      ${productFragment}
+      discovererId
+      creators {
+        ${userFragment}
+      }
+    }
+  }
+}
+`
+
 export const GET_COMMENTS = gql`
 fragment CommentFields on Comment {
   id
@@ -287,8 +325,8 @@ fragment CommentFields on Comment {
     ${userFragment}
   }
 }
-query($page: Int, $size: Int, $productId: String, $milestoneId: String) {
-  getComments(page: $page, size: $size, productId: $productId, milestoneId: $milestoneId) {
+query($page: Int, $size: Int, $productId: String, $milestoneId: String, $wishId: String) {
+  getComments(page: $page, size: $size, productId: $productId, milestoneId: $milestoneId, wishId: $wishId) {
     data {
       product {
         ${productFragment}

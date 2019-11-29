@@ -1,7 +1,7 @@
 import { Avatar } from 'antd'
 import md5 from 'crypto-js/md5'
 
-export default ({ user, size = 64, ...rest }) => {
+export default ({ user, size = 32, ...rest }) => {
   const props = {
     ...rest
   }
@@ -11,6 +11,6 @@ export default ({ user, size = 64, ...rest }) => {
     props.src = `https://www.gravatar.com/avatar/${user.email ? md5(user.email) : ''}?size=${size * 2}&d=monsterid`
   }
   return (
-    <Avatar shape='square' icon='user' alt={user.nickname} {...props} />
+    <Avatar shape='square' icon='user' size={size} alt={user.nickname} {...props} />
   )
 }

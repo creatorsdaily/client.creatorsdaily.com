@@ -1,5 +1,5 @@
 import { forwardRef } from 'react'
-import { Form, Input } from 'antd'
+import { Form, Input, Select } from 'antd'
 import noop from 'lodash/noop'
 import Editor from './Editor'
 
@@ -22,17 +22,29 @@ export default forwardRef((props, ref) => {
       onSubmit(fieldsValue)
     })
   }
+  const typeSelector = getFieldDecorator('type', {
+    initialValue: 'FEATURE',
+    rules: [{
+      required: true,
+      message: '必须选择「新愿」类型！'
+    }]
+  })(
+    <Select style={{ width: 96 }}>
+      <Select.Option value='FEATURE'>请求功能</Select.Option>
+      <Select.Option value='BUG'>报告缺陷</Select.Option>
+    </Select>
+  )
   return (
     <Form {...rest} onSubmit={handleSubmit}>
       <Item>
         {getFieldDecorator('title', {
           rules: [{
             required: true,
-            message: '必须输入里程碑标题！',
+            message: '必须输入「新愿」标题！',
             max: 24
           }]
         })(
-          <Input placeholder='标题' />
+          <Input addonBefore={typeSelector} placeholder='「新愿」标题' />
         )}
       </Item>
       <Item>
@@ -40,10 +52,10 @@ export default forwardRef((props, ref) => {
           initialValue: '',
           rules: [{
             required: true,
-            message: '必须输入里程碑内容！'
+            message: '必须输入「新愿」内容！'
           }]
         })(
-          <Editor placeholder='里程碑内容' />
+          <Editor placeholder='请输入「新愿」内容' />
         )}
       </Item>
     </Form>

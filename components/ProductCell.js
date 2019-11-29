@@ -21,6 +21,9 @@ const StyledProductLike = styled(ProductLike)`
   i {
     margin-left: 0 !important;
   }
+  .anticon + span {
+    margin: 0;
+  }
 `
 
 const StyledLink = styled.a`

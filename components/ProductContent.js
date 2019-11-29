@@ -31,7 +31,13 @@ const Container = styled.div`
   overflow: hidden;
 `
 
-export default ({ content, background = 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1))', height = 160, full = false, ...rest }) => {
+export default ({
+  content,
+  background = 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1))',
+  height = 160,
+  full = false,
+  ...rest
+}) => {
   const [more, setMore] = useToggle(true)
   const [checked, setChecked] = useToggle(false)
   const ref = useRef()

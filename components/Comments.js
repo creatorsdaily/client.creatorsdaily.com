@@ -100,6 +100,7 @@ export const CommentsBox = ({
   list,
   productId,
   milestoneId,
+  wishId,
   product,
   query,
   onFocus = noop,
@@ -126,6 +127,7 @@ export const CommentsBox = ({
     const comment = {
       productId,
       milestoneId,
+      wishId,
       content
     }
     if (replyId) {
@@ -158,7 +160,7 @@ export const CommentsBox = ({
       {renderHeader()}
       <CommentBox>
         <EditorBox>
-          <StyledEditor value={content} type='mini' placeholder='你觉着这个产品怎么样？' onChange={setContent} onFocus={onFocus} onBlur={onBlur} />
+          <StyledEditor value={content} type='mini' placeholder='吐槽一下？' onChange={setContent} onFocus={onFocus} onBlur={onBlur} />
         </EditorBox>
         <StyledButton loading={createLoading} type='primary' onClick={() => handleReply()}>来一发</StyledButton>
       </CommentBox>
@@ -170,13 +172,14 @@ export const CommentsBox = ({
   )
 }
 
-export default ({ productId, milestoneId, ...rest }) => {
+export default ({ productId, milestoneId, wishId, ...rest }) => {
   const size = 10
   const [page, setPage] = useState(1)
   const query = [GET_COMMENTS, {
     size,
     productId,
-    milestoneId
+    milestoneId,
+    wishId
   }]
 
   const { data, loading, fetchMore } = useQuery(query[0], {
@@ -222,6 +225,7 @@ export default ({ productId, milestoneId, ...rest }) => {
       renderFooter={renderMore}
       productId={productId}
       milestoneId={milestoneId}
+      wishId={wishId}
       {...rest}
     />
   )

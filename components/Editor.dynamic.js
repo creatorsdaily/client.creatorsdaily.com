@@ -1,9 +1,6 @@
-// import Editor from 'react-simple-code-editor'
-// import Highlight, { Prism } from 'prism-react-renderer'
-import { Fragment, forwardRef, useState } from 'react'
+import { forwardRef } from 'react'
 import styled from 'styled-components'
 import SimpleMDE from 'react-simplemde-editor'
-// import theme from '../libs/codeTheme'
 
 const StyledEditor = styled(SimpleMDE)`
   line-height: 22px;
@@ -88,7 +85,7 @@ const StyledEditor = styled(SimpleMDE)`
 //   </Highlight>
 // )
 
-export default forwardRef(({ id, type, delay = 1000, options/*, value */, ...rest }, ref) => {
+export default forwardRef(({ id, type, placeholder, delay = 1000, options/*, value */, ...rest }, ref) => {
   // useState(localStorage.getItem(`smde_${id}`) || value)
   return (
     <StyledEditor
@@ -102,6 +99,7 @@ export default forwardRef(({ id, type, delay = 1000, options/*, value */, ...res
         status: false,
         toolbar: false,
         toolbarTips: false,
+        placeholder,
         // autosave: {
         //   enabled: true,
         //   uniqueId: id,
