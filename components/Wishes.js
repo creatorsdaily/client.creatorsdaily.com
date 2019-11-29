@@ -30,10 +30,19 @@ align-items: center;
 flex: 1;
 `
 
-const WishTitle = styled.h3`
-margin: 2px 0 0;
-font-weight: bold;
-font-size: 14px;
+const WishTitle = styled.div`
+margin-top: 2px;
+display: flex;
+h3 {
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 0;
+  flex: 1;
+  overflow: hidden;
+  font-weight: bold;
+  font-size: 14px;
+}
 `
 
 const WishTip = styled.div`
@@ -48,7 +57,7 @@ border-radius: 4px;
 
 const WishContent = styled.div`
 display: flex;
-margin-left: 8px;
+margin: 0 8px;
 flex-direction: column;
 flex: 1;
 `
@@ -58,6 +67,17 @@ height: 18px;
 line-height: 18px;
 font-size: 12px;
 display: flex;
+text-overflow: ellipsis;
+white-space: nowrap;
+overflow: hidden;
+> div {
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  width: 0;
+  flex: 1;
+  overflow: hidden;
+  display: flex;
+}
 .ant-tag {
   line-height: 16px;
 }
@@ -116,17 +136,21 @@ export default ({
               </WishAvatar>
               <WishContent>
                 <WishMeta>
-                  <Tag color={wishTypeColors[item.type]}>
-                    {wishTypes[item.type]}
-                  </Tag>
-                  <WishUsername>{item.user.nickname}</WishUsername>
-                  <WishSpan>在</WishSpan>
-                  <Time time={item.createdAt} />
-                  <WishSpan>提交</WishSpan>
+                  <div>
+                    <Tag color={wishTypeColors[item.type]}>
+                      {wishTypes[item.type]}
+                    </Tag>
+                    <WishUsername>{item.user.nickname}</WishUsername>
+                    <WishSpan>在</WishSpan>
+                    <Time time={item.createdAt} />
+                    <WishSpan>提交</WishSpan>
+                  </div>
                 </WishMeta>
                 <Link href='/[id]/wishes/[wishId]' as={`/${productId}/wishes/${item.id}`}>
                   <a>
-                    <WishTitle>{item.title}</WishTitle>
+                    <WishTitle>
+                      <h3>{item.title}</h3>
+                    </WishTitle>
                   </a>
                 </Link>
               </WishContent>
