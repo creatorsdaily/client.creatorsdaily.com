@@ -36,7 +36,8 @@ const UserCellContainer = ({ id }) => {
 export default () => {
   const users = [
     '588c9fbf-adeb-4380-9d9c-f042b0059f58',
-    'f8738659-6e1c-475f-8ca8-b91837d0549f'
+    'f8738659-6e1c-475f-8ca8-b91837d0549f',
+    'd34c903c-c011-45b3-99b0-bfb8d0a58126'
   ]
   return (
     <Container>

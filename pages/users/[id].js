@@ -55,10 +55,10 @@ export default withApollo(() => {
   const discoveredTotal = get(user, 'discoveredProducts.total', 0)
   const likedProducts = get(user, 'likedProducts.data', [])
   const likedTotal = get(user, 'likedProducts.total', 0)
-  const renderList = list => {
+  const renderList = (list, size) => {
     if (list.length) {
       return list.map(product => (
-        <ProductCell {...product} key={product.id} />
+        <ProductCell {...product} key={product.id} size={size} />
       ))
     }
     return (
@@ -71,6 +71,16 @@ export default withApollo(() => {
       <>
         <SmallTitle>{user.nickname} 创造的产品</SmallTitle>
         {renderList(createdProducts)}
+      </>
+    )
+  }
+  const renderDiscovereds = () => {
+    if (!discoveredProducts.length) return null
+    return (
+      <>
+        <SmallTitle>{user.nickname} 发现的产品</SmallTitle>
+        {renderList(discoveredProducts, 'small')}
+        {renderMoreDiscovered()}
       </>
     )
   }
@@ -159,19 +169,14 @@ export default withApollo(() => {
         <Row gutter={24}>
           <Col md={12} xs={24}>
             <Spin spinning={loading}>
+              {renderCreateds()}
+              {renderDiscovereds()}
               <SmallTitle>{user.nickname} 喜欢的产品</SmallTitle>
-              {renderList(likedProducts)}
+              {renderList(likedProducts, 'small')}
               {renderMoreLiked()}
             </Spin>
           </Col>
-          <Col md={12} xs={24}>
-            <Spin spinning={loading}>
-              {renderCreateds()}
-              <SmallTitle>{user.nickname} 发现的产品</SmallTitle>
-              {renderList(discoveredProducts)}
-              {renderMoreDiscovered()}
-            </Spin>
-          </Col>
+          <Col md={12} xs={24} />
         </Row>
       </StyledContainer>
     </Page>
