@@ -34,7 +34,7 @@ ${media.sm`
 `
 
 export default withApollo(() => {
-  const size = 10
+  const size = 20
   const [page, setPage] = useState(1)
   const query = [GET_USERS, {
     size,
