@@ -24,6 +24,8 @@ nickname
 username
 email
 number
+createdAt
+signinedAt
 avatar {
   id
   hash
@@ -36,7 +38,6 @@ query {
     ${userFragment}
     token
     oneSignal
-    createdAt
   }
 }
 `
@@ -50,7 +51,6 @@ query(
 ) {
   user(id: $id) {
     ${userFragment}
-    createdAt
     createdProducts(page: $createdPage, size: $createdSize) {
       total
       data {
@@ -67,6 +67,23 @@ query(
       total
       data {
         ${productFragment}
+      }
+    }
+  }
+}
+`
+
+export const GET_USERS = gql`
+query($page: Int, $size: Int, $isCreator: Boolean) {
+  getUsers(page: $page, size: $size, isCreator: $isCreator) {
+    total
+    data {
+      ${userFragment}
+      createdProducts {
+        total
+        data {
+          ${productFragment}
+        }
       }
     }
   }
@@ -214,9 +231,13 @@ query($id: String!) {
     title
     description
     content
+    createdAt
     media {
       id
       hash
+    }
+    user {
+      ${userFragment}
     }
     products {
       id

@@ -92,6 +92,13 @@ export default withApollo(() => {
               <Paragraph>
                 这里是爱意满满的作品展示区，无论您是产品的 <Text strong>创造者</Text> ，还是产品的 <Text strong>发现者</Text> ，都可以在这里将它展示给全世界。
               </Paragraph>
+              <Paragraph>
+                完成产品发布后，会自动推送至 <a href='https://kz.sync163.com/web/topic/vqNzr253b46Yk?uid=ZNlYrg5BAReny' target='_blank'>快知</a>、<a href='https://tophub.today/n/YKd6JwndaP' target='_blank'>今日热榜</a> 等平台，并有机会入选
+                <Text strong>
+                今日产品
+                </Text>
+                推送至公众号、知乎等平台。
+              </Paragraph>
             </StyledTypography>
           </Col>
         </Row>

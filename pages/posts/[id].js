@@ -6,12 +6,15 @@ import { Spin } from 'antd'
 import Head from 'next/head'
 import styled from 'styled-components'
 import { Fragment } from 'react'
+import Link from 'next/link'
 import { GET_POST } from '../../queries'
 import Article from '../../layouts/Article'
 import ProductCell from '../../components/ProductCell'
 import SmallTitle from '../../components/SmallTitle'
 import IPFSImage from '../../components/IPFSImage'
 import withApollo from '../../libs/with-apollo'
+import UserCell from '../../components/UserCell'
+import Time from '../../components/Time'
 
 const StyledProductCell = styled(ProductCell)`
 margin-top: 10px;
@@ -22,13 +25,34 @@ margin-top: 24px;
 text-align: center;
 `
 
+const PostTitle = styled.h1`
+line-height: 30px;
+margin-top: 0 !important;
+margin-bottom: 0 !important;
+border-bottom: 0 !important;
+text-align: left !important;
+`
+
 const PostMedia = styled(IPFSImage)`
 width: 100%;
-max-width: 300px;
+height: 260px;
 object-fit: cover;
-box-shadow: 0 0 1px rgba(0,0,0,0.2);
-margin: 0 auto 32px;
 display: block;
+`
+
+const PostMeta = styled.div`
+padding: 12px 0;
+display: flex;
+align-items: center;
+// border-top: 1px solid #F0F0F0;
+// border-bottom: 1px solid #F0F0F0;
+.ant-avatar i {
+  color: #FFF;
+}
+`
+
+const PostTime = styled.div`
+font-size: 12px;
 `
 
 export default withApollo(() => {
@@ -39,21 +63,36 @@ export default withApollo(() => {
     }
   })
   const post = get(data, 'getPost', {})
+  const user = get(post, 'user', {})
   const product = get(data, 'getPost.products[0]', {})
   return (
-    <Article footer={(
-      <Fragment>
-        <StyledSmallTitle>相关产品</StyledSmallTitle>
-        <StyledProductCell {...product} />
-      </Fragment>
-    )}>
+    <Article
+      header={(
+        post.media ? <PostMedia hash={post.media && post.media.hash} /> : null
+      )}
+      footer={(
+        <Fragment>
+          <StyledSmallTitle>相关产品</StyledSmallTitle>
+          <StyledProductCell {...product} />
+        </Fragment>
+      )}
+    >
       <Head>
         <title>{post.title} - {process.env.NAME}</title>
         <meta key='description' name='description' content={post.description} />
       </Head>
       <Spin spinning={loading}>
-        <h1>{post.title}</h1>
-        <PostMedia hash={post.media && post.media.hash} />
+        <PostTitle>{post.title}</PostTitle>
+        <PostMeta>
+          <Link href='/users/[id]' as={`/users/${user.id}`}>
+            <a>
+              <UserCell user={user} />
+            </a>
+          </Link>
+          <PostTime>
+            在 <Time time={post.createdAt} /> 发布
+          </PostTime>
+        </PostMeta>
         <ReactMarkdown source={post.content} />
       </Spin>
     </Article>

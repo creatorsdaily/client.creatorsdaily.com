@@ -7,6 +7,11 @@ line-height: 1.8em;
 
 img {
   max-width: 100%;
+  max-height: 500px;
+  display: block;
+  margin: 0 auto;
+  border-radius: 5px;
+  box-shadow: 0 5px 20px rgba(0,0,0,0.1);
 }
 
 pre, code {
@@ -24,7 +29,7 @@ code {
 pre {
   font-size: 15px;
   line-height: 1.4em;
-  display: block; !important;
+  display: block !important;
 }
 
 pre code {
@@ -105,17 +110,16 @@ blockquote::before, blockquote::after, q::before, q::after {
 }
 
 h1, h2, h3, h4, h5, h6 {
-  margin: 20px 0 10px;
   padding: 0;
   font-style: bold !important;
   color: rgba(0, 0, 0, 0.9);
-  margin: 1.5em 5px !important;
+  margin: 1.5em 5px;
   padding: 0.5em 0 !important;
 }
 
 h1 {
-  font-size: 26px !important;
-  border-bottom: 1px solid #ddd !important;
+  font-size: 24px !important;
+  border-bottom: 1px solid #ddd;
   text-align: center;
 }
 

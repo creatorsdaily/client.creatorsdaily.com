@@ -22,19 +22,23 @@ line-height: 30px;
 height: 30px;
 text-align: center;
 color: #333;
-margin-bottom: 16px;
+margin: 0 8px 16px;
 font-weight: bold;
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
 `
 
 const StyledIPFSImage = styled(IPFSImage)`
-  width: 100px;
-  height: 100px;
-  margin: 16px auto;
+  width: 50px;
+  height: 50px;
+  margin: 16px auto 8px;
   display: block;
   object-fit: contain;
   justify-content: center;
   align-items: center;
   display: flex;
+  font-size: 12px;
 `
 
 const LinkContent = styled.div`
@@ -63,7 +67,7 @@ export default withApollo(() => {
             <Spin spinning={loading}>
               <Row gutter={24}>
                 {links.map(x => (
-                  <Col key={x.id} lg={6} md={8} sm={8} xs={24}>
+                  <Col key={x.id} xl={4} lg={6} md={8} sm={6} xs={24}>
                     <a target='_blank' href={x.url} alt={x.name} >
                       <Box>
                         <StyledIPFSImage hash={x.media && x.media.hash} />

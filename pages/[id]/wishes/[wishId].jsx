@@ -55,6 +55,9 @@ button {
 const WishTitle = styled.h1`
   font-size: 20px;
   margin-bottom: 0;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
 `
 
 const WishContent = styled(ProductContent)`

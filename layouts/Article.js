@@ -18,7 +18,7 @@ ${media.sm`
 `}
 `
 
-export default ({ children, footer = null }) => {
+export default ({ children, header = null, footer = null }) => {
   if (typeof footer === 'function') {
     footer = footer()
   }
@@ -27,6 +27,7 @@ export default ({ children, footer = null }) => {
       <StyledContainer>
         <Row type='flex' gutter={24}>
           <Col lg={14} md={17} xs={24}>
+            {header}
             <StyledArticle>
               {children}
             </StyledArticle>
