@@ -3,7 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 import useToggle from 'react-use/lib/useToggle'
 import { useEffect, useRef } from 'react'
-import Article from './Article.dd'
+import Article from './Article'
 
 const More = styled.div`
   position: absolute;
@@ -21,9 +21,10 @@ const More = styled.div`
 `
 
 const StyledArticle = styled(Article)`
-  overflow: hidden;
-  position: relative;
-  height: ${({ more }) => more === 'true' ? 'auto' : `${({ height }) => height - 60}px`};
+font-size: 14px;
+overflow: hidden;
+position: relative;
+height: ${({ more }) => more === 'true' ? 'auto' : `${({ height }) => height - 60}px`};
 `
 
 const Container = styled.div`

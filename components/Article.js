@@ -2,11 +2,11 @@ import styled from 'styled-components'
 
 export default styled.div`
 color: rgba(0, 0, 0, 0.75);
-font-size: 14px;
-line-height: 1.8em;
+font-size: 16px;
+line-height: 1.6;
 
-img {
-  max-width: 100%;
+p img {
+  max-width: 68%;
   max-height: 500px;
   display: block;
   margin: 0 auto;
@@ -41,7 +41,7 @@ pre code {
 }
 
 strong, b{
-  color: #BF360C;
+  color: #FF992A;
 }
 
 em, i {
@@ -49,12 +49,12 @@ em, i {
 }
 
 hr {
-  border: 1px solid #BF360C;
-  margin: 1.5em auto;
+  border-top: 1px solid #DE7B76;
+  margin: 1.5em 0;
 }
 
 p {
-  margin: 1.5em 0 !important;
+  margin: 1.2em 0;
 }
 
 table, pre, dl, blockquote, q, ul, ol {
@@ -98,11 +98,16 @@ dl dd {
 }
 
 blockquote, q {
-  border-left: 2px solid #009688;
+  border-left: 3px solid #DE7B76;
   padding: 0 10px;
   color: #606060;
   quotes: none;
-  margin-left: 1em;
+  margin: 20px 0;
+  padding: 1px 0 1px 10px;
+  background: rgba(158, 158, 158, 0.1);
+  p {
+    margin: 10px;
+  }
 }
 
 blockquote::before, blockquote::after, q::before, q::after {
@@ -119,13 +124,11 @@ h1, h2, h3, h4, h5, h6 {
 
 h1 {
   font-size: 24px !important;
-  border-bottom: 1px solid #ddd;
   text-align: center;
 }
 
 h2 {
   font-size: 20px !important;
-  border-bottom: 1px solid #eee !important;
 }
 
 h3 {
@@ -134,7 +137,7 @@ h3 {
 
 h4 {
   font-size: 16px;
-  border-left: 5px solid #009688;
+  border-left: 5px solid #DE7B76;
   padding: 0 0.5em !important;
 }
 
@@ -177,7 +180,7 @@ table tr th, table tr td {
 table tr th {
   font-weight: bold;
   color: #eee;
-  border: 1px solid #009688;
-  background-color: #009688;
+  border: 1px solid #DE7B76;
+  background-color: #DE7B76;
 }
 `
