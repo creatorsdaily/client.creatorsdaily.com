@@ -68,7 +68,7 @@ export default withApollo(() => {
   return (
     <Article
       header={(
-        post.media ? <PostMedia hash={post.media && post.media.hash} /> : null
+        post.media ? <PostMedia hash={post.media && `${post.media.hash}-800-400-inside`} /> : null
       )}
       footer={(
         <Fragment>
@@ -93,7 +93,12 @@ export default withApollo(() => {
             在 <Time time={post.createdAt} /> 发布
           </PostTime>
         </PostMeta>
-        <ReactMarkdown source={post.content} />
+        <ReactMarkdown source={post.content} transformImageUri={(uri) => {
+          if (uri.indexOf(process.env.FILES) !== 0) {
+            return uri
+          }
+          return `${uri}-1000-1000-inside`
+        }} />
       </Spin>
     </Article>
   )

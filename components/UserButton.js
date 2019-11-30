@@ -54,7 +54,7 @@ export default ({ user, back = '/', ...rest }) => {
   )
   return (
     <Popover content={menu} overlayClassName='user-button-popover'>
-      <div style={{ display: 'flex', float: 'right' }}>
+      <div {...rest}>
         <Link href='/users/[id]' as={`/users/${user.id}`}>
           <a style={{ display: 'block', overflow: 'hidden' }}>
             <StyledButton {...rest}>

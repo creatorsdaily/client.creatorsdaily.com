@@ -17,7 +17,7 @@ img {
 pre, code {
   font-size: 14px;
   font-family: Roboto, 'Courier New', Consolas, Inconsolata, Courier, monospace;
-  margin: auto 5px;
+  margin: auto 0;
 }
 
 code {
@@ -54,11 +54,11 @@ hr {
 }
 
 p {
-  margin: 1.5em 5px !important;
+  margin: 1.5em 0 !important;
 }
 
 table, pre, dl, blockquote, q, ul, ol {
-  margin: 10px 5px;
+  margin: 10px 0;
 }
 
 ul, ol {
@@ -113,7 +113,7 @@ h1, h2, h3, h4, h5, h6 {
   padding: 0;
   font-style: bold !important;
   color: rgba(0, 0, 0, 0.9);
-  margin: 1.5em 5px;
+  margin: 1.5em 0;
   padding: 0.5em 0 !important;
 }
 

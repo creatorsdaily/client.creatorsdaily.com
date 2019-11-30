@@ -1,4 +1,4 @@
-import { Col, Layout, Menu, Row } from 'antd'
+import { Button, Col, Layout, Menu, Row, Tooltip } from 'antd'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { withRouter } from 'next/router'
@@ -7,6 +7,32 @@ import useViewer from '../hooks/useViewer'
 import Container from './Container'
 import UserButton from './UserButton'
 import Brand from './Brand'
+
+const StyledContainer = styled(Container)`
+.ant-menu-item {
+padding: 0 15px;
+}
+`
+
+const CreateButton = styled.a`
+display: flex;
+justify-content: flex-end;
+margin-right: 12px;
+i {
+  color: rgba(0,0,0,0.7);
+}
+`
+
+const StyledUserButton = styled(UserButton)`
+line-height: initial;
+box-shadow: none;
+`
+
+const UserContainer = styled.div`
+display: flex;
+justify-content: flex-end;
+align-items: center;
+`
 
 const { Header } = Layout
 
@@ -42,9 +68,21 @@ export default withRouter(({ router }) => {
   const matched = menu
     .filter(({ href }) => href === '/' ? router.asPath === '/' : router.asPath.indexOf(href) === 0)
     .map(x => x.href)
+  const renderCreateButton = () => {
+    if (!user) return null
+    return (
+      <Link href='/create' passHref>
+        <CreateButton>
+          <Tooltip title='发布产品'>
+            <Button type='link' icon='plus' size='large' />
+          </Tooltip>
+        </CreateButton>
+      </Link>
+    )
+  }
   return (
     <Header>
-      <Container>
+      <StyledContainer>
         <Row type='flex' align='middle'>
           <Col lg={5} md={5} sm={2} xs={4}>
             <Link href='/' passHref>
@@ -72,10 +110,13 @@ export default withRouter(({ router }) => {
             </Menu>
           </Col>
           <Col xl={4} lg={5} md={6} sm={9} xs={0}>
-            <UserButton user={user} back={router.asPath} style={{ float: 'right' }} />
+            <UserContainer>
+              {renderCreateButton()}
+              <StyledUserButton user={user} back={router.asPath} />
+            </UserContainer>
           </Col>
         </Row>
-      </Container>
+      </StyledContainer>
     </Header>
   )
 })

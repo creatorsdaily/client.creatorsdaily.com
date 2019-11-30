@@ -88,7 +88,7 @@ export default withApollo(() => {
         <Row type='flex' gutter={24} justify='center'>
           <Col md={12} xs={24}>
             <StyledTypography>
-              <StyledTitle level={4}>推荐新产品</StyledTitle>
+              <StyledTitle level={4}>发布产品</StyledTitle>
               <Paragraph>
                 这里是爱意满满的作品展示区，无论您是产品的 <Text strong>创造者</Text> ，还是产品的 <Text strong>发现者</Text> ，都可以在这里将它展示给全世界。
               </Paragraph>

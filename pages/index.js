@@ -144,7 +144,7 @@ export default withApollo(() => {
           <Col lg={6} md={8} xs={24}>
             <Link href='/create' passHref>
               <CreateButton>
-                <Button type='primary' size='large' block>推荐新产品</Button>
+                <Button type='primary' icon='plus' size='large' block>发布产品</Button>
               </CreateButton>
             </Link>
             <RightSide />
