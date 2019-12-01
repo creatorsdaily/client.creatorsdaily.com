@@ -36,13 +36,24 @@ export default forwardRef((props, ref) => {
     },
     refetchQueries: [{
       query: GET_TOPICS
+    }, {
+      query: GET_TOPICS,
+      variables: {
+        keyword: [topic].filter(x => !!x)
+      }
+    }, {
+      query: GET_TOPICS,
+      variables: {
+        size: 1000
+      }
     }],
     onCompleted ({ createTopic }) {
       onCreate(createTopic)
-    }
+    },
+    awaitRefetchQueries: true
   })
   useDebounce(() => refetch({
-    keyword: [topic]
+    keyword: [topic].filter(x => !!x)
   }), 800, [topic])
   const topics = get(data, 'getTopics.data', [])
   const renderButton = () => {

@@ -10,7 +10,7 @@ export default ({ icon, topics = [] }) => {
   })
   const { data: topicsData } = useQuery(GET_TOPICS, {
     variables: {
-      size: 100
+      size: 1000
     },
     skip: !topics.length || topics.some(x => x.name)
   })

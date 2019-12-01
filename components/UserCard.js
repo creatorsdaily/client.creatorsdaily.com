@@ -52,6 +52,9 @@ const UserTitle = styled.div`
 height: 20px;
 line-height: 20px;
 font-size: 12px;
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
 b {
   font-size: 14px;
 }

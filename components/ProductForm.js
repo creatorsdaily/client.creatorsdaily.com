@@ -13,6 +13,19 @@ import { Inputs } from './ProductLinks'
 
 const { Item } = Form
 
+const strlen = (str) => {
+  var len = 0
+  for (var i = 0; i < str.length; i++) {
+    var c = str.charCodeAt(i)
+    if ((c >= 0x0001 && c <= 0x007e) || (c >= 0xff60 && c <= 0xff9f)) {
+      len++
+    } else {
+      len += 2
+    }
+  }
+  return len
+}
+
 export const productToForm = product => {
   const data = pick(omitBy(product, isUndefined), [
     'name', 'description', 'topics', 'medias', 'content', 'icon', 'links', 'isMiniProgram', 'miniProgramQRCode'
@@ -109,9 +122,16 @@ export default forwardRef((props, ref) => {
         <Item label='名称' colon={false}>
           {getFieldDecorator('name', {
             rules: [{
-              max: 15,
               required: true,
-              message: '产品名需要大于 0 小于 15 个字符'
+              validator (rule, value, callback) {
+                if (!value) {
+                  callback(new Error('产品名称不能为空'))
+                } else if (strlen(value) > 30) {
+                  callback(new Error('产品名称太长'))
+                } else {
+                  callback()
+                }
+              }
             }]
           })(
             <Input placeholder='输入要推荐的产品名称' />
