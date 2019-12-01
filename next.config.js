@@ -38,9 +38,40 @@ module.exports = withPlugins([
   // }],
   [withOffline, {
     // generateInDevMode: true,
+    // workboxOpts: {
+    //   swDest: 'static/service-worker.js'
+    // },
+    // experimental: {
+    //   async rewrites () {
+    //     return [
+    //       {
+    //         source: '/service-worker.js',
+    //         destination: '/_next/static/service-worker.js'
+    //       }
+    //     ]
+    //   }
+    // },
     dontAutoRegisterSw: true,
+    transformManifest: manifest => ['/'].concat(manifest),
     workboxOpts: {
-      swDest: path.join(__dirname, 'public/service-worker.js')
+      swDest: path.join(__dirname, 'public/service-worker.js'),
+      runtimeCaching: [
+        {
+          urlPattern: /^https?.*/,
+          handler: 'networkFirst',
+          options: {
+            cacheName: 'https-calls',
+            networkTimeoutSeconds: 15,
+            expiration: {
+              maxEntries: 150,
+              maxAgeSeconds: 30 * 24 * 60 * 60 // 1 month
+            },
+            cacheableResponse: {
+              statuses: [0, 200]
+            }
+          }
+        }
+      ]
     }
   }],
   [withLess, {

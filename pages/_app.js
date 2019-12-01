@@ -63,7 +63,6 @@ const CreatorsApp = ({ pageProps, Component }) => {
         <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
         <link rel='icon' type='image/png' sizes='96x96' href='/favicon-96x96.png' />
         <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
-        <link rel='manifest' href='/manifest.json' />
         <link href='/api/atom' type='application/atom+xml' rel='alternate' title={`${process.env.NAME} ATOM Feed`} />
         <meta name='msapplication-TileColor' content='#ffffff' />
         <meta name='msapplication-TileImage' content='/ms-icon-144x144.png' />

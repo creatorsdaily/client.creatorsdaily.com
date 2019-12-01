@@ -31,6 +31,7 @@ export default class extends Document {
     return (
       <Html lang='zh-cmn-Hans'>
         <Head>
+          <link rel='manifest' href='/manifest.json' />
           <script src='https://cdn.onesignal.com/sdks/OneSignalSDK.js' async='' />
         </Head>
         <body className='creatorsdaily'>

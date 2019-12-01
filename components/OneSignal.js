@@ -22,7 +22,7 @@ export default () => {
           cancelButtonText: '暂时不需要'
         }
       })
-      navigator.serviceWorker.register('/OneSignalSDKWorker.js');
+      navigator.serviceWorker.register('/OneSignalSDKWorker.js', { scope: '/' });
       // OneSignal.showNativePrompt();
     });
     ` }} />

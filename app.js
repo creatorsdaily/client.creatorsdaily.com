@@ -3,8 +3,8 @@ const fs = require('fs')
 const proxy = require('http2-proxy')
 
 const server = http2.createSecureServer({
-  key: fs.readFileSync('127.0.0.1+1-key.pem'),
-  cert: fs.readFileSync('127.0.0.1+1.pem')
+  key: fs.readFileSync('localhost+2-key.pem'),
+  cert: fs.readFileSync('localhost+2.pem')
 })
 
 server.listen(443)
