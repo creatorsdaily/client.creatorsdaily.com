@@ -7,6 +7,9 @@ const StyledEmpty = styled(Empty)`
   display: flex;
   flex-direction: column;
   height: 100%;
+  p {
+    color: #707070;
+  }
 `
 
 const SmallEmpty = styled(Empty)`
@@ -20,6 +23,7 @@ const SmallEmpty = styled(Empty)`
     white-space: nowrap;
     width: 100%;
     text-align: center;
+    color: #707070;
   }
   .ant-empty-image {
     height: 20px;

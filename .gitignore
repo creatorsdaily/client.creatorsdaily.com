@@ -59,3 +59,4 @@ bundles/*
 public/service-worker.js
 *.pem
 public/service-worker.js.map
+public/service-worker.js.gz

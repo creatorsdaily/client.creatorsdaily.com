@@ -1,5 +1,5 @@
 import React, { Fragment } from 'react'
-import { Affix, Button, Col, Empty, Row, Spin } from 'antd'
+import { Button, Col, Empty, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import styled from 'styled-components'
 import Link from 'next/link'

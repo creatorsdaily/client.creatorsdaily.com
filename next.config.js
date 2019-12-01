@@ -2,6 +2,7 @@ const fs = require('fs')
 const path = require('path')
 const withPlugins = require('next-compose-plugins')
 const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
+const CompressionPlugin = require('compression-webpack-plugin')
 // const withCSS = require('@zeit/next-css')
 const withLess = require('@zeit/next-less')
 const withMDX = require('@zeit/next-mdx')({
@@ -70,6 +71,7 @@ module.exports = withPlugins([
       url: 'native-url',
       moment: 'dayjs'
     }
+    config.plugins.push(new CompressionPlugin())
     if (isServer) {
       const antStyles = /antd\/.*?\/style.*?/
       const origExternals = [...config.externals]
