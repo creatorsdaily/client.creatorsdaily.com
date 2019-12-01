@@ -206,3 +206,7 @@ export {
 export {
   default as AndroidFill
 } from '@ant-design/icons/lib/fill/AndroidFill'
+
+export {
+  default as WechatFill
+} from '@ant-design/icons/lib/fill/WechatFill'

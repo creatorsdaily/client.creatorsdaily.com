@@ -128,7 +128,7 @@ export default ({ links, ...rest }) => {
     const { host } = url.parse(x)
     let name = '网址'
     let icon = 'compass'
-    if (host === 'apps.apple.com') {
+    if (host === 'apps.apple.com' || host === 'itunes.apple.com') {
       name = 'AppStore'
       icon = 'apple'
     }
@@ -139,6 +139,14 @@ export default ({ links, ...rest }) => {
     if (host === 'www.coolapk.com') {
       name = '酷安'
       icon = 'android'
+    }
+    if (host === 'play.google.com') {
+      name = 'Google Play'
+      icon = 'android'
+    }
+    if (host === 'mp.weixin.qq.com') {
+      name = '微信公众号'
+      icon = 'wechat'
     }
     return (
       <a key={x} href={x} rel='noreferrer' target='_blank'>
