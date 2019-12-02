@@ -52,26 +52,19 @@ module.exports = withPlugins([
     //   }
     // },
     dontAutoRegisterSw: true,
-    transformManifest: manifest => ['/'].concat(manifest),
+    // transformManifest: manifest => ['/'].concat(manifest),
     workboxOpts: {
-      swDest: path.join(__dirname, 'public/service-worker.js')
-      // runtimeCaching: [
-      //   {
-      //     urlPattern: /^https?.*/,
-      //     handler: 'NetworkFirst',
-      //     options: {
-      //       cacheName: 'https-calls',
-      //       networkTimeoutSeconds: 15,
-      //       expiration: {
-      //         maxEntries: 150,
-      //         maxAgeSeconds: 30 * 24 * 60 * 60 // 1 month
-      //       },
-      //       cacheableResponse: {
-      //         statuses: [0, 200]
-      //       }
-      //     }
-      //   }
-      // ]
+      swDest: path.join(__dirname, 'public/service-worker.js'),
+      runtimeCaching: [{
+        urlPattern: new RegExp('^https://api.creatorsdaily.com/graphql'),
+        handler: 'NetworkFirst',
+        options: {
+          networkTimeoutSeconds: 10,
+          cacheableResponse: {
+            statuses: [0, 200]
+          }
+        }
+      }]
     }
   }],
   [withLess, {
