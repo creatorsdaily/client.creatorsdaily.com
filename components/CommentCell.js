@@ -80,7 +80,12 @@ const StyledEditor = styled(Mini)`
 min-height: 32px;
 `
 
-const CommentCell = ({ product, comment, loading, onReply = noop }) => {
+const MoreButton = styled(Button)`
+padding: 0;
+font-size: 12px;
+`
+
+const CommentCell = ({ product, comment, loading, onReply = noop, level = 1 }) => {
   const isCreator = get(product, 'creators', []).some(x => x.id === comment.user.id)
   const isDiscoverer = get(product, 'discovererId') === comment.user.id && !isCreator
   const [reply, setReply] = useState('')
@@ -106,6 +111,20 @@ const CommentCell = ({ product, comment, loading, onReply = noop }) => {
       </ReplyBox>
     )
   }
+  const renderChildren = () => {
+    if (level >= 4 && comment.children.length) {
+      return (
+        <Link href='/comments/[id]' as={`/comments/${comment.id}`}>
+          <a>
+            <MoreButton size='small' type='link'>查看更多回复...</MoreButton>
+          </a>
+        </Link>
+      )
+    }
+    return comment.children.map(x => (
+      <CommentCell key={x.id} product={product} comment={x} loading={loading} onReply={onReply} level={level + 1} />
+    ))
+  }
   return (
     <Comment hasParent={!!comment.parentId} hasChildren={!!comment.children.length}>
       <CommentHeader id={`comments-${comment.id}`} name={`comments-${comment.id}`}>
@@ -124,9 +143,7 @@ const CommentCell = ({ product, comment, loading, onReply = noop }) => {
           <Time time={comment.createdAt} />
         </CommentMeta>
         {renderReplyBox(comment)}
-        {comment.children.map(x => (
-          <CommentCell key={x.id} product={product} comment={x} loading={loading} onReply={onReply} />
-        ))}
+        {renderChildren()}
       </CommentContent>
     </Comment>
   )

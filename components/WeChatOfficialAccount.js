@@ -2,8 +2,8 @@ import styled from 'styled-components'
 import { Fragment } from 'react'
 
 const Image = styled.img`
-max-width: 256px;
-max-height: 256px;
+max-width: 180px;
+max-height: 180px;
 display: block;
 margin: 0 auto;
 `

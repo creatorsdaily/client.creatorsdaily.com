@@ -41,7 +41,7 @@ export default forwardRef((props, ref) => {
           rules: [{
             required: true,
             message: '必须输入「新愿」标题！',
-            max: 24
+            max: 32
           }]
         })(
           <Input addonBefore={typeSelector} placeholder='「新愿」标题' />

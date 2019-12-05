@@ -6,6 +6,7 @@ import Head from 'next/head'
 import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import Link from 'next/link'
+import validate from 'uuid-validate'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import Product from '../../components/Product'
@@ -22,7 +23,7 @@ const StyledContainer = styled(Container)`
   margin-bottom: 24px;
 `
 
-export default withApollo(() => {
+const ProductPage = () => {
   const { query: { id } } = useRouter()
   const { loading, data } = useQuery(GET_PRODUCT, { variables: { id } })
   const product = get(data, 'product', {})
@@ -65,4 +66,13 @@ export default withApollo(() => {
       </StyledContainer>
     </Page>
   )
-})
+}
+
+ProductPage.getInitialProps = ({ query: { id }, res }) => {
+  if (res) {
+    res.statusCode = 404
+  }
+  if (!validate(id)) return { statusCode: 404 }
+}
+
+export default withApollo(ProductPage)

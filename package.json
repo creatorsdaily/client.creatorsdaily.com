@@ -53,7 +53,8 @@
     "react-simplemde-editor": "^4.1.0",
     "react-use": "^13.9.0",
     "styled-components": "^4.3.2",
-    "type-to-reducer": "^1.1.0"
+    "type-to-reducer": "^1.1.0",
+    "uuid-validate": "^0.0.3"
   },
   "devDependencies": {
     "@types/node": "^12.12.14",

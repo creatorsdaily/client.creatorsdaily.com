@@ -1,12 +1,11 @@
 import styled from 'styled-components'
-import { Button, Empty, Spin, message } from 'antd'
+import { Button, Empty, Spin } from 'antd'
 import { useState } from 'react'
-import gql from 'graphql-tag'
-import { useMutation, useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import noop from 'lodash/noop'
-import formError from '../libs/form-error'
 import { GET_COMMENTS } from '../queries'
+import useCreateComment from '../hooks/useCreateComment'
 import Box from './Box'
 import { Mini } from './Editor'
 import CommentCell from './CommentCell'
@@ -36,26 +35,6 @@ margin-bottom: 16px;
 const StyledButton = styled(Button)`
 font-size: 14px;
 font-weight: bold;
-`
-
-const CREATE_COMMENT = gql`
-mutation($comment: IComment!) {
-  createComment(comment: $comment) {
-    id
-    content
-    createdAt
-    parentId
-    children {
-      id
-    }
-    user {
-      id
-      nickname
-      email
-      oneSignal
-    }
-  }
-}
 `
 
 export const updateComments = (cache, { data: { createComment } }, query, product) => {
@@ -109,37 +88,20 @@ export const CommentsBox = ({
   renderHeader = noop,
   ...rest
 }) => {
-  const [content, setContent] = useState('')
-  const [create, { loading: createLoading }] = useMutation(CREATE_COMMENT, {
-    onCompleted: data => {
-      message.success('提交成功')
-      setContent('')
-    },
-    onError: error => {
-      const errors = formError(null, error)
-      message.error(errors[0].message)
-    },
+  const [
+    handleReply,
+    { loading: createLoading },
+    content,
+    setContent
+  ] = useCreateComment({
+    productId,
+    milestoneId,
+    wishId
+  }, {
     update (cache, data) {
       updateComments(cache, data, query, product)
     }
   })
-  const handleReply = (replyId, reply) => {
-    const comment = {
-      productId,
-      milestoneId,
-      wishId,
-      content
-    }
-    if (replyId) {
-      comment.parentId = replyId
-      comment.content = reply
-    }
-    return create({
-      variables: {
-        comment
-      }
-    })
-  }
   const renderList = () => {
     if (!list.length) {
       return (

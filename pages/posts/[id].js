@@ -68,7 +68,7 @@ export default withApollo(() => {
   return (
     <Article
       header={(
-        post.media ? <PostMedia hash={post.media && `${post.media.hash}-800-400-inside`} /> : null
+        post.media ? <PostMedia hash={post.media && `${post.media.hash}-800-400`} /> : null
       )}
       footer={(
         <Fragment>

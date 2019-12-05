@@ -336,12 +336,54 @@ query($id: String!) {
 }
 `
 
+export const GET_COMMENT = gql`
+fragment CommentFields on Comment {
+  id
+  content
+  createdAt
+  parentId
+  productId
+  milestoneId
+  wishId
+  user {
+    ${userFragment}
+  }
+}
+query($id: String!) {
+  getComment(id: $id) {
+    product {
+      ${productFragment}
+      discovererId
+      creators {
+        ${userFragment}
+      }
+    }
+    ...CommentFields
+    children {
+      ...CommentFields
+      children {
+        ...CommentFields
+        children {
+          ...CommentFields
+          children {
+            ...CommentFields
+          }
+        }
+      }
+    }
+  }
+}
+`
+
 export const GET_COMMENTS = gql`
 fragment CommentFields on Comment {
   id
   content
   createdAt
   parentId
+  productId
+  milestoneId
+  wishId
   user {
     ${userFragment}
   }
@@ -365,18 +407,6 @@ query($page: Int, $size: Int, $productId: String, $milestoneId: String, $wishId:
             ...CommentFields
             children {
               ...CommentFields
-              children {
-                ...CommentFields
-                children {
-                  ...CommentFields
-                  children {
-                    ...CommentFields
-                    children {
-                      ...CommentFields
-                    }
-                  }
-                }
-              }
             }
           }
         }
