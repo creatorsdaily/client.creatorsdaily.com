@@ -3,6 +3,7 @@ import { useMutation } from '@apollo/react-hooks'
 import { message } from 'antd'
 import gql from 'graphql-tag'
 import formError from '../libs/form-error'
+import { userFragment } from '../queries'
 
 const CREATE_COMMENT = gql`
 mutation($comment: IComment!) {
@@ -11,14 +12,14 @@ mutation($comment: IComment!) {
     content
     createdAt
     parentId
+    productId
+    milestoneId
+    wishId
     children {
       id
     }
     user {
-      id
-      nickname
-      email
-      oneSignal
+      ${userFragment}
     }
   }
 }
@@ -28,7 +29,7 @@ export default ({
   productId,
   milestoneId,
   wishId
-}, option) => {
+}, option = {}) => {
   const [content, setContent] = useState('')
   const [create, result] = useMutation(CREATE_COMMENT, {
     onCompleted: data => {

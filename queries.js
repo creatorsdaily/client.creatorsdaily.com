@@ -18,7 +18,7 @@ icon {
   hash
 }`
 
-const userFragment = `
+export const userFragment = `
 id
 nickname
 username
