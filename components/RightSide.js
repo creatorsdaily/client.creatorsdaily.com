@@ -1,4 +1,4 @@
-import { Affix, Button, Modal, Tooltip } from 'antd'
+import { Affix, Button, Icon, Modal, Tooltip } from 'antd'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
 import Box from './Box'
@@ -56,17 +56,17 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
         </StyledBox>
         <Buttons>
           <div>
-            <WeChatButton tooltip='加好友邀请入群'>微信</WeChatButton>
+            <WeChatButton tooltip='加好友邀请入群'>
+              <Icon type='wechat' />
+            </WeChatButton>
+            <a href='https://twitter.com/@creators_daily' rel='noreferrer' target='_blank'>
+              <SmallButton size='small' icon='twitter' type='link' />
+            </a>
             <a href='https://t.me/creatorsdaily' rel='noreferrer' target='_blank'>
               <SmallButton size='small' type='link'>
               Telegram
               </SmallButton>
             </a>
-            <Tooltip placement='top' title='加入我的星球'>
-              <SmallButton size='small' type='link' onClick={handleZSXQ}>
-              知识星球
-              </SmallButton>
-            </Tooltip>
             <a href='https://kz.sync163.com/web/topic/vqNzr253b46Yk?uid=ZNlYrg5BAReny' rel='noreferrer' target='_blank'>
               <Tooltip placement='top' title='在快知订阅最新产品通知'>
                 <SmallButton size='small' type='link'>
@@ -74,6 +74,11 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
                 </SmallButton>
               </Tooltip>
             </a>
+            <Tooltip placement='top' title='加入我的星球'>
+              <SmallButton size='small' type='link' onClick={handleZSXQ}>
+              知识星球
+              </SmallButton>
+            </Tooltip>
           </div>
         </Buttons>
       </Affix>

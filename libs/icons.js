@@ -148,6 +148,14 @@ export {
 } from '@ant-design/icons/lib/outline/InfoCircleOutline'
 
 export {
+  default as WechatOutline
+} from '@ant-design/icons/lib/outline/WechatOutline'
+
+export {
+  default as TwitterOutline
+} from '@ant-design/icons/lib/outline/TwitterOutline'
+
+export {
   default as MessageFill
 } from '@ant-design/icons/lib/fill/MessageFill'
 

@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import Link from 'next/link'
 import styled from 'styled-components'
-import { GET_USER } from '../queries'
+import { GET_USERS } from '../queries'
 import media from '../libs/media'
 import UserCell from './UserCell'
 
@@ -18,31 +18,26 @@ const StyledLink = styled.a`
   display: block;
 `
 
-const UserCellContainer = ({ id }) => {
-  const { data } = useQuery(GET_USER, {
-    variables: { id },
+export default () => {
+  const { data } = useQuery(GET_USERS, {
+    variables: {
+      ids: [
+        '588c9fbf-adeb-4380-9d9c-f042b0059f58',
+        'f8738659-6e1c-475f-8ca8-b91837d0549f',
+        'd34c903c-c011-45b3-99b0-bfb8d0a58126'
+      ]
+    },
     errorPolicy: 'ignore'
   })
-  const user = get(data, 'user', {})
-  return (
-    <Link href='/users/[id]' as={`/users/${user.id}`} passHref>
-      <StyledLink>
-        <UserCell user={user} />
-      </StyledLink>
-    </Link>
-  )
-}
-
-export default () => {
-  const users = [
-    '588c9fbf-adeb-4380-9d9c-f042b0059f58',
-    'f8738659-6e1c-475f-8ca8-b91837d0549f',
-    'd34c903c-c011-45b3-99b0-bfb8d0a58126'
-  ]
+  const users = get(data, 'getUsers.data', [])
   return (
     <Container>
-      {users.map(x => (
-        <UserCellContainer id={x} key={x} />
+      {users.map(user => (
+        <Link key={user.id} href='/users/[id]' as={`/users/${user.id}`} passHref>
+          <StyledLink>
+            <UserCell user={user} />
+          </StyledLink>
+        </Link>
       ))}
     </Container>
   )

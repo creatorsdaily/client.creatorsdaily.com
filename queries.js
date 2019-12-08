@@ -32,6 +32,23 @@ avatar {
 }
 `
 
+const postFragment = `
+id
+title
+description
+createdAt
+media {
+  id
+  hash
+}
+user {
+  ${userFragment}
+}
+products {
+  ${productFragment}
+}
+`
+
 export const VIEWER = gql`
 query {
   viewer {
@@ -47,7 +64,8 @@ query(
   $id: String!,
   $createdPage: Int, $createdSize: Int,
   $discoveredPage: Int, $discoveredSize: Int,
-  $likedPage: Int, $likedSize: Int
+  $likedPage: Int, $likedSize: Int,
+  $postPage: Int, $postSize: Int
 ) {
   user(id: $id) {
     ${userFragment}
@@ -69,13 +87,19 @@ query(
         ${productFragment}
       }
     }
+    posts(page: $postPage, size: $postSize) {
+      total
+      data {
+        ${postFragment}
+      }
+    }
   }
 }
 `
 
 export const GET_USERS = gql`
-query($page: Int, $size: Int, $isCreator: Boolean) {
-  getUsers(page: $page, size: $size, isCreator: $isCreator) {
+query($page: Int, $size: Int, $isCreator: Boolean, $ids: [String!]) {
+  getUsers(page: $page, size: $size, isCreator: $isCreator, ids: $ids) {
     total
     data {
       ${userFragment}
@@ -176,32 +200,7 @@ query($page: Int, $size: Int) {
   getPosts(page: $page, size: $size) {
     total
     data {
-      id
-      title
-      description
-      createdAt
-      media {
-        id
-        hash
-      }
-      user {
-        ${userFragment}
-      }
-      products {
-        id
-        name
-        description
-        isLike
-        likeCount
-        topics {
-          id
-          name
-        }
-        icon {
-          id
-          hash
-        }
-      }
+      ${postFragment}
     }
   }
 }
@@ -227,33 +226,8 @@ query($page: Int, $size: Int) {
 export const GET_POST = gql`
 query($id: String!) {
   getPost(id: $id) {
-    id
-    title
-    description
     content
-    createdAt
-    media {
-      id
-      hash
-    }
-    user {
-      ${userFragment}
-    }
-    products {
-      id
-      name
-      description
-      isLike
-      likeCount
-      topics {
-        id
-        name
-      }
-      icon {
-        id
-        hash
-      }
-    }
+    ${postFragment}
   }
 }
 `
