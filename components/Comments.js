@@ -114,7 +114,8 @@ export const CommentsBox = ({
         loading={createLoading}
         key={x.id}
         comment={x}
-        onReply={handleReply} />
+        onReply={handleReply}
+      />
     ))
   }
   return (
