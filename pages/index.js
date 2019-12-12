@@ -90,15 +90,8 @@ export default withApollo(() => {
     }
     return (
       <Fragment>
-        <SmallTitle>
-          <Link href='/posts'>
-            <a>
-            今日推荐
-            </a>
-          </Link>
-        </SmallTitle>
         {posts.map(post => (
-          <StyledPostCell {...post} key={post.id} />
+          <StyledPostCell flag='每日精选' {...post} key={post.id} />
         ))}
       </Fragment>
     )

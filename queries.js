@@ -24,6 +24,8 @@ nickname
 username
 email
 number
+link
+description
 createdAt
 signinedAt
 avatar {

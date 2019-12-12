@@ -80,7 +80,7 @@ export default withApollo(() => {
       )
     }
     return creators.map(x => (
-      <div key={x.id}>
+      <div key={x.id} style={{ overflow: 'hidden' }}>
         <StyledUserCard user={x} />
       </div>
     ))

@@ -13,7 +13,6 @@ import ProfileForm, { formToProfile, profileToForm } from '../../components/Prof
 import Avatar from '../../components/Avatar'
 import SmallTitle from '../../components/SmallTitle'
 import formError from '../../libs/form-error'
-import { VIEWER } from '../../queries'
 import withApollo from '../../libs/with-apollo'
 
 const UPDATE_USER = gql`
@@ -22,8 +21,10 @@ mutation($user: IUser!) {
     id
     nickname
     email
+    link
+    description
     avatar {
-      id,
+      id
       hash
     }
   }
@@ -81,8 +82,7 @@ export default withApollo(() => {
       const { form } = ref.current.props
       const errors = formError(form, error)
       message.error(errors[0].message)
-    },
-    refetchQueries: () => [{ query: VIEWER }]
+    }
   })
   const user = viewer || {}
   const handleSubmit = values => {

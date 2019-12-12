@@ -65,20 +65,37 @@ width: 100%;
 height: 160px;
 display: block;
 overflow: hidden;
-&:hover {
-  img {
-    transform: scale(1.2);
-  }
-}
+position: relative;
 img {
   object-fit: cover;
   height: 100%;
   width: 100%;
   transition: transform 0.6s;
+  position: absolute;
+}
+&:hover {
+  img {
+    transform: scale(1.2);
+  }
 }
 `
 
-export default ({ id, products, description, createdAt, disabled = false, media, title, ...rest }) => {
+const PostTag = styled.div`
+height: 24px;
+line-height: 24px;
+color: #FFF;
+background: #DE7B76;
+position: absolute;
+width: 100px;
+text-align: center;
+transform: rotate(-45deg) translateY(32px);
+left: -50px;
+top: -12px;
+z-index: 1;
+font-size: 12px;
+`
+
+export default ({ id, products, description, createdAt, disabled = false, media, title, flag, ...rest }) => {
   const renderProduct = () => {
     if (!products.length) {
       return (
@@ -97,6 +114,7 @@ export default ({ id, products, description, createdAt, disabled = false, media,
         <Col xl={10} lg={11} md={11} sm={11} xs={24}>
           <Link href='/posts/[id]' as={`/posts/${id}`} passHref>
             <PostMedia aria-label={title}>
+              {flag && (<PostTag>{flag}</PostTag>)}
               <IPFSImage alt={title} hash={media && `${media.hash}-600-300`} />
             </PostMedia>
           </Link>

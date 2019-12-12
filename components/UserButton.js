@@ -33,6 +33,14 @@ export default ({ user, back = '/', ...rest }) => {
   }
   const menu = (
     <Menu selectedKeys={[router.pathname]}>
+      <Menu.Item key={`/users/[id]`}>
+        <Link href='/users/[id]' as={`/users/${user.id}`}>
+          <a>
+            <Icon type='user' />
+            我的主页
+          </a>
+        </Link>
+      </Menu.Item>
       <Menu.Item key='/settings/profile'>
         <Link href='/settings/profile'>
           <a>
@@ -46,7 +54,7 @@ export default ({ user, back = '/', ...rest }) => {
         <Link href={`/auth/signout?back=${encodeURIComponent(back)}`}>
           <a>
             <Icon type='logout' />
-            退出登录
+            退出账号
           </a>
         </Link>
       </Menu.Item>
@@ -58,7 +66,7 @@ export default ({ user, back = '/', ...rest }) => {
         <Link href='/users/[id]' as={`/users/${user.id}`}>
           <a style={{ display: 'block', overflow: 'hidden' }}>
             <StyledButton {...rest}>
-              <UserCell user={user} />
+              <UserCell user={user} hideName />
             </StyledButton>
           </a>
         </Link>

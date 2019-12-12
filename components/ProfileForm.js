@@ -11,7 +11,7 @@ const { Item } = Form
 
 export const profileToForm = product => {
   const data = pick(omitBy(product, isUndefined), [
-    'nickname', 'avatar', 'email'
+    'nickname', 'avatar', 'email', 'link', 'description'
   ])
   if (data.avatar) {
     data.avatar = data.avatar.id
@@ -70,12 +70,32 @@ export default forwardRef((props, ref) => {
             type: 'email'
           }]
         })(
-          <Input placeholder='输入您的电子邮件地址' />
+          <Input placeholder='输入你的电子邮件地址' />
         )}
       </Item>
       <Item label='头像'>
         {getFieldDecorator('avatar')(
           <ProductIcon onError={handleAvatarError} />
+        )}
+      </Item>
+      <Item label='个人链接'>
+        {getFieldDecorator('link', {
+          rules: [{
+            message: '链接格式不正确！',
+            type: 'url'
+          }]
+        })(
+          <Input placeholder='个人主页地址' />
+        )}
+      </Item>
+      <Item label='一句话介绍'>
+        {getFieldDecorator('description', {
+          rules: [{
+            max: 32,
+            message: '个人介绍最长 32 个字符'
+          }]
+        })(
+          <Input placeholder='一句话简单介绍一下自己' />
         )}
       </Item>
       <Item>

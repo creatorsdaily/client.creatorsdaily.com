@@ -7,7 +7,6 @@ const Container = styled.div`
 `
 
 const CommentAvatar = styled(Avatar)`
-margin-right: 12px;
 `
 
 const CommentUsername = styled.div`
@@ -15,13 +14,14 @@ line-height: 32px;
 font-size: 13px;
 font-weight: bold;
 margin-right: 8px;
+margin-left: 12px;
 `
 
-export default ({ user, ...rest }) => {
+export default ({ user, hideName = false, ...rest }) => {
   return (
     <Container {...rest}>
       <CommentAvatar user={user} />
-      <CommentUsername>{user.nickname}</CommentUsername>
+      {!hideName && (<CommentUsername>{user.nickname}</CommentUsername>)}
     </Container>
   )
 }
