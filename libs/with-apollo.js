@@ -110,7 +110,7 @@ export default (PageComponent, { ssr = true } = {}) => {
  * Get the user token from cookie
  * @param {Object} req
  */
-function getToken (req) {
+export function getToken (req) {
   const cookies = cookie.parse(req ? req.headers.cookie || '' : document.cookie)
   return cookies.token
 }

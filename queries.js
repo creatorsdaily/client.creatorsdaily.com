@@ -61,6 +61,21 @@ query {
 }
 `
 
+export const VIEWER_AUTHES = gql`
+query {
+  viewer {
+    ${userFragment}
+    authes {
+      id
+      type
+      data
+    }
+    token
+    oneSignal
+  }
+}
+`
+
 export const GET_USER = gql`
 query(
   $id: String!,

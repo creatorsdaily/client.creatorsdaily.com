@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import { Button, Col, Empty, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import styled from 'styled-components'
@@ -89,11 +89,11 @@ export default withApollo(() => {
       return (<div style={{ height: postsLoading ? 30 : 0 }} />)
     }
     return (
-      <Fragment>
+      <>
         {posts.map(post => (
           <StyledPostCell flag='每日精选' {...post} key={post.id} />
         ))}
-      </Fragment>
+      </>
     )
   }
   const renderMilestones = () => {

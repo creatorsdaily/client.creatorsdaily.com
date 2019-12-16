@@ -1,6 +1,9 @@
 import { ApolloClient, InMemoryCache, NormalizedCacheObject, HttpLink } from 'apollo-boost'
 import { setContext } from 'apollo-link-context'
 import fetch from 'isomorphic-unfetch'
+import { WebSocketLink } from 'apollo-link-ws';
+import { split } from 'apollo-link';
+import { getMainDefinition } from 'apollo-utilities'
 
 interface Options {
   getToken?(): string
@@ -29,10 +32,40 @@ function create (initialState: NormalizedCacheObject, {
       }
     }
   })
+  let link = authLink.concat(httpLink)
+  if (isBrowser) {
+    const wsLink = new WebSocketLink({
+      uri: process.env.GRAPHQL_WS!,
+      options: {
+        reconnect: true,
+        connectionParams: () => {
+          if (!getToken) return {}
+          const token = getToken()
+          return {
+            headers: {
+              authorization: token ? `Bearer ${token}` : ''
+            }
+          }
+        }
+      }
+    });
+    link = split(
+      // split based on operation type
+      ({ query }) => {
+        const definition = getMainDefinition(query);
+        return (
+          definition.kind === 'OperationDefinition' &&
+          definition.operation === 'subscription'
+        );
+      },
+      wsLink,
+      link,
+    )
+  }
   return new ApolloClient({
     connectToDevTools: isBrowser,
     ssrMode: !isBrowser,
-    link: authLink.concat(httpLink),
+    link,
     cache: new InMemoryCache().restore(initialState)
   })
 }

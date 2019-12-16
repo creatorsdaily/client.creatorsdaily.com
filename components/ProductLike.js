@@ -64,7 +64,7 @@ export default ({ title = '我喜欢', id, likeCount, isLike, ...rest }) => {
       {...rest}
     >
       {title}
-      <Count>{likeCount || '' }</Count>
+      <Count>{likeCount || ''}</Count>
     </StyledButton>
   )
 }

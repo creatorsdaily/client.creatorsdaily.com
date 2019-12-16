@@ -24,9 +24,15 @@ export default ({
       <Row type='flex'>
         <Col span={18}>
           <Link href={`/auth/github?back=${back}`}>
-            <a>
+            <a style={{ marginRight: 24 }}>
               <StyledIcon type='github' />
               Github
+            </a>
+          </Link>
+          <Link href={`/auth/wechat?back=${back}`}>
+            <a>
+              <StyledIcon type='wechat' />
+              微信
             </a>
           </Link>
         </Col>

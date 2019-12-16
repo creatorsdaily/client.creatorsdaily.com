@@ -1,19 +1,17 @@
 import React, { useRef } from 'react'
 import Head from 'next/head'
-import { Col, Divider, Form, Menu, Row, message } from 'antd'
+import { Divider, Form, message } from 'antd'
 import styled from 'styled-components'
 import get from 'lodash/get'
 import pick from 'lodash/pick'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
-import Page from '../../layouts/Page'
-import Container from '../../components/Container'
 import useAuth from '../../hooks/useAuth'
 import ProfileForm, { formToProfile, profileToForm } from '../../components/ProfileForm'
 import Avatar from '../../components/Avatar'
-import SmallTitle from '../../components/SmallTitle'
 import formError from '../../libs/form-error'
 import withApollo from '../../libs/with-apollo'
+import Setting from '../../layouts/Setting'
 
 const UPDATE_USER = gql`
 mutation($user: IUser!) {
@@ -31,16 +29,7 @@ mutation($user: IUser!) {
 }
 `
 
-const StyledContainer = styled(Container)`
-margin: 24px auto;
-`
-
 const ProfileEditorForm = Form.create()(ProfileForm)
-
-const FormContainer = styled.div`
-background: #FFF;
-padding: 24px;
-`
 
 const FormHeader = styled.div`
 display: flex;
@@ -59,10 +48,6 @@ line-height: 32px;
 
 const Counter = styled.span`
 font-weight: bold;
-`
-
-const MenuContainer = styled.div`
-  margin-bottom: 24px;
 `
 
 export default withApollo(() => {
@@ -96,38 +81,20 @@ export default withApollo(() => {
     })
   }
   return (
-    <Page>
+    <Setting>
       <Head>
-        <title>编辑 - {process.env.NAME}</title>
+        <title>个人信息 - {process.env.NAME}</title>
       </Head>
-      <StyledContainer>
-        <Row gutter={24}>
-          <Col xl={4} lg={5} md={6} sm={24}>
-            <MenuContainer>
-              <SmallTitle>设置</SmallTitle>
-              <Menu selectedKeys={['profile']} mode='inline'>
-                <Menu.Item key='profile'>个人信息</Menu.Item>
-                <Menu.Item disabled key='password'>修改密码</Menu.Item>
-              </Menu>
-            </MenuContainer>
-          </Col>
-          <Col xl={12} lg={14} md={18} sm={24}>
-            <FormContainer>
-              <FormHeader>
-                <StyledAvatar user={user} />
-                <StyledInfo>{user.username}，{process.env.NAME}第 <Counter>{user.number}</Counter> 位成员</StyledInfo>
-              </FormHeader>
-              <Divider />
-              <ProfileEditorForm
-                onSubmit={handleSubmit}
-                loading={userLoading || loading}
-                wrappedComponentRef={ref}
-              />
-            </FormContainer>
-          </Col>
-          <Col xl={8} lg={5} md={24} sm={24} />
-        </Row>
-      </StyledContainer>
-    </Page>
+      <FormHeader>
+        <StyledAvatar user={user} />
+        <StyledInfo>{user.username}，{process.env.NAME}第 <Counter>{user.number}</Counter> 位成员</StyledInfo>
+      </FormHeader>
+      <Divider />
+      <ProfileEditorForm
+        onSubmit={handleSubmit}
+        loading={userLoading || loading}
+        wrappedComponentRef={ref}
+      />
+    </Setting>
   )
 })
