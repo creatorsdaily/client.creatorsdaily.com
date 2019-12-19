@@ -1,4 +1,4 @@
-import { Fragment, forwardRef } from 'react'
+import { forwardRef } from 'react'
 import { Button, Checkbox, Form, Input, Radio } from 'antd'
 import noop from 'lodash/noop'
 import isUndefined from 'lodash/isUndefined'
@@ -118,7 +118,7 @@ export default forwardRef((props, ref) => {
   const renderStep1 = () => {
     if (step !== 1 && step !== 'all') return null
     return (
-      <Fragment>
+      <>
         <Item label='名称' colon={false}>
           {getFieldDecorator('name', {
             rules: [{
@@ -157,7 +157,7 @@ export default forwardRef((props, ref) => {
             <Inputs placeholder='产品的访问链接' />
           )}
         </Item>
-        <Item label='是否微信小程序？' colon={false}>
+        <Item label='是否有微信小程序？' colon={false}>
           {getFieldDecorator('isMiniProgram', {
             initialValue: false
           })(
@@ -168,13 +168,13 @@ export default forwardRef((props, ref) => {
           )}
         </Item>
         {renderQRCode()}
-      </Fragment>
+      </>
     )
   }
   const renderStep2 = () => {
     if (step !== 2 && step !== 'all') return null
     return (
-      <Fragment>
+      <>
         <Item label='图标' colon={false}>
           {getFieldDecorator('icon')(
             <ProductIcon onError={handleIconError} />
@@ -198,13 +198,13 @@ export default forwardRef((props, ref) => {
             <TopicSelect onCreate={handleCreate} />
           )}
         </Item>
-      </Fragment>
+      </>
     )
   }
   const renderStep3 = () => {
     if (step !== 3 && step !== 'all') return null
     return (
-      <Fragment>
+      <>
         <Item label='产品图片' colon={false}>
           {getFieldDecorator('medias')(
             <ProductMedias height={160} />
@@ -227,7 +227,7 @@ export default forwardRef((props, ref) => {
             )}
           </Item>
         )}
-      </Fragment>
+      </>
     )
   }
   return (

@@ -51,6 +51,7 @@ font-weight: bold;
 `
 
 export default withApollo(() => {
+  useAuth()
   const ref = useRef()
   const { viewer, loading: userLoading } = useAuth({
     onCompleted (data) {
