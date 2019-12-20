@@ -1,12 +1,13 @@
 import React from 'react'
 import Head from 'next/head'
-import { Col, Row, Typography } from 'antd'
+import { Col, List, Row, Typography } from 'antd'
 import styled from 'styled-components'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import RightSide from '../../components/RightSide'
 import media from '../../libs/media'
 import withApollo from '../../libs/with-apollo'
+import Box from '../../components/Box'
 
 const StyledContainer = styled(Container)`
 margin: 24px auto;
@@ -20,10 +21,32 @@ ${media.sm`
 `}
 `
 
-const StyledImage = styled.img`
-width: 80%;
-margin: 24px auto;
+const RightLike = styled.img`
+width: 160px;
 display: block;
+`
+
+const LeftLike = styled(RightLike)`
+transform: rotateY(180deg);
+`
+
+const StyledImage = styled.img`
+width: 200px;
+display: block;
+margin-bottom: 24px;
+`
+
+const Content = styled(Box)`
+  padding: 24px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+`
+
+const LikeImages = styled.div`
+display: flex;
+justify-content: center;
+align-items: center;
 `
 
 export default withApollo(() => {
@@ -39,17 +62,16 @@ export default withApollo(() => {
               <Typography.Title level={4}>喜欢</Typography.Title>
               如果你真的<Typography.Text type='danger'>抑制不住</Typography.Text>地喜欢我，那么非常欢迎你的赞赏，让你的喜欢来得更猛烈些吧！
             </LikeContent>
-            <Row gutter={24} type='flex' align='middle'>
-              <Col md={8} xs={24}>
-                <StyledImage src='/zanshang.jpg' />
-              </Col>
-              <Col md={8} xs={24}>
-                <StyledImage src='/wepay.jpg' />
-              </Col>
-              <Col md={8} xs={24}>
-                <StyledImage src='/alipay.jpg' />
-              </Col>
-            </Row>
+            <Content>
+              <LikeImages>
+                <LeftLike src='/like.png' />
+                <StyledImage src='/wepay.png' />
+                <RightLike src='/like.png' />
+              </LikeImages>
+              <h3>好心的老板们</h3>
+              <div>网站纯兴趣驱动运营，你的「喜欢」将会用于支持她的发展</div>
+              <List />
+            </Content>
           </Col>
           <Col lg={6} md={7} xs={24}>
             <RightSide />
