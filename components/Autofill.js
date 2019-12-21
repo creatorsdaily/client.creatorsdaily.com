@@ -135,7 +135,7 @@ export default ({ links = [], onSet = noop, step }) => {
       setInfo(data)
     })
   }, [usedLinks.join(',')])
-  if ((!info && !loading) || !step) return null
+  if ((!info && !loading) || step === 'all') return null
   const handleSetName = () => onSet('name', info.title)
   const handleSetIcon = async () => {
     setIconLoading(true)
