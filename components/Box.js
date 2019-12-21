@@ -7,7 +7,7 @@ export default styled.div`
   border-radius: 0;
   box-shadow: 0 5px 15px rgba(0, 0, 0, 0.02);
   border: 1px solid #FFF;
-  transition: border-color 0.25s;
+  transition: border-color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   ${media.sm`
     border-radius: 3px;
   `}

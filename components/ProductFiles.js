@@ -11,7 +11,7 @@ const StyledCarousel = styled(Carousel)`
   overflow: hidden;
   .slick-slide {
     opacity: 0.5;
-    transition: opacity 0.25s;
+    transition: opacity 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
   .slick-slide.slick-active {
     opacity: 1;

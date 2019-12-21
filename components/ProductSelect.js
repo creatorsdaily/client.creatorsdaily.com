@@ -1,4 +1,4 @@
-import { Fragment, forwardRef, useEffect, useState } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import { Button, Input, Spin } from 'antd'
 import get from 'lodash/get'
 import { useQuery } from '@apollo/react-hooks'
@@ -20,7 +20,7 @@ const List = styled.ul`
   li {
     margin-bottom: 12px;
     cursor: pointer;
-    transition: background 0.25s;
+    transition: background 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     &:last-child {
       margin-bottom: 0;
     }
@@ -109,7 +109,7 @@ export default forwardRef((props, ref) => {
   const renderSelect = () => {
     if (value) return null
     return (
-      <Fragment>
+      <>
         <Search placeholder='搜索产品' size='large' onSearch={handleSearch} />
         <Spin spinning={loading}>
           <List>
@@ -120,7 +120,7 @@ export default forwardRef((props, ref) => {
             ))}
           </List>
         </Spin>
-      </Fragment>
+      </>
     )
   }
   return (

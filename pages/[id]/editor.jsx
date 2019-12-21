@@ -63,7 +63,6 @@ export default withApollo(() => {
     },
     onCompleted (data) {
       const product = productToForm(get(data, 'product', {}))
-      console.log(product)
       const { form } = ref.current.props
       form.setFieldsValue(pick(product, Object.keys(form.getFieldsValue())))
     }
@@ -115,7 +114,8 @@ export default withApollo(() => {
               <Button block loading={getLoading || loading} htmlType='submit' type='primary'>保存</Button>
             </Col>
           </Row>
-        )} />
+        )}
+      />
     )
   }
   return (

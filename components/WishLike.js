@@ -61,7 +61,6 @@ export default ({ id, likeCount, isLike, ...rest }) => {
     }
   })
   const handleClick = () => {
-    console.log(id)
     like({
       variables: {
         id,
@@ -79,7 +78,7 @@ export default ({ id, likeCount, isLike, ...rest }) => {
       islike={(!!isLike).toString()}
       {...rest}
     >
-      <Count>{likeCount || '' }</Count>
+      <Count>{likeCount || ''}</Count>
     </StyledButton>
   )
 }

@@ -119,6 +119,26 @@ export default forwardRef((props, ref) => {
     if (step !== 1 && step !== 'all') return null
     return (
       <>
+        <Item label='链接地址' colon={false}>
+          {getFieldDecorator('links', {
+            rules: [{
+              transform (v) {
+                return v.filter(x => !!x)
+              },
+              validator (rule, value, callback) {
+                if (!Array.isArray(value)) {
+                  callback(new Error('链接地址必须为数组'))
+                } else if (value.length && value.some(x => !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,7}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(x))) {
+                  callback(new Error('地址格式不正确！'))
+                } else {
+                  callback()
+                }
+              }
+            }]
+          })(
+            <Inputs placeholder='产品的访问链接' />
+          )}
+        </Item>
         <Item label='名称' colon={false}>
           {getFieldDecorator('name', {
             rules: [{
@@ -135,26 +155,6 @@ export default forwardRef((props, ref) => {
             }]
           })(
             <Input placeholder='输入要推荐的产品名称' />
-          )}
-        </Item>
-        <Item label='链接地址' colon={false}>
-          {getFieldDecorator('links', {
-            rules: [{
-              transform (v) {
-                return v.filter(x => !!x)
-              },
-              validator (rule, value, callback) {
-                if (!Array.isArray(value)) {
-                  callback(new Error('链接地址必须为数组'))
-                } else if (value.length && value.some(x => !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(x))) {
-                  callback(new Error('地址格式不正确！'))
-                } else {
-                  callback()
-                }
-              }
-            }]
-          })(
-            <Inputs placeholder='产品的访问链接' />
           )}
         </Item>
         <Item label='是否有微信小程序？' colon={false}>

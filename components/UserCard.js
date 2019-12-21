@@ -43,7 +43,7 @@ b {
 
 const UserName = styled.b`
 color: #303030;
-transition: color 0.3s;
+transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 font-size: 20px !important;
 margin-right: 8px;
 :hover {
@@ -107,9 +107,11 @@ border: 1px solid #F0F0F0;
 export default ({ user, children, ...rest }) => {
   const renderActive = () => {
     if (Date.now() - new Date(user.signinedAt) < 3 * 60 * 1000) {
-      return (<UserActive>
-        <Tag color='#87d068'>在线</Tag>
-      </UserActive>)
+      return (
+        <UserActive>
+          <Tag color='#87d068'>在线</Tag>
+        </UserActive>
+      )
     }
     return (
       <UserActive>
