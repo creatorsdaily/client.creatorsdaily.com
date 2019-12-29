@@ -4,5 +4,8 @@
     "node_modules": true,
     "bundles": true
   },
-  "eslint.autoFixOnSave": true
+  "eslint.autoFixOnSave": true,
+  "editor.codeActionsOnSave": {
+    "source.fixAll.eslint": true
+  }
 }

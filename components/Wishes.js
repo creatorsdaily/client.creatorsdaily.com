@@ -1,4 +1,4 @@
-import { Button, Divider, List, Tag, Tooltip } from 'antd'
+import { Button, List, Tag, Tooltip } from 'antd'
 import styled from 'styled-components'
 import get from 'lodash/get'
 import Link from 'next/link'

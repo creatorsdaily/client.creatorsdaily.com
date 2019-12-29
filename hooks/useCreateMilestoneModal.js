@@ -52,6 +52,7 @@ export default (productId, {
   }
   return [(
     <Modal
+      key='modal'
       confirmLoading={loading}
       visible={visible}
       title='新里程碑'

@@ -8,6 +8,7 @@ import IPFSImage from './IPFSImage'
 
 const StyledCarousel = styled(Carousel)`
   height: ${({ height }) => height}px;
+  background: #FFF;
   overflow: hidden;
   .slick-slide {
     opacity: 0.5;

@@ -8,9 +8,9 @@ margin-bottom: 6px;
 height: 34px;
 line-height: 34px;
 padding: 0 16px;
-color: rgba(0, 0, 0, 0.65);
+color: rgba(0, 0, 0, 0.85);
 a {
-  color: rgba(0, 0, 0, 0.65);
+  color: rgba(0, 0, 0, 0.85);
   :hover {
     color: #2e8de6;
   }

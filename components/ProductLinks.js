@@ -148,6 +148,10 @@ export default ({ links, ...rest }) => {
       name = '微信公众号'
       icon = 'wechat'
     }
+    if (host === 'chrome.google.com') {
+      name = 'Chrome 应用商店'
+      icon = 'chrome'
+    }
     return (
       <a key={x} href={x} rel='noreferrer' target='_blank'>
         <StyledButton block>

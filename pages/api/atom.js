@@ -3,9 +3,8 @@ import initApollo from '../../libs/init-apollo'
 import createFeed from '../../libs/feed'
 import { GET_PRODUCTS } from '../../queries'
 
-const apollo = initApollo()
-
 export default async (req, res) => {
+  const apollo = initApollo()
   res.setHeader('Content-Type', 'application/xml')
   res.statusCode = 200
   const data = await apollo.query({

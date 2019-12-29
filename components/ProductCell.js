@@ -50,6 +50,7 @@ right: 100px;
 const Container = styled(Box)`
   margin-bottom: 24px;
   position: relative;
+  overflow: hidden;
   padding-right: ${({ size }) => size === 'small' ? 0 : 80}px;
   height: ${({ size }) => size === 'small' ? 62 : 114}px;
 `
@@ -112,9 +113,24 @@ height: 22px;
 line-height: 22px;
 `
 
+const ProductTag = styled.div`
+height: 24px;
+line-height: 24px;
+color: #FFF;
+background: #DE7B76;
+position: absolute;
+width: 100px;
+text-align: center;
+transform: rotate(-45deg) translateY(32px) scale(0.9);
+left: -50px;
+top: -12px;
+z-index: 1;
+font-size: 12px;
+`
+
 export default ({
-  id, disabled = false, topics = [], size = 'normal',
-  likeCount, commentCount, isLike, icon, name, description,
+  id, disabled = false, topics = [], size = 'normal', isMiniProgram,
+  likeCount, commentCount, codeCount, isLike, icon, name, description,
   ...rest
 }) => {
   const {
@@ -162,8 +178,17 @@ export default ({
       <StyledProductLike title='' id={id} likeCount={likeCount} isLike={isLike} />
     )
   }
+  const renderTag = () => {
+    if (size === 'small') return null
+    if (codeCount) {
+      return (
+        <ProductTag>免费兑换码</ProductTag>
+      )
+    }
+  }
   return (
     <Container {...rest} size={size}>
+      {renderTag()}
       {renderContent()}
       {renderMeta()}
       {renderLikes()}

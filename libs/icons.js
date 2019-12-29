@@ -156,6 +156,26 @@ export {
 } from '@ant-design/icons/lib/outline/TwitterOutline'
 
 export {
+  default as GiftOutline
+} from '@ant-design/icons/lib/outline/GiftOutline'
+
+export {
+  default as QrcodeOutline
+} from '@ant-design/icons/lib/outline/QrcodeOutline'
+
+export {
+  default as WeiboOutline
+} from '@ant-design/icons/lib/outline/WeiboOutline'
+
+export {
+  default as FolderAddOutline
+} from '@ant-design/icons/lib/outline/FolderAddOutline'
+
+export {
+  default as CheckCircleOutline
+} from '@ant-design/icons/lib/outline/CheckCircleOutline'
+
+export {
   default as MessageFill
 } from '@ant-design/icons/lib/fill/MessageFill'
 

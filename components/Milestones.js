@@ -38,6 +38,9 @@ const MilestoneButton = styled(Button)`
 
 const MilestoneContent = styled(ProductContent)`
 font-size: 12px;
+img {
+  max-width: 200px !important;
+}
 `
 
 export default ({

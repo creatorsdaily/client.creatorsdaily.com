@@ -158,6 +158,14 @@ query($id: String!) {
     content
     discovererId
     links
+    codes {
+      id
+      code
+      redeemedAt
+      redeemer {
+        ${userFragment}
+      }
+    }
     miniProgramQRCode {
       id
       hash
@@ -203,6 +211,7 @@ query($page: Int, $size: Int, $topic: [String!], $keyword: [String!]) {
   getProducts(page: $page, size: $size, topic: $topic, keyword: $keyword) {
     total
     data {
+      codeCount
       ${productFragment}
       discoverer {
         ${userFragment}

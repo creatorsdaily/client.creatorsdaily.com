@@ -116,20 +116,20 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
     <>
       <SmallTitle>核心用户</SmallTitle>
       <CoreUsers />
+      <WeApp>
+        <Button type='link' onClick={handleWeApp}>
+          <img src='/weapp.jpg' />
+          <div>
+            <h4>微信小程序上线啦</h4>
+            <div>扫码立刻体验</div>
+          </div>
+        </Button>
+      </WeApp>
       <Affix offsetTop={24}>
         <StyledBox>
           <Title>微信公众号</Title>
           <WeChatOfficialAccount title='微信关注：一群创造者' />
         </StyledBox>
-        <WeApp>
-          <Button type='link' onClick={handleWeApp}>
-            <img src='/weapp.jpg' />
-            <div>
-              <h4>微信小程序上线啦</h4>
-              <div>扫码立刻体验</div>
-            </div>
-          </Button>
-        </WeApp>
       </Affix>
       <ContactBox>
         <Contact>

@@ -5,17 +5,16 @@ import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
 import noop from 'lodash/noop'
 import styled from 'styled-components'
-import WishForm from '../components/WishForm'
+import CodeForm from '../components/CodeForm'
 import formError from '../libs/form-error'
 
-const CreateWishForm = Form.create()(WishForm)
+const CreateCodeForm = Form.create()(CodeForm)
 
-const CREATE_MILESTONE = gql`
-mutation($wish: IWish!) {
-  createWish(wish: $wish) {
+const CREATE_CODES = gql`
+mutation($productId: String!, $codes: [String!]!) {
+  createCodes(productId: $productId, codes: $codes) {
     id
-    type
-    title
+    code
   }
 }
 `
@@ -31,7 +30,7 @@ export default (productId, {
 } = {}) => {
   const ref = useRef()
   const [visible, setVisible] = useToggle(false)
-  const [create, { loading }] = useMutation(CREATE_MILESTONE, {
+  const [create, { loading }] = useMutation(CREATE_CODES, {
     ...rest,
     onCompleted: data => {
       const { form } = ref.current.props
@@ -41,7 +40,7 @@ export default (productId, {
     },
     onError: error => {
       const { form } = ref.current.props
-      formError(form, error, 'content')
+      formError(form, error, 'codes')
       onError(error)
     }
   })
@@ -56,31 +55,25 @@ export default (productId, {
       key='modal'
       confirmLoading={loading}
       visible={visible}
-      title='创建「新愿」'
+      title='发布产品兑换码'
       onCancel={hide}
       onOk={() => {
         const { form } = ref.current.props
         form.validateFields((err, {
-          type,
-          title,
-          content
+          codes
         }) => {
           if (err) return
           create({
             variables: {
-              wish: {
-                productId,
-                type,
-                title,
-                content
-              }
+              productId,
+              codes: codes.split('\n').filter(x => !!x)
             }
           })
         })
       }}
     >
-      <StyledAlert showIcon message='你可以在这里向开发者「请求功能」或「报告缺陷」～' />
-      <CreateWishForm wrappedComponentRef={ref} />
+      <StyledAlert showIcon message='产品需要付费才能体验？发布一些产品「兑换码」，为你的忠实用户提供一些小福利吧～' />
+      <CreateCodeForm wrappedComponentRef={ref} />
     </Modal>
   ), show, hide]
 }

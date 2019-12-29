@@ -1,20 +1,7 @@
-import get from 'lodash/get'
+import graphqlError from './graphql-error'
 
-export default (form, { graphQLErrors = [], networkError, message }, field) => {
-  let errors = []
-  if (!graphQLErrors.length && !networkError && message) {
-    errors.push(new Error(message))
-  }
-  errors = [
-    ...graphQLErrors.map(x => {
-      if (typeof x.message === 'string') {
-        return x
-      }
-      return new Error(x.message.error)
-    }),
-    ...get(networkError, 'result.errors', []),
-    ...errors
-  ]
+export default (form, error, field) => {
+  const errors = graphqlError(error)
   if (field) {
     form.setFields({
       [field]: {
