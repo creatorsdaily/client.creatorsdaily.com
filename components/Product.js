@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Button, Divider, Modal, Spin, Tooltip } from 'antd'
+import { Button, Modal, Spin, Tooltip } from 'antd'
 import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import { GET_PRODUCT } from '../queries'
@@ -19,6 +19,7 @@ background: #FFF;
 overflow: hidden;
 display: flex;
 justify-content: space-between;
+border-top: 1px solid #F5F5F5;
 border-bottom: 1px solid #F5F5F5;
 .ant-btn {
   margin-right: 10px;

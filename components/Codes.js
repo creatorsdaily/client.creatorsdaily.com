@@ -39,11 +39,23 @@ font-size: 12px;
 const CodeContent = styled.div`
 font-weight: bold;
 font-family: monospace;
+flex: 1;
+width: 0;
+margin-right: 12px;
 ${({ received }) => received ? 'color: #AAA; text-decoration: line-through;' : ''}
+div {
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow:ellipsis;
+}
 `
 
 const CodeTitle = styled.div`
 font-family: monospace;
+`
+
+const CodeButton = styled.div`
+width: 140px;
 `
 
 const RECEIVE_CODE = gql`
@@ -119,7 +131,7 @@ export default ({
         onConfirm={() => confirm(item.id)}
         placement='left'
       >
-        <Button icon='gift'>领取</Button>
+        <Button icon='gift' block>领取</Button>
       </Popconfirm>
     )
   }
@@ -140,9 +152,11 @@ export default ({
           <List.Item key={item.id}>
             <CodeCell>
               <CodeContent received={!!item.redeemer}>
-                {item.code}
+                <div>{item.code}</div>
               </CodeContent>
-              {renderButton(item)}
+              <CodeButton>
+                {renderButton(item)}
+              </CodeButton>
             </CodeCell>
           </List.Item>
         )}

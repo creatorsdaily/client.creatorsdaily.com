@@ -2,11 +2,20 @@ import styled from 'styled-components'
 import Avatar from './Avatar'
 
 const Container = styled.div`
-  display: flex;
-  color: #333;
+display: flex;
+color: #333;
+overflow: hidden;
+text-overflow:ellipsis;
+white-space: nowrap;
 `
 
 const CommentAvatar = styled(Avatar)`
+width: 32px;
+height: 32px;
+img {
+  width: 32px;
+  height: 32px;
+}
 `
 
 const CommentUsername = styled.div`
@@ -15,6 +24,10 @@ font-size: 13px;
 font-weight: bold;
 margin-right: 8px;
 margin-left: 12px;
+width: 0;
+flex: 1;
+overflow: hidden;
+text-overflow:ellipsis;
 `
 
 export default ({ user, hideName = false, ...rest }) => {
