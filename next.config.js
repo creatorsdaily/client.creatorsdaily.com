@@ -1,9 +1,10 @@
 const fs = require('fs')
 const path = require('path')
 const withPlugins = require('next-compose-plugins')
-const withBundleAnalyzer = require('@zeit/next-bundle-analyzer')
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+  enabled: process.env.ANALYZE === 'true'
+})
 const CompressionPlugin = require('compression-webpack-plugin')
-// const withCSS = require('@zeit/next-css')
 const withLess = require('@zeit/next-less')
 const withMDX = require('@zeit/next-mdx')({
   extension: /\.mdx?$/
@@ -31,29 +32,8 @@ const {
 } = process.env
 module.exports = withPlugins([
   withMDX,
-  // [withCSS, {
-  //   cssModules: false,
-  //   cssLoaderOptions: {
-  //     url: false
-  //   }
-  // }],
   [withOffline, {
-    // generateInDevMode: true,
-    // workboxOpts: {
-    //   swDest: 'static/service-worker.js'
-    // },
-    // experimental: {
-    //   async rewrites () {
-    //     return [
-    //       {
-    //         source: '/service-worker.js',
-    //         destination: '/_next/static/service-worker.js'
-    //       }
-    //     ]
-    //   }
-    // },
     dontAutoRegisterSw: true,
-    // transformManifest: manifest => ['/'].concat(manifest),
     workboxOpts: {
       swDest: path.join(__dirname, 'public/service-worker.js'),
       runtimeCaching: [{
@@ -71,23 +51,10 @@ module.exports = withPlugins([
   [withLess, {
     lessLoaderOptions: {
       javascriptEnabled: true,
-      modifyVars: themeVariables // make your antd custom effective
+      modifyVars: themeVariables
     }
   }],
-  [withBundleAnalyzer, {
-    analyzeServer: ['server', 'both'].includes(process.env.BUNDLE_ANALYZE),
-    analyzeBrowser: ['browser', 'both'].includes(process.env.BUNDLE_ANALYZE),
-    bundleAnalyzerConfig: {
-      server: {
-        analyzerMode: 'static',
-        reportFilename: '../../bundles/server.html'
-      },
-      browser: {
-        analyzerMode: 'static',
-        reportFilename: '../bundles/client.html'
-      }
-    }
-  }]
+  withBundleAnalyzer
 ], {
   webpack: (config, { isServer }) => {
     config.resolve.alias = {
