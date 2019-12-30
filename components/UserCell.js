@@ -4,9 +4,6 @@ import Avatar from './Avatar'
 const Container = styled.div`
 display: flex;
 color: #333;
-overflow: hidden;
-text-overflow:ellipsis;
-white-space: nowrap;
 `
 
 const CommentAvatar = styled(Avatar)`
@@ -24,7 +21,7 @@ font-size: 13px;
 font-weight: bold;
 margin-right: 8px;
 margin-left: 12px;
-width: 0;
+white-space: nowrap;
 flex: 1;
 overflow: hidden;
 text-overflow:ellipsis;
