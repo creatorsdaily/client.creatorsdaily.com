@@ -118,7 +118,9 @@ export default ({ links = [], onSet = noop, step }) => {
   const [info, setInfo] = useState()
   const usedLinks = links.filter(x => {
     const { host } = url.parse(x)
-    return host === 'apps.apple.com' || host === 'itunes.apple.com'
+    return host === 'apps.apple.com' ||
+      host === 'itunes.apple.com' ||
+      host === 'play.google.com'
   })
   useEffect(() => {
     if (!usedLinks.length) {
