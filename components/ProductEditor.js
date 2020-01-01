@@ -103,6 +103,24 @@ export default ({ step, product = {}, wrappedComponentRef, ...rest }) => {
     }
     return null
   }
+  const handleData = data => {
+    const { form } = wrappedComponentRef.current.props
+    if (data.title && !form.getFieldValue('name')) {
+      form.setFieldsValue({
+        name: data.title
+      })
+    }
+    if (data.description && !form.getFieldValue('description')) {
+      form.setFieldsValue({
+        description: data.description
+      })
+    }
+    if (data.content && !form.getFieldValue('content')) {
+      form.setFieldsValue({
+        content: data.content
+      })
+    }
+  }
   const handleSet = async (type, value) => {
     const { form } = wrappedComponentRef.current.props
     let file
@@ -169,7 +187,7 @@ export default ({ step, product = {}, wrappedComponentRef, ...rest }) => {
           {renderStep3Preview()}
         </Col>
       </Row>
-      <Autofill links={preview.links} step={step} onSet={handleSet} />
+      <Autofill links={preview.links} step={step} onSet={handleSet} onData={handleData} />
     </>
   )
 }

@@ -1,10 +1,11 @@
-import { useEffect, useState } from 'react'
+import { useState } from 'react'
 import base64url from 'base64url'
 import * as url from 'native-url'
 import axios from 'axios'
 import styled from 'styled-components'
 import { Button, Form, Popover, Spin, message } from 'antd'
 import noop from 'lodash/noop'
+import useDebounce from 'react-use/lib/useDebounce'
 import Box from './Box'
 
 const { Item } = Form
@@ -110,33 +111,50 @@ img {
 }
 `
 
-export default ({ links = [], onSet = noop, step }) => {
+const urlRank = x => {
+  const { host } = url.parse(x)
+  switch (host) {
+    case 'apps.apple.com':
+      return 99
+    case 'itunes.apple.com':
+      return 98
+    case 'play.google.com':
+      return 89
+    default:
+      return 1
+  }
+}
+
+let lastKey = 0
+
+export default ({ links = [], onSet = noop, step, onData = noop }) => {
   const [iconLoading, setIconLoading] = useState(false)
   const [mediaLoading, setMediaLoading] = useState(false)
   const [closed, setClosed] = useState(true)
   const [loading, setLoading] = useState(false)
   const [info, setInfo] = useState()
-  const usedLinks = links.filter(x => {
-    const { host } = url.parse(x)
-    return host === 'apps.apple.com' ||
-      host === 'itunes.apple.com' ||
-      host === 'play.google.com'
-  })
-  useEffect(() => {
-    if (!usedLinks.length) {
-      setLoading(false)
-      setClosed(false)
-      setInfo(null)
-      return
-    }
-    const key = base64url(usedLinks[0])
+  const link = links
+    .filter(x => /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,7}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(x))
+    .sort((a, b) => urlRank(b) - urlRank(a))[0]
+  useDebounce(() => {
+    if (!link) return
+    const key = base64url(link)
     setLoading(true)
-    axios.get(`https://json.xyz/${key}`).then(({ data }) => {
-      setLoading(false)
-      setClosed(false)
-      setInfo(data)
-    })
-  }, [usedLinks.join(',')])
+    lastKey += 1;
+    ((currentKey) => {
+      axios.get(`https://json.xyz/${key}`).then(({ data }) => {
+        if (currentKey !== lastKey) return
+        setLoading(false)
+        setClosed(false)
+        setInfo(data)
+        onData(data)
+      }).catch(() => {
+        if (currentKey !== lastKey) return
+        setLoading(false)
+        setClosed(true)
+      })
+    })(lastKey)
+  }, 800, [link])
   if ((!info && !loading) || step === 'all') return null
   const handleSetName = () => onSet('name', info.title)
   const handleSetIcon = async () => {
