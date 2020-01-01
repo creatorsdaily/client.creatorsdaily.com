@@ -1,6 +1,7 @@
 import get from 'lodash/get'
 
-export default ({ graphQLErrors = [], networkError, message }) => {
+export default err => {
+  const { graphQLErrors = [], networkError, message } = err
   let errors = []
   if (!graphQLErrors.length && !networkError && message) {
     errors.push(new Error(message))
@@ -15,5 +16,8 @@ export default ({ graphQLErrors = [], networkError, message }) => {
     ...get(networkError, 'result.errors', []),
     ...errors
   ]
+  if (!errors.length) {
+    errors.push(err)
+  }
   return errors
 }

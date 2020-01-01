@@ -185,11 +185,13 @@ export default ({ links = [], onSet = noop, step, onData = noop }) => {
     if (step !== 2) return null
     return (
       <>
-        <Item label='图标' colon={false}>
-          <IconButton loading={iconLoading} block onClick={handleSetIcon}>
-            <img src={info.icon} />
-          </IconButton>
-        </Item>
+        {!!info.icon && (
+          <Item label='图标' colon={false}>
+            <IconButton loading={iconLoading} block onClick={handleSetIcon}>
+              <img src={info.icon} />
+            </IconButton>
+          </Item>
+        )}
         <Item label='简介' colon={false}>
           <DescriptionButton block onClick={handleSetDescription}>{info.description}</DescriptionButton>
         </Item>
@@ -200,19 +202,23 @@ export default ({ links = [], onSet = noop, step, onData = noop }) => {
     if (step !== 3) return null
     return (
       <>
-        <Item label='产品图片' colon={false}>
-          <Spin spinning={mediaLoading}>
-            <Images>
-              {info.images.map((x, i) => (
-                <Popover placement='leftTop' content={(<img src={x} style={{ maxHeight: 400 }} />)} key={x}>
-                  <ImageIcon block onClick={() => handleSetMedia(i)}>
-                    <img src={x} />
-                  </ImageIcon>
-                </Popover>
-              ))}
-            </Images>
-          </Spin>
-        </Item>
+        {
+          !!(info.images || []).length && (
+            <Item label='产品图片' colon={false}>
+              <Spin spinning={mediaLoading}>
+                <Images>
+                  {info.images.map((x, i) => (
+                    <Popover placement='leftTop' content={(<img src={x} style={{ maxHeight: 400 }} />)} key={x}>
+                      <ImageIcon block onClick={() => handleSetMedia(i)}>
+                        <img src={x} />
+                      </ImageIcon>
+                    </Popover>
+                  ))}
+                </Images>
+              </Spin>
+            </Item>
+          )
+        }
         <Item label='产品详情' colon={false}>
           <ContentButton block onClick={handleSetContent}>{info.content}</ContentButton>
         </Item>
