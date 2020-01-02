@@ -221,6 +221,21 @@ query($page: Int, $size: Int, $topic: [String!], $keyword: [String!]) {
 }
 `
 
+export const SEARCH_PRODUCTS = gql`
+query($page: Int, $size: Int, $keyword: String!) {
+  searchProducts(page: $page, size: $size, keyword: $keyword) {
+    total
+    data {
+      codeCount
+      ${productFragment}
+      discoverer {
+        ${userFragment}
+      }
+    }
+  }
+}
+`
+
 export const GET_POSTS = gql`
 query($page: Int, $size: Int) {
   getPosts(page: $page, size: $size) {

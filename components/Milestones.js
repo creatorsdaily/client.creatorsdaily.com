@@ -91,7 +91,7 @@ export default ({
                 </a>
               </Link>
             </MilestoneTitle>
-            <MilestoneContent height={80} full content={x.content} background='linear-gradient(rgba(250,250,250,0), rgba(250,250,250,1))' />
+            <MilestoneContent height={80} full content={x.content.slice(0, 400) + (x.content.length > 400 ? '...' : '')} background='linear-gradient(rgba(250,250,250,0), rgba(250,250,250,1))' />
           </Timeline.Item>
         ))}
         <Timeline.Item color='green' dot={<Icon type='flag' />}>

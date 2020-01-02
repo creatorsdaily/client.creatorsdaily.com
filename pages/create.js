@@ -1,8 +1,8 @@
-import React, { useRef } from 'react'
+import React, { useRef, useState } from 'react'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
-import { useMutation } from '@apollo/react-hooks'
-import { Button, Col, Row, Typography, message } from 'antd'
+import { useMutation, useQuery } from '@apollo/react-hooks'
+import { Button, Col, Modal, Row, Typography, message } from 'antd'
 import get from 'lodash/get'
 import { useRouter } from 'next/router'
 import Page from '../layouts/Page'
@@ -11,8 +11,9 @@ import useAuth from '../hooks/useAuth'
 import ProductEditor from '../components/ProductEditor'
 import formError from '../libs/form-error'
 import { formToProduct } from '../components/ProductForm'
-import { GET_PRODUCTS } from '../queries'
+import { GET_PRODUCTS, SEARCH_PRODUCTS } from '../queries'
 import withApollo from '../libs/with-apollo'
+import ProductCell from '../components/ProductCell'
 
 const { Title, Paragraph, Text } = Typography
 
@@ -36,6 +37,12 @@ margin: 24px auto 0;
 display: block;
 `
 
+const StyledProductCell = styled(ProductCell)`
+box-shadow: none;
+border: 1px solid #E0E0E0;
+margin-bottom: 16px;
+`
+
 const CREATE_PRODUCT = gql`
 mutation($product: IProduct!) {
   createProduct(product: $product) {
@@ -45,10 +52,28 @@ mutation($product: IProduct!) {
 }
 `
 
+const ModalContent = withApollo(({ list }) => {
+  return (
+    <div style={{ marginTop: 24 }}>
+      {
+        list.map(x => (
+          <StyledProductCell key={x.id} size='small' {...x} />
+        ))
+      }
+    </div>
+  )
+})
+
 export default withApollo(() => {
   const ref = useRef()
+  const [searchLoading, setSearchLoading] = useState(false)
   useAuth()
   const { replace } = useRouter()
+  const {
+    refetch
+  } = useQuery(SEARCH_PRODUCTS, {
+    skip: true
+  })
   const [create, { loading }] = useMutation(CREATE_PRODUCT, {
     onCompleted: data => {
       const id = get(data, 'createProduct.id')
@@ -68,19 +93,37 @@ export default withApollo(() => {
       message.error(errors[0].message)
     },
     refetchQueries: () => [{
-      query: GET_PRODUCTS,
-      variables: {
-        page: 1,
-        size: 15
-      }
+      query: GET_PRODUCTS
     }]
   })
-  const handleSubmit = values => {
-    create({
+  const handleSubmit = async values => {
+    setSearchLoading(true)
+    const { data } = await refetch({
+      keyword: values.name,
+      size: 5
+    })
+    setSearchLoading(false)
+    const runCreate = () => create({
       variables: {
         product: formToProduct(values)
       }
     })
+    const list = get(data, 'searchProducts.data', [])
+    const total = get(data, 'searchProducts.total', 0)
+    if (total) {
+      return Modal.confirm({
+        title: '搜索到已存在以下产品，是否继续推荐？',
+        okText: '继续推荐',
+        icon: null,
+        content: (
+          <ModalContent list={list} />
+        ),
+        onOk () {
+          runCreate()
+        }
+      })
+    }
+    runCreate()
   }
   return (
     <Page>
@@ -102,9 +145,11 @@ export default withApollo(() => {
             </StyledTypography>
           </Col>
         </Row>
-        <ProductEditor step={1} product={{}} onSubmit={handleSubmit} wrappedComponentRef={ref} renderFooter={() => (
-          <StyledButton loading={loading} htmlType='submit' type='primary'>推荐产品</StyledButton>
-        )} />
+        <ProductEditor
+          step={1} product={{}} onSubmit={handleSubmit} wrappedComponentRef={ref} renderFooter={() => (
+            <StyledButton loading={searchLoading || loading} htmlType='submit' type='primary'>推荐产品</StyledButton>
+          )}
+        />
       </StyledContainer>
     </Page>
   )

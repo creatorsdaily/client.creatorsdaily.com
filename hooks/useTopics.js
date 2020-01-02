@@ -6,7 +6,9 @@ export default ({
   key = 'topic',
   path
 } = {}) => {
-  const { query, pathname, replace } = useRouter()
+  const router = useRouter()
+  if (!router) return [[], () => {}]
+  const { query, pathname, replace } = router
 
   let { topic = [] } = query
   if (topic && !Array.isArray(topic)) {

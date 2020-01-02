@@ -81,7 +81,7 @@ overflow: hidden;
 text-overflow:ellipsis;
 a {
   color: #DE7B76;
-  font-family: monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 }
 `
 

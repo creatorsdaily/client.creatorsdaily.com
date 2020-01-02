@@ -53,7 +53,7 @@ const ButtonLink = styled.div`
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
-  font-family: monospace;
+  font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 `
 
 const InputsContainer = styled.div`

@@ -6,6 +6,7 @@ import { GET_PRODUCT } from '../queries'
 import ProductHeader from './ProductHeader'
 import ProductContent from './ProductContent'
 import ProductFiles from './ProductFiles'
+import ProductEmbed from './ProductEmbed'
 
 const StyledContent = styled(ProductContent)`
   padding: 24px;
@@ -51,18 +52,32 @@ const Product = ({
     const shareText = encodeURIComponent(`这个叫「${name}」的产品非常有趣～分享给大家～`)
     window.open(`http://v.t.sina.com.cn/share/share.php?url=${url}&pic=${pic}&title=${shareText}`, '_blank', 'scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes')
   }
+  const handleLink = () => {
+    Modal.info({
+      okText: '关闭',
+      className: 'preview-modal',
+      icon: null,
+      maskClosable: true,
+      autoFocusButton: null,
+      width: 800,
+      content: (
+        <ProductEmbed id={id} name={name} />
+      )
+    })
+  }
   return (
     <div id={id}>
       <ProductHeader id={id} topics={topics} description={description} icon={icon} name={name} />
       <ProductFiles medias={medias} />
       <ProductMeta>
         <div>
-          <Button icon='weibo' type='dashed' onClick={handleWeibo}>
+          <Button icon='weibo' onClick={handleWeibo}>
             微博分享
           </Button>
-          <Button icon='qrcode' type='dashed' onClick={handleWXACode}>
-            专属小程序码
+          <Button icon='qrcode' onClick={handleWXACode}>
+            小程序
           </Button>
+          <Button icon='link' type='dashed' onClick={handleLink} />
         </div>
         <Tooltip title='加入集合，敬请期待' placement='left'>
           <Button icon='folder-add' disabled type='dashed' />

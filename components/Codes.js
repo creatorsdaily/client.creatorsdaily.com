@@ -38,7 +38,7 @@ font-size: 12px;
 
 const CodeContent = styled.div`
 font-weight: bold;
-font-family: monospace;
+font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 flex: 1;
 width: 0;
 margin-right: 12px;
@@ -51,7 +51,7 @@ div {
 `
 
 const CodeTitle = styled.div`
-font-family: monospace;
+font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 `
 
 const CodeButton = styled.div`
