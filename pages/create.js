@@ -112,8 +112,11 @@ export default withApollo(() => {
     const total = get(data, 'searchProducts.total', 0)
     if (total) {
       return Modal.confirm({
+        getContainer: '#page-create',
         title: '搜索到已存在以下产品，是否继续推荐？',
         okText: '继续推荐',
+        maskClosable: true,
+        autoFocusButton: null,
         icon: null,
         content: (
           <ModalContent list={list} />
@@ -126,7 +129,7 @@ export default withApollo(() => {
     runCreate()
   }
   return (
-    <Page>
+    <Page id='page-create'>
       <StyledContainer>
         <Row type='flex' gutter={24} justify='center'>
           <Col md={12} xs={24}>
