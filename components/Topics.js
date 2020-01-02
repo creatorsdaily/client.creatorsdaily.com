@@ -116,7 +116,11 @@ const Topics = ({
 }
 
 export const TopicsBar = ({ list, disabled = false, checkable = false, hideTitle = false, ...rest }) => {
-  const { data: topicsData } = useQuery(GET_TOPICS)
+  const { data: topicsData } = useQuery(GET_TOPICS, {
+    variables: {
+      size: 50
+    }
+  })
   const renderTitle = () => {
     if (hideTitle) return null
     return (
@@ -136,7 +140,11 @@ export const TopicList = ({
   href,
   key
 }) => {
-  const { data: topicsData } = useQuery(GET_TOPICS)
+  const { data: topicsData } = useQuery(GET_TOPICS, {
+    variables: {
+      size: 50
+    }
+  })
   const [value, replace] = useTopics({
     key,
     path: href
