@@ -7,6 +7,7 @@ import useViewer from '../hooks/useViewer'
 import Container from './Container'
 import UserButton from './UserButton'
 import Brand from './Brand'
+import Search from './Search'
 
 const StyledContainer = styled(Container)`
 .ant-menu-item {
@@ -34,6 +35,15 @@ justify-content: flex-end;
 align-items: center;
 `
 
+const HeaderContent = styled.div`
+display: flex;
+align-items: center;
+`
+
+const StyledSearch = styled(Search)`
+margin: 0 24px;
+`
+
 const { Header } = Layout
 
 const menu = [{
@@ -42,7 +52,7 @@ const menu = [{
 }, {
   name: '日报',
   href: '/posts'
-}, {
+}/*, {
   name: '聊产品',
   href: '/talk'
 }, {
@@ -52,7 +62,7 @@ const menu = [{
   name: 'APP',
   href: '/app',
   disabled: true
-}]
+} */]
 
 const Logo = styled.div`
   color: #262626;
@@ -94,20 +104,23 @@ export default withRouter(({ router }) => {
             </Link>
           </Col>
           <Col xl={15} lg={14} md={13} sm={13} xs={20}>
-            <Menu
-              mode='horizontal'
-              selectedKeys={matched}
-            >
-              {menu.map(({ href, name, disabled }) => (
-                <Menu.Item key={href} disabled={disabled}>
-                  <Link href={href}>
-                    <a>
-                      {name}
-                    </a>
-                  </Link>
-                </Menu.Item>
-              ))}
-            </Menu>
+            <HeaderContent>
+              <Menu
+                mode='horizontal'
+                selectedKeys={matched}
+              >
+                {menu.map(({ href, name, disabled }) => (
+                  <Menu.Item key={href} disabled={disabled}>
+                    <Link href={href}>
+                      <a>
+                        {name}
+                      </a>
+                    </Link>
+                  </Menu.Item>
+                ))}
+              </Menu>
+              <StyledSearch />
+            </HeaderContent>
           </Col>
           <Col xl={4} lg={5} md={6} sm={9} xs={0}>
             <UserContainer>

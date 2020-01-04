@@ -8,7 +8,7 @@ import { useRouter } from 'next/router'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
 import ProductCell from '../components/ProductCell'
-import { GET_POSTS, GET_PRODUCTS } from '../queries'
+import { GET_POSTS, GET_PRODUCTS, SEARCH_PRODUCTS } from '../queries'
 import usePagination from '../hooks/usePagination'
 import { TopicList, TopicsBar } from '../components/Topics'
 import RightSide from '../components/RightSide'
@@ -52,7 +52,8 @@ ${media.sm`
 `
 
 export default withApollo(() => {
-  const { query: { topic, page } } = useRouter()
+  const { query: { topic, keyword, page } } = useRouter()
+  const key = keyword ? 'searchProducts' : 'getProducts'
   const {
     result: {
       loading,
@@ -61,18 +62,18 @@ export default withApollo(() => {
     pagination
   } = usePagination({
     path: '/',
-    query: GET_PRODUCTS,
-    getTotal: ({ data }) => get(data, 'getProducts.total', 0)
+    query: keyword ? SEARCH_PRODUCTS : GET_PRODUCTS,
+    getTotal: ({ data }) => get(data, `${key}.total`, 0)
   })
 
   const { data: postsData, loading: postsLoading } = useQuery(GET_POSTS, {
     variables: {
       size: 1
     },
-    skip: (!!topic || !!Number(page))
+    skip: (!!keyword || !!topic || !!Number(page))
   })
 
-  const products = get(data, 'getProducts.data', [])
+  const products = get(data, `${key}.data`, [])
   const posts = get(postsData, 'getPosts.data', [])
   const renderList = () => {
     if (products.length) {
@@ -97,7 +98,7 @@ export default withApollo(() => {
     )
   }
   const renderMilestones = () => {
-    if (!!topic || !!Number(page)) return null
+    if (!!keyword || !!topic || !!Number(page)) return null
     return (
       <>
         <SmallTitle>

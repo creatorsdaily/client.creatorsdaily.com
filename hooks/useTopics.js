@@ -16,7 +16,7 @@ export default ({
   }
   return [topic, (value, run) => {
     const str = qs.stringify({
-      ...omit(query, ['page', 'size', 'id']),
+      ...omit(query, ['page', 'size', 'id', 'keyword']),
       [key]: value
     }, { arrayFormat: 'repeat' })
     const url = `${path || pathname}${str && `?${str}`}`

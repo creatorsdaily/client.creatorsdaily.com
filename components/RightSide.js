@@ -125,12 +125,6 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
           </div>
         </Button>
       </WeApp>
-      <Affix offsetTop={24}>
-        <StyledBox>
-          <Title>微信公众号</Title>
-          <WeChatOfficialAccount title='微信关注：一群创造者' />
-        </StyledBox>
-      </Affix>
       <ContactBox>
         <Contact>
           <WeChatButton>
@@ -169,6 +163,12 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
           </Button>
         </Contact>
       </ContactBox>
+      <Affix offsetTop={24}>
+        <StyledBox>
+          <Title>微信公众号</Title>
+          <WeChatOfficialAccount title='微信关注：一群创造者' />
+        </StyledBox>
+      </Affix>
     </>
   )
 }

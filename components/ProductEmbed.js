@@ -1,4 +1,4 @@
-import { Button, Divider, Icon, Result, Switch } from 'antd'
+import { Divider, Icon, Result, Switch } from 'antd'
 import styled from 'styled-components'
 import { useState } from 'react'
 
@@ -24,7 +24,7 @@ background-color: #F0F0F0;
 `
 
 const Code = styled.pre`
-width: 100%;
+width: auto;
 white-space: pre-line;
 text-align: left;
 font-size: 12px;

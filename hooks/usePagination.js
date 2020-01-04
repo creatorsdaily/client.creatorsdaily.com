@@ -14,11 +14,13 @@ export default ({
   options = {},
   getTotal = () => 0
 } = {}) => {
-  let { query: {
-    page = 1,
-    size = defaultPageSize,
-    ...rest
-  } } = useRouter()
+  let {
+    query: {
+      page = 1,
+      size = defaultPageSize,
+      ...rest
+    }
+  } = useRouter()
   page = Number(page)
   size = Number(size)
   const result = useQuery(query, {
