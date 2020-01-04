@@ -100,6 +100,7 @@ export default withApollo(() => {
     setSearchLoading(true)
     const { data } = await refetch({
       keyword: values.name,
+      score: 20,
       size: 5
     })
     setSearchLoading(false)

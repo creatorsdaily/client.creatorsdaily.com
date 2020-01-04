@@ -1,6 +1,6 @@
 import gql from 'graphql-tag'
 
-const productFragment = `
+export const productFragment = `
 id
 name
 description
@@ -222,8 +222,8 @@ query($page: Int, $size: Int, $topic: [String!], $keyword: [String!]) {
 `
 
 export const SEARCH_PRODUCTS = gql`
-query($page: Int, $size: Int, $keyword: String!) {
-  searchProducts(page: $page, size: $size, keyword: $keyword) {
+query($page: Int, $size: Int, $score: Int, $keyword: String!) {
+  searchProducts(page: $page, size: $size, score: $score, keyword: $keyword) {
     total
     data {
       codeCount

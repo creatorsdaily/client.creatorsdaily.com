@@ -1,7 +1,24 @@
 import get from 'lodash/get'
+import gql from 'graphql-tag'
 import initApollo from '../../libs/init-apollo'
 import createFeed from '../../libs/feed'
-import { GET_PRODUCTS } from '../../queries'
+import { productFragment, userFragment } from '../../queries'
+
+export const GET_PRODUCTS = gql`
+query($page: Int, $size: Int, $topic: [String!], $keyword: [String!]) {
+  getProducts(page: $page, size: $size, topic: $topic, keyword: $keyword) {
+    total
+    data {
+      codeCount
+      ${productFragment}
+      content
+      discoverer {
+        ${userFragment}
+      }
+    }
+  }
+}
+`
 
 export default async (req, res) => {
   const apollo = initApollo()

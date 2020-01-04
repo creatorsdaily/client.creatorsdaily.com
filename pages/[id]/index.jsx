@@ -93,10 +93,11 @@ const ProductPage = () => {
 }
 
 ProductPage.getInitialProps = ({ query: { id }, res }) => {
-  if (res) {
+  if (res && !validate(id)) {
     res.statusCode = 404
   }
   if (!validate(id)) return { statusCode: 404 }
+  return {}
 }
 
 export default withApollo(ProductPage)

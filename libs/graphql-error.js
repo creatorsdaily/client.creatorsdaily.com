@@ -11,7 +11,9 @@ export default err => {
       if (typeof x.message === 'string') {
         return x
       }
-      return new Error(x.message.error)
+      const e = new Error(x.message.error)
+      e.statusCode = x.message.statusCode
+      return e
     }),
     ...get(networkError, 'result.errors', []),
     ...errors

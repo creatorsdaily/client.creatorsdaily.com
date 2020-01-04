@@ -4,6 +4,7 @@ import cookie from 'cookie'
 import Head from 'next/head'
 import { ApolloProvider } from '@apollo/react-hooks'
 import initApollo from './init-apollo'
+import graphqlError from './graphql-error'
 
 /**
  * Creates and provides the apolloContext
@@ -82,6 +83,9 @@ export default (PageComponent, { ssr = true } = {}) => {
               />
             )
           } catch (error) {
+            if (graphqlError(error)[0].statusCode === 404 && pageProps) {
+              pageProps.statusCode = 404
+            }
             // Prevent Apollo Client GraphQL errors from crashing SSR.
             // Handle them in components via the data.error prop:
             // https://www.apollographql.com/docs/react/api/react-apollo.html#graphql-query-data-error
