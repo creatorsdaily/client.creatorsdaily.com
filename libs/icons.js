@@ -176,6 +176,10 @@ export {
 } from '@ant-design/icons/lib/outline/CheckCircleOutline'
 
 export {
+  default as BulbOutline
+} from '@ant-design/icons/lib/outline/BulbOutline'
+
+export {
   default as MessageFill
 } from '@ant-design/icons/lib/fill/MessageFill'
 

@@ -1,6 +1,7 @@
-import { Affix, Button, Modal } from 'antd'
+import { Affix, Button, Col, Modal, Row } from 'antd'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
+import Link from 'next/link'
 import Box from './Box'
 import WeChatOfficialAccount from './WeChatOfficialAccount'
 import ZSXQ from './ZSXQ'
@@ -85,6 +86,41 @@ h4 {
 }
 `
 
+const VoteBtn = styled.a`
+display: block;
+margin: 16px auto 0;
+max-width: 250px;
+img {
+  width: 100%;
+}
+`
+
+const Buttons = styled(Box)`
+`
+
+const BigButton = styled(Button)`
+color: #404040;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+height: 86px;
+span {
+  margin-left: 0 !important;
+}
+i {
+  font-size: 26px;
+  color: #6C9DF7;
+  margin-bottom: 8px;
+}
+`
+
+const Mbutton = styled(BigButton)`
+i {
+  color: #F0E63B;
+}
+`
+
 export default ({ onQuestion = noop, onProduct = noop }) => {
   const handleZSXQ = () => {
     Modal.info({
@@ -114,6 +150,24 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
   }
   return (
     <>
+      <Buttons>
+        <Row type='flex'>
+          <Col span={12}>
+            <Link href='/milestones'>
+              <a>
+                <Mbutton size='large' block type='link' icon='bulb'>里程碑</Mbutton>
+              </a>
+            </Link>
+          </Col>
+          <Col span={12}>
+            <Link href='/talk'>
+              <a>
+                <BigButton size='large' block type='link' icon='message'>聊产品</BigButton>
+              </a>
+            </Link>
+          </Col>
+        </Row>
+      </Buttons>
       <SmallTitle>核心用户</SmallTitle>
       <CoreUsers />
       <WeApp>
@@ -167,6 +221,11 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
         <StyledBox>
           <Title>微信公众号</Title>
           <WeChatOfficialAccount title='微信关注：一群创造者' />
+          <Link href='/[id]' as='/b256ab69-e72a-4491-bd3b-13da969f6c0c' passHref>
+            <VoteBtn>
+              <img src='/api/b256ab69-e72a-4491-bd3b-13da969f6c0c/vote.svg?theme=light' />
+            </VoteBtn>
+          </Link>
         </StyledBox>
       </Affix>
     </>

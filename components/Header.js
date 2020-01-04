@@ -103,7 +103,7 @@ export default withRouter(({ router }) => {
               </a>
             </Link>
           </Col>
-          <Col xl={15} lg={14} md={13} sm={13} xs={20}>
+          <Col xl={15} lg={14} md={13} sm={14} xs={20}>
             <HeaderContent>
               <Menu
                 mode='horizontal'
@@ -122,7 +122,7 @@ export default withRouter(({ router }) => {
               <StyledSearch />
             </HeaderContent>
           </Col>
-          <Col xl={4} lg={5} md={6} sm={9} xs={0}>
+          <Col xl={4} lg={5} md={6} sm={8} xs={0}>
             <UserContainer>
               {renderCreateButton()}
               <StyledUserButton user={user} back={router.asPath} />

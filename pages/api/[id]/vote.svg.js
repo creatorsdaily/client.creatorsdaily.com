@@ -67,7 +67,7 @@ export default async (req, res) => {
                 <rect stroke="${strokeColor}" fill="${backgroundColor}" fill-rule="nonzero" x="0.5" y="0.5" width="249" height="53" rx="${radius}"></rect>
                 <g id="Group" transform="translate(53.000000, 11.000000)" fill="${tipColor}" font-family="PingFangSC, PingFang SC" font-size="10" font-weight="500">
                     <text id="vote">
-                        <tspan x="0" y="10">点击为「${product.name.length > 8 ? `${product.name.slice(0, 7)}...` : product.name}」投票</tspan>
+                        <tspan x="0" y="10">为「${product.name.length > 10 ? `${product.name.slice(0, 9)}...` : product.name}」投票</tspan>
                     </text>
                 </g>
                 <g id="Group" transform="translate(52.000000, 22.000000)" fill="${titleColor}" font-family="PingFangSC, PingFang SC" font-size="16" font-weight="500">

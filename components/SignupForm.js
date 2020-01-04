@@ -25,7 +25,6 @@ export default forwardRef((props, ref) => {
           }]
         })(
           <Input
-            size='large'
             placeholder='用户名'
             prefix={<Icon type='user' />}
           />
@@ -38,7 +37,6 @@ export default forwardRef((props, ref) => {
           }]
         })(
           <Input
-            size='large'
             placeholder='密码'
             type='password'
             prefix={<Icon type='lock' />}
@@ -46,7 +44,7 @@ export default forwardRef((props, ref) => {
         )}
       </Item>
       <Item>
-        <Button loading={loading} type='primary' size='large' block htmlType='submit'>注册</Button>
+        <Button loading={loading} type='primary' block htmlType='submit'>注册</Button>
       </Item>
     </Form>
   )

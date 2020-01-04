@@ -1,5 +1,12 @@
 import styled from 'styled-components'
+import { useEffect, useState } from 'react'
+import { v4 } from 'slugid'
+import { useRouter } from 'next/router'
+import useViewer from '../hooks/useViewer'
 import media from '../libs/media'
+import redirect from '../libs/redirect'
+import WechatBox from './WechatBox'
+import ThirdSignin from './ThirdSignin'
 
 const Container = styled.div`
   padding-top: 96px;
@@ -8,7 +15,7 @@ const Container = styled.div`
   min-height: 556px;
   box-sizing: border-box;
   ${media.sm`
-    width: 430px;
+    width: 360px;
   `}
 `
 
@@ -19,14 +26,14 @@ const AuthBox = styled.div`
   border-top: 1px solid #e9e9e9;
   border-bottom: 1px solid #e9e9e9;
   ${media.sm`
-    width: 430px;
+    width: 360px;
     border-radius: 4px;
     border: 1px solid #e9e9e9;
   `}
 `
 
 const Content = styled.div`
-  max-width: 320px;
+  max-width: 250px;
   margin: 0 auto;
   border-radius: 4px;
   font-size: 14px;
@@ -49,10 +56,30 @@ const Slogon = styled.p`
 `
 
 const Body = styled.div`
-  margin-top: 32px;
+  margin-top: 16px;
+`
+
+const StyledWechatBox = styled(WechatBox)`
+display: none;
+${media.sm`
+display: block;
+`}
 `
 
 export default ({ children }) => {
+  const [code, setCode] = useState(v4())
+  useEffect(() => {
+    const timer = setInterval(() => setCode(v4()), 2 * 60 * 1000)
+    return () => clearInterval(timer)
+  }, [])
+  const { query } = useRouter()
+  const back = query.back || '/'
+  const { viewer, loading } = useViewer()
+  useEffect(() => {
+    if (viewer) {
+      redirect(back)
+    }
+  }, [loading])
   return (
     <Container>
       <AuthBox>
@@ -60,9 +87,11 @@ export default ({ children }) => {
           <Header>
             <Title>{process.env.NAME}</Title>
             <Slogon>{process.env.SLOGAN}</Slogon>
+            <StyledWechatBox code={code} back={back} />
           </Header>
           <Body>
             {children}
+            <ThirdSignin back={back} />
           </Body>
         </Content>
       </AuthBox>

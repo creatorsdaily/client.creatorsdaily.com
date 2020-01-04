@@ -15,8 +15,8 @@ const MINI_PROGRAM_SINGINED = gql`
 `
 
 const Image = styled.img`
-width: 256px;
-height: 256px;
+width: 160px;
+height: 160px;
 display: block;
 margin: 0 auto;
 `
@@ -45,8 +45,8 @@ export default ({ code, back = '/', ...rest }) => {
     }
   })
   return (
-    <div>
-      <Image src={`${process.env.API}/auth/wxacode?code=${code}`} {...rest} />
+    <div {...rest}>
+      <Image src={`${process.env.API}/auth/wxacode?code=${code}&size=200`} />
       <Tips>打开微信扫一扫，快速登录</Tips>
     </div>
   )

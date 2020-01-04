@@ -1,12 +1,11 @@
-import { Fragment, useRef } from 'react'
-import { Form } from 'antd'
+import { useRef } from 'react'
+import { Divider, Form } from 'antd'
 import cookie from 'component-cookie'
 import gql from 'graphql-tag'
 import { useApolloClient, useMutation } from '@apollo/react-hooks'
 import redirect from '../libs/redirect'
 import formError from '../libs/form-error'
 import SignupForm from './SignupForm'
-import ThirdSignin from './ThirdSignin'
 
 const PageSignupForm = Form.create()(SignupForm)
 
@@ -40,7 +39,8 @@ export default ({ back = '/' }) => {
     }
   })
   return (
-    <Fragment>
+    <>
+      <Divider>注册账号</Divider>
       <PageSignupForm
         wrappedComponentRef={ref}
         loading={loading}
@@ -55,7 +55,6 @@ export default ({ back = '/' }) => {
           })
         }}
       />
-      <ThirdSignin back={back} href='/auth/signin' text='直接登录' />
-    </Fragment>
+    </>
   )
 }
