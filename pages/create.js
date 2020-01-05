@@ -8,12 +8,12 @@ import { useRouter } from 'next/router'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
 import useAuth from '../hooks/useAuth'
-import ProductEditor from '../components/ProductEditor'
+import ProductEditor from '../components/ProductEditor.dynamic'
 import formError from '../libs/form-error'
-import { formToProduct } from '../components/ProductForm'
-import { GET_PRODUCTS, SEARCH_PRODUCTS } from '../queries'
+import { SEARCH_PRODUCTS } from '../queries'
 import withApollo from '../libs/with-apollo'
 import ProductCell from '../components/ProductCell'
+import { formToProduct } from '../libs/form-utils'
 
 const { Title, Paragraph, Text } = Typography
 
@@ -91,10 +91,7 @@ export default withApollo(() => {
       const { form } = ref.current.props
       const errors = formError(form, error)
       message.error(errors[0].message)
-    },
-    refetchQueries: () => [{
-      query: GET_PRODUCTS
-    }]
+    }
   })
   const handleSubmit = async values => {
     setSearchLoading(true)

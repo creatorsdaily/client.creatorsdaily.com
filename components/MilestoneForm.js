@@ -1,7 +1,7 @@
 import { forwardRef } from 'react'
 import { Form, Input } from 'antd'
 import noop from 'lodash/noop'
-import Editor from './Editor'
+import Editor from './Editor.dynamic'
 
 const { Item } = Form
 

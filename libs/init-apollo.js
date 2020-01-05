@@ -1,19 +1,18 @@
-import { ApolloClient, InMemoryCache, NormalizedCacheObject, HttpLink } from 'apollo-boost'
+import { InMemoryCache } from 'apollo-cache-inmemory'
+import { HttpLink } from 'apollo-link-http'
+import ApolloClient from 'apollo-client'
 import { setContext } from 'apollo-link-context'
 import fetch from 'isomorphic-unfetch'
-import { WebSocketLink } from 'apollo-link-ws';
-import { split } from 'apollo-link';
+import { WebSocketLink } from 'apollo-link-ws'
+import { split } from 'apollo-link'
 import { getMainDefinition } from 'apollo-utilities'
+import { persistCache } from 'apollo-cache-persist'
 
-interface Options {
-  getToken?(): string
-}
+let apolloClient = null
 
-let apolloClient: ApolloClient<NormalizedCacheObject> | null = null
-
-function create (initialState: NormalizedCacheObject, {
+function create (initialState, {
   getToken
-}: Options) {
+}) {
   const isBrowser = typeof window !== 'undefined'
   const httpLink = new HttpLink({
     uri: process.env.GRAPHQL, // Server URL (must be absolute)
@@ -35,7 +34,7 @@ function create (initialState: NormalizedCacheObject, {
   let link = authLink.concat(httpLink)
   if (isBrowser) {
     const wsLink = new WebSocketLink({
-      uri: process.env.GRAPHQL_WS!,
+      uri: process.env.GRAPHQL_WS,
       options: {
         reconnect: true,
         connectionParams: () => {
@@ -48,32 +47,34 @@ function create (initialState: NormalizedCacheObject, {
           }
         }
       }
-    });
+    })
     link = split(
       // split based on operation type
       ({ query }) => {
-        const definition = getMainDefinition(query);
+        const definition = getMainDefinition(query)
         return (
           definition.kind === 'OperationDefinition' &&
           definition.operation === 'subscription'
-        );
+        )
       },
       wsLink,
-      link,
+      link
     )
   }
+  const cache = new InMemoryCache().restore(initialState)
+  if (isBrowser) persistCache({ cache, storage: localStorage })
   return new ApolloClient({
     connectToDevTools: isBrowser,
     ssrMode: !isBrowser,
     link,
-    cache: new InMemoryCache().restore(initialState)
+    cache
   })
 }
 
 export default function initApollo (
-  initialState: NormalizedCacheObject = {},
-  options: Options = {}
-): ApolloClient<NormalizedCacheObject> {
+  initialState,
+  options = {}
+) {
   if (typeof window === 'undefined') {
     return create(initialState, options)
   }

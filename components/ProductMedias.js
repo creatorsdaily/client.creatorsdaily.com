@@ -8,7 +8,7 @@ import get from 'lodash/get'
 import { useMutation } from '@apollo/react-hooks'
 import useViewer from '../hooks/useViewer'
 import IPFSImage from './IPFSImage'
-import ProductFiles from './ProductFiles'
+import ProductFiles from './ProductFiles.dynamic'
 
 const StyledFiles = styled.div`
 display: flex;
@@ -151,7 +151,8 @@ export default forwardRef(({ value = [], onChange = noop, onError = noop }, ref)
         slidesToScroll={1}
         slidesToShow={1}
         medias={ids.map(x => ({ id: x }))}
-        onLoad={setFiles} />
+        onLoad={setFiles}
+      />
       <StyledFiles>
         {files.map((x, i) => (
           <SmallImage key={x.id}>

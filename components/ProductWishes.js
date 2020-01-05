@@ -4,6 +4,7 @@ import get from 'lodash/get'
 import Link from 'next/link'
 import useCreateWishModal from '../hooks/useCreateWishModal'
 import { GET_PRODUCT } from '../queries'
+import { wishTypeColors, wishTypes } from '../libs/enums'
 import Box from './Box'
 import Avatar from './Avatar'
 import Time from './Time'
@@ -91,16 +92,6 @@ font-weight: bold;
 const WishSpan = styled.span`
 padding: 0 8px;
 `
-
-export const wishTypes = {
-  BUG: '缺陷',
-  FEATURE: '功能'
-}
-
-export const wishTypeColors = {
-  BUG: '#f50',
-  FEATURE: '#2db7f5'
-}
 
 export default ({
   productId,

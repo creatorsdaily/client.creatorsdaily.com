@@ -84,7 +84,7 @@ const PostTag = styled.div`
 height: 24px;
 line-height: 24px;
 color: #FFF;
-background: #DE7B76;
+background: #DE2B26;
 position: absolute;
 width: 100px;
 text-align: center;

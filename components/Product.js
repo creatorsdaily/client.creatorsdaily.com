@@ -4,9 +4,9 @@ import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import { GET_PRODUCT } from '../queries'
 import ProductHeader from './ProductHeader'
-import ProductContent from './ProductContent'
-import ProductFiles from './ProductFiles'
-import ProductEmbed from './ProductEmbed'
+import ProductContent from './ProductContent.dynamic'
+import ProductFiles from './ProductFiles.dynamic'
+import ProductEmbed from './ProductEmbed.dynamic'
 
 const StyledContent = styled(ProductContent)`
   padding: 24px;

@@ -7,7 +7,7 @@ import useCreateMilestoneModal from '../hooks/useCreateMilestoneModal'
 import useCanEditProduct from '../hooks/useCanEditProduct'
 import { GET_PRODUCT } from '../queries'
 import Time from './Time'
-import ProductContent from './ProductContent'
+import ProductContent from './ProductContent.dynamic'
 
 const Milestones = styled.div`
 padding: 8px 8px 0;

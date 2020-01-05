@@ -1,6 +1,16 @@
 import get from 'lodash/get'
+import gql from 'graphql-tag'
 import initApollo from '../../../libs/init-apollo'
-import { GET_PRODUCT } from '../../../queries'
+
+export const GET_PRODUCT = gql`
+query($id: String!) {
+  product(id: $id) {
+    id
+    name
+    likeCount
+  }
+}
+`
 
 export default async (req, res) => {
   const apollo = initApollo()
@@ -25,42 +35,40 @@ export default async (req, res) => {
 <svg width="250px" height="54px" viewBox="0 0 250 54" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
     <title>创造者日报</title>
     <desc>点击为产品投票！</desc>
-    <defs>
-        <linearGradient x1="17.7452741%" y1="84.4896185%" x2="76.898702%" y2="22.7107947%" id="linearGradient-1">
-            <stop stop-color="#E95952" offset="0%"></stop>
-            <stop stop-color="#EC735E" offset="9%"></stop>
-            <stop stop-color="#F08C6A" offset="21%"></stop>
-            <stop stop-color="#F29F72" offset="33%"></stop>
-            <stop stop-color="#F4A977" offset="45%"></stop>
-            <stop stop-color="#F4AD79" offset="59%"></stop>
-            <stop stop-color="#F1B38A" offset="78%"></stop>
-            <stop stop-color="#EDBDA3" offset="100%"></stop>
-        </linearGradient>
-        <linearGradient x1="99.9988381%" y1="49.9987193%" x2="2.99996514%" y2="49.9987193%" id="linearGradient-2">
-            <stop stop-color="#DE7B76" offset="0%"></stop>
-            <stop stop-color="#E36A64" offset="31%"></stop>
-            <stop stop-color="#E85D57" offset="66%"></stop>
-            <stop stop-color="#E95952" offset="100%"></stop>
-        </linearGradient>
-        <linearGradient x1="2.98985685e-14%" y1="49.9959344%" x2="100.001045%" y2="49.9959344%" id="linearGradient-3">
-            <stop stop-color="#E95952" offset="0%"></stop>
-            <stop stop-color="#EB6859" offset="9%"></stop>
-            <stop stop-color="#F0906A" offset="34%"></stop>
-            <stop stop-color="#F19A6F" offset="41%"></stop>
-            <stop stop-color="#F3A876" offset="56%"></stop>
-            <stop stop-color="#F4AD79" offset="69%"></stop>
-            <stop stop-color="#F1B38A" offset="83%"></stop>
-            <stop stop-color="#EDBDA3" offset="100%"></stop>
-        </linearGradient>
-        <linearGradient x1="3.24211406e-14%" y1="50.0034177%" x2="99.9990961%" y2="50.0034177%" id="linearGradient-4">
-            <stop stop-color="#E95952" offset="0%"></stop>
-            <stop stop-color="#ED7A5F" offset="53%"></stop>
-            <stop stop-color="#EE8263" offset="58%"></stop>
-            <stop stop-color="#F19A6F" offset="73%"></stop>
-            <stop stop-color="#F3A876" offset="88%"></stop>
-            <stop stop-color="#F4AD79" offset="100%"></stop>
-        </linearGradient>
-    </defs>
+    <linearGradient x1="17.7452741%" y1="84.4896185%" x2="76.898702%" y2="22.7107947%" id="linearGradient-1">
+        <stop stop-color="#E95952" offset="0%"></stop>
+        <stop stop-color="#EC735E" offset="9%"></stop>
+        <stop stop-color="#F08C6A" offset="21%"></stop>
+        <stop stop-color="#F29F72" offset="33%"></stop>
+        <stop stop-color="#F4A977" offset="45%"></stop>
+        <stop stop-color="#F4AD79" offset="59%"></stop>
+        <stop stop-color="#F1B38A" offset="78%"></stop>
+        <stop stop-color="#EDBDA3" offset="100%"></stop>
+    </linearGradient>
+    <linearGradient x1="99.9988381%" y1="49.9987193%" x2="2.99996514%" y2="49.9987193%" id="linearGradient-2">
+        <stop stop-color="#DE7B76" offset="0%"></stop>
+        <stop stop-color="#E36A64" offset="31%"></stop>
+        <stop stop-color="#E85D57" offset="66%"></stop>
+        <stop stop-color="#E95952" offset="100%"></stop>
+    </linearGradient>
+    <linearGradient x1="2.98985685e-14%" y1="49.9959344%" x2="100.001045%" y2="49.9959344%" id="linearGradient-3">
+        <stop stop-color="#E95952" offset="0%"></stop>
+        <stop stop-color="#EB6859" offset="9%"></stop>
+        <stop stop-color="#F0906A" offset="34%"></stop>
+        <stop stop-color="#F19A6F" offset="41%"></stop>
+        <stop stop-color="#F3A876" offset="56%"></stop>
+        <stop stop-color="#F4AD79" offset="69%"></stop>
+        <stop stop-color="#F1B38A" offset="83%"></stop>
+        <stop stop-color="#EDBDA3" offset="100%"></stop>
+    </linearGradient>
+    <linearGradient x1="3.24211406e-14%" y1="50.0034177%" x2="99.9990961%" y2="50.0034177%" id="linearGradient-4">
+        <stop stop-color="#E95952" offset="0%"></stop>
+        <stop stop-color="#ED7A5F" offset="53%"></stop>
+        <stop stop-color="#EE8263" offset="58%"></stop>
+        <stop stop-color="#F19A6F" offset="73%"></stop>
+        <stop stop-color="#F3A876" offset="88%"></stop>
+        <stop stop-color="#F4AD79" offset="100%"></stop>
+    </linearGradient>
     <g id="Page-6" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
         <g id="Artboard">
             <g id="featured">

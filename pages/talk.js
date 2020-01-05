@@ -8,7 +8,7 @@ import Head from 'next/head'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
 import { GET_COMMENTS } from '../queries'
-import { CommentsBox } from '../components/Comments'
+import CommentsBox from '../components/CommentsBox.dynamic'
 import ProductCell from '../components/ProductCell'
 import { ProductContainer } from '../components/Product'
 import withApollo from '../libs/with-apollo'
@@ -99,7 +99,7 @@ export default withApollo(() => {
         <Row gutter={24}>
           <Col md={12} xs={24}>
             <Spin spinning={loading}>
-              { list.map(x => (
+              {list.map(x => (
                 <CommentsBox
                   key={x.id}
                   onFocus={() => setFocusProduct(x.product.id)}
@@ -122,7 +122,7 @@ export default withApollo(() => {
                   product={x.product}
                   productId={x.product.id}
                 />
-              )) }
+              ))}
               {renderMore()}
             </Spin>
           </Col>

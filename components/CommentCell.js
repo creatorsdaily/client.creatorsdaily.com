@@ -7,7 +7,7 @@ import get from 'lodash/get'
 import useToggle from 'react-use/lib/useToggle'
 import Link from 'next/link'
 import Time from './Time'
-import { Mini } from './Editor'
+import { Mini } from './Editor.dynamic'
 import UserCell from './UserCell'
 
 const Comment = styled.div`

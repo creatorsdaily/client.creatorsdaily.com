@@ -18,16 +18,22 @@ export default ({ ...rest }) => {
   useEffect(() => {
     setKeywordValue(keyword)
   }, [keyword])
-  return (<StyledSearch
-    placeholder='搜索你关心的产品'
-    {...rest}
-    value={keywordValue}
-    onChange={({ currentTarget }) => {
-      setKeywordValue(currentTarget.value)
-    }}
-    onSearch={value => {
-      const url = value ? `/?keyword=${value}` : '/'
-      replace(url, url, { shallow: true })
-    }}
-  />)
+  return (
+    <>
+      <label htmlFor='product-search' style={{ width: 0, height: 0, overflow: 'hidden' }}>搜索</label>
+      <StyledSearch
+        id='product-search'
+        placeholder='搜索你关心的产品'
+        {...rest}
+        value={keywordValue}
+        onChange={({ currentTarget }) => {
+          setKeywordValue(currentTarget.value)
+        }}
+        onSearch={value => {
+          const url = value ? `/?keyword=${value}` : '/'
+          replace(url, url, { shallow: true })
+        }}
+      />
+    </>
+  )
 }

@@ -9,11 +9,11 @@ import { useRouter } from 'next/router'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import useAuth from '../../hooks/useAuth'
-import ProductEditor from '../../components/ProductEditor'
+import ProductEditor from '../../components/ProductEditor.dynamic'
 import formError from '../../libs/form-error'
 import { GET_PRODUCT } from '../../queries'
-import { formToProduct, productToForm } from '../../components/ProductForm'
 import withApollo from '../../libs/with-apollo'
+import { formToProduct, productToForm } from '../../libs/form-utils'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;

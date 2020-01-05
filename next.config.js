@@ -37,9 +37,13 @@ module.exports = withPlugins([
     workboxOpts: {
       swDest: path.join(__dirname, 'public/service-worker.js'),
       runtimeCaching: [{
-        urlPattern: new RegExp('^https://api.creatorsdaily.com/graphql'),
+        urlPattern: /^https?.*/,
         handler: 'NetworkFirst',
         options: {
+          cacheName: 'offlineCache',
+          expiration: {
+            maxEntries: 200
+          },
           networkTimeoutSeconds: 10,
           cacheableResponse: {
             statuses: [0, 200]

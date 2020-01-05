@@ -9,15 +9,15 @@ import { GET_WISH } from '../../../queries'
 import Page from '../../../layouts/Page'
 import Container from '../../../components/Container'
 import ProductCell from '../../../components/ProductCell'
-import ProductContent from '../../../components/ProductContent'
+import ProductContent from '../../../components/ProductContent.dynamic'
 import Comments from '../../../components/Comments'
 import SmallTitle from '../../../components/SmallTitle'
 import media from '../../../libs/media'
 import Time from '../../../components/Time'
 import UserCell from '../../../components/UserCell'
 import withApollo from '../../../libs/with-apollo'
-import { wishTypeColors, wishTypes } from '../../../components/Wishes'
 import WishLike from '../../../components/WishLike'
+import { wishTypeColors, wishTypes } from '../../../libs/enums'
 
 const StyledContainer = styled(Container)`
   margin-top: 24px;

@@ -172,7 +172,7 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
       <CoreUsers />
       <WeApp>
         <Button type='link' onClick={handleWeApp}>
-          <img src='/weapp.jpg' />
+          <img src='/weapp.jpg' alt='小程序码' />
           <div>
             <h4>微信小程序上线啦</h4>
             <div>扫码立刻体验</div>
@@ -182,14 +182,14 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
       <ContactBox>
         <Contact>
           <WeChatButton>
-            <img src='/wechat.png' />
+            <img src='/wechat.png' alt='微信' />
             <div>官方「微信」群</div>
           </WeChatButton>
         </Contact>
         <Contact>
           <a href='https://t.me/creatorsdaily' rel='noopener noreferrer' target='_blank'>
             <Button type='link'>
-              <img src='/telegram.png' />
+              <img src='/telegram.png' alt='Telegram' />
               <div>加入「Telegram」群组</div>
             </Button>
           </a>
@@ -197,7 +197,7 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
         <Contact>
           <a href='https://twitter.com/@creators_daily' rel='noopener noreferrer' target='_blank'>
             <Button type='link'>
-              <img src='/twitter.png' />
+              <img src='/twitter.png' alt='Twitter' />
               <div>关注「Twitter」</div>
             </Button>
           </a>
@@ -205,14 +205,14 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
         <Contact>
           <a href='https://kz.sync163.com/web/topic/vqNzr253b46Yk?uid=ZNlYrg5BAReny' rel='noopener noreferrer' target='_blank'>
             <Button type='link'>
-              <KuaizhiImg src='/kuaizhi.png' />
+              <KuaizhiImg src='/kuaizhi.png' alt='快知' />
               <div>在「快知」订阅产品通知</div>
             </Button>
           </a>
         </Contact>
         <Contact>
           <Button type='link' onClick={handleZSXQ}>
-            <img src='/zsxq.png' />
+            <img src='/zsxq.png' alt='知识星球' />
             <div>加入我的「知识星球」</div>
           </Button>
         </Contact>
@@ -222,8 +222,8 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
           <Title>微信公众号</Title>
           <WeChatOfficialAccount title='微信关注：一群创造者' />
           <Link href='/[id]' as='/b256ab69-e72a-4491-bd3b-13da969f6c0c' passHref>
-            <VoteBtn>
-              <img src='/api/b256ab69-e72a-4491-bd3b-13da969f6c0c/vote.svg?theme=light' />
+            <VoteBtn aria-label='投票'>
+              <img alt='投票' src='/api/b256ab69-e72a-4491-bd3b-13da969f6c0c/vote.svg?theme=light' />
             </VoteBtn>
           </Link>
         </StyledBox>

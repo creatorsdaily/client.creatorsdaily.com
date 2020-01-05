@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import noop from 'lodash/noop'
+import { forwardRef } from 'react'
 import { GET_MEDIAS } from '../queries'
 import IPFSImage from './IPFSImage'
 
@@ -38,8 +39,8 @@ const PreviewIPFSImage = styled(IPFSImage)`
   margin: 0 auto;
 `
 
-const ProductFiles = React.forwardRef(({ children, height = 300, medias = [], onLoad = noop, ...rest }, ref) => {
-  const { data, loading, refetch } = useQuery(GET_MEDIAS, {
+export default forwardRef(({ children, height = 300, medias = [], onLoad = noop, ...rest }, ref) => {
+  const { data } = useQuery(GET_MEDIAS, {
     variables: { ids: medias.map(x => x.id) },
     skip: !medias.length || !medias.some(x => !x.hash),
     onCompleted (res) {
@@ -77,5 +78,3 @@ const ProductFiles = React.forwardRef(({ children, height = 300, medias = [], on
     </StyledCarousel>
   )
 })
-
-export default ProductFiles

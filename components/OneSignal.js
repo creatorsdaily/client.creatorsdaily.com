@@ -1,6 +1,8 @@
 export default () => {
+  if (process.env.NODE_ENV !== 'production') return null
   return (
-    <script dangerouslySetInnerHTML={{ __html: `
+    <script dangerouslySetInnerHTML={{
+      __html: `
     window.OneSignal = window.OneSignal || [];
     OneSignal.push(function() {
       OneSignal.init({
@@ -25,6 +27,8 @@ export default () => {
       navigator.serviceWorker.register('/OneSignalSDKWorker.js', { scope: '/' });
       // OneSignal.showNativePrompt();
     });
-    ` }} />
+    `
+    }}
+    />
   )
 }
