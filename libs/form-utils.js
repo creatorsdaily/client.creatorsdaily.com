@@ -40,10 +40,10 @@ export const productToForm = product => {
   if (data.miniProgramQRCode) {
     data.miniProgramQRCode = data.miniProgramQRCode.id
   }
-  if (data.topics.length) {
+  if (data.topics && data.topics.length) {
     data.topics = data.topics.map(x => x.id)
   }
-  if (data.medias.length) {
+  if (data.medias && data.medias.length) {
     data.medias = data.medias.map(x => x.id)
   }
   if (data.links) {

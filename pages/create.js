@@ -1,4 +1,4 @@
-import React, { useRef, useState } from 'react'
+import React, { useState } from 'react'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/react-hooks'
@@ -9,11 +9,11 @@ import Page from '../layouts/Page'
 import Container from '../components/Container'
 import useAuth from '../hooks/useAuth'
 import ProductEditor from '../components/ProductEditor.dynamic'
-import formError from '../libs/form-error'
 import { SEARCH_PRODUCTS } from '../queries'
 import withApollo from '../libs/with-apollo'
 import ProductCell from '../components/ProductCell'
 import { formToProduct } from '../libs/form-utils'
+import graphqlError from '../libs/graphql-error'
 
 const { Title, Paragraph, Text } = Typography
 
@@ -65,7 +65,6 @@ const ModalContent = withApollo(({ list }) => {
 })
 
 export default withApollo(() => {
-  const ref = useRef()
   const [searchLoading, setSearchLoading] = useState(false)
   useAuth()
   const { replace } = useRouter()
@@ -88,8 +87,7 @@ export default withApollo(() => {
       }, `/${id}/editor?step=${step}`)
     },
     onError: error => {
-      const { form } = ref.current.props
-      const errors = formError(form, error)
+      const errors = graphqlError(error)
       message.error(errors[0].message)
     }
   })
@@ -147,7 +145,7 @@ export default withApollo(() => {
           </Col>
         </Row>
         <ProductEditor
-          step={1} product={{}} onSubmit={handleSubmit} wrappedComponentRef={ref} renderFooter={() => (
+          step={1} product={{}} onSubmit={handleSubmit} renderFooter={() => (
             <StyledButton loading={searchLoading || loading} htmlType='submit' type='primary'>推荐产品</StyledButton>
           )}
         />

@@ -1,14 +1,15 @@
-import { useState } from 'react'
+import { useEffect, useRef, useState } from 'react'
 import { Alert, Col, Divider, Form, Row, Typography } from 'antd'
 import styled from 'styled-components'
 import FormData from 'form-data'
 import axios from 'axios'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import pick from 'lodash/pick'
 import ProductForm from '../components/ProductForm'
 import ProductCell from '../components/ProductCell'
 import useViewer from '../hooks/useViewer'
-import { formToProduct } from '../libs/form-utils'
+import { formToProduct, productToForm } from '../libs/form-utils'
 import Product from './Product'
 import Autofill from './Autofill'
 
@@ -43,7 +44,8 @@ background: #FFF;
 padding: 24px;
 `
 
-export default ({ step, product = {}, wrappedComponentRef, ...rest }) => {
+export default ({ step, product = {}, ...rest }) => {
+  const ref = useRef()
   const [preview, setPreview] = useState(product)
   const { viewer: user } = useViewer()
   const [create] = useMutation(CREATE_MEDIA)
@@ -62,6 +64,10 @@ export default ({ step, product = {}, wrappedComponentRef, ...rest }) => {
     })
     return data[0]
   }
+  useEffect(() => {
+    const { form } = ref.current.props
+    form.setFieldsValue(pick(productToForm(product), Object.keys(form.getFieldsValue())))
+  }, [])
   const renderStep2Preview = () => {
     if (step === 2) {
       return (
@@ -105,7 +111,7 @@ export default ({ step, product = {}, wrappedComponentRef, ...rest }) => {
     return null
   }
   const handleData = data => {
-    const { form } = wrappedComponentRef.current.props
+    const { form } = ref.current.props
     if (data.title && !form.getFieldValue('name')) {
       form.setFieldsValue({
         name: data.title
@@ -123,7 +129,7 @@ export default ({ step, product = {}, wrappedComponentRef, ...rest }) => {
     }
   }
   const handleSet = async (type, value) => {
-    const { form } = wrappedComponentRef.current.props
+    const { form } = ref.current.props
     let file
     switch (type) {
       case 'name':
@@ -181,7 +187,7 @@ export default ({ step, product = {}, wrappedComponentRef, ...rest }) => {
     <>
       <Row type='flex' gutter={24} justify='center'>
         <Col md={12} xs={24}>
-          <ProductEditorForm {...rest} {...formItemLayout} wrappedComponentRef={wrappedComponentRef} step={step} product={preview} setPreview={setPreview} />
+          <ProductEditorForm {...rest} {...formItemLayout} wrappedComponentRef={ref} step={step} product={preview} setPreview={setPreview} />
         </Col>
         <Col md={step === 1 ? 0 : 12} xs={step === 1 ? 0 : 24}>
           {renderStep2Preview()}

@@ -1,19 +1,18 @@
-import React, { useEffect, useRef } from 'react'
+import React from 'react'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/react-hooks'
 import { Button, Col, Row, Spin, message } from 'antd'
 import get from 'lodash/get'
-import pick from 'lodash/pick'
 import { useRouter } from 'next/router'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import useAuth from '../../hooks/useAuth'
 import ProductEditor from '../../components/ProductEditor.dynamic'
-import formError from '../../libs/form-error'
 import { GET_PRODUCT } from '../../queries'
 import withApollo from '../../libs/with-apollo'
-import { formToProduct, productToForm } from '../../libs/form-utils'
+import { formToProduct } from '../../libs/form-utils'
+import graphqlError from '../../libs/graphql-error'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
@@ -34,7 +33,6 @@ mutation($product: IProduct!) {
 `
 
 export default withApollo(() => {
-  const ref = useRef()
   useAuth()
   const { replace, query } = useRouter()
   const step = Number(query.step) || 'all'
@@ -48,8 +46,7 @@ export default withApollo(() => {
       }
     },
     onError: error => {
-      const { form } = ref.current.props
-      const errors = formError(form, error)
+      const errors = graphqlError(error)
       message.error(errors[0].message)
     },
     refetchQueries: () => [{
@@ -62,12 +59,6 @@ export default withApollo(() => {
       id: query.id
     }
   })
-  useEffect(() => {
-    const product = productToForm(get(data, 'product'))
-    if (!ref.current || !product) return
-    const { form } = ref.current.props
-    form.setFieldsValue(pick(product, Object.keys(form.getFieldsValue())))
-  }, [!!ref.current, data])
   const next = () => {
     replace({
       pathname: '/[id]/editor',
@@ -107,7 +98,6 @@ export default withApollo(() => {
         step={step}
         product={product}
         onSubmit={handleSubmit}
-        wrappedComponentRef={ref}
         renderFooter={() => (
           <Row type='flex' justify='center' gutter={24}>
             {renderCancelButton()}
