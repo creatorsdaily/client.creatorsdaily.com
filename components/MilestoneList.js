@@ -11,14 +11,14 @@ import Time from './Time'
 import MoreButton from './MoreButton'
 
 const ProductIcon = styled(IPFSImage)`
-  width: 40px;
-  height: 40px;
+  width: 32px;
+  height: 32px;
   object-fit: contain;
   margin-right: 10px;
 `
 
 const ProductCell = styled.div`
-  height: 40px;
+  height: 32px;
   display: flex;
   align-items: center;
 `
@@ -42,7 +42,7 @@ span {
 `
 
 const MilestoneTitle = styled.h3`
-font-size: 16px;
+font-size: 15px;
 margin: 0;
 overflow: hidden;
 text-overflow:ellipsis;

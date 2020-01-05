@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import noop from 'lodash/noop'
-import { forwardRef } from 'react'
+import { forwardRef, useEffect, useState } from 'react'
 import { GET_MEDIAS } from '../queries'
 import IPFSImage from './IPFSImage'
 
@@ -18,6 +18,27 @@ const StyledCarousel = styled(Carousel)`
   .slick-slide.slick-active {
     opacity: 1;
   }
+`
+
+const MobileContainer = styled.div`
+height: ${({ height }) => height}px;
+background: #FFF;
+overflow-x: auto;
+-webkit-overflow-scrolling: touch;
+display: flex;
+> div {
+  overflow: initial;
+
+  img {
+    margin: 0 6px 0 0;
+  }
+
+  :last-child {
+    img {
+      margin: 0;
+    }
+  }
+}
 `
 
 const FileContainer = styled.div`
@@ -40,6 +61,7 @@ const PreviewIPFSImage = styled(IPFSImage)`
 `
 
 export default forwardRef(({ children, height = 300, medias = [], onLoad = noop, ...rest }, ref) => {
+  const [isMobile, setIsMobile] = useState()
   const { data } = useQuery(GET_MEDIAS, {
     variables: { ids: medias.map(x => x.id) },
     skip: !medias.length || !medias.some(x => !x.hash),
@@ -47,6 +69,15 @@ export default forwardRef(({ children, height = 300, medias = [], onLoad = noop,
       onLoad(get(res, 'getMedias.data', medias))
     }
   })
+  useEffect(() => {
+    setIsMobile(window.innerWidth <= 480)
+  }, [])
+
+  if (typeof isMobile !== 'boolean') {
+    return (
+      <MobileContainer height={height} />
+    )
+  }
 
   if ((!medias || !medias.length) && !children) {
     return (
@@ -67,13 +98,22 @@ export default forwardRef(({ children, height = 300, medias = [], onLoad = noop,
     })
   }
   const list = get(data, 'getMedias.data', medias)
+  const images = list.map(x => (
+    <FileContainer key={x.id} height={height} onClick={() => handleClick(x.hash)}>
+      <IPFSImage hash={x.hash} key={x.id} />
+    </FileContainer>
+  ))
+  if (isMobile) {
+    return (
+      <MobileContainer height={height}>
+        {images}
+        {children}
+      </MobileContainer>
+    )
+  }
   return (
     <StyledCarousel autoplay infinite variableWidth centerMode slidesToScroll={1} slidesToShow={1} height={height} {...rest} ref={ref}>
-      {list.map(x => (
-        <FileContainer key={x.id} height={height} onClick={() => handleClick(x.hash)}>
-          <IPFSImage hash={x.hash} key={x.id} />
-        </FileContainer>
-      ))}
+      {images}
       {children}
     </StyledCarousel>
   )

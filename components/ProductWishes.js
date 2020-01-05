@@ -60,6 +60,7 @@ const WishContent = styled.div`
 display: flex;
 margin: 0 8px;
 flex-direction: column;
+width: 0;
 flex: 1;
 `
 
@@ -67,18 +68,7 @@ const WishMeta = styled.div`
 height: 18px;
 line-height: 18px;
 font-size: 12px;
-display: flex;
-text-overflow: ellipsis;
-white-space: nowrap;
 overflow: hidden;
-> div {
-  text-overflow: ellipsis;
-  white-space: nowrap;
-  width: 0;
-  flex: 1;
-  overflow: hidden;
-  display: flex;
-}
 .ant-tag {
   line-height: 16px;
 }
@@ -87,6 +77,7 @@ overflow: hidden;
 const WishUsername = styled.div`
 font-size: 12px;
 font-weight: bold;
+display: inline-block;
 `
 
 const WishSpan = styled.span`
@@ -127,15 +118,13 @@ export default ({
               </WishAvatar>
               <WishContent>
                 <WishMeta>
-                  <div>
-                    <Tag color={wishTypeColors[item.type]}>
-                      {wishTypes[item.type]}
-                    </Tag>
-                    <WishUsername>{item.user.nickname}</WishUsername>
-                    <WishSpan>在</WishSpan>
-                    <Time time={item.createdAt} />
-                    <WishSpan>提交</WishSpan>
-                  </div>
+                  <Tag color={wishTypeColors[item.type]}>
+                    {wishTypes[item.type]}
+                  </Tag>
+                  <WishUsername>{item.user.nickname}</WishUsername>
+                  <WishSpan>在</WishSpan>
+                  <Time time={item.createdAt} />
+                  <WishSpan>提交</WishSpan>
                 </WishMeta>
                 <Link href='/[id]/wishes/[wishId]' as={`/${productId}/wishes/${item.id}`}>
                   <a>

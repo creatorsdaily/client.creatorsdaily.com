@@ -188,7 +188,7 @@ query($id: String!) {
         createdAt
       }
     }
-    wishes {
+    wishes(size: 10) {
       data {
         id
         type
