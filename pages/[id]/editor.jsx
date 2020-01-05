@@ -1,4 +1,4 @@
-import React, { useRef } from 'react'
+import React, { useEffect, useRef } from 'react'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/react-hooks'
@@ -60,13 +60,14 @@ export default withApollo(() => {
   const { data, loading: getLoading } = useQuery(GET_PRODUCT, {
     variables: {
       id: query.id
-    },
-    onCompleted (data) {
-      const product = productToForm(get(data, 'product', {}))
-      const { form } = ref.current.props
-      form.setFieldsValue(pick(product, Object.keys(form.getFieldsValue())))
     }
   })
+  useEffect(() => {
+    const product = productToForm(get(data, 'product'))
+    if (!ref.current || !product) return
+    const { form } = ref.current.props
+    form.setFieldsValue(pick(product, Object.keys(form.getFieldsValue())))
+  }, [!!ref.current, data])
   const next = () => {
     replace({
       pathname: '/[id]/editor',
