@@ -121,6 +121,15 @@ i {
 }
 `
 
+const Indie = styled.a`
+display: flex;
+font-size: 12px;
+color: #6C6C6C;
+:hover {
+  color: #eba8a2;
+}
+`
+
 export default ({ onQuestion = noop, onProduct = noop }) => {
   const handleZSXQ = () => {
     Modal.info({
@@ -178,6 +187,15 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
             <div>扫码立刻体验</div>
           </div>
         </Button>
+      </WeApp>
+      <WeApp>
+        <Indie href='https://indiehackers.net/topics' target='_blank'>
+          <img src='https://media.creatorsdaily.com/QmVRA2A1BZomVauPCmD8y8jx2ko97NrmTm33FToanzV1im-160-160-contain' />
+          <div>
+            <h4>独立开发者社区</h4>
+            <div>点击打开友情社区</div>
+          </div>
+        </Indie>
       </WeApp>
       <ContactBox>
         <Contact>
