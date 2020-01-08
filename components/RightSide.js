@@ -193,7 +193,7 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
           <img src='https://media.creatorsdaily.com/QmVRA2A1BZomVauPCmD8y8jx2ko97NrmTm33FToanzV1im-160-160-contain' />
           <div>
             <h4>独立开发者社区</h4>
-            <div>点击打开友情社区</div>
+            <div>特别友情社区</div>
           </div>
         </Indie>
       </WeApp>
