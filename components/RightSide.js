@@ -125,10 +125,33 @@ const Indie = styled.a`
 display: flex;
 font-size: 12px;
 color: #6C6C6C;
+overflow: hidden;
 :hover {
   color: #eba8a2;
 }
+> div {
+  width: 100%;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
 `
+
+const partners = [{
+  name: '码力全开',
+  link: 'https://www.maliquankai.com',
+  slogan: '独立开发者交流、学习聚集地',
+  icon: 'https://media.creatorsdaily.com/QmZN56juqA3hE4bExo7XSMSF1HoB4zBjTQRFWmZNL2ZWMy-160-160-contain'
+}, {
+  name: '电鸭社区',
+  link: 'https://eleduck.com',
+  slogan: '互联网工作者们的聚集地',
+  icon: 'https://media.creatorsdaily.com/QmSw56w7qPxST6UNiFfLRTKrVWC6AE8fCJbn5dXUB2JPWV-160-160-contain'
+}, {
+  name: '独立开发者社区',
+  link: 'https://indiehackers.net/topics',
+  slogan: '特别友情社区',
+  icon: 'https://media.creatorsdaily.com/QmVRA2A1BZomVauPCmD8y8jx2ko97NrmTm33FToanzV1im-160-160-contain'
+}]
 
 export default ({ onQuestion = noop, onProduct = noop }) => {
   const handleZSXQ = () => {
@@ -188,24 +211,17 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
           </div>
         </Button>
       </WeApp>
-      <WeApp>
-        <Indie href='https://eleduck.com' target='_blank'>
-          <img alt='电鸭社区' src='https://media.creatorsdaily.com/QmSw56w7qPxST6UNiFfLRTKrVWC6AE8fCJbn5dXUB2JPWV-160-160-contain' />
-          <div>
-            <h4>电鸭社区</h4>
-            <div>互联网工作者们的聚集地</div>
-          </div>
-        </Indie>
-      </WeApp>
-      <WeApp>
-        <Indie href='https://indiehackers.net/topics' target='_blank'>
-          <img alt='独立开发者社区' src='https://media.creatorsdaily.com/QmVRA2A1BZomVauPCmD8y8jx2ko97NrmTm33FToanzV1im-160-160-contain' />
-          <div>
-            <h4>独立开发者社区</h4>
-            <div>特别友情社区</div>
-          </div>
-        </Indie>
-      </WeApp>
+      {partners.map(x => (
+        <WeApp key={x.link}>
+          <Indie href={x.link} target='_blank'>
+            <img alt={x.name} src={x.icon} />
+            <div>
+              <h4>{x.name}</h4>
+              <div>{x.slogan}</div>
+            </div>
+          </Indie>
+        </WeApp>
+      ))}
       <ContactBox>
         <Contact>
           <WeChatButton>
