@@ -131,7 +131,7 @@ width: 100%;
   color: #eba8a2;
 }
 > div {
-  width: 100%;
+  flex: 1;
   text-overflow:ellipsis;
   white-space: nowrap;
 }
