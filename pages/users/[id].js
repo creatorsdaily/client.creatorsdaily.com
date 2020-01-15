@@ -13,6 +13,7 @@ import SmallTitle from '../../components/SmallTitle'
 import withApollo from '../../libs/with-apollo'
 import MoreButton from '../../components/MoreButton'
 import UserCard from '../../components/UserCard'
+import RightSide from '../../components/RightSide'
 
 const StyledContainer = styled(Container)`
 margin: 24px auto;
@@ -124,14 +125,11 @@ export default withApollo(() => {
       </Head>
       <StyledContainer>
         <Row gutter={24}>
-          <Col md={12} xs={24}>
+          <Col lg={2} xs={0} />
+          <Col lg={14} md={16} xs={24}>
             <Spin spinning={loading}>
               <UserCard user={user} />
             </Spin>
-          </Col>
-        </Row>
-        <Row gutter={24}>
-          <Col md={12} xs={24}>
             <Spin spinning={loading}>
               {renderDiscovereds()}
               <SmallTitle>{user.nickname} 喜欢的产品</SmallTitle>
@@ -139,7 +137,9 @@ export default withApollo(() => {
               {renderMoreLiked()}
             </Spin>
           </Col>
-          <Col md={12} xs={24} />
+          <Col lg={6} md={8} xs={24}>
+            <RightSide />
+          </Col>
         </Row>
       </StyledContainer>
     </Page>

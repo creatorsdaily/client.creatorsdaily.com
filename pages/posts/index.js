@@ -76,7 +76,8 @@ export default withApollo(() => {
       </Head>
       <StyledContainer>
         <Row type='flex' gutter={24}>
-          <Col lg={14} md={17} xs={24}>
+          <Col lg={2} xs={0} />
+          <Col lg={14} md={16} xs={24}>
             <Spin spinning={loading}>
               {renderList()}
             </Spin>
@@ -87,7 +88,7 @@ export default withApollo(() => {
               {pagination}
             </Pagination>
           </Col>
-          <Col lg={6} md={7} xs={24}>
+          <Col lg={6} md={8} xs={24}>
             <RightSide />
           </Col>
         </Row>

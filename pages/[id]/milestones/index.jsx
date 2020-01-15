@@ -10,6 +10,7 @@ import MilestoneList from '../../../components/MilestoneList'
 import { GET_PRODUCT } from '../../../queries'
 import ProductCell from '../../../components/ProductCell'
 import withApollo from '../../../libs/with-apollo'
+import RightSide from '../../../components/RightSide'
 
 const StyledContainer = styled(Container)`
   margin-top: 24px;
@@ -31,11 +32,15 @@ export default withApollo(() => {
       </Head>
       <StyledContainer>
         <Row type='flex' gutter={24}>
-          <Col md={12} xs={24}>
+          <Col lg={2} xs={0} />
+          <Col lg={14} md={16} xs={24}>
             <Spin spinning={loading}>
               <ProductCell {...product} />
             </Spin>
             <MilestoneList productId={id} />
+          </Col>
+          <Col lg={6} md={8} xs={24}>
+            <RightSide />
           </Col>
         </Row>
       </StyledContainer>

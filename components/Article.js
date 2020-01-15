@@ -33,7 +33,7 @@ pre {
 }
 
 pre code {
-  white-space: pre;
+  white-space: pre-wrap;
   overflow: auto;
   border-radius: 3px;
   padding: 1px 1px;

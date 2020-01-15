@@ -16,6 +16,7 @@ import media from '../../../libs/media'
 import Time from '../../../components/Time'
 import UserCell from '../../../components/UserCell'
 import withApollo from '../../../libs/with-apollo'
+import RightSide from '../../../components/RightSide'
 
 const StyledContainer = styled(Container)`
   margin-top: 24px;
@@ -78,7 +79,8 @@ export default withApollo(() => {
       </Head>
       <StyledContainer>
         <Row type='flex' gutter={24}>
-          <Col md={12} xs={24}>
+          <Col lg={2} xs={0} />
+          <Col lg={14} md={16} xs={24}>
             <Spin spinning={loading}>
               <MilestoneHeader>
                 <div>里程碑</div>
@@ -113,6 +115,9 @@ export default withApollo(() => {
             </Spin>
             <SmallTitle id='comments' name='comments'>聊一聊</SmallTitle>
             <Comments productId={id} milestoneId={milestoneId} product={product} />
+          </Col>
+          <Col lg={6} md={8} xs={24}>
+            <RightSide />
           </Col>
         </Row>
       </StyledContainer>

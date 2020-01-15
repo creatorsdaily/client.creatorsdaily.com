@@ -189,8 +189,17 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
         </Button>
       </WeApp>
       <WeApp>
+        <Indie href='https://eleduck.com' target='_blank'>
+          <img alt='电鸭社区' src='https://media.creatorsdaily.com/QmSw56w7qPxST6UNiFfLRTKrVWC6AE8fCJbn5dXUB2JPWV-160-160-contain' />
+          <div>
+            <h4>电鸭社区</h4>
+            <div>互联网工作者们的聚集地</div>
+          </div>
+        </Indie>
+      </WeApp>
+      <WeApp>
         <Indie href='https://indiehackers.net/topics' target='_blank'>
-          <img src='https://media.creatorsdaily.com/QmVRA2A1BZomVauPCmD8y8jx2ko97NrmTm33FToanzV1im-160-160-contain' />
+          <img alt='独立开发者社区' src='https://media.creatorsdaily.com/QmVRA2A1BZomVauPCmD8y8jx2ko97NrmTm33FToanzV1im-160-160-contain' />
           <div>
             <h4>独立开发者社区</h4>
             <div>特别友情社区</div>
