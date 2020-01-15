@@ -126,6 +126,7 @@ display: flex;
 font-size: 12px;
 color: #6C6C6C;
 overflow: hidden;
+width: 100%;
 :hover {
   color: #eba8a2;
 }
