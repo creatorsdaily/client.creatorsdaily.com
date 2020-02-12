@@ -1,0 +1,19 @@
+name: Deploy
+on: [push]
+jobs:
+  deploy:
+    name: Deploy
+    runs-on: ubuntu-latest
+    steps:
+    - name: Deploy
+      uses: appleboy/ssh-action@master
+      with:
+        host: ${{ secrets.HOST }}
+        username: ${{ secrets.USERNAME }}
+        key: ${{ secrets.KEY }}
+        port: ${{ secrets.PORT }}
+        script: |
+          cd client.creatorsdaily.com
+          git pull origin master
+          docker-compose build client.creatorsdaily.com
+          docker-compose up -d --remove-orphans

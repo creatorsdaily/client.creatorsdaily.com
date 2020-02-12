@@ -6,7 +6,6 @@ import media from '../libs/media'
 import { TopicsBar } from './Topics'
 
 const Container = styled.div`
-  margin-bottom: 24px;
   height: 80px;
   padding: 0 16px;
   ${media.sm`

@@ -29,8 +29,7 @@ export default withApollo(() => {
       </Head>
       <StyledContainer>
         <Row type='flex' gutter={24}>
-          <Col lg={2} xs={0} />
-          <Col lg={14} md={16} xs={24}>
+          <Col lg={18} md={16} xs={24}>
             <Content>
               <Typography.Title level={4}>里程碑</Typography.Title>
               产品新动态

@@ -1,5 +1,9 @@
 import styled from 'styled-components'
 import { Button, Modal, Spin, Tooltip } from 'antd'
+import FolderAddOutlined from '@ant-design/icons/FolderAddOutlined'
+import LinkOutlined from '@ant-design/icons/LinkOutlined'
+import QrcodeOutlined from '@ant-design/icons/QrcodeOutlined'
+import WeiboOutlined from '@ant-design/icons/WeiboOutlined'
 import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import { GET_PRODUCT } from '../queries'
@@ -7,11 +11,11 @@ import ProductHeader from './ProductHeader'
 import ProductContent from './ProductContent.dynamic'
 import ProductFiles from './ProductFiles.dynamic'
 import ProductEmbed from './ProductEmbed.dynamic'
+import Box from './Box'
 
 const StyledContent = styled(ProductContent)`
   padding: 24px;
   background: #FFF;
-  margin-bottom: 24px;
 `
 
 const ProductMeta = styled.div`
@@ -30,8 +34,12 @@ border-bottom: 1px solid #F5F5F5;
 }
 `
 
+const StyledProductHeader = styled(ProductHeader)`
+margin-bottom: 24px;
+`
+
 const Product = ({
-  id, name, description, content, topics, icon, medias = [], full = false
+  id, name, description, content, topics, icon, medias = [], full = false, withHeader = false
 }) => {
   const handleWXACode = () => {
     Modal.info({
@@ -65,25 +73,31 @@ const Product = ({
       )
     })
   }
+  const renderHeader = () => {
+    if (!withHeader) return null
+    return (<StyledProductHeader id={id} topics={topics} description={description} icon={icon} name={name} />)
+  }
   return (
     <div id={id}>
-      <ProductHeader id={id} topics={topics} description={description} icon={icon} name={name} />
-      <ProductFiles medias={medias} />
-      <ProductMeta>
-        <div>
-          <Button icon='weibo' onClick={handleWeibo}>
-            微博分享
-          </Button>
-          <Button icon='qrcode' onClick={handleWXACode}>
-            小程序
-          </Button>
-          <Button icon='link' type='dashed' onClick={handleLink} />
-        </div>
-        <Tooltip title='加入集合，敬请期待' placement='left'>
-          <Button icon='folder-add' disabled type='dashed' />
-        </Tooltip>
-      </ProductMeta>
-      <StyledContent content={content} full={full} />
+      {renderHeader()}
+      <Box>
+        <ProductFiles medias={medias} />
+        <ProductMeta>
+          <div>
+            <Button icon={<WeiboOutlined />} onClick={handleWeibo}>
+              微博分享
+            </Button>
+            <Button icon={<QrcodeOutlined />} onClick={handleWXACode}>
+              小程序
+            </Button>
+            <Button icon={<LinkOutlined />} type='dashed' onClick={handleLink} />
+          </div>
+          <Tooltip title='加入集合，敬请期待' placement='left'>
+            <Button icon={<FolderAddOutlined />} disabled type='dashed' />
+          </Tooltip>
+        </ProductMeta>
+        <StyledContent content={content} full={full} />
+      </Box>
     </div>
   )
 }

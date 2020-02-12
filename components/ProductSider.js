@@ -1,26 +1,16 @@
+import { Divider } from 'antd'
 import styled from 'styled-components'
-import { Button, Col, Divider, Row } from 'antd'
-import Link from 'next/link'
 import media from '../libs/media'
-import useCanEditProduct from '../hooks/useCanEditProduct'
 import ProductLinks from './ProductLinks'
-import ProductLike from './ProductLike'
 import ProductUsers from './ProductUsers'
 import WeChatButton from './WeChatButton'
 import MiniProgram from './MiniProgram'
 
 const Container = styled.div`
 padding: 0 16px;
-${media.md`
-  margin-top: 104px;
-`}
 ${media.sm`
   padding: 0;
 `}
-`
-
-const StyledProductLike = styled(ProductLike)`
-margin-bottom: 12px;
 `
 
 const StyledWeChatButton = styled(WeChatButton)`
@@ -28,26 +18,7 @@ const StyledWeChatButton = styled(WeChatButton)`
   display: block;
 `
 
-export default ({ id, name, isMiniProgram, miniProgramQRCode, discovererId, isLike, likeCount, links = [], discoverer, creators = [] }) => {
-  const canEdit = useCanEditProduct({ creators, discovererId })
-
-  const renderButton = () => {
-    if (!canEdit) return null
-    return (
-      <Row gutter={8} style={{ marginBottom: 24 }}>
-        <Col span={16}>
-          <Link href='/[id]/editor' as={`/${id}/editor`}>
-            <a>
-              <Button block icon='edit'>编辑</Button>
-            </a>
-          </Link>
-        </Col>
-        <Col span={8}>
-          <Button block type='danger' icon='delete' disabled>删除</Button>
-        </Col>
-      </Row>
-    )
-  }
+export default ({ name, isMiniProgram, miniProgramQRCode, links = [], discoverer, creators = [] }) => {
   const renderMiniProgram = () => {
     if (!isMiniProgram) return null
     return (
@@ -69,8 +40,6 @@ export default ({ id, name, isMiniProgram, miniProgramQRCode, discovererId, isLi
 
   return (
     <Container>
-      {renderButton()}
-      <StyledProductLike id={id} likeCount={likeCount} isLike={isLike} />
       <ProductLinks links={links} />
       {renderMiniProgram()}
       <ProductUsers discoverer={discoverer} creators={creators} />

@@ -1,5 +1,6 @@
 import { Avatar } from 'antd'
 import md5 from 'crypto-js/md5'
+import UserOutlined from '@ant-design/icons/UserOutlined'
 
 export default ({ user, size = 32, ...rest }) => {
   const props = {
@@ -11,6 +12,6 @@ export default ({ user, size = 32, ...rest }) => {
     props.src = `https://www.gravatar.com/avatar/${user.email ? md5(user.email) : ''}?size=${size * 2}&d=monsterid`
   }
   return (
-    <Avatar shape='square' icon='user' size={size} alt={user.nickname} {...props} />
+    <Avatar shape='square' icon={<UserOutlined />} size={size} alt={user.nickname} {...props} />
   )
 }

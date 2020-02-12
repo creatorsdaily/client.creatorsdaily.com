@@ -3,7 +3,7 @@ import styled from 'styled-components'
 import validate from 'uuid-validate'
 import { Col, Row, Spin } from 'antd'
 import Container from '../../../components/Container'
-import Milestones from '../../../components/Milestones'
+import Codes from '../../../components/ProductCodes'
 import withApollo from '../../../libs/with-apollo'
 import Product from '../../../layouts/Product'
 import PorductSider from '../../../components/ProductSider'
@@ -17,12 +17,12 @@ const Content = ({ id, product, loading }) => {
   return (
     <StyledContainer>
       <Head>
-        <title>里程碑 · {product.name} - {process.env.NAME}</title>
+        <title>兑换码 · {product.name} - {process.env.NAME}</title>
       </Head>
       <Row type='flex' gutter={24}>
         <Col xxl={18} xl={17} lg={16} md={14} sm={24} xs={24}>
           <Spin spinning={loading}>
-            <Milestones productId={id} product={product} />
+            <Codes productId={id} product={product} />
           </Spin>
         </Col>
         <Col xxl={6} xl={7} lg={8} md={10} sm={24} xs={24}>
@@ -33,7 +33,7 @@ const Content = ({ id, product, loading }) => {
   )
 }
 
-const MilestonesPage = () => {
+const CodesPage = () => {
   return (
     <Product>
       <Content />
@@ -41,7 +41,7 @@ const MilestonesPage = () => {
   )
 }
 
-MilestonesPage.getInitialProps = ({ query: { id }, res }) => {
+CodesPage.getInitialProps = ({ query: { id }, res }) => {
   if (res && !validate(id)) {
     res.statusCode = 404
   }
@@ -49,4 +49,4 @@ MilestonesPage.getInitialProps = ({ query: { id }, res }) => {
   return {}
 }
 
-export default withApollo(MilestonesPage)
+export default withApollo(CodesPage)

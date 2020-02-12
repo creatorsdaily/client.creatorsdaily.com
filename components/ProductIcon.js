@@ -1,4 +1,4 @@
-import { Icon, Upload } from 'antd'
+import { Upload } from 'antd'
 import styled from 'styled-components'
 import { useToggle } from 'react-use'
 import noop from 'lodash/noop'
@@ -6,6 +6,8 @@ import { forwardRef, useEffect, useState } from 'react'
 import gql from 'graphql-tag'
 import get from 'lodash/get'
 import { useMutation, useQuery } from '@apollo/react-hooks'
+import LoadingOutlined from '@ant-design/icons/LoadingOutlined'
+import PlusOutlined from '@ant-design/icons/PlusOutlined'
 import { GET_MEDIA } from '../queries'
 import useViewer from '../hooks/useViewer'
 import IPFSImage from './IPFSImage'
@@ -79,7 +81,7 @@ export default forwardRef(({ value, onChange = noop, onError = noop }, ref) => {
   }
   const uploadButton = (
     <div>
-      <Icon type={(loading || getLoading || createLoading) ? 'loading' : 'plus'} />
+      {(loading || getLoading || createLoading) ? <LoadingOutlined /> : <PlusOutlined />}
       <div className='ant-upload-text'>点击上传</div>
     </div>
   )

@@ -1,6 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import { Col, Row } from 'antd'
+import LazyLoad from 'react-lazyload'
 import media from '../libs/media'
 import Box from './Box'
 import IPFSImage from './IPFSImage'
@@ -115,7 +116,9 @@ export default ({ id, products, description, createdAt, disabled = false, media,
           <Link href='/posts/[id]' as={`/posts/${id}`} passHref>
             <PostMedia aria-label={title}>
               {flag && (<PostTag>{flag}</PostTag>)}
-              <IPFSImage alt={title} hash={media && `${media.hash}-600-300`} />
+              <LazyLoad height={160} throttle={200} once>
+                <IPFSImage alt={title} hash={media && `${media.hash}-600-300`} />
+              </LazyLoad>
             </PostMedia>
           </Link>
         </Col>

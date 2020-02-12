@@ -1,7 +1,10 @@
 import Link from 'next/link'
 import styled from 'styled-components'
-import { Button, Divider, Icon, Menu, Popover } from 'antd'
+import { Button, Divider, Menu, Popover } from 'antd'
 import { useRouter } from 'next/router'
+import UserOutlined from '@ant-design/icons/UserOutlined'
+import SettingOutlined from '@ant-design/icons/SettingOutlined'
+import LogoutOutlined from '@ant-design/icons/LogoutOutlined'
 import UserCell from './UserCell'
 
 const StyledButton = styled(Button)`
@@ -33,10 +36,10 @@ export default ({ user, back = '/', ...rest }) => {
   }
   const menu = (
     <Menu selectedKeys={[router.pathname]}>
-      <Menu.Item key={`/users/[id]`}>
+      <Menu.Item key='/users/[id]'>
         <Link href='/users/[id]' as={`/users/${user.id}`}>
           <a>
-            <Icon type='user' />
+            <UserOutlined />
             我的主页
           </a>
         </Link>
@@ -44,7 +47,7 @@ export default ({ user, back = '/', ...rest }) => {
       <Menu.Item key='/settings/profile'>
         <Link href='/settings/profile'>
           <a>
-            <Icon type='setting' />
+            <SettingOutlined />
             设置
           </a>
         </Link>
@@ -53,7 +56,7 @@ export default ({ user, back = '/', ...rest }) => {
       <Menu.Item key='signout'>
         <Link href={`/auth/signout?back=${encodeURIComponent(back)}`}>
           <a>
-            <Icon type='logout' />
+            <LogoutOutlined />
             退出账号
           </a>
         </Link>

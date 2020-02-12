@@ -68,7 +68,7 @@ export default withApollo(() => {
               <Row gutter={24}>
                 {links.map(x => (
                   <Col key={x.id} xl={4} lg={6} md={8} sm={6} xs={24}>
-                    <a target='_blank' href={x.url} alt={x.name} >
+                    <a target='_blank' rel='noopener noreferrer' href={x.url} alt={x.name}>
                       <Box>
                         <StyledIPFSImage hash={x.media && x.media.hash} />
                         <LinkTitle>

@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
+import PlusOutlined from '@ant-design/icons/PlusOutlined'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
 import ProductCell from '../components/ProductCell'
@@ -112,22 +113,26 @@ export default withApollo(() => {
       </>
     )
   }
+  const renderPostsTitle = () => {
+    if (!!keyword || !!topic || !!Number(page)) return null
+    return (<SmallTitle>产品展区</SmallTitle>)
+  }
   return (
     <Page>
       <StyledContainer>
         <Row gutter={24}>
-          <Col xs={24} lg={0}>
+          <Col lg={0} xs={24}>
             <StyledTopicsBar href='/' checkable />
           </Col>
-          <Col lg={5} xs={0}>
+          <Col xl={4} lg={5} xs={0}>
             <TopicList href='/' />
           </Col>
-          <Col lg={13} md={16} xs={24}>
+          <Col xl={14} lg={13} md={16} xs={24}>
             <Spin spinning={postsLoading}>
               {renderPosts()}
             </Spin>
             {renderMilestones()}
-            <SmallTitle>产品展区</SmallTitle>
+            {renderPostsTitle()}
             <Spin spinning={loading}>
               {renderList()}
             </Spin>
@@ -138,7 +143,7 @@ export default withApollo(() => {
           <Col lg={6} md={8} xs={24}>
             <Link href='/create' passHref>
               <CreateButton>
-                <Button type='primary' icon='plus' size='large' block>发布产品</Button>
+                <Button type='primary' icon={<PlusOutlined />} size='large' block>发布产品</Button>
               </CreateButton>
             </Link>
             <RightSide />

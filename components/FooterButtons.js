@@ -1,9 +1,12 @@
 import styled from 'styled-components'
-import { BackTop, Button, Divider, Icon, Tooltip, notification } from 'antd'
+import { BackTop, Button, Tooltip, notification } from 'antd'
 import { useEffect, useState } from 'react'
 import useToggle from 'react-use/lib/useToggle'
+import BellFilled from '@ant-design/icons/BellFilled'
+import ChromeFilled from '@ant-design/icons/ChromeFilled'
+import RocketFilled from '@ant-design/icons/RocketFilled'
 
-const ActiveBell = styled(Icon)`
+const ActiveBell = styled(BellFilled)`
 color: #DE7B76;
 `
 
@@ -109,7 +112,7 @@ export default () => {
         return (
           <Tooltip placement='top' title='开启通知，及时接收新动态'>
             <Button onClick={handleOpenPush}>
-              <ShakeBell type='bell' theme='filled' />
+              <ShakeBell />
               开启通知
             </Button>
           </Tooltip>
@@ -118,19 +121,12 @@ export default () => {
         return (
           <Tooltip placement='top' title='糟糕！通知被禁用了，请您重新打开'>
             <Button shape='circle' disabled>
-              <Icon type='bell' theme='filled' />
+              <BellFilled />
             </Button>
           </Tooltip>
         )
       case 'granted':
         return null
-        // return (
-        //   <Tooltip placement='top' title='通知已开启'>
-        //     <Button shape='circle'>
-        //       <ActiveBell type='bell' theme='filled' />
-        //     </Button>
-        //   </Tooltip>
-        // )
     }
   }
   const renderInstallButton = () => {
@@ -140,7 +136,7 @@ export default () => {
     return (
       <Tooltip placement='top' title='安装 Chrome 应用'>
         <Button onClick={handleInstall} shape='circle'>
-          <Icon type='chrome' theme='filled' />
+          <ChromeFilled />
         </Button>
       </Tooltip>
     )
@@ -152,7 +148,7 @@ export default () => {
       <BackTop visibilityHeight={600}>
         <Tooltip placement='top' title='回到顶部'>
           <Button shape='circle' style={{ marginLeft: 0 }}>
-            <Icon type='rocket' theme='filled' />
+            <RocketFilled />
           </Button>
         </Tooltip>
       </BackTop>

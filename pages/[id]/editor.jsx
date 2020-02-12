@@ -68,7 +68,7 @@ export default withApollo(() => {
       }
     }, `/${query.id}/editor?step=${step + 1}`)
   }
-  const handleSubmit = values => {
+  const handleFinish = values => {
     update({
       variables: {
         product: {
@@ -97,7 +97,7 @@ export default withApollo(() => {
       <ProductEditor
         step={step}
         product={product}
-        onSubmit={handleSubmit}
+        onFinish={handleFinish}
         renderFooter={() => (
           <Row type='flex' justify='center' gutter={24}>
             {renderCancelButton()}

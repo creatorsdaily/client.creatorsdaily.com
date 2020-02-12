@@ -3,7 +3,8 @@
   "plugins": [
     ["import", {
       "libraryName": "antd",
-      // "style": true
+      "libraryDirectory": "es",
+      "style": true
     }],
     ["styled-components", { "ssr": true }]
   ]

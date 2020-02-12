@@ -3,12 +3,11 @@ import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
 import get from 'lodash/get'
 import styled from 'styled-components'
-import { Button, Col, Divider, Row, Tag, Tooltip } from 'antd'
+import { Button, Col, Divider, Row, Spin, Tag, Tooltip } from 'antd'
 import Link from 'next/link'
+import validate from 'uuid-validate'
 import { GET_WISH } from '../../../queries'
-import Page from '../../../layouts/Page'
 import Container from '../../../components/Container'
-import ProductCell from '../../../components/ProductCell'
 import ProductContent from '../../../components/ProductContent.dynamic'
 import Comments from '../../../components/Comments'
 import SmallTitle from '../../../components/SmallTitle'
@@ -18,14 +17,12 @@ import UserCell from '../../../components/UserCell'
 import withApollo from '../../../libs/with-apollo'
 import WishLike from '../../../components/WishLike'
 import { wishTypeColors, wishTypes } from '../../../libs/enums'
+import Product from '../../../layouts/Product'
+import PorductSider from '../../../components/ProductSider'
 
 const StyledContainer = styled(Container)`
-  margin-top: 24px;
-  margin-bottom: 24px;
-`
-
-const StyledProductCell = styled(ProductCell)`
-margin-bottom: 16px;
+margin-top: 24px;
+margin-bottom: 24px;
 `
 
 const WishHeader = styled.div`
@@ -73,25 +70,25 @@ right: 24px;
 z-index: 1;
 `
 
-export default withApollo(() => {
-  const { query: { id, wishId } } = useRouter()
+const Content = ({ id, product, loading }) => {
+  const { query: { wishId } } = useRouter()
   const { data } = useQuery(GET_WISH, {
     variables: {
       id: wishId
     }
   })
   const wish = get(data, 'getWish', {})
-  const product = get(wish, 'product', {})
   const user = get(wish, 'user', {})
+  const description = (wish.content || '').slice(0, 120) + '...'
   return (
-    <Page>
+    <StyledContainer>
       <Head>
-        <title>{wish.title} - {product.name} - {process.env.NAME}</title>
-        <meta key='description' name='description' content={wish.content} />
+        <title>{wish.title} · {product.name} - {process.env.NAME}</title>
+        <meta key='description' name='description' content={description} />
       </Head>
-      <StyledContainer>
-        <Row type='flex' gutter={24}>
-          <Col md={12} xs={24}>
+      <Row type='flex' gutter={24}>
+        <Col xxl={18} xl={17} lg={16} md={14} sm={24} xs={24}>
+          <Spin spinning={loading}>
             <WishHeader>
               <Tag color={wishTypeColors[wish.type]}>
                 {wishTypes[wish.type]}
@@ -101,7 +98,6 @@ export default withApollo(() => {
               </div>
               <WishTitle>{wish.title}</WishTitle>
             </WishHeader>
-            <StyledProductCell {...product} size='small' />
             <WishMeta>
               <Link href='/users/[id]' as={`/users/${user.id}`}>
                 <a>
@@ -128,9 +124,30 @@ export default withApollo(() => {
             <WishContent content={wish.content} full />
             <SmallTitle id='comments' name='comments'>聊一聊</SmallTitle>
             <Comments productId={id} wishId={wishId} product={product} />
-          </Col>
-        </Row>
-      </StyledContainer>
-    </Page>
+          </Spin>
+        </Col>
+        <Col xxl={6} xl={7} lg={8} md={10} sm={24} xs={24}>
+          <PorductSider {...product} />
+        </Col>
+      </Row>
+    </StyledContainer>
   )
-})
+}
+
+const WishPage = () => {
+  return (
+    <Product>
+      <Content />
+    </Product>
+  )
+}
+
+WishPage.getInitialProps = ({ query: { id }, res }) => {
+  if (res && !validate(id)) {
+    res.statusCode = 404
+  }
+  if (!validate(id)) return { statusCode: 404 }
+  return {}
+}
+
+export default withApollo(WishPage)

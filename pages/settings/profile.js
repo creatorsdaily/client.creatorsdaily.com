@@ -1,9 +1,8 @@
-import React, { useRef } from 'react'
+import React from 'react'
 import Head from 'next/head'
 import { Divider, Form, message } from 'antd'
 import styled from 'styled-components'
 import get from 'lodash/get'
-import pick from 'lodash/pick'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import useAuth from '../../hooks/useAuth'
@@ -29,8 +28,6 @@ mutation($user: IUser!) {
 }
 `
 
-const ProfileEditorForm = Form.create()(ProfileForm)
-
 const FormHeader = styled.div`
 display: flex;
 align-items: center;
@@ -52,12 +49,11 @@ font-weight: bold;
 
 export default withApollo(() => {
   useAuth()
-  const ref = useRef()
+  const [form] = Form.useForm()
   const { viewer, loading: userLoading } = useAuth({
     onCompleted (data) {
       const profile = profileToForm(get(data, 'viewer', {}))
-      const { form } = ref.current.props
-      form.setFieldsValue(pick(profile, Object.keys(form.getFieldsValue())))
+      form.setFieldsValue(profile)
     }
   })
   const [update, { loading }] = useMutation(UPDATE_USER, {
@@ -65,13 +61,12 @@ export default withApollo(() => {
       message.success('保存成功')
     },
     onError: error => {
-      const { form } = ref.current.props
       const errors = formError(form, error)
       message.error(errors[0].message)
     }
   })
   const user = viewer || {}
-  const handleSubmit = values => {
+  const handleFinish = values => {
     update({
       variables: {
         user: {
@@ -91,10 +86,10 @@ export default withApollo(() => {
         <StyledInfo>{user.username}，{process.env.NAME}第 <Counter>{user.number}</Counter> 位成员</StyledInfo>
       </FormHeader>
       <Divider />
-      <ProfileEditorForm
-        onSubmit={handleSubmit}
+      <ProfileForm
+        form={form}
+        onFinish={handleFinish}
         loading={userLoading || loading}
-        wrappedComponentRef={ref}
       />
     </Setting>
   )

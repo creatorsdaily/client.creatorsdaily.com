@@ -3,12 +3,11 @@ import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
 import get from 'lodash/get'
 import styled from 'styled-components'
+import validate from 'uuid-validate'
 import { Button, Col, Divider, Row, Spin } from 'antd'
 import Link from 'next/link'
 import { GET_MILESTONE } from '../../../queries'
-import Page from '../../../layouts/Page'
 import Container from '../../../components/Container'
-import ProductCell from '../../../components/ProductCell'
 import ProductContent from '../../../components/ProductContent.dynamic'
 import Comments from '../../../components/Comments'
 import SmallTitle from '../../../components/SmallTitle'
@@ -16,15 +15,12 @@ import media from '../../../libs/media'
 import Time from '../../../components/Time'
 import UserCell from '../../../components/UserCell'
 import withApollo from '../../../libs/with-apollo'
-import RightSide from '../../../components/RightSide'
+import Product from '../../../layouts/Product'
+import PorductSider from '../../../components/ProductSider'
 
 const StyledContainer = styled(Container)`
   margin-top: 24px;
   margin-bottom: 24px;
-`
-
-const StyledProductCell = styled(ProductCell)`
-margin-bottom: 16px;
 `
 
 const MilestoneHeader = styled.div`
@@ -61,66 +57,80 @@ padding: 24px;
 margin-bottom: 24px;
 `
 
-export default withApollo(() => {
-  const { query: { id, milestoneId } } = useRouter()
+const Content = ({ id, product, loading: productLoading }) => {
+  const { query: { milestoneId } } = useRouter()
   const { data, loading } = useQuery(GET_MILESTONE, {
     variables: {
       id: milestoneId
     }
   })
   const milestone = get(data, 'getMilestone', {})
-  const product = get(milestone, 'product', {})
   const user = get(milestone, 'user', {})
+  const description = (milestone.content || '').slice(0, 120) + '...'
   return (
-    <Page>
+    <StyledContainer>
       <Head>
-        <title>{milestone.title} - {product.name} - {process.env.NAME}</title>
-        <meta key='description' name='description' content={milestone.content} />
+        <title>{milestone.title} · {product.name} - {process.env.NAME}</title>
+        <meta key='description' name='description' content={description} />
       </Head>
-      <StyledContainer>
-        <Row type='flex' gutter={24}>
-          <Col lg={2} xs={0} />
-          <Col lg={14} md={16} xs={24}>
-            <Spin spinning={loading}>
-              <MilestoneHeader>
-                <div>里程碑</div>
-                <div>
-                  <Divider type='vertical' />
-                </div>
-                <MilestoneTitle>{milestone.title}</MilestoneTitle>
-              </MilestoneHeader>
-              <StyledProductCell {...product} size='small' />
-              <MilestoneMeta>
-                <Link href='/users/[id]' as={`/users/${user.id}`}>
-                  <a>
-                    <UserCell user={user} />
-                  </a>
-                </Link>
-                <div>
+      <Row type='flex' gutter={24}>
+        <Col xxl={18} xl={17} lg={16} md={14} sm={24} xs={24}>
+          <Spin spinning={loading}>
+            <MilestoneHeader>
+              <div>里程碑</div>
+              <div>
+                <Divider type='vertical' />
+              </div>
+              <MilestoneTitle>{milestone.title}</MilestoneTitle>
+            </MilestoneHeader>
+            <MilestoneContent content={milestone.content} full />
+            <MilestoneMeta>
+              <Link href='/users/[id]' as={`/users/${user.id}`}>
+                <a>
+                  <UserCell user={user} />
+                </a>
+              </Link>
+              <div>
                   在
-                  <span> </span>
-                  <strong>
-                    <Time time={milestone.createdAt} />
-                  </strong>
-                  <span> </span>
+                <span> </span>
+                <strong>
+                  <Time time={milestone.createdAt} />
+                </strong>
+                <span> </span>
                   发布
-                </div>
-                <Link href='/[id]' as={`/${product.id}#milestones`}>
-                  <a>
-                    <Button type='link'>全部</Button>
-                  </a>
-                </Link>
-              </MilestoneMeta>
-              <MilestoneContent content={milestone.content} full />
-            </Spin>
-            <SmallTitle id='comments' name='comments'>聊一聊</SmallTitle>
-            <Comments productId={id} milestoneId={milestoneId} product={product} />
-          </Col>
-          <Col lg={6} md={8} xs={24}>
-            <RightSide />
-          </Col>
-        </Row>
-      </StyledContainer>
-    </Page>
+              </div>
+              <Link href='/[id]/milestones' as={`/${product.id}/milestones`}>
+                <a>
+                  <Button type='link'>全部</Button>
+                </a>
+              </Link>
+            </MilestoneMeta>
+          </Spin>
+          <SmallTitle id='comments' name='comments'>聊一聊</SmallTitle>
+          <Comments productId={id} milestoneId={milestoneId} product={product} />
+        </Col>
+        <Col xxl={6} xl={7} lg={8} md={10} sm={24} xs={24}>
+          <PorductSider {...product} />
+        </Col>
+      </Row>
+    </StyledContainer>
   )
-})
+}
+
+const MilestonePage = () => {
+  return (
+    <Product>
+      <Content />
+    </Product>
+  )
+}
+
+MilestonePage.getInitialProps = ({ query: { id }, res }) => {
+  if (res && !validate(id)) {
+    res.statusCode = 404
+  }
+  if (!validate(id)) return { statusCode: 404 }
+  return {}
+}
+
+export default withApollo(MilestonePage)

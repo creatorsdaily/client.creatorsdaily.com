@@ -93,8 +93,7 @@ export default withApollo(() => {
       </Head>
       <StyledContainer>
         <Row type='flex' gutter={24}>
-          <Col lg={2} xs={0} />
-          <Col lg={14} md={16} xs={24}>
+          <Col lg={18} md={16} xs={24}>
             <Header>
               <Typography.Title level={4}>创造者们</Typography.Title>
                 创造者们是创造者日报的灵魂，目前已入驻 <Typography.Text type='danger'>{total}</Typography.Text> 位创造者，你也是创造者？加入我们吧～

@@ -1,11 +1,10 @@
-import { useEffect, useRef, useState } from 'react'
+import { useState } from 'react'
 import { Alert, Col, Divider, Form, Row, Typography } from 'antd'
 import styled from 'styled-components'
 import FormData from 'form-data'
 import axios from 'axios'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
-import pick from 'lodash/pick'
 import ProductForm from '../components/ProductForm'
 import ProductCell from '../components/ProductCell'
 import useViewer from '../hooks/useViewer'
@@ -32,20 +31,13 @@ const StyledProductCell = styled(ProductCell)`
   margin-bottom: 48px;
 `
 
-const ProductEditorForm = styled(Form.create({
-  onValuesChange ({ setPreview, product }, changed) {
-    setPreview({
-      ...product,
-      ...formToProduct(changed)
-    })
-  }
-})(ProductForm))`
+const ProductEditorForm = styled(ProductForm)`
 background: #FFF;
 padding: 24px;
 `
 
 export default ({ step, product = {}, ...rest }) => {
-  const ref = useRef()
+  const [form] = Form.useForm()
   const [preview, setPreview] = useState(product)
   const { viewer: user } = useViewer()
   const [create] = useMutation(CREATE_MEDIA)
@@ -64,10 +56,6 @@ export default ({ step, product = {}, ...rest }) => {
     })
     return data[0]
   }
-  useEffect(() => {
-    const { form } = ref.current.props
-    form.setFieldsValue(pick(productToForm(product), Object.keys(form.getFieldsValue())))
-  }, [])
   const renderStep2Preview = () => {
     if (step === 2) {
       return (
@@ -111,7 +99,6 @@ export default ({ step, product = {}, ...rest }) => {
     return null
   }
   const handleData = data => {
-    const { form } = ref.current.props
     if (data.title && !form.getFieldValue('name')) {
       form.setFieldsValue({
         name: data.title
@@ -128,8 +115,13 @@ export default ({ step, product = {}, ...rest }) => {
       })
     }
   }
+  const handleValuesChange = (changed) => {
+    setPreview({
+      ...product,
+      ...formToProduct(changed)
+    })
+  }
   const handleSet = async (type, value) => {
-    const { form } = ref.current.props
     let file
     switch (type) {
       case 'name':
@@ -183,18 +175,29 @@ export default ({ step, product = {}, ...rest }) => {
         })
     }
   }
+  const renderAutofill = () => {
+    if (step === 'all') return null
+    return (<Autofill links={preview.links} step={step} onSet={handleSet} onData={handleData} />)
+  }
   return (
     <>
       <Row type='flex' gutter={24} justify='center'>
         <Col md={12} xs={24}>
-          <ProductEditorForm {...rest} {...formItemLayout} wrappedComponentRef={ref} step={step} product={preview} setPreview={setPreview} />
+          <ProductEditorForm
+            {...rest}
+            {...formItemLayout}
+            form={form}
+            step={step}
+            initialValues={productToForm(product)}
+            onValuesChange={handleValuesChange}
+          />
         </Col>
         <Col md={step === 1 ? 0 : 12} xs={step === 1 ? 0 : 24}>
           {renderStep2Preview()}
           {renderStep3Preview()}
         </Col>
       </Row>
-      <Autofill links={preview.links} step={step} onSet={handleSet} onData={handleData} />
+      {renderAutofill()}
     </>
   )
 }

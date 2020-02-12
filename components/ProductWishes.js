@@ -2,6 +2,7 @@ import { Button, List, Tag, Tooltip } from 'antd'
 import styled from 'styled-components'
 import get from 'lodash/get'
 import Link from 'next/link'
+import PlusOutlined from '@ant-design/icons/PlusOutlined'
 import useCreateWishModal from '../hooks/useCreateWishModal'
 import { GET_PRODUCT } from '../queries'
 import { wishTypeColors, wishTypes } from '../libs/enums'
@@ -102,7 +103,7 @@ export default ({
     <StyledBox>
       <Header>
         <WishTip>每一条「新愿」都可能影响产品的发展</WishTip>
-        <Button type='primary' icon='plus' onClick={show}>新愿</Button>
+        <Button type='primary' icon={<PlusOutlined />} onClick={show}>新愿</Button>
       </Header>
       <List
         split={false}

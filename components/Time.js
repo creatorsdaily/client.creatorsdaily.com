@@ -1,4 +1,9 @@
 import day from 'dayjs'
+import relativeTime from 'dayjs/plugin/relativeTime'
+import 'dayjs/locale/zh-cn'
+
+day.extend(relativeTime)
+day.locale('zh-cn')
 
 export default ({ time, format }) => {
   if (format || day(Date.now()).subtract(new Date(time)).unix() / 60 / 60 / 24 > 3) {

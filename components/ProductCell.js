@@ -1,6 +1,8 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import { Button } from 'antd'
+import { MessageOutlined } from '@ant-design/icons'
+import LazyLoad from 'react-lazyload'
 import useProductMeta from '../hooks/useProductMeta'
 import { TopicsBar } from './Topics'
 import Box from './Box'
@@ -143,7 +145,7 @@ export default ({
       <ProductMeta>
         <Link href='/[id]' as={`/${id}#comments`}>
           <a>
-            <CommentsButton icon='message' size='small'>
+            <CommentsButton icon={<MessageOutlined />} size='small'>
               {!!commentCount && (<CommentsCount>{commentCount}</CommentsCount>)}
             </CommentsButton>
           </a>
@@ -154,7 +156,9 @@ export default ({
   }
   const renderCell = () => (
     <StyledLink size={size}>
-      <ProductIcon alt={name} size={size} hash={hash && `${hash}-160-160-contain`} />
+      <LazyLoad height={size} throttle={200} once>
+        <ProductIcon alt={name} size={size} hash={hash && `${hash}-160-160-contain`} />
+      </LazyLoad>
       <ProductContent size={size}>
         <ProductName size={size}>
           {name}

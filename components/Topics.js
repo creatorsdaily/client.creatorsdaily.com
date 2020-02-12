@@ -4,6 +4,7 @@ import get from 'lodash/get'
 import { useQuery } from '@apollo/react-hooks'
 import noop from 'lodash/noop'
 import Link from 'next/link'
+import LazyLoad from 'react-lazyload'
 import { GET_TOPICS } from '../queries'
 import useTopics from '../hooks/useTopics'
 import IPFSImage from './IPFSImage'
@@ -169,7 +170,9 @@ export const TopicList = ({
           <Link key={key} href={handleCheck(key, !checked)}>
             <a>
               <TopicIcon>
-                <TopicImage alt={name} hash={icon && `${icon.hash}-60-60`} size='small' />
+                <LazyLoad height={30} throttle={200} once>
+                  <TopicImage alt={name} hash={icon && `${icon.hash}-60-60`} size='small' />
+                </LazyLoad>
               </TopicIcon>
               {name}
             </a>
