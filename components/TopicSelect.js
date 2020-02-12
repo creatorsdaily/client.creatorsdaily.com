@@ -6,6 +6,7 @@ import get from 'lodash/get'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
 import useDebounce from 'react-use/lib/useDebounce'
+import { PlusOutlined } from '@ant-design/icons'
 import { GET_TOPICS } from '../queries'
 
 const { Option } = Select
@@ -60,11 +61,12 @@ export default forwardRef((props, ref) => {
     if (!topic) return null
     return (
       <Button
-        icon='plus'
+        icon={<PlusOutlined />}
         type='link'
         block
         onMouseDown={() => createTopic()}
-      >添加<TopicName>#{topic}</TopicName>话题</Button>
+      >添加<TopicName>#{topic}</TopicName>话题
+      </Button>
     )
   }
   return (

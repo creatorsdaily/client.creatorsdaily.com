@@ -5,6 +5,7 @@ import { useQuery } from '@apollo/react-hooks'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
 import uniqBy from 'lodash/uniqBy'
+import { CloseOutlined } from '@ant-design/icons'
 import { GET_PRODUCT, GET_PRODUCTS } from '../queries'
 import IPFSImage from './IPFSImage'
 
@@ -49,7 +50,7 @@ const ProductName = styled.div`
 const Product = ({ name, icon = {}, closeable, onClose }) => {
   const renderClose = () => {
     if (!closeable) return null
-    return (<Button icon='close' type='link' onClick={onClose} />)
+    return (<Button icon={<CloseOutlined />} type='link' onClick={onClose} />)
   }
   return (
     <ProductContainer>

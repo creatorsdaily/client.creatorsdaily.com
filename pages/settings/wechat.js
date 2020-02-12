@@ -5,6 +5,7 @@ import styled from 'styled-components'
 import { useQuery, useSubscription } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import { Avatar } from 'antd'
+import { UserOutlined } from '@ant-design/icons'
 import withApollo from '../../libs/with-apollo'
 import Setting from '../../layouts/Setting'
 import { VIEWER_AUTHES } from '../../queries'
@@ -60,7 +61,7 @@ export default withApollo(() => {
       <div>
         <Info>当前账号已绑定以下微信账号</Info>
         <UserCell>
-          <Avatar shape='square' size={32} icon='user' src={user.avatarUrl} />
+          <Avatar shape='square' size={32} icon={<UserOutlined />} src={user.avatarUrl} />
           <UserName>{user.nickName}</UserName>
         </UserCell>
       </div>

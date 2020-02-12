@@ -1,6 +1,7 @@
-import { Divider, Icon, Result, Switch } from 'antd'
+import { Divider, Result, Switch } from 'antd'
 import styled from 'styled-components'
 import { useState } from 'react'
+import { LinkOutlined } from '@ant-design/icons'
 
 const StyledLink = styled.a`
 min-height: 54px;
@@ -42,7 +43,7 @@ export default ({ id, name }) => {
       status='info'
       title={`将「${name}」添加到网站`}
       subTitle={`你可以将专属于「${name}」的投票按钮或永久链接添加到你的网站上，让用户一起为产品投票吧！`}
-      icon={(<Icon type='link' />)}
+      icon={(<LinkOutlined />)}
       extra={(
         <div>
           <Divider>投票按钮</Divider>

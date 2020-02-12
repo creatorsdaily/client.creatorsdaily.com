@@ -3,6 +3,7 @@ import PlusOutlined from '@ant-design/icons/PlusOutlined'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
+import { GiftOutlined } from '@ant-design/icons'
 import useCreateCodeModal from '../hooks/useCreateCodeModal'
 import { GET_PRODUCT, userFragment } from '../queries'
 import graphqlError from '../libs/graphql-error'
@@ -131,7 +132,7 @@ export default ({
         onConfirm={() => confirm(item.id)}
         placement='left'
       >
-        <Button icon='gift' block>领取</Button>
+        <Button icon={<GiftOutlined />} block>领取</Button>
       </Popconfirm>
     )
   }

@@ -1,10 +1,11 @@
 import styled from 'styled-components'
 import { useDropzone } from 'react-dropzone'
 import noop from 'lodash/noop'
-import { Button, Col, Icon, Input, Row } from 'antd'
+import { Button, Col, Input, Row } from 'antd'
 import { useState } from 'react'
 import axios from 'axios'
 import FormData from 'form-data'
+import { PlusOutlined, ThunderboltOutlined } from '@ant-design/icons'
 import useAddProductFiles from '../hooks/useAddProductFiles'
 
 const StyledUploader = styled.div`
@@ -89,7 +90,7 @@ const Uploader = ({ height = 260, onUpload = noop, allowUrl = false, autoUpload 
           />
         </Col>
         <Col span={6}>
-          <Button icon='thunderbolt' block onClick={handleClick}>快速上传</Button>
+          <Button icon={<ThunderboltOutlined />} block onClick={handleClick}>快速上传</Button>
         </Col>
       </Row>
     )
@@ -100,7 +101,7 @@ const Uploader = ({ height = 260, onUpload = noop, allowUrl = false, autoUpload 
         <Dropzone {...getRootProps()}>
           <input {...getInputProps()} />
           <DropzoneIcon>
-            <Icon type='plus' />
+            <PlusOutlined />
           </DropzoneIcon>
           <p>
             请<span>点击</span>或<span>拖拽</span>图片上传

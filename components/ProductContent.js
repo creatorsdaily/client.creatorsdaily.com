@@ -3,6 +3,7 @@ import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 import useToggle from 'react-use/lib/useToggle'
 import { useEffect, useRef } from 'react'
+import { DownOutlined } from '@ant-design/icons'
 import Article from './Article'
 
 const More = styled.div`
@@ -58,7 +59,7 @@ export default ({
     if (more) return null
     return (
       <More height={height} background={background}>
-        <Button icon='down' type='link' onClick={() => setMore(true)}>查看全部</Button>
+        <Button icon={<DownOutlined />} type='link' onClick={() => setMore(true)}>查看全部</Button>
       </More>
     )
   }
