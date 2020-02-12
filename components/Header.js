@@ -1,4 +1,5 @@
 import { Button, Col, Layout, Menu, Row, Tooltip } from 'antd'
+import PlusOutlined from '@ant-design/icons/PlusOutlined'
 import Link from 'next/link'
 import styled from 'styled-components'
 import { withRouter } from 'next/router'
@@ -19,7 +20,7 @@ const CreateButton = styled.a`
 display: flex;
 justify-content: flex-end;
 margin-right: 12px;
-i {
+svg {
   color: rgba(0,0,0,0.7);
 }
 `
@@ -84,7 +85,7 @@ export default withRouter(({ router }) => {
       <Link href='/create' passHref>
         <CreateButton>
           <Tooltip title='发布产品'>
-            <Button type='link' icon='plus' size='large' />
+            <Button type='link' icon={<PlusOutlined />} size='large' />
           </Tooltip>
         </CreateButton>
       </Link>
@@ -94,7 +95,7 @@ export default withRouter(({ router }) => {
     <Header>
       <StyledContainer>
         <Row type='flex' align='middle'>
-          <Col lg={5} md={5} sm={2} xs={4}>
+          <Col xl={4} lg={5} md={5} sm={2} xs={4}>
             <Link href='/' passHref>
               <a>
                 <Logo>
@@ -103,7 +104,7 @@ export default withRouter(({ router }) => {
               </a>
             </Link>
           </Col>
-          <Col xl={15} lg={14} md={13} sm={14} xs={20}>
+          <Col xl={16} lg={14} md={13} sm={14} xs={20}>
             <HeaderContent>
               <Menu
                 mode='horizontal'

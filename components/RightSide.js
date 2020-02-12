@@ -2,6 +2,8 @@ import { Affix, Button, Col, Modal, Row } from 'antd'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
 import Link from 'next/link'
+import BulbOutlined from '@ant-design/icons/BulbOutlined'
+import MessageOutlined from '@ant-design/icons/MessageOutlined'
 import Box from './Box'
 import WeChatOfficialAccount from './WeChatOfficialAccount'
 import ZSXQ from './ZSXQ'
@@ -108,7 +110,7 @@ height: 86px;
 span {
   margin-left: 0 !important;
 }
-i {
+svg {
   font-size: 26px;
   color: #6C9DF7;
   margin-bottom: 8px;
@@ -116,7 +118,7 @@ i {
 `
 
 const Mbutton = styled(BigButton)`
-i {
+svg {
   color: #F0E63B;
 }
 `
@@ -188,14 +190,14 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
           <Col span={12}>
             <Link href='/milestones'>
               <a>
-                <Mbutton size='large' block type='link' icon='bulb'>里程碑</Mbutton>
+                <Mbutton size='large' block type='link' icon={<BulbOutlined />}>里程碑</Mbutton>
               </a>
             </Link>
           </Col>
           <Col span={12}>
             <Link href='/talk'>
               <a>
-                <BigButton size='large' block type='link' icon='message'>聊产品</BigButton>
+                <BigButton size='large' block type='link' icon={<MessageOutlined />}>聊产品</BigButton>
               </a>
             </Link>
           </Col>
@@ -214,7 +216,7 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
       </WeApp>
       {partners.map(x => (
         <WeApp key={x.link}>
-          <Indie href={x.link} target='_blank'>
+          <Indie href={x.link} target='_blank' rel='noopener noreferrer'>
             <img alt={x.name} src={x.icon} />
             <div>
               <h4>{x.name}</h4>

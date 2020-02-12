@@ -1,4 +1,3 @@
-import { forwardRef } from 'react'
 import { Button, Checkbox, Form, Input, Radio } from 'antd'
 import noop from 'lodash/noop'
 import formError from '../libs/form-error'
@@ -23,23 +22,14 @@ const strlen = (str) => {
   return len
 }
 
-export default forwardRef((props, ref) => {
-  const {
-    form, showButton = false, renderFooter = noop, onSubmit = noop, step = 'all', topics,
-    setPreview, product,
-    ...rest
-  } = props
-  const { getFieldDecorator, getFieldValue, setFieldsValue } = form
-  if (ref) {
-    ref.current = { props }
-  }
-  const handleSubmit = e => {
-    e.preventDefault()
-    form.validateFields((err, fieldsValue) => {
-      if (err) return
-      onSubmit(fieldsValue)
-    })
-  }
+export default ({
+  form, topics,
+  showButton = false, step = 'all',
+  renderFooter = noop,
+  initialValues = {},
+  ...rest
+}) => {
+  const { getFieldValue, setFieldsValue } = form
   const handleCreate = ({ id }) => {
     const topics = getFieldValue('topics') || []
     setFieldsValue({
@@ -55,10 +45,13 @@ export default forwardRef((props, ref) => {
   const renderQRCode = () => {
     const isMiniProgram = getFieldValue('isMiniProgram')
     return (
-      <Item label='小程序码' colon={false} style={{ display: isMiniProgram ? 'block' : 'none' }}>
-        {getFieldDecorator('miniProgramQRCode')(
-          <ProductIcon onError={handleQRCodeError} />
-        )}
+      <Item
+        name='miniProgramQRCode'
+        label='小程序码'
+        colon={false}
+        style={{ display: isMiniProgram ? 'block' : 'none' }}
+      >
+        <ProductIcon onError={handleQRCodeError} />
       </Item>
     )
   }
@@ -66,53 +59,51 @@ export default forwardRef((props, ref) => {
     if (step !== 1 && step !== 'all') return null
     return (
       <>
-        <Item label='链接地址' colon={false}>
-          {getFieldDecorator('links', {
-            rules: [{
-              transform (v) {
-                return v.filter(x => !!x)
-              },
-              validator (rule, value, callback) {
-                if (!Array.isArray(value)) {
-                  callback(new Error('链接地址必须为数组'))
-                } else if (value.length && value.some(x => !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,7}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(x))) {
-                  callback(new Error('地址格式不正确！'))
-                } else {
-                  callback()
-                }
+        <Item
+          name='links'
+          label='链接地址'
+          colon={false}
+          rules={[{
+            transform (v) {
+              return v.filter(x => !!x)
+            },
+            async validator (rule, value) {
+              if (!Array.isArray(value)) {
+                throw new Error('链接地址必须为数组')
+              } else if (value.length && value.some(x => !/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,7}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/.test(x))) {
+                throw new Error('地址格式不正确！')
               }
-            }]
-          })(
-            <Inputs placeholder='产品的访问链接' />
-          )}
+            }
+          }]}
+        >
+          <Inputs placeholder='产品的访问链接' />
         </Item>
-        <Item label='名称' colon={false}>
-          {getFieldDecorator('name', {
-            rules: [{
-              required: true,
-              validator (rule, value, callback) {
-                if (!value) {
-                  callback(new Error('产品名称不能为空'))
-                } else if (strlen(value) > 30) {
-                  callback(new Error('产品名称太长'))
-                } else {
-                  callback()
-                }
+        <Item
+          name='name'
+          label='名称'
+          colon={false}
+          rules={[{
+            required: true,
+            async validator (rule, value) {
+              if (!value) {
+                throw new Error('产品名称不能为空')
+              } else if (strlen(value) > 30) {
+                throw new Error('产品名称太长')
               }
-            }]
-          })(
-            <Input placeholder='输入要推荐的产品名称' />
-          )}
+            }
+          }]}
+        >
+          <Input placeholder='输入要推荐的产品名称' />
         </Item>
-        <Item label='是否有微信小程序？' colon={false}>
-          {getFieldDecorator('isMiniProgram', {
-            initialValue: false
-          })(
-            <Radio.Group>
-              <Radio value>是</Radio>
-              <Radio value={false}>否</Radio>
-            </Radio.Group>
-          )}
+        <Item
+          name='isMiniProgram'
+          label='是否有微信小程序？'
+          colon={false}
+        >
+          <Radio.Group>
+            <Radio value>是</Radio>
+            <Radio value={false}>否</Radio>
+          </Radio.Group>
         </Item>
         {renderQRCode()}
       </>
@@ -122,28 +113,31 @@ export default forwardRef((props, ref) => {
     if (step !== 2 && step !== 'all') return null
     return (
       <>
-        <Item label='图标' colon={false}>
-          {getFieldDecorator('icon')(
-            <ProductIcon onError={handleIconError} />
-          )}
+        <Item
+          name='icon'
+          label='图标'
+          colon={false}
+        >
+          <ProductIcon onError={handleIconError} />
         </Item>
-        <Item label='简介' colon={false}>
-          {getFieldDecorator('description', {
-            initialValue: ''
-          })(
-            <Input placeholder='一句话介绍' />
-          )}
+        <Item
+          name='description'
+          label='简介'
+          colon={false}
+        >
+          <Input placeholder='一句话介绍' />
         </Item>
-        <Item label='话题' colon={false}>
-          {getFieldDecorator('topics', {
-            rules: [{
-              type: 'array',
-              max: 5,
-              message: '每个产品最多添加 5 个话题！'
-            }]
-          })(
-            <TopicSelect onCreate={handleCreate} />
-          )}
+        <Item
+          name='topics'
+          label='话题'
+          colon={false}
+          rules={[{
+            type: 'array',
+            max: 5,
+            message: '每个产品最多添加 5 个话题！'
+          }]}
+        >
+          <TopicSelect onCreate={handleCreate} />
         </Item>
       </>
     )
@@ -152,33 +146,40 @@ export default forwardRef((props, ref) => {
     if (step !== 3 && step !== 'all') return null
     return (
       <>
-        <Item label='产品图片' colon={false}>
-          {getFieldDecorator('medias')(
-            <ProductMedias height={160} />
-          )}
+        <Item
+          name='medias'
+          label='产品图片'
+          colon={false}
+        >
+          <ProductMedias height={160} />
         </Item>
-        <Item label='产品详情' colon={false}>
-          {getFieldDecorator('content', {
-            initialValue: ''
-          })(
-            <Editor placeholder='详细介绍' />
-          )}
+        <Item
+          name='content'
+          label='产品详情'
+          colon={false}
+        >
+          <Editor placeholder='详细介绍' />
         </Item>
         {step === 3 && (
-          <Item label='创造者' colon={false}>
-            {getFieldDecorator('isCreator', {
-              initialValue: false,
-              valuePropName: 'checked'
-            })(
-              <Checkbox>我是这个产品的创造者</Checkbox>
-            )}
+          <Item name='isCreator' valuePropName='checked' label='创造者' colon={false}>
+            <Checkbox>我是这个产品的创造者</Checkbox>
           </Item>
         )}
       </>
     )
   }
   return (
-    <Form {...rest} onSubmit={handleSubmit} hideRequiredMark>
+    <Form
+      {...rest}
+      form={form}
+      initialValues={{
+        isMiniProgram: false,
+        isCreator: false,
+        ...initialValues
+      }}
+      hideRequiredMark
+      layout='vertical'
+    >
       {renderStep1()}
       {renderStep2()}
       {renderStep3()}
@@ -190,4 +191,4 @@ export default forwardRef((props, ref) => {
       )}
     </Form>
   )
-})
+}

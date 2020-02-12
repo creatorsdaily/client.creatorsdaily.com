@@ -1,4 +1,5 @@
 import { Button, List, Modal, Popconfirm, Result, Tooltip, message } from 'antd'
+import PlusOutlined from '@ant-design/icons/PlusOutlined'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
@@ -74,7 +75,7 @@ export default ({
   product
 }) => {
   const {
-    codes
+    codes = []
   } = product
   const [modal, show] = useCreateCodeModal(productId, {
     refetchQueries: () => [{
@@ -138,7 +139,7 @@ export default ({
     <StyledBox>
       <Header>
         <CodeTip>{tip}</CodeTip>
-        <Button type='primary' icon='plus' onClick={show}>兑换码</Button>
+        <Button type='primary' icon={<PlusOutlined />} onClick={show}>兑换码</Button>
       </Header>
       <List
         loading={loading}

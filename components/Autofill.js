@@ -6,6 +6,7 @@ import styled from 'styled-components'
 import { Button, Form, Popover, Spin, message } from 'antd'
 import noop from 'lodash/noop'
 import useDebounce from 'react-use/lib/useDebounce'
+import DownOutlined from '@ant-design/icons/DownOutlined'
 import Box from './Box'
 
 const { Item } = Form
@@ -177,7 +178,9 @@ export default ({ links = [], onSet = noop, step, onData = noop }) => {
     if (step !== 1) return null
     return (
       <Item label='名称' colon={false}>
-        <Button block onClick={handleSetName}>{info.title}</Button>
+        <div>
+          <Button block onClick={handleSetName}>{info.title}</Button>
+        </div>
       </Item>
     )
   }
@@ -230,7 +233,7 @@ export default ({ links = [], onSet = noop, step, onData = noop }) => {
     return (
       <Content>
         <ContentBox>
-          <StyledForm>
+          <StyledForm layout='vertical'>
             {renderStep1()}
             {renderStep2()}
             {renderStep3()}
@@ -243,7 +246,7 @@ export default ({ links = [], onSet = noop, step, onData = noop }) => {
   return (
     <Container closed={closed}>
       <Spin spinning={loading}>
-        <Title block icon='down' closed={closed.toString()} onClick={() => setClosed(!closed)}>产品发布小助手</Title>
+        <Title block icon={<DownOutlined />} closed={closed.toString()} onClick={() => setClosed(!closed)}>产品发布小助手</Title>
         {renderContent()}
       </Spin>
     </Container>

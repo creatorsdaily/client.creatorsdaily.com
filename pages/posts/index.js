@@ -3,6 +3,7 @@ import Head from 'next/head'
 import { Button, Col, Empty, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import styled from 'styled-components'
+import { LinkOutlined } from '@ant-design/icons'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import { GET_POSTS } from '../../queries'
@@ -76,13 +77,12 @@ export default withApollo(() => {
       </Head>
       <StyledContainer>
         <Row type='flex' gutter={24}>
-          <Col lg={2} xs={0} />
-          <Col lg={14} md={16} xs={24}>
+          <Col lg={18} md={16} xs={24}>
             <Spin spinning={loading}>
               {renderList()}
             </Spin>
             <StyledFeed href='/api/posts.atom' rel='noreferrer' target='_blank'>
-              <Button icon='link' block>订阅日报</Button>
+              <Button icon={<LinkOutlined />} block>订阅日报</Button>
             </StyledFeed>
             <Pagination>
               {pagination}

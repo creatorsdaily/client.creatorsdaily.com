@@ -1,4 +1,4 @@
-import { Button, Icon, Popconfirm, Upload } from 'antd'
+import { Button, Popconfirm, Upload } from 'antd'
 import styled from 'styled-components'
 import { useToggle } from 'react-use'
 import noop from 'lodash/noop'
@@ -6,9 +6,12 @@ import { forwardRef, useEffect, useRef, useState } from 'react'
 import gql from 'graphql-tag'
 import get from 'lodash/get'
 import { useMutation } from '@apollo/react-hooks'
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined'
+import LoadingOutlined from '@ant-design/icons/LoadingOutlined'
+import PlusOutlined from '@ant-design/icons/PlusOutlined'
 import useViewer from '../hooks/useViewer'
 import IPFSImage from './IPFSImage'
-import ProductFiles from './ProductFiles.dynamic'
+import ProductFiles from './ProductFiles'
 
 const StyledFiles = styled.div`
 display: flex;
@@ -115,12 +118,12 @@ export default forwardRef(({ value = [], onChange = noop, onError = noop }, ref)
   }
   const uploadButton = files.length >= 6 ? null : (
     <div>
-      <Icon type={(loading || createLoading) ? 'loading' : 'plus'} />
+      {(loading || createLoading) ? <LoadingOutlined /> : <PlusOutlined />}
       <div className='ant-upload-text'>点击上传</div>
     </div>
   )
   const handleSelect = index => {
-    filesRef.current.slick.slickGoTo(index)
+    filesRef.current.goTo(index)
   }
   const renderUpload = () => {
     return (
@@ -161,7 +164,7 @@ export default forwardRef(({ value = [], onChange = noop, onError = noop }, ref)
               title='确定删除这张图片吗？'
               onConfirm={() => handleRemove(x)}
             >
-              <Button type='danger' size='small' icon='delete' block />
+              <Button type='danger' size='small' icon={<DeleteOutlined />} block />
             </Popconfirm>
           </SmallImage>
         ))}

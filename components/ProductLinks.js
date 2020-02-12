@@ -1,8 +1,17 @@
 import * as url from 'native-url'
 import styled from 'styled-components'
-import { Button, Divider, Icon, Input } from 'antd'
+import { Button, Divider, Input } from 'antd'
 import { forwardRef, useEffect, useState } from 'react'
 import noop from 'lodash/noop'
+import AndroidFilled from '@ant-design/icons/CaretUpOutlined'
+import AppleFilled from '@ant-design/icons/AppleFilled'
+import ChromeFilled from '@ant-design/icons/ChromeFilled'
+import CompassFilled from '@ant-design/icons/CompassFilled'
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined'
+import GithubFilled from '@ant-design/icons/GithubFilled'
+import PlusOutlined from '@ant-design/icons/PlusOutlined'
+import RightOutlined from '@ant-design/icons/RightOutlined'
+import WechatFilled from '@ant-design/icons/WechatFilled'
 
 const Links = styled.div`
 `
@@ -12,22 +21,20 @@ const StyledButton = styled(Button)`
   display: flex;
   align-items: center;
   margin-bottom: 12px;
-  i {
+  svg {
     height: 34px;
     line-height: 34px;
     font-size: 34px;
     color: #999;
-    svg {
-      transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
-    }
+    transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
   }
-  .anticon-right {
+  .anticon-right svg {
     height: 20px;
     line-height: 20px;
     font-size: 20px;
   }
   :hover {
-    i {
+    svg {
       color: #DE7B76;
     }
   }
@@ -111,12 +118,12 @@ export const Inputs = forwardRef(({ value = [''], onChange = noop, placeholder =
       {list.map((x, i) => (
         <InputLine key={i}>
           <Input placeholder={i === 0 ? placeholder : '链接'} value={x} onChange={(e) => handleChange(i, e)} />
-          {i !== 0 && (<Button type='dashed' icon='delete' onClick={() => handleRemove(i)} />)}
+          {i !== 0 && (<Button type='dashed' icon={<DeleteOutlined />} onClick={() => handleRemove(i)} />)}
         </InputLine>
       ))}
       <MoreButton>
         <div>更多链接？点击添加</div>
-        <Button icon='plus' type='link' onClick={handleAdd} />
+        <Button icon={<PlusOutlined />} type='link' onClick={handleAdd} />
       </MoreButton>
     </InputsContainer>
   )
@@ -127,40 +134,40 @@ export default ({ links, ...rest }) => {
   const list = links.map(x => {
     const { host } = url.parse(x)
     let name = '网址'
-    let icon = 'compass'
+    let icon = <CompassFilled />
     if (host === 'apps.apple.com' || host === 'itunes.apple.com') {
       name = 'AppStore'
-      icon = 'apple'
+      icon = <AppleFilled />
     }
     if (host === 'github.com') {
       name = 'GitHub'
-      icon = 'github'
+      icon = <GithubFilled />
     }
     if (host === 'www.coolapk.com') {
       name = '酷安'
-      icon = 'android'
+      icon = <AndroidFilled />
     }
     if (host === 'play.google.com') {
       name = 'Google Play'
-      icon = 'android'
+      icon = <AndroidFilled />
     }
     if (host === 'mp.weixin.qq.com') {
       name = '微信公众号'
-      icon = 'wechat'
+      icon = <WechatFilled />
     }
     if (host === 'chrome.google.com') {
       name = 'Chrome 应用商店'
-      icon = 'chrome'
+      icon = <ChromeFilled />
     }
     return (
-      <a key={x} href={x} rel='noreferrer' target='_blank'>
+      <a key={x} href={x} target='_blank' rel='noopener noreferrer'>
         <StyledButton block>
-          <Icon type={icon} theme='filled' />
+          {icon}
           <ButtonContent>
             <ButtonName>{name}</ButtonName>
             <ButtonLink>{x}</ButtonLink>
           </ButtonContent>
-          <Icon type='right' />
+          <RightOutlined />
         </StyledButton>
       </a>
     )

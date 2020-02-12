@@ -26,8 +26,7 @@ export default ({ children, header = null, footer = null }) => {
     <Page>
       <StyledContainer>
         <Row type='flex' gutter={24}>
-          <Col lg={2} xs={0} />
-          <Col lg={14} md={16} xs={24}>
+          <Col lg={18} md={16} xs={24}>
             {header}
             <StyledArticle>
               {children}

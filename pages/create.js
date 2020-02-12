@@ -91,7 +91,7 @@ export default withApollo(() => {
       message.error(errors[0].message)
     }
   })
-  const handleSubmit = async values => {
+  const handleFinish = async values => {
     setSearchLoading(true)
     const { data } = await refetch({
       keyword: values.name,
@@ -135,7 +135,7 @@ export default withApollo(() => {
                 这里是爱意满满的作品展示区，无论您是产品的 <Text strong>创造者</Text> ，还是产品的 <Text strong>发现者</Text> ，都可以在这里将它展示给全世界。
               </Paragraph>
               <Paragraph>
-                完成产品发布后，会自动推送至 <a href='https://kz.sync163.com/web/topic/vqNzr253b46Yk?uid=ZNlYrg5BAReny' target='_blank'>快知</a>、<a href='https://tophub.today/n/YKd6JwndaP' target='_blank'>今日热榜</a> 等平台，并有机会入选
+                完成产品发布后，会自动推送至 <a href='https://kz.sync163.com/web/topic/vqNzr253b46Yk?uid=ZNlYrg5BAReny' target='_blank' rel='noopener noreferrer'>快知</a>、<a href='https://tophub.today/n/YKd6JwndaP' target='_blank' rel='noopener noreferrer'>今日热榜</a> 等平台，并有机会入选
                 <Text strong>
                 今日产品
                 </Text>
@@ -145,7 +145,10 @@ export default withApollo(() => {
           </Col>
         </Row>
         <ProductEditor
-          step={1} product={{}} onSubmit={handleSubmit} renderFooter={() => (
+          step={1}
+          product={{}}
+          onFinish={handleFinish}
+          renderFooter={() => (
             <StyledButton loading={searchLoading || loading} htmlType='submit' type='primary'>推荐产品</StyledButton>
           )}
         />

@@ -2,6 +2,7 @@ import { Button, message } from 'antd'
 import styled from 'styled-components'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
+import CaretUpOutlined from '@ant-design/icons/CaretUpOutlined'
 import formError from '../libs/form-error'
 
 const StyledButton = styled(Button)`
@@ -38,7 +39,7 @@ mutation($id: String!, $dislike: Boolean) {
 }
 `
 
-export default ({ title = '我喜欢', id, likeCount, isLike, ...rest }) => {
+export default ({ title = '我喜欢', id, likeCount, isLike, loading: containerLoading, ...rest }) => {
   const [like, { loading }] = useMutation(LIKE, {
     onError: error => {
       const errors = formError(null, error)
@@ -55,10 +56,10 @@ export default ({ title = '我喜欢', id, likeCount, isLike, ...rest }) => {
   }
   return (
     <StyledButton
-      loading={loading}
+      loading={containerLoading || loading}
       block
       size='large'
-      icon='caret-up'
+      icon={<CaretUpOutlined />}
       onClick={handleClick}
       islike={(!!isLike).toString()}
       {...rest}

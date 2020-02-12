@@ -4,6 +4,7 @@ const withPlugins = require('next-compose-plugins')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true'
 })
+const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin')
 const CompressionPlugin = require('compression-webpack-plugin')
 const withLess = require('@zeit/next-less')
 const withMDX = require('@zeit/next-mdx')({
@@ -63,11 +64,9 @@ module.exports = withPlugins([
   webpack: (config, { isServer }) => {
     config.resolve.alias = {
       ...config.resolve.alias,
-      '@ant-design/icons/lib/dist$': path.resolve(__dirname, './libs/icons.js'),
-      url: 'native-url',
-      moment: 'dayjs'
+      url: 'native-url'
     }
-    config.plugins.push(new CompressionPlugin())
+    config.plugins.push(new CompressionPlugin(), new AntdDayjsWebpackPlugin())
     if (isServer) {
       const antStyles = /antd\/.*?\/style.*?/
       const origExternals = [...config.externals]
@@ -88,6 +87,11 @@ module.exports = withPlugins([
         use: 'null-loader'
       })
     }
+    config.plugins.forEach((x) => {
+      if (x.constructor.name === 'MiniCssExtractPlugin') {
+        x.options.ignoreOrder = true
+      }
+    })
     // if (!isServer) {
     //   const cacheGroups = config.optimization.splitChunks.cacheGroups
     //   delete cacheGroups.react

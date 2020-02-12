@@ -125,8 +125,7 @@ export default withApollo(() => {
       </Head>
       <StyledContainer>
         <Row gutter={24}>
-          <Col lg={2} xs={0} />
-          <Col lg={14} md={16} xs={24}>
+          <Col lg={18} md={16} xs={24}>
             <Spin spinning={loading}>
               <UserCard user={user} />
             </Spin>

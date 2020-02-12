@@ -18,6 +18,7 @@ const UserAvatar = styled(Avatar)`
 margin-top: -48px;
 margin-right: 12px;
 background: #FFF;
+color: #E0E0E0;
 `
 
 const UserContent = styled.div`
@@ -148,7 +149,7 @@ export default ({ user, children, ...rest }) => {
         </UserJoin>
         {user.link && (
           <UserLink>
-            个人链接：<a href={user.link} target='_blank'>{user.link}</a>
+            个人链接：<a href={user.link} target='_blank' rel='noopener noreferrer'>{user.link}</a>
           </UserLink>
         )}
         {renderActive()}

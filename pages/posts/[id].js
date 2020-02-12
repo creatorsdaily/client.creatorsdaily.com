@@ -5,7 +5,6 @@ import { useRouter } from 'next/router'
 import { Spin } from 'antd'
 import Head from 'next/head'
 import styled from 'styled-components'
-import { Fragment } from 'react'
 import Link from 'next/link'
 import { GET_POST } from '../../queries'
 import Article from '../../layouts/Article'
@@ -71,10 +70,10 @@ export default withApollo(() => {
         post.media ? <PostMedia hash={post.media && `${post.media.hash}-800-400`} /> : null
       )}
       footer={(
-        <Fragment>
+        <>
           <StyledSmallTitle>相关产品</StyledSmallTitle>
           <StyledProductCell {...product} />
-        </Fragment>
+        </>
       )}
     >
       <Head>
@@ -93,12 +92,14 @@ export default withApollo(() => {
             在 <Time time={post.createdAt} /> 发布
           </PostTime>
         </PostMeta>
-        <ReactMarkdown source={post.content} transformImageUri={(uri) => {
-          if (uri.indexOf(process.env.FILES) !== 0) {
-            return uri
-          }
-          return `${uri}-1000-1000-inside`
-        }} />
+        <ReactMarkdown
+          source={post.content} transformImageUri={(uri) => {
+            if (uri.indexOf(process.env.FILES) !== 0) {
+              return uri
+            }
+            return `${uri}-1000-1000-inside`
+          }}
+        />
       </Spin>
     </Article>
   )
