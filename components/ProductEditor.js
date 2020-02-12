@@ -64,7 +64,7 @@ export default ({ step, product = {}, ...rest }) => {
           <StyledAlert
             message={(
               <div>
-              产品会在列表页面这样展示，请上传图标，填写简介，并选择合适的话题，使产品看上去 <Text mark>漂亮</Text> 且 <Text mark>专业</Text> 。
+                产品会在列表页面这样展示，请上传图标，填写简介，并选择合适的话题，使产品看上去 <Text mark>漂亮</Text> 且 <Text mark>专业</Text> 。
               </div>
             )} type='success'
           />
@@ -88,7 +88,7 @@ export default ({ step, product = {}, ...rest }) => {
           <StyledAlert
             message={(
               <div>
-            为用户上传产品的预览图片并详细介绍一下该产品，产品详情支持 <Text mark>Markdown</Text> 格式。
+                为用户上传产品的预览图片并详细介绍一下该产品，产品详情支持 <Text mark>Markdown</Text> 格式。
               </div>
             )} type='success'
           />

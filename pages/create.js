@@ -137,7 +137,7 @@ export default withApollo(() => {
               <Paragraph>
                 完成产品发布后，会自动推送至 <a href='https://kz.sync163.com/web/topic/vqNzr253b46Yk?uid=ZNlYrg5BAReny' target='_blank' rel='noopener noreferrer'>快知</a>、<a href='https://tophub.today/n/YKd6JwndaP' target='_blank' rel='noopener noreferrer'>今日热榜</a> 等平台，并有机会入选
                 <Text strong>
-                今日产品
+                  今日产品
                 </Text>
                 推送至公众号、知乎等平台。
               </Paragraph>
