@@ -26,10 +26,10 @@ const SmallEmpty = styled(Empty)`
     color: #707070;
   }
   .ant-empty-image {
-    height: 20px;
+    height: ${({ size }) => size === 'mini' ? 40 : 20}px;
     margin-bottom: 0;
     width: 40px;
-    transform: translateY(4px);
+    transform: translateY(${({ size }) => size === 'mini' ? 0 : 4}px);
     svg {
       width: 40px;
     }
@@ -40,11 +40,15 @@ export default ({ hash, size, ...rest }) => {
   if (!hash) {
     if (size === 'small') {
       return (
-        <SmallEmpty description='无图片' image={Empty.PRESENTED_IMAGE_SIMPLE} {...rest} />
+        <SmallEmpty size={size} description='无图片' image={Empty.PRESENTED_IMAGE_SIMPLE} {...rest} />
+      )
+    } else if (size === 'mini') {
+      return (
+        <SmallEmpty size={size} description={false} image={Empty.PRESENTED_IMAGE_SIMPLE} {...rest} />
       )
     }
     return (
-      <StyledEmpty description='暂无图片' image={Empty.PRESENTED_IMAGE_SIMPLE} {...rest} />
+      <StyledEmpty size={size} description='暂无图片' image={Empty.PRESENTED_IMAGE_SIMPLE} {...rest} />
     )
   }
   return (

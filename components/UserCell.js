@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 import LazyLoad from 'react-lazyload'
+import { Badge } from 'antd'
 import Avatar from './Avatar'
 
 const Container = styled.div`
@@ -32,12 +33,15 @@ text-overflow:ellipsis;
 `
 
 export default ({ user, hideName = false, ...rest }) => {
+  const nickname = user.nickname || ''
   return (
     <Container {...rest}>
-      <LazyLoad height={32} throttle={200} once>
-        <StyledAvatar user={user} />
-      </LazyLoad>
-      {!hideName && (<Username>{user.nickname}</Username>)}
+      <Badge count={nickname.indexOf('oOcAI') === 0 ? '每观' : 0}>
+        <LazyLoad height={32} throttle={200} once>
+          <StyledAvatar user={user} />
+        </LazyLoad>
+      </Badge>
+      {!hideName && (<Username>{nickname}</Username>)}
     </Container>
   )
 }

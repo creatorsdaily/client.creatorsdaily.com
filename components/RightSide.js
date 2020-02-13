@@ -9,6 +9,7 @@ import WeChatOfficialAccount from './WeChatOfficialAccount'
 import ZSXQ from './ZSXQ'
 import WeChatButton from './WeChatButton'
 import CoreUsers from './CoreUsers'
+import ActiveUsers from './ActiveUsers'
 import SmallTitle from './SmallTitle'
 
 const StyledBox = styled(Box)`
@@ -203,8 +204,8 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
           </Col>
         </Row>
       </Buttons>
-      <SmallTitle>核心用户</SmallTitle>
-      <CoreUsers />
+      <SmallTitle>活跃用户</SmallTitle>
+      <ActiveUsers />
       <WeApp>
         <Button type='link' onClick={handleWeApp}>
           <img src='/weapp.jpg' alt='小程序码' />
@@ -214,6 +215,8 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
           </div>
         </Button>
       </WeApp>
+      <SmallTitle>核心用户</SmallTitle>
+      <CoreUsers />
       {partners.map(x => (
         <WeApp key={x.link}>
           <Indie href={x.link} target='_blank' rel='noopener noreferrer'>

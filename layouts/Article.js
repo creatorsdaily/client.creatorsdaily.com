@@ -4,6 +4,7 @@ import Container from '../components/Container'
 import Article from '../components/Article'
 import media from '../libs/media'
 import RightSide from '../components/RightSide'
+import LeftSide from '../components/LeftSide'
 import Page from './Page'
 
 const StyledContainer = styled(Container)`
@@ -26,14 +27,22 @@ export default ({ children, header = null, footer = null }) => {
     <Page>
       <StyledContainer>
         <Row type='flex' gutter={24}>
-          <Col lg={18} md={16} xs={24}>
+          <Col
+            xl={{
+              order: 1,
+              span: 14
+            }} lg={18} md={16} xs={24}
+          >
             {header}
             <StyledArticle>
               {children}
             </StyledArticle>
             {footer}
           </Col>
-          <Col lg={6} md={8} xs={24}>
+          <Col xl={4} md={0} xs={24}>
+            <LeftSide />
+          </Col>
+          <Col xl={{ order: 2 }} lg={6} md={8} xs={24}>
             <RightSide />
           </Col>
         </Row>

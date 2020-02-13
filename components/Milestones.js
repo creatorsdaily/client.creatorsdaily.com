@@ -39,7 +39,8 @@ img {
 
 export default ({
   productId,
-  product = {}
+  product = {},
+  renderHeader = () => null
 }) => {
   const {
     discovererId,
@@ -68,6 +69,7 @@ export default ({
   return (
     <Milestones>
       {modal}
+      {renderHeader()}
       <Timeline>
         {renderCreatorMilestone()}
         {milestonesList.map(x => (

@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import get from 'lodash/get'
 import styled from 'styled-components'
 import validate from 'uuid-validate'
-import { Button, Col, Divider, Row, Spin } from 'antd'
+import { Button, Divider, Spin } from 'antd'
 import Link from 'next/link'
 import { GET_MILESTONE } from '../../../queries'
 import Container from '../../../components/Container'
@@ -16,7 +16,8 @@ import Time from '../../../components/Time'
 import UserCell from '../../../components/UserCell'
 import withApollo from '../../../libs/with-apollo'
 import Product from '../../../layouts/Product'
-import PorductSider from '../../../components/ProductSider'
+import ProductInner from '../../../layouts/ProductInner'
+import ProductCell from '../../../components/ProductCell'
 
 const StyledContainer = styled(Container)`
   margin-top: 24px;
@@ -73,46 +74,41 @@ const Content = ({ id, product, loading: productLoading }) => {
         <title>{milestone.title} · {product.name} - {process.env.NAME}</title>
         <meta key='description' name='description' content={description} />
       </Head>
-      <Row type='flex' gutter={24}>
-        <Col xxl={18} xl={17} lg={16} md={14} sm={24} xs={24}>
-          <Spin spinning={loading}>
-            <MilestoneHeader>
-              <div>里程碑</div>
-              <div>
-                <Divider type='vertical' />
-              </div>
-              <MilestoneTitle>{milestone.title}</MilestoneTitle>
-            </MilestoneHeader>
-            <MilestoneContent content={milestone.content} full />
-            <MilestoneMeta>
-              <Link href='/users/[id]' as={`/users/${user.id}`}>
-                <a>
-                  <UserCell user={user} />
-                </a>
-              </Link>
-              <div>
+      <ProductInner product={product}>
+        <Spin spinning={loading}>
+          <MilestoneHeader>
+            <div>里程碑</div>
+            <div>
+              <Divider type='vertical' />
+            </div>
+            <MilestoneTitle>{milestone.title}</MilestoneTitle>
+          </MilestoneHeader>
+          <MilestoneMeta>
+            <Link href='/users/[id]' as={`/users/${user.id}`}>
+              <a>
+                <UserCell user={user} />
+              </a>
+            </Link>
+            <div>
                   在
-                <span> </span>
-                <strong>
-                  <Time time={milestone.createdAt} />
-                </strong>
-                <span> </span>
+              <span> </span>
+              <strong>
+                <Time time={milestone.createdAt} />
+              </strong>
+              <span> </span>
                   发布
-              </div>
-              <Link href='/[id]/milestones' as={`/${product.id}/milestones`}>
-                <a>
-                  <Button type='link'>全部</Button>
-                </a>
-              </Link>
-            </MilestoneMeta>
-          </Spin>
-          <SmallTitle id='comments' name='comments'>聊一聊</SmallTitle>
-          <Comments productId={id} milestoneId={milestoneId} product={product} />
-        </Col>
-        <Col xxl={6} xl={7} lg={8} md={10} sm={24} xs={24}>
-          <PorductSider {...product} />
-        </Col>
-      </Row>
+            </div>
+            <Link href='/[id]/milestones' as={`/${product.id}/milestones`}>
+              <a>
+                <Button type='link'>全部</Button>
+              </a>
+            </Link>
+          </MilestoneMeta>
+          <MilestoneContent content={milestone.content} full />
+        </Spin>
+        <SmallTitle id='comments' name='comments'>聊一聊</SmallTitle>
+        <Comments productId={id} milestoneId={milestoneId} product={product} />
+      </ProductInner>
     </StyledContainer>
   )
 }

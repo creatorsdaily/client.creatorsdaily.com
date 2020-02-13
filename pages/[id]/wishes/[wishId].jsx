@@ -19,6 +19,7 @@ import WishLike from '../../../components/WishLike'
 import { wishTypeColors, wishTypes } from '../../../libs/enums'
 import Product from '../../../layouts/Product'
 import PorductSider from '../../../components/ProductSider'
+import ProductInner from '../../../layouts/ProductInner'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
@@ -86,50 +87,42 @@ const Content = ({ id, product, loading }) => {
         <title>{wish.title} · {product.name} - {process.env.NAME}</title>
         <meta key='description' name='description' content={description} />
       </Head>
-      <Row type='flex' gutter={24}>
-        <Col xxl={18} xl={17} lg={16} md={14} sm={24} xs={24}>
-          <Spin spinning={loading}>
-            <WishHeader>
-              <Tag color={wishTypeColors[wish.type]}>
-                {wishTypes[wish.type]}
-              </Tag>
-              <div>
-                <Divider type='vertical' />
-              </div>
-              <WishTitle>{wish.title}</WishTitle>
-            </WishHeader>
-            <WishMeta>
-              <Link href='/users/[id]' as={`/users/${user.id}`}>
-                <a>
-                  <UserCell user={user} />
-                </a>
-              </Link>
-              <div>在 <strong>
-                <Time time={wish.createdAt} />
-              </strong> 发布
-              </div>
-              <Link href='/[id]' as={`/${product.id}#wishes`}>
-                <a>
-                  <Button type='link'>全部</Button>
-                </a>
-              </Link>
-              <WishLikeContainer>
-                <Tooltip title='支持这个「新愿」' placement='left'>
-                  <div>
-                    <WishLike id={wish.id} isLike={wish.isLike} likeCount={wish.likeCount} />
-                  </div>
-                </Tooltip>
-              </WishLikeContainer>
-            </WishMeta>
-            <WishContent content={wish.content} full />
-            <SmallTitle id='comments' name='comments'>聊一聊</SmallTitle>
-            <Comments productId={id} wishId={wishId} product={product} />
-          </Spin>
-        </Col>
-        <Col xxl={6} xl={7} lg={8} md={10} sm={24} xs={24}>
-          <PorductSider {...product} />
-        </Col>
-      </Row>
+      <ProductInner product={product}>
+        <Spin spinning={loading}>
+          <WishHeader>
+            <Tag color={wishTypeColors[wish.type]}>
+              {wishTypes[wish.type]}
+            </Tag>
+            <div>
+              <Divider type='vertical' />
+            </div>
+            <WishTitle>{wish.title}</WishTitle>
+          </WishHeader>
+          <WishMeta>
+            <Link href='/users/[id]' as={`/users/${user.id}`}>
+              <a>
+                <UserCell user={user} />
+              </a>
+            </Link>
+            <div>在 <strong><Time time={wish.createdAt} /></strong> 发布</div>
+            <Link href='/[id]' as={`/${product.id}#wishes`}>
+              <a>
+                <Button type='link'>全部</Button>
+              </a>
+            </Link>
+            <WishLikeContainer>
+              <Tooltip title='支持这个「新愿」' placement='left'>
+                <div>
+                  <WishLike id={wish.id} isLike={wish.isLike} likeCount={wish.likeCount} />
+                </div>
+              </Tooltip>
+            </WishLikeContainer>
+          </WishMeta>
+          <WishContent content={wish.content} full />
+          <SmallTitle id='comments' name='comments'>聊一聊</SmallTitle>
+          <Comments productId={id} wishId={wishId} product={product} />
+        </Spin>
+      </ProductInner>
     </StyledContainer>
   )
 }

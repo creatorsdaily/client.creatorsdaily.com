@@ -32,7 +32,11 @@ const StyledLink = styled.a`
   width: 100%;
   height: 100%;
   display: block;
-  padding: ${({ size }) => size === 'small' ? 8 : 16}px;
+  padding: ${({ size }) => ({
+    normal: 16,
+    small: 8,
+    mini: 0
+  }[size])}px;
 `
 
 const ProductMeta = styled.div`
@@ -50,33 +54,61 @@ right: 100px;
 `
 
 const Container = styled(Box)`
-  margin-bottom: 24px;
+  margin-bottom: ${({ size }) => size !== 'mini' ? 24 : 16}px;
   position: relative;
   overflow: hidden;
-  padding-right: ${({ size }) => size === 'small' ? 0 : 80}px;
-  height: ${({ size }) => size === 'small' ? 62 : 114}px;
+  padding-right: ${({ size }) => size !== 'normal' ? 0 : 80}px;
+  height: ${({ size }) => ({
+    normal: 114,
+    small: 62,
+    mini: 40
+  }[size])}px;
+  ${({ size }) => size === 'mini' ? `
+  box-shadow: none;
+  border-width: 0;
+  &:hover {
+    border-width: 0;
+  }
+  ` : ''}
 `
 
 const ProductContent = styled.div`
-  margin-left: ${({ size }) => size === 'small' ? 56 : 98}px;
+  margin-left: ${({ size }) => ({
+    normal: 98,
+    small: 56,
+    mini: 52
+  }[size])}px;
 `
 
 const ProductName = styled.h3`
-  font-size: ${({ size }) => size === 'small' ? 14 : 16}px;
+  font-size: ${({ size }) => ({
+    normal: 16,
+    small: 14,
+    mini: 12
+  }[size])}px;
   margin: 0;
-  line-height: 24px;
+  line-height: ${({ size }) => size !== 'mini' ? 24 : 40}px;
   overflow: hidden;
   text-overflow:ellipsis;
   white-space: nowrap;
   display: block;
+  font-weight: ${({ size }) => size !== 'mini' ? 'normal' : 'bold'};
   a {
     color: #303030;
   }
 `
 
 const ProductIcon = styled(IPFSImage)`
-  width: ${({ size }) => size === 'small' ? 44 : 80}px;
-  height: ${({ size }) => size === 'small' ? 44 : 80}px;
+  width: ${({ size }) => ({
+    normal: 80,
+    small: 44,
+    mini: 40
+  }[size])}px;
+  height: ${({ size }) => ({
+    normal: 80,
+    small: 44,
+    mini: 40
+  }[size])}px;
   float: left;
   object-fit: contain;
 `
@@ -140,7 +172,7 @@ export default ({
     topics: newTopics
   } = useProductMeta({ icon, topics })
   const renderMeta = () => {
-    if (size === 'small') return null
+    if (size !== 'normal') return null
     return (
       <ProductMeta>
         <Link href='/[id]' as={`/${id}#comments`}>
@@ -154,16 +186,20 @@ export default ({
       </ProductMeta>
     )
   }
+  const renderDescription = () => {
+    if (size === 'mini') return null
+    return (<Description size={size}>{description}</Description>)
+  }
   const renderCell = () => (
     <StyledLink size={size}>
-      <LazyLoad height={size} throttle={200} once>
+      <LazyLoad throttle={200} once>
         <ProductIcon alt={name} size={size} hash={hash && `${hash}-160-160-contain`} />
       </LazyLoad>
       <ProductContent size={size}>
         <ProductName size={size}>
           {name}
         </ProductName>
-        <Description size={size}>{description}</Description>
+        {renderDescription()}
       </ProductContent>
     </StyledLink>
   )
@@ -177,13 +213,13 @@ export default ({
     )
   }
   const renderLikes = () => {
-    if (size === 'small') return null
+    if (size !== 'normal') return null
     return (
       <StyledProductLike title='' id={id} likeCount={likeCount} isLike={isLike} />
     )
   }
   const renderTag = () => {
-    if (size === 'small') return null
+    if (size !== 'normal') return null
     if (codeCount) {
       return (
         <ProductTag>免费兑换码</ProductTag>

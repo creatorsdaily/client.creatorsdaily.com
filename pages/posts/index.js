@@ -13,6 +13,7 @@ import PostCell from '../../components/PostCell'
 import Time from '../../components/Time'
 import RightSide from '../../components/RightSide'
 import withApollo from '../../libs/with-apollo'
+import LeftSide from '../../components/LeftSide'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
@@ -77,7 +78,12 @@ export default withApollo(() => {
       </Head>
       <StyledContainer>
         <Row type='flex' gutter={24}>
-          <Col lg={18} md={16} xs={24}>
+          <Col
+            xl={{
+              order: 1,
+              span: 14
+            }} lg={18} md={16} xs={24}
+          >
             <Spin spinning={loading}>
               {renderList()}
             </Spin>
@@ -88,7 +94,10 @@ export default withApollo(() => {
               {pagination}
             </Pagination>
           </Col>
-          <Col lg={6} md={8} xs={24}>
+          <Col xl={4} md={0} xs={24}>
+            <LeftSide />
+          </Col>
+          <Col xl={{ order: 2 }} lg={6} md={8} xs={24}>
             <RightSide />
           </Col>
         </Row>

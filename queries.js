@@ -176,6 +176,9 @@ query($id: String!) {
     creators {
       ${userFragment}
     }
+    likes {
+      ${userFragment}
+    }
     medias {
       id
       hash
@@ -207,8 +210,8 @@ query($id: String!) {
 `
 
 export const GET_PRODUCTS = gql`
-query($page: Int, $size: Int, $topic: [String!], $keyword: [String!]) {
-  getProducts(page: $page, size: $size, topic: $topic, keyword: $keyword) {
+query($page: Int, $size: Int, $topic: [String!], $keyword: [String!], $order: String) {
+  getProducts(page: $page, size: $size, topic: $topic, keyword: $keyword, order: $order) {
     total
     data {
       codeCount

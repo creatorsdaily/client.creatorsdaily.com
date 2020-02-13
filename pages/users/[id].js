@@ -14,6 +14,7 @@ import withApollo from '../../libs/with-apollo'
 import MoreButton from '../../components/MoreButton'
 import UserCard from '../../components/UserCard'
 import RightSide from '../../components/RightSide'
+import LeftSide from '../../components/LeftSide'
 
 const StyledContainer = styled(Container)`
 margin: 24px auto;
@@ -124,8 +125,13 @@ export default withApollo(() => {
         <meta key='description' name='description' content={`${process.env.NAME}第 ${user.number} 位成员`} />
       </Head>
       <StyledContainer>
-        <Row gutter={24}>
-          <Col lg={18} md={16} xs={24}>
+        <Row type='flex' gutter={24}>
+          <Col
+            xl={{
+              order: 1,
+              span: 14
+            }} lg={18} md={16} xs={24}
+          >
             <Spin spinning={loading}>
               <UserCard user={user} />
             </Spin>
@@ -136,7 +142,10 @@ export default withApollo(() => {
               {renderMoreLiked()}
             </Spin>
           </Col>
-          <Col lg={6} md={8} xs={24}>
+          <Col xl={4} md={0} xs={24}>
+            <LeftSide />
+          </Col>
+          <Col xl={{ order: 2 }} lg={6} md={8} xs={24}>
             <RightSide />
           </Col>
         </Row>

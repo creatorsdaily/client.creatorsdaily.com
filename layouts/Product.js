@@ -10,7 +10,7 @@ import { useQuery } from '@apollo/react-hooks'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
 import useCanEditProduct from '../hooks/useCanEditProduct'
-
+import WeChatButton from '../components/WeChatButton'
 import ProductHeader from '../components/ProductHeader'
 import ProductLike from '../components/ProductLike'
 import media from '../libs/media'
@@ -37,10 +37,16 @@ border-bottom: 1px solid #F0F0F0;
 border-top: 1px solid #F0F0F0;
 `
 
+const StyledWeChatButton = styled(WeChatButton)`
+  margin: 16px auto 0;
+  display: block;
+`
+
 export default ({ children }) => {
   const { pathname, query: { id } } = useRouter()
   const { loading, data } = useQuery(GET_PRODUCT, { variables: { id } })
   const product = get(data, 'product', {})
+  const creators = get(product, 'creators', [])
   const canEdit = useCanEditProduct(product)
   const keywords = (product.topics || []).map(x => x.name).join(',')
   const description = (product.description || '').slice(0, 120) + '...'
@@ -64,6 +70,15 @@ export default ({ children }) => {
       </Row>
     )
   }
+  const renderWeChat = () => {
+    if (!creators.length) {
+      return (
+        <StyledWeChatButton tooltip={`「${product.name}」暂无创造者，如果您是产品的创造者，请点击并联系微信认领`}>
+          点击认领产品
+        </StyledWeChatButton>
+      )
+    }
+  }
   return (
     <Page>
       <Head>
@@ -74,6 +89,7 @@ export default ({ children }) => {
       <Content>
         <Container>
           <Row type='flex' gutter={24} align='middle'>
+            {/* <Col xl={4} xs={0} /> */}
             <Col xxl={18} xl={17} lg={16} md={14} sm={24} xs={24}>
               <Spin spinning={loading}>
                 <ProductHeader {...product} />
@@ -83,6 +99,7 @@ export default ({ children }) => {
               <ProductLikeContainer>
                 {renderButton()}
                 <ProductLike id={product.id} likeCount={product.likeCount} isLike={product.isLike} loading={loading} />
+                {renderWeChat()}
               </ProductLikeContainer>
             </Col>
           </Row>

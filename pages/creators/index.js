@@ -12,6 +12,7 @@ import UserCard from '../../components/UserCard'
 import RightSide from '../../components/RightSide'
 import MoreButton from '../../components/MoreButton'
 import media from '../../libs/media'
+import LeftSide from '../../components/LeftSide'
 
 const StyledMoreButton = styled(MoreButton)`
 margin-bottom: 24px;
@@ -93,7 +94,12 @@ export default withApollo(() => {
       </Head>
       <StyledContainer>
         <Row type='flex' gutter={24}>
-          <Col lg={18} md={16} xs={24}>
+          <Col
+            xl={{
+              order: 1,
+              span: 14
+            }} lg={18} md={16} xs={24}
+          >
             <Header>
               <Typography.Title level={4}>创造者们</Typography.Title>
                 创造者们是创造者日报的灵魂，目前已入驻 <Typography.Text type='danger'>{total}</Typography.Text> 位创造者，你也是创造者？加入我们吧～
@@ -103,7 +109,10 @@ export default withApollo(() => {
             </Spin>
             {renderMore()}
           </Col>
-          <Col lg={6} md={8} xs={24}>
+          <Col xl={4} md={0} xs={24}>
+            <LeftSide />
+          </Col>
+          <Col xl={{ order: 2 }} lg={6} md={8} xs={24}>
             <RightSide />
           </Col>
         </Row>

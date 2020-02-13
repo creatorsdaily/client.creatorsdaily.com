@@ -33,7 +33,7 @@ export default ({ tooltip, children, ...rest }) => {
     return button
   }
   return (
-    <Tooltip placement='top' title={tooltip}>
+    <Tooltip placement='bottom' title={tooltip}>
       {button}
     </Tooltip>
   )

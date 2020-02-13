@@ -1,16 +1,22 @@
 import Head from 'next/head'
 import styled from 'styled-components'
 import validate from 'uuid-validate'
-import { Col, Row, Spin } from 'antd'
+import { Spin } from 'antd'
 import Container from '../../../components/Container'
 import Milestones from '../../../components/Milestones'
 import withApollo from '../../../libs/with-apollo'
 import Product from '../../../layouts/Product'
-import PorductSider from '../../../components/ProductSider'
+import ProductInner from '../../../layouts/ProductInner'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
 margin-bottom: 24px;
+`
+
+const MilestonesHeader = styled.h1`
+margin-bottom: 24px;
+border-bottom: 1px solid #F0F0F0;
+padding-bottom: 24px;
 `
 
 const Content = ({ id, product, loading }) => {
@@ -19,16 +25,15 @@ const Content = ({ id, product, loading }) => {
       <Head>
         <title>里程碑 · {product.name} - {process.env.NAME}</title>
       </Head>
-      <Row type='flex' gutter={24}>
-        <Col xxl={18} xl={17} lg={16} md={14} sm={24} xs={24}>
-          <Spin spinning={loading}>
-            <Milestones productId={id} product={product} />
-          </Spin>
-        </Col>
-        <Col xxl={6} xl={7} lg={8} md={10} sm={24} xs={24}>
-          <PorductSider {...product} />
-        </Col>
-      </Row>
+      <ProductInner product={product}>
+        <Spin spinning={loading}>
+          <Milestones
+            productId={id}
+            product={product}
+            renderHeader={() => (<MilestonesHeader>「{product.name}」的大事记</MilestonesHeader>)}
+          />
+        </Spin>
+      </ProductInner>
     </StyledContainer>
   )
 }
