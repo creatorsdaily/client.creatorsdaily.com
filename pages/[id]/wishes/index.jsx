@@ -19,7 +19,7 @@ const Content = ({ id, product, loading }) => {
       <Head>
         <title>新愿 · {product.name} - {process.env.NAME}</title>
       </Head>
-      <ProductInner product={product}>
+      <ProductInner loading={loading} product={product}>
         <Spin spinning={loading}>
           <Wishes productId={id} product={product} />
         </Spin>

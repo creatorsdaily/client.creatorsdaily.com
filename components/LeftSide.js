@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Spin } from 'antd'
+import { Skeleton } from 'antd'
 import get from 'lodash/get'
 import { useQuery } from '@apollo/react-hooks'
 import { GET_PRODUCTS } from '../queries'
@@ -19,14 +19,20 @@ export default () => {
     }
   })
   const products = get(data, 'getProducts.data', [])
+  const renderProductList = () => {
+    if (loading) {
+      return (
+        <Skeleton active={loading} />
+      )
+    }
+    return products.map(x => (
+      <ProductCell key={x.id} {...x} size='mini' />
+    ))
+  }
   return (
     <Container>
       <SmallTitle>产品好评榜</SmallTitle>
-      <Spin spinning={loading}>
-        {products.map(x => (
-          <ProductCell key={x.id} {...x} size='mini' />
-        ))}
-      </Spin>
+      {renderProductList()}
     </Container>
   )
 }

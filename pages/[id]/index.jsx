@@ -17,7 +17,7 @@ margin-top: 24px;
 const Content = ({ id, product, loading }) => {
   return (
     <StyledContainer>
-      <ProductInner product={product}>
+      <ProductInner loading={loading} product={product}>
         <Spin spinning={loading}>
           <Product {...product} full />
         </Spin>

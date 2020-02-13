@@ -87,7 +87,7 @@ const Content = ({ id, product, loading }) => {
         <title>{wish.title} · {product.name} - {process.env.NAME}</title>
         <meta key='description' name='description' content={description} />
       </Head>
-      <ProductInner product={product}>
+      <ProductInner loading={loading} product={product}>
         <Spin spinning={loading}>
           <WishHeader>
             <Tag color={wishTypeColors[wish.type]}>

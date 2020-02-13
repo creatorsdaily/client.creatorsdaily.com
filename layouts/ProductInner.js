@@ -2,7 +2,7 @@ import { Col, Row } from 'antd'
 import PorductSider from '../components/ProductSider'
 import ProductLeftSider from '../components/ProductLeftSider'
 
-export default ({ product, children }) => {
+export default ({ product, loading, children }) => {
   return (
     <Row type='flex' gutter={24}>
       <Col
@@ -26,7 +26,7 @@ export default ({ product, children }) => {
           span: 7
         }} lg={8} md={10} sm={24} xs={24}
       >
-        <PorductSider {...product} />
+        <PorductSider loading={loading} {...product} />
       </Col>
       <Col
         xxl={{
@@ -37,7 +37,7 @@ export default ({ product, children }) => {
           span: 4
         }} lg={0} md={0} sm={24} xs={24}
       >
-        <ProductLeftSider likes={product.likes} />
+        <ProductLeftSider loading={loading} likes={product.likes} />
       </Col>
     </Row>
   )

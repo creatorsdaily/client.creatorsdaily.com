@@ -74,7 +74,7 @@ const Content = ({ id, product, loading: productLoading }) => {
         <title>{milestone.title} · {product.name} - {process.env.NAME}</title>
         <meta key='description' name='description' content={description} />
       </Head>
-      <ProductInner product={product}>
+      <ProductInner loading={loading} product={product}>
         <Spin spinning={loading}>
           <MilestoneHeader>
             <div>里程碑</div>

@@ -3,15 +3,7 @@ import styled from 'styled-components'
 import { Button, Divider, Input } from 'antd'
 import { forwardRef, useEffect, useState } from 'react'
 import noop from 'lodash/noop'
-import AndroidFilled from '@ant-design/icons/CaretUpOutlined'
-import AppleFilled from '@ant-design/icons/AppleFilled'
-import ChromeFilled from '@ant-design/icons/ChromeFilled'
-import CompassFilled from '@ant-design/icons/CompassFilled'
-import DeleteOutlined from '@ant-design/icons/DeleteOutlined'
-import GithubFilled from '@ant-design/icons/GithubFilled'
-import PlusOutlined from '@ant-design/icons/PlusOutlined'
-import RightOutlined from '@ant-design/icons/RightOutlined'
-import WechatFilled from '@ant-design/icons/WechatFilled'
+import { AndroidFilled, AppleFilled, ChromeFilled, CompassFilled, DeleteOutlined, GithubFilled, PlusOutlined, RightOutlined, WechatFilled } from '@ant-design/icons'
 
 const Links = styled.div`
 `
