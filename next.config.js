@@ -38,14 +38,54 @@ module.exports = withPlugins([
     workboxOpts: {
       swDest: path.join(__dirname, 'public/service-worker.js'),
       runtimeCaching: [{
+        urlPattern: /^https:\/\/media\.creatorsdaily\.com\/.*/i,
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'media-creatorsdaily-com',
+          expiration: {
+            maxEntries: 1,
+            maxAgeSeconds: 24 * 60 * 60 * 365
+          }
+        }
+      }, {
+        urlPattern: /\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'static-image-assets',
+          expiration: {
+            maxEntries: 1024,
+            maxAgeSeconds: 24 * 60 * 60 * 30
+          }
+        }
+      }, {
+        urlPattern: /\.(?:js)$/i,
+        handler: 'StaleWhileRevalidate',
+        options: {
+          cacheName: 'static-js-assets',
+          expiration: {
+            maxEntries: 512,
+            maxAgeSeconds: 24 * 60 * 60 * 3
+          }
+        }
+      }, {
+        urlPattern: /\.(?:css)$/i,
+        handler: 'StaleWhileRevalidate',
+        options: {
+          cacheName: 'static-style-assets',
+          expiration: {
+            maxEntries: 128,
+            maxAgeSeconds: 24 * 60 * 60 * 3
+          }
+        }
+      }, {
         urlPattern: /^https?.*/,
         handler: 'NetworkFirst',
         options: {
-          cacheName: 'offlineCache',
+          cacheName: 'others',
           expiration: {
             maxEntries: 200
           },
-          networkTimeoutSeconds: 10,
+          networkTimeoutSeconds: 3,
           cacheableResponse: {
             statuses: [0, 200]
           }
