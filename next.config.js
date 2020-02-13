@@ -38,17 +38,37 @@ module.exports = withPlugins([
     workboxOpts: {
       swDest: path.join(__dirname, 'public/service-worker.js'),
       runtimeCaching: [{
+        urlPattern: /^https:\/\/www\.gravatar\.com\/.*/i,
+        handler: 'CacheFirst',
+        options: {
+          cacheName: 'one-signal',
+          expiration: {
+            maxEntries: 512,
+            maxAgeSeconds: 24 * 60 * 60 * 3
+          }
+        }
+      }, {
+        urlPattern: /^https:\/\/cdn\.onesignal\.com\/.*/i,
+        handler: 'StaleWhileRevalidate',
+        options: {
+          cacheName: 'one-signal',
+          expiration: {
+            maxEntries: 8,
+            maxAgeSeconds: 24 * 60 * 60 * 3
+          }
+        }
+      }, {
         urlPattern: /^https:\/\/media\.creatorsdaily\.com\/.*/i,
         handler: 'CacheFirst',
         options: {
           cacheName: 'media-creatorsdaily-com',
           expiration: {
-            maxEntries: 1,
+            maxEntries: 1024,
             maxAgeSeconds: 24 * 60 * 60 * 365
           }
         }
       }, {
-        urlPattern: /\.(?:jpg|jpeg|gif|png|svg|ico|webp)$/i,
+        urlPattern: /\.(?:jpg|jpeg|gif|png|svg|ico|webp)(\?.*)?$/i,
         handler: 'CacheFirst',
         options: {
           cacheName: 'static-image-assets',
@@ -58,7 +78,7 @@ module.exports = withPlugins([
           }
         }
       }, {
-        urlPattern: /\.(?:js)$/i,
+        urlPattern: /\.(?:js)(\?.*)?$/i,
         handler: 'StaleWhileRevalidate',
         options: {
           cacheName: 'static-js-assets',
@@ -68,7 +88,7 @@ module.exports = withPlugins([
           }
         }
       }, {
-        urlPattern: /\.(?:css)$/i,
+        urlPattern: /\.(?:css)(\?.*)?$/i,
         handler: 'StaleWhileRevalidate',
         options: {
           cacheName: 'static-style-assets',
@@ -83,7 +103,7 @@ module.exports = withPlugins([
         options: {
           cacheName: 'others',
           expiration: {
-            maxEntries: 200
+            maxEntries: 512
           },
           networkTimeoutSeconds: 3,
           cacheableResponse: {
