@@ -19,20 +19,14 @@ export default () => {
     }
   })
   const products = get(data, 'getProducts.data', [])
-  const renderProductList = () => {
-    if (loading) {
-      return (
-        <Skeleton active={loading} />
-      )
-    }
-    return products.map(x => (
-      <ProductCell key={x.id} {...x} size='mini' />
-    ))
-  }
   return (
     <Container>
       <SmallTitle>产品好评榜</SmallTitle>
-      {renderProductList()}
+      <Skeleton active loading={loading}>
+        {products.map(x => (
+          <ProductCell key={x.id} {...x} size='mini' />
+        ))}
+      </Skeleton>
     </Container>
   )
 }

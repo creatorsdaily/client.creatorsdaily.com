@@ -25,26 +25,22 @@ export default ({ likes = [], loading: productLoading }) => {
     return (
       <Container>
         <SmallTitle>喜欢它的用户</SmallTitle>
-        {productLoading ? <Skeleton active={loading} /> : <Users list={likes} />}
+        <Skeleton active loading={productLoading}>
+          <Users list={likes} />
+        </Skeleton>
       </Container>
     )
-  }
-  const renderProductList = () => {
-    if (loading) {
-      return (
-        <Skeleton active={loading} />
-      )
-    }
-    return products.map(x => (
-      <ProductCell key={x.id} {...x} size='mini' />
-    ))
   }
   return (
     <>
       {renderLikes()}
       <Container>
         <SmallTitle>产品好评榜</SmallTitle>
-        {renderProductList()}
+        <Skeleton active loading={loading}>
+          {products.map(x => (
+            <ProductCell key={x.id} {...x} size='mini' />
+          ))}
+        </Skeleton>
       </Container>
     </>
   )

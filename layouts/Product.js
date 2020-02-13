@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Col, Menu, Row, Spin } from 'antd'
+import { Button, Col, Menu, Row, Skeleton } from 'antd'
 import styled from 'styled-components'
 import Link from 'next/link'
 import get from 'lodash/get'
@@ -42,6 +42,13 @@ const StyledWeChatButton = styled(WeChatButton)`
   display: block;
 `
 
+const SkeletonContainer = styled.div`
+padding: 0 16px;
+${media.sm`
+  padding: 0;
+`}
+`
+
 export default ({ children }) => {
   const { pathname, query: { id } } = useRouter()
   const { loading, data } = useQuery(GET_PRODUCT, { variables: { id } })
@@ -79,6 +86,16 @@ export default ({ children }) => {
       )
     }
   }
+  const renderProductHeader = () => {
+    if (loading) {
+      return (
+        <SkeletonContainer>
+          <Skeleton active paragraph={{ rows: 3 }} title={false} avatar={{ shape: 'square', size: 80 }} loading={loading} />
+        </SkeletonContainer>
+      )
+    }
+    return (<ProductHeader {...product} />)
+  }
   return (
     <Page>
       <Head>
@@ -91,9 +108,7 @@ export default ({ children }) => {
           <Row type='flex' gutter={24} align='middle'>
             {/* <Col xl={4} xs={0} /> */}
             <Col xxl={18} xl={17} lg={16} md={14} sm={24} xs={24}>
-              <Spin spinning={loading}>
-                <ProductHeader {...product} />
-              </Spin>
+              {renderProductHeader()}
             </Col>
             <Col xxl={6} xl={7} lg={8} md={10} sm={24} xs={24}>
               <ProductLikeContainer>
@@ -112,7 +127,7 @@ export default ({ children }) => {
               <Link href='/[id]' as={`/${product.id}`}>
                 <a>
                   <AppstoreOutlined />
-                    详情
+                  详情
                 </a>
               </Link>
             </Menu.Item>
@@ -120,7 +135,7 @@ export default ({ children }) => {
               <Link href='/[id]/milestones' as={`/${product.id}/milestones`}>
                 <a>
                   <FlagOutlined />
-                    里程碑
+                  里程碑
                 </a>
               </Link>
             </Menu.Item>
@@ -129,7 +144,7 @@ export default ({ children }) => {
                 <Link href='/[id]/codes' as={`/${product.id}/codes`}>
                   <a>
                     <GiftOutlined />
-                  兑换码
+                    兑换码
                   </a>
                 </Link>
               </Menu.Item>)}
@@ -137,7 +152,7 @@ export default ({ children }) => {
               <Link href='/[id]/wishes' as={`/${product.id}/wishes`}>
                 <a>
                   <HeartOutlined />
-                心愿
+                  心愿
                 </a>
               </Link>
             </Menu.Item>
