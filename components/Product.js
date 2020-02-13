@@ -113,7 +113,7 @@ export const ProductContainer = ({ id, full = false }) => {
   const product = get(data, 'product', {})
   return (
     <Spin spinning={loading}>
-      <Product {...product} full={full} />
+      <Product {...product} full={full} withHeader />
     </Spin>
   )
 }

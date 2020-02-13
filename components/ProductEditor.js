@@ -76,7 +76,7 @@ export default ({ step, product = {}, ...rest }) => {
   }
   const renderStep3Preview = () => {
     const product = (
-      <Product {...preview} full />
+      <Product {...preview} full withHeader />
     )
     if (step === 'all') {
       return product
