@@ -3,7 +3,6 @@ import Head from 'next/head'
 import { Col, Empty, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import styled from 'styled-components'
-import { useRouter } from 'next/router'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import { GET_QUESTIONS } from '../../queries'
@@ -16,7 +15,9 @@ import useCreateOptionModal from '../../hooks/useCreateOptionModal'
 import { TopicList, TopicsBar } from '../../components/Topics'
 
 const StyledContainer = styled(Container)`
+${media.lg`
 margin-top: 24px;
+`}
 `
 
 const Pagination = styled.div`

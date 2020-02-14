@@ -68,7 +68,11 @@ right: 100px;
 const Container = styled(Box)`
   position: relative;
   overflow: hidden;
-  padding-right: ${({ size }) => size === 'mini' ? 0 : 80}px;
+  padding-right: ${({ size }) => ({
+    normal: 80,
+    small: 50,
+    mini: 0
+  }[size])}px;
   height: ${({ size }) => ({
     normal: 114,
     small: 62,
