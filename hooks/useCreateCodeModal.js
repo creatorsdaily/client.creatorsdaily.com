@@ -52,17 +52,15 @@ export default (productId, {
       visible={visible}
       title='发布产品兑换码'
       onCancel={hide}
-      onOk={() => {
-        form.validateFields((err, {
+      onOk={async () => {
+        const {
           codes
-        }) => {
-          if (err) return
-          create({
-            variables: {
-              productId,
-              codes: codes.split('\n').filter(x => !!x)
-            }
-          })
+        } = await form.validateFields()
+        create({
+          variables: {
+            productId,
+            codes: codes.split('\n').filter(x => !!x)
+          }
         })
       }}
     >

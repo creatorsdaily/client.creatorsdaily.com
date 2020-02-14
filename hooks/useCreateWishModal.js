@@ -53,23 +53,21 @@ export default (productId, {
       visible={visible}
       title='创建「新愿」'
       onCancel={hide}
-      onOk={() => {
-        form.validateFields((err, {
+      onOk={async () => {
+        const {
           type,
           title,
           content
-        }) => {
-          if (err) return
-          create({
-            variables: {
-              wish: {
-                productId,
-                type,
-                title,
-                content
-              }
+        } = await form.validateFields()
+        create({
+          variables: {
+            wish: {
+              productId,
+              type,
+              title,
+              content
             }
-          })
+          }
         })
       }}
     >

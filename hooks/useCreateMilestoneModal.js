@@ -52,21 +52,19 @@ export default (productId, {
       visible={visible}
       title='新里程碑'
       onCancel={hide}
-      onOk={() => {
-        form.validateFields((err, {
+      onOk={async () => {
+        const {
           title,
           content
-        }) => {
-          if (err) return
-          create({
-            variables: {
-              milestone: {
-                productId,
-                title,
-                content
-              }
+        } = await form.validateFields()
+        create({
+          variables: {
+            milestone: {
+              productId,
+              title,
+              content
             }
-          })
+          }
         })
       }}
     >
