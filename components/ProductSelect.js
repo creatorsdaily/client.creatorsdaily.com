@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useState } from 'react'
 import { Button, Input, Spin } from 'antd'
 import get from 'lodash/get'
-import { useQuery } from '@apollo/react-hooks'
+import { useLazyQuery, useQuery } from '@apollo/react-hooks'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
 import uniqBy from 'lodash/uniqBy'
@@ -74,10 +74,8 @@ export default forwardRef((props, ref) => {
     },
     skip: !question
   })
-  const { data, loading: searchLoading, refetch } = useQuery(SEARCH_PRODUCTS, {
-    skip: true
-  })
-  const searchList = get(data, 'getProducts.data', [])
+  const [search, { data, loading: searchLoading }] = useLazyQuery(SEARCH_PRODUCTS)
+  const searchList = get(data, 'searchProducts.data', [])
   useEffect(() => setValue(nValue), [nValue])
   const products = searchList.length ? searchList : uniqBy([].concat(
     get(questionData, 'getQuestion.options', []).map(x => x.product),
@@ -97,15 +95,17 @@ export default forwardRef((props, ref) => {
     )
   }
   const handleSearch = keyword => {
-    refetch({
-      keyword
+    search({
+      variables: {
+        keyword
+      }
     })
   }
   const renderSelect = () => {
     if (value) return null
     return (
       <>
-        <Search placeholder='搜索产品' size='large' onSearch={handleSearch} />
+        <Search placeholder='搜索产品' size='large' loading={searchLoading} onSearch={handleSearch} />
         <Spin spinning={loading || questionLoading || searchLoading}>
           <List>
             {products.map((product) => (
