@@ -2,6 +2,26 @@ import omitBy from 'lodash/omitBy'
 import isUndefined from 'lodash/isUndefined'
 import pick from 'lodash/pick'
 
+export const formToQuestion = form => {
+  const data = omitBy(form, isUndefined)
+  if (data.topics) {
+    data.topics = data.topics.map(x => ({
+      id: x
+    }))
+  }
+  return data
+}
+
+export const questionToForm = question => {
+  const data = pick(omitBy(question, isUndefined), [
+    'name', 'topics'
+  ])
+  if (data.topics && data.topics.length) {
+    data.topics = data.topics.map(x => x.id)
+  }
+  return data
+}
+
 export const formToProduct = form => {
   const data = omitBy(form, isUndefined)
   if (data.icon) {

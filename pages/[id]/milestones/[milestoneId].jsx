@@ -17,7 +17,6 @@ import UserCell from '../../../components/UserCell'
 import withApollo from '../../../libs/with-apollo'
 import Product from '../../../layouts/Product'
 import ProductInner from '../../../layouts/ProductInner'
-import ProductCell from '../../../components/ProductCell'
 
 const StyledContainer = styled(Container)`
   margin-top: 24px;

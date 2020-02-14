@@ -24,7 +24,7 @@ const Username = styled.div`
 line-height: 32px;
 font-size: 13px;
 font-weight: bold;
-margin-right: 8px;
+margin-right: 0;
 margin-left: 12px;
 white-space: nowrap;
 flex: 1;

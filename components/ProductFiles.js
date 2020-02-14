@@ -112,7 +112,7 @@ export default forwardRef(({ children, height = 300, medias = [], onLoad = noop,
     )
   }
   return (
-    <StyledCarousel autoplay infinite variableWidth centerMode slidesToScroll={1} slidesToShow={1} height={height} {...rest} ref={ref}>
+    <StyledCarousel arrows autoplay infinite variableWidth centerMode slidesToScroll={1} slidesToShow={1} height={height} {...rest} ref={ref}>
       {images}
       {children}
     </StyledCarousel>

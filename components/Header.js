@@ -51,6 +51,9 @@ const menu = [{
   name: '创造者们',
   href: '/creators'
 }, {
+  name: '问题',
+  href: '/questions'
+}, {
   name: '日报',
   href: '/posts'
 }/*, {

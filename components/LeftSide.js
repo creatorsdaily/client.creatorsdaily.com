@@ -9,6 +9,11 @@ import ProductCell from './ProductCell'
 
 const Container = styled(Box)`
 padding: 6px 16px 0;
+margin-bottom: 24px;
+`
+
+const StyledProductCell = styled(ProductCell)`
+margin-bottom: 12px;
 `
 
 export default () => {
@@ -24,7 +29,7 @@ export default () => {
       <SmallTitle>产品好评榜</SmallTitle>
       <Skeleton active loading={loading}>
         {products.map(x => (
-          <ProductCell key={x.id} {...x} size='mini' />
+          <StyledProductCell key={x.id} {...x} size='mini' />
         ))}
       </Skeleton>
     </Container>

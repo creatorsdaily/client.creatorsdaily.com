@@ -19,6 +19,7 @@ margin: 24px auto;
 
 const StyledBox = styled(Box)`
 padding: 16px;
+margin-bottom: 24px;
 `
 
 const StyledProductCell = styled(ProductCell)`
@@ -67,7 +68,8 @@ export default withApollo(() => {
         product={comment.product}
         loading={loading || createLoading}
         comment={comment}
-        onReply={handleReply} />
+        onReply={handleReply}
+      />
     )
   }
   return (

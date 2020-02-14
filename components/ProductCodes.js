@@ -13,6 +13,7 @@ import UserCell from './UserCell'
 
 const StyledBox = styled(Box)`
 padding: 16px 16px 4px;
+margin-bottom: 24px;
 `
 
 const Header = styled.div`

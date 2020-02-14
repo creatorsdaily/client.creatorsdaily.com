@@ -37,10 +37,11 @@ margin-bottom: 24px;
 `
 
 const Content = styled(Box)`
-  padding: 24px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
+padding: 24px;
+display: flex;
+align-items: center;
+flex-direction: column;
+margin-bottom: 24px;
 `
 
 const LikeImages = styled.div`

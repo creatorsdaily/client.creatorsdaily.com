@@ -1,11 +1,10 @@
 import React from 'react'
-import { Button, Col, Empty, Row, Spin } from 'antd'
+import { Col, Empty, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import styled from 'styled-components'
 import Link from 'next/link'
 import { useQuery } from '@apollo/react-hooks'
 import { useRouter } from 'next/router'
-import PlusOutlined from '@ant-design/icons/PlusOutlined'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
 import ProductCell from '../components/ProductCell'
@@ -25,6 +24,10 @@ margin-top: 24px;
 `}
 `
 
+const StyledProductCell = styled(ProductCell)`
+margin-bottom: 24px;
+`
+
 const Pagination = styled.div`
 padding: 0 24px;
 margin-bottom: 24px;
@@ -35,14 +38,6 @@ ${media.sm`
 
 const StyledPostCell = styled(PostCell)`
 margin-bottom: 12px;
-`
-
-const CreateButton = styled.a`
-margin: 0 24px 24px;
-display: block;
-${media.sm`
-  margin: 0 0 24px;
-`}
 `
 
 const StyledTopicsBar = styled(TopicsBar)`
@@ -79,7 +74,7 @@ export default withApollo(() => {
   const renderList = () => {
     if (products.length) {
       return products.map(product => (
-        <ProductCell {...product} key={product.id} />
+        <StyledProductCell {...product} key={product.id} />
       ))
     }
     return (
@@ -120,7 +115,7 @@ export default withApollo(() => {
   return (
     <Page>
       <StyledContainer>
-        <Row gutter={24}>
+        <Row type='flex' gutter={24}>
           <Col lg={0} xs={24}>
             <StyledTopicsBar href='/' checkable />
           </Col>
@@ -141,11 +136,6 @@ export default withApollo(() => {
             </Pagination>
           </Col>
           <Col lg={6} md={8} xs={24}>
-            <Link href='/create' passHref>
-              <CreateButton>
-                <Button type='primary' icon={<PlusOutlined />} size='large' block>发布产品</Button>
-              </CreateButton>
-            </Link>
             <RightSide />
           </Col>
         </Row>

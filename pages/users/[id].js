@@ -20,6 +20,10 @@ const StyledContainer = styled(Container)`
 margin: 24px auto;
 `
 
+const StyledProductCell = styled(ProductCell)`
+margin-bottom: 24px;
+`
+
 export default withApollo(() => {
   const size = 15
   const [discoveredPage, setDiscoveredPage] = useState(1)
@@ -41,7 +45,7 @@ export default withApollo(() => {
   const renderList = (list, size) => {
     if (list.length) {
       return list.map(product => (
-        <ProductCell {...product} key={product.id} size={size} />
+        <StyledProductCell {...product} key={product.id} size={size} />
       ))
     }
     return (

@@ -18,6 +18,10 @@ const StyledContent = styled(ProductContent)`
   background: #FFF;
 `
 
+const StyledBox = styled(Box)`
+margin-bottom: 24px;
+`
+
 const ProductMeta = styled.div`
 padding: 24px;
 background: #FFF;
@@ -80,7 +84,7 @@ const Product = ({
   return (
     <div id={id}>
       {renderHeader()}
-      <Box>
+      <StyledBox>
         <ProductFiles medias={medias} />
         <ProductMeta>
           <div>
@@ -97,7 +101,7 @@ const Product = ({
           </Tooltip>
         </ProductMeta>
         <StyledContent content={content} full={full} />
-      </Box>
+      </StyledBox>
     </div>
   )
 }

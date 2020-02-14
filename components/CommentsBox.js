@@ -12,6 +12,7 @@ min-height: 32px;
 
 const StyledBox = styled(Box)`
 padding: 16px;
+margin-bottom: 24px;
 `
 
 const EditorBox = styled.div`

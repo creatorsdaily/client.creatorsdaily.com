@@ -34,6 +34,19 @@ avatar {
 }
 `
 
+const questionFragment = `
+id
+name
+createdAt
+user {
+  ${userFragment}
+}
+topics {
+  id
+  name
+}
+`
+
 const postFragment = `
 id
 title
@@ -239,6 +252,17 @@ query($page: Int, $size: Int, $score: Int, $keyword: String!) {
 }
 `
 
+export const SEARCH_QUESTION = gql`
+query($page: Int, $size: Int, $score: Int, $keyword: String!) {
+  searchQuestion(page: $page, size: $size, score: $score, keyword: $keyword) {
+    total
+    data {
+      name
+    }
+  }
+}
+`
+
 export const GET_POSTS = gql`
 query($page: Int, $size: Int) {
   getPosts(page: $page, size: $size) {
@@ -431,6 +455,62 @@ query($page: Int, $size: Int, $productId: String, $milestoneId: String, $wishId:
       }
     },
     total
+  }
+}
+`
+
+export const GET_QUESTION = gql`
+query($id: String!) {
+  getQuestion(id: $id) {
+    ${questionFragment}
+    options {
+      rank
+      value
+      questionId
+      product {
+        ${productFragment}
+      }
+      ups {
+        id
+        reason
+        positive
+        createdAt
+        user {
+          id
+          nickname
+          username
+        }
+      }
+      downs {
+        id
+        reason
+        positive
+        createdAt
+        user {
+          id
+          nickname
+          username
+        }
+      }
+    }
+  }
+}
+`
+
+export const GET_QUESTIONS = gql`
+query($page: Int, $size: Int, $topic: [String!]) {
+  getQuestions(page: $page, size: $size, topic: $topic) {
+    total
+    data {
+      ${questionFragment}
+      options {
+        rank
+        value
+        product {
+          ${productFragment}
+        }
+      }
+    }
   }
 }
 `

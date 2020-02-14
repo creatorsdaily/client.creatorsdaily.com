@@ -51,6 +51,7 @@ white-space: nowrap;
 
 const MilestoneBox = styled(Box)`
 padding: 10px;
+margin-bottom: 24px;
 `
 
 const StyledDivider = styled(Divider)`

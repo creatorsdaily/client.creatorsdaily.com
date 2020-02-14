@@ -29,6 +29,7 @@ ${({ hasParent, hasChildren }) => (hasParent || !hasChildren) ? '' : `
 
 const StyledTag = styled(Tag)`
 height: 22px;
+margin-left: 10px;
 `
 
 const CommentHeader = styled.div`

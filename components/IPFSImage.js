@@ -27,7 +27,7 @@ const SmallEmpty = styled(Empty)`
   }
   .ant-empty-image {
     height: ${({ size }) => size === 'mini' ? 40 : 20}px;
-    margin-bottom: 0;
+    margin: 0 auto;
     width: 40px;
     transform: translateY(${({ size }) => size === 'mini' ? 0 : 4}px);
     svg {

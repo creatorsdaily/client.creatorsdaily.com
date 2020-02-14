@@ -12,6 +12,7 @@ display: flex;
 color: rgba(0, 0, 0, 0.65);
 padding: 12px;
 margin-top: 48px;
+margin-bottom: 24px;
 `
 
 const UserAvatar = styled(Avatar)`

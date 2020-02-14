@@ -17,6 +17,7 @@ import Time from '../../components/Time'
 
 const StyledProductCell = styled(ProductCell)`
 margin-top: 10px;
+margin-bottom: 24px;
 `
 
 const StyledSmallTitle = styled(SmallTitle)`

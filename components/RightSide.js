@@ -4,6 +4,8 @@ import noop from 'lodash/noop'
 import Link from 'next/link'
 import BulbOutlined from '@ant-design/icons/BulbOutlined'
 import MessageOutlined from '@ant-design/icons/MessageOutlined'
+import { PlusOutlined } from '@ant-design/icons';
+import media from '../libs/media'
 import Box from './Box'
 import WeChatOfficialAccount from './WeChatOfficialAccount'
 import ZSXQ from './ZSXQ'
@@ -14,6 +16,7 @@ import SmallTitle from './SmallTitle'
 
 const StyledBox = styled(Box)`
 padding: 16px;
+margin-bottom: 24px;
 img {
   max-width: 100%;
 }
@@ -27,6 +30,7 @@ const Title = styled.h3`
 const ContactBox = styled(Box)`
 padding: 16px;
 margin-top: 24px;
+margin-bottom: 24px;
 button {
   color: #6C6C6C;
 }
@@ -63,6 +67,7 @@ transform: scale(0.82);
 
 const WeApp = styled(Box)`
 padding: 16px;
+margin-bottom: 24px;
 display: flex;
 button {
   color: #6C6C6C;
@@ -99,6 +104,7 @@ img {
 `
 
 const Buttons = styled(Box)`
+margin-bottom: 24px;
 `
 
 const BigButton = styled(Button)`
@@ -138,6 +144,22 @@ width: 100%;
   text-overflow:ellipsis;
   white-space: nowrap;
 }
+`
+
+const CreateButton = styled.a`
+margin: 0 0 24px 24px;
+display: block;
+${media.sm`
+  margin: 0 0 24px;
+`}
+`
+
+const CreateQuestionButton = styled.a`
+margin-right: 24px;
+display: block;
+${media.sm`
+  margin-right: 0;
+`}
 `
 
 const partners = [{
@@ -186,6 +208,22 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
   }
   return (
     <>
+      <Row type='flex' gutter={24}>
+        <Col span={14}>
+          <Link href='/create' passHref>
+            <CreateButton>
+              <Button type='primary' icon={<PlusOutlined />} size='large' block>发布产品</Button>
+            </CreateButton>
+          </Link>
+        </Col>
+        <Col span={10}>
+          <Link href='/questions/create' passHref>
+            <CreateQuestionButton>
+              <Button size='large' block>提问</Button>
+            </CreateQuestionButton>
+          </Link>
+        </Col>
+      </Row>
       <Buttons>
         <Row type='flex'>
           <Col span={12}>

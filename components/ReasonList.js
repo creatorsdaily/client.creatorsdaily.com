@@ -10,7 +10,7 @@ const ReasonTitle = styled.h3`
 margin: 16px 0;
 `
 
-export default ({ list = {}, positive = false, withOutTitle = false, ...rest }) => {
+export default ({ list = [], positive = false, withOutTitle = false, ...rest }) => {
   const reasons = list.filter(x => x.reason)
   if (!reasons.length) {
     return (<div {...rest} style={{ opacity: 0 }} />)

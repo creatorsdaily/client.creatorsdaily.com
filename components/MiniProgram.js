@@ -15,6 +15,7 @@ padding: 12px;
 display: flex;
 align-items: center;
 cursor: pointer;
+margin-bottom: 24px;
 `
 
 const Content = styled.div`

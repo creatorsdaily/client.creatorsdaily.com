@@ -28,15 +28,26 @@ const StyledProductLike = styled(ProductLike)`
   }
 `
 
-const StyledLink = styled.a`
-  width: 100%;
-  height: 100%;
-  display: block;
-  padding: ${({ size }) => ({
-    normal: 16,
-    small: 8,
-    mini: 0
-  }[size])}px;
+const SmallProductLike = styled.div`
+position: absolute;
+right: 12px;
+top: 0;
+line-height: 60px;
+font-size: 12px;
+span {
+  margin-right: 4px;
+  font-weight: bold;
+}
+`
+
+const Cell = styled.div`
+width: 100%;
+height: 100%;
+padding: ${({ size }) => ({
+  normal: 16,
+  small: 8,
+  mini: 0
+}[size])}px;
 `
 
 const ProductMeta = styled.div`
@@ -54,10 +65,9 @@ right: 100px;
 `
 
 const Container = styled(Box)`
-  margin-bottom: ${({ size }) => size !== 'mini' ? 24 : 16}px;
   position: relative;
   overflow: hidden;
-  padding-right: ${({ size }) => size !== 'normal' ? 0 : 80}px;
+  padding-right: ${({ size }) => size === 'mini' ? 0 : 80}px;
   height: ${({ size }) => ({
     normal: 114,
     small: 62,
@@ -66,6 +76,7 @@ const Container = styled(Box)`
   ${({ size }) => size === 'mini' ? `
   box-shadow: none;
   border-width: 0;
+  background: none;
   &:hover {
     border-width: 0;
   }
@@ -165,6 +176,7 @@ font-size: 12px;
 export default ({
   id, disabled = false, topics = [], size = 'normal', isMiniProgram,
   likeCount, commentCount, codeCount, isLike, icon, name, description,
+  overflow = false,
   ...rest
 }) => {
   const {
@@ -188,11 +200,11 @@ export default ({
   }
   const renderDescription = () => {
     if (size === 'mini') return null
-    return (<Description size={size}>{description}</Description>)
+    return (<Description size={size}>{description || '暂无'}</Description>)
   }
   const renderCell = () => (
-    <StyledLink size={size}>
-      <LazyLoad throttle={200} once>
+    <Cell size={size}>
+      <LazyLoad throttle={200} once overflow={overflow}>
         <ProductIcon alt={name} size={size} hash={hash && `${hash}-160-160-contain`} />
       </LazyLoad>
       <ProductContent size={size}>
@@ -201,19 +213,27 @@ export default ({
         </ProductName>
         {renderDescription()}
       </ProductContent>
-    </StyledLink>
+    </Cell>
   )
   const renderContent = () => {
     const cell = renderCell()
     if (!id || disabled) return cell
     return (
-      <Link href='/[id]' as={`/${id}`} passHref>
-        {cell}
+      <Link href='/[id]' as={`/${id}`}>
+        <a>
+          {cell}
+        </a>
       </Link>
     )
   }
   const renderLikes = () => {
-    if (size !== 'normal') return null
+    if (size === 'mini') return null
+    if (size === 'small') {
+      if (!likeCount) return null
+      return (
+        <SmallProductLike><span>{likeCount}</span>个喜欢</SmallProductLike>
+      )
+    }
     return (
       <StyledProductLike title='' id={id} likeCount={likeCount} isLike={isLike} />
     )

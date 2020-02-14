@@ -71,4 +71,40 @@ body {
   .ant-modal-wrap, .ant-modal-body {
     overflow-x: hidden;
   }
+  .ant-carousel .slick-prev, .ant-carousel .slick-next {
+    height: 100px;
+    margin-top: -50px;
+    width: 40px;
+    z-index: 1;
+    background: rgba(0,0,0,0.3);
+    transition: background 0.3s;
+    border-radius: 3px;
+    &:hover {
+      background: rgba(0,0,0,0.6);
+    }
+    &::before {
+      font-size: 20px;
+      color: #FFF;
+      background-size: 70%;
+      content: ' ';
+      height: 40px;
+      width: 40px;
+      display: block;
+      background-position: center;
+      background-repeat: no-repeat;
+      opacity: 0.6;
+    }
+  }
+  .ant-carousel .slick-prev {
+    left: 25px;
+    &::before {
+      background-image: url(/icons/left.svg);
+    }
+  }
+  .ant-carousel .slick-next {
+    right: 25px;
+    &::before {
+      background-image: url(/icons/right.svg);
+    }
+  }
 }

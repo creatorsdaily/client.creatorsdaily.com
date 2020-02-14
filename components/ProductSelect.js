@@ -6,8 +6,8 @@ import styled from 'styled-components'
 import noop from 'lodash/noop'
 import uniqBy from 'lodash/uniqBy'
 import { CloseOutlined } from '@ant-design/icons'
-import { GET_PRODUCT, GET_PRODUCTS } from '../queries'
-import IPFSImage from './IPFSImage'
+import { GET_PRODUCT, GET_PRODUCTS, GET_QUESTION, SEARCH_PRODUCTS } from '../queries'
+import ProductCell from './ProductCell'
 
 const { Search } = Input
 
@@ -32,36 +32,25 @@ const List = styled.ul`
 `
 
 const ProductContainer = styled.div`
-  display: flex;
-  align-items: center;
+display: flex;
+align-items: center;
+justify-content: space-between;
 `
 
-const ProductImage = styled(IPFSImage)`
-  width: 40px;
-  height: 40px;
-  object-fit: contain;
-`
-
-const ProductName = styled.div`
-  margin-left: 12px;
-  flex: 1;
-`
-
-const Product = ({ name, icon = {}, closeable, onClose }) => {
+const Product = ({ product, closeable, onClose }) => {
   const renderClose = () => {
     if (!closeable) return null
     return (<Button icon={<CloseOutlined />} type='link' onClick={onClose} />)
   }
   return (
     <ProductContainer>
-      <ProductImage size='small' hash={icon && icon.hash} />
-      <ProductName>{name}</ProductName>
+      <ProductCell {...product} size='mini' disabled overflow />
       {renderClose()}
     </ProductContainer>
   )
 }
 
-const DataProduct = ({ id, icon, closeable, onClose }) => {
+const DataProduct = ({ id, closeable, onClose }) => {
   const { loading, data } = useQuery(GET_PRODUCT, {
     variables: {
       id
@@ -70,7 +59,7 @@ const DataProduct = ({ id, icon, closeable, onClose }) => {
   const product = get(data, 'product')
   return (
     <Spin spinning={loading}>
-      <Product name={product && product.name} closeable={closeable} onClose={onClose} icon={icon} />
+      <Product product={product} closeable={closeable} onClose={onClose} />
     </Spin>
   )
 }
@@ -78,11 +67,20 @@ const DataProduct = ({ id, icon, closeable, onClose }) => {
 export default forwardRef((props, ref) => {
   const { defaultValue, value: nValue, onChange = noop, fixed, question, ...rest } = props
   const [value, setValue] = useState(nValue || defaultValue)
-  const { data: defaultProducts } = useQuery(GET_PRODUCTS)
-  const { loading, data, refetch } = useQuery(GET_PRODUCTS)
+  const { data: defaultProducts, loading } = useQuery(GET_PRODUCTS)
+  const { data: questionData, loading: questionLoading } = useQuery(GET_QUESTION, {
+    variables: {
+      id: question
+    },
+    skip: !question
+  })
+  const { data, loading: searchLoading, refetch } = useQuery(SEARCH_PRODUCTS, {
+    skip: true
+  })
+  const searchList = get(data, 'getProducts.data', [])
   useEffect(() => setValue(nValue), [nValue])
-  const products = uniqBy([].concat(
-    get(data, 'getProducts.data', []),
+  const products = searchList.length ? searchList : uniqBy([].concat(
+    get(questionData, 'getQuestion.options', []).map(x => x.product),
     get(defaultProducts, 'getProducts.data', [])
   ), 'id')
   const fireChange = v => {
@@ -95,28 +93,24 @@ export default forwardRef((props, ref) => {
     const product = products.find(x => x.id === value)
     if (!product) return null
     return (
-      <DataProduct id={value} closeable={!fixed} icon={product.icon} onClose={handleClose} />
+      <DataProduct id={value} closeable={!fixed} onClose={handleClose} />
     )
   }
   const handleSearch = keyword => {
-    const variables = {
-      keyword: [keyword]
-    }
-    if (keyword) {
-      variables.topic = []
-    }
-    refetch(variables)
+    refetch({
+      keyword
+    })
   }
   const renderSelect = () => {
     if (value) return null
     return (
       <>
         <Search placeholder='搜索产品' size='large' onSearch={handleSearch} />
-        <Spin spinning={loading}>
+        <Spin spinning={loading || questionLoading || searchLoading}>
           <List>
-            {products.map(({ id, icon, name }) => (
-              <li key={id} onClick={() => fireChange(id)}>
-                <Product name={name} icon={icon} />
+            {products.map((product) => (
+              <li key={product.id} onClick={() => fireChange(product.id)}>
+                <Product product={product} />
               </li>
             ))}
           </List>
