@@ -1,6 +1,6 @@
 import { Button, Form, Input } from 'antd'
 import Link from 'next/link'
-import { useState } from 'react'
+import { useEffect, useState } from 'react'
 import ProductSelect from './ProductSelect'
 
 const { Item } = Form
@@ -13,13 +13,16 @@ export default (props) => {
     if (!nValue || nValue === productId) return
     setProductId(nValue)
   }
+  useEffect(() => {
+    setProductId(product)
+  }, [product])
   const renderReason = () => {
     if (!productId) return null
     return (
       <Item
         name='reason'
       >
-        <TextArea placeholder={`${positive ? '推荐' : '反对'}理由`} />
+        <TextArea placeholder={`${positive ? '推荐' : '反对'}理由(选填)`} />
       </Item>
     )
   }

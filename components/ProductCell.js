@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import Link from 'next/link'
 import { Button } from 'antd'
-import { MessageOutlined } from '@ant-design/icons'
+import { HeartFilled, HeartOutlined, MessageOutlined } from '@ant-design/icons'
 import LazyLoad from 'react-lazyload'
 import useProductMeta from '../hooks/useProductMeta'
 import { TopicsBar } from './Topics'
@@ -34,6 +34,7 @@ right: 12px;
 top: 0;
 line-height: 60px;
 font-size: 12px;
+${({ isLike }) => isLike ? 'color: #DE7B76;' : ''}
 span {
   margin-right: 4px;
   font-weight: bold;
@@ -81,6 +82,9 @@ const Container = styled(Box)`
     border-width: 0;
   }
   ` : ''}
+  > a {
+    display: contents;
+  }
 `
 
 const ProductContent = styled.div`
@@ -176,7 +180,7 @@ font-size: 12px;
 export default ({
   id, disabled = false, topics = [], size = 'normal', isMiniProgram,
   likeCount, commentCount, codeCount, isLike, icon, name, description,
-  overflow = false,
+  overflow = false, withLike = true,
   ...rest
 }) => {
   const {
@@ -227,11 +231,12 @@ export default ({
     )
   }
   const renderLikes = () => {
+    if (!withLike) return null
     if (size === 'mini') return null
     if (size === 'small') {
       if (!likeCount) return null
       return (
-        <SmallProductLike><span>{likeCount}</span>个喜欢</SmallProductLike>
+        <SmallProductLike isLike={isLike}><span>{likeCount}</span>{isLike ? (<HeartFilled />) : (<HeartOutlined />)}</SmallProductLike>
       )
     }
     return (

@@ -83,7 +83,7 @@ export default ({ rank, ups, downs, questionId, product, mode = 'normal', onClic
             as={`/questions/${questionId}/products/${product.id}`}
           >
             <a>
-              <StyledProductCell {...product} disabled size='small' />
+              <StyledProductCell {...product} disabled size='small' withLike={false} />
             </a>
           </Link>
         </div>

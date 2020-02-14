@@ -469,6 +469,10 @@ query($id: String!) {
       questionId
       product {
         ${productFragment}
+        medias {
+          id
+          hash
+        }
       }
       ups {
         id

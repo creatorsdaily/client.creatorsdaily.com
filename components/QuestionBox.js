@@ -87,7 +87,7 @@ export default ({ id, name, user, options = [], topics = [], createdAt, onRecomm
   }
   const renderOption = ({ rank, ups, value, downs, product }) => {
     return (
-      <div>
+      <div key={product.id}>
         <OptionProduct>
           <LeftPart>
             {renderTag(rank)}
