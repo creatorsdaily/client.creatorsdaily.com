@@ -49,6 +49,10 @@ ${media.sm`
 `}
 `
 
+const StyledBox = styled(Box)`
+margin-bottom: 24px;
+`
+
 export default withApollo(() => {
   const { data, loading } = useQuery(GET_LINKS)
   const links = get(data, 'getLinks.data', [])
@@ -69,12 +73,12 @@ export default withApollo(() => {
                 {links.map(x => (
                   <Col key={x.id} xl={4} lg={6} md={8} sm={6} xs={24}>
                     <a target='_blank' rel='noopener noreferrer' href={x.url} alt={x.name}>
-                      <Box>
+                      <StyledBox>
                         <StyledIPFSImage hash={x.media && x.media.hash} />
                         <LinkTitle>
                           {x.name}
                         </LinkTitle>
-                      </Box>
+                      </StyledBox>
                     </a>
                   </Col>
                 ))}

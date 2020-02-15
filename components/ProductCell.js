@@ -82,6 +82,7 @@ const Container = styled(Box)`
   box-shadow: none;
   border-width: 0;
   background: none;
+  border-radius: 0 !important;;
   &:hover {
     border-width: 0;
   }
