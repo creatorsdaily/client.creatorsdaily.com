@@ -34,13 +34,24 @@ text-overflow:ellipsis;
 
 export default ({ user, hideName = false, ...rest }) => {
   const nickname = user.nickname || ''
+  const renderAvatar = () => {
+    const avatar = (
+      <LazyLoad height={32} throttle={200} once>
+        <StyledAvatar user={user} />
+      </LazyLoad>
+    )
+    if (nickname.indexOf('oOcAI')) {
+      return avatar
+    }
+    return (
+      <Badge count='每观'>
+        {avatar}
+      </Badge>
+    )
+  }
   return (
     <Container {...rest}>
-      <Badge count={nickname.indexOf('oOcAI') === 0 ? '每观' : 0}>
-        <LazyLoad height={32} throttle={200} once>
-          <StyledAvatar user={user} />
-        </LazyLoad>
-      </Badge>
+      {renderAvatar()}
       {!hideName && (<Username>{nickname}</Username>)}
     </Container>
   )

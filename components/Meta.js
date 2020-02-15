@@ -12,7 +12,8 @@ line-height: 32px;
 `
 
 const UserCellContainer = styled.a`
-display: inline-block;
+display: block;
+float: left;
 `
 
 export default ({ user = {}, createdAt, ...rest }) => {
