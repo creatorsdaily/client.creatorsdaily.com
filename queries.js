@@ -218,6 +218,28 @@ query($id: String!) {
         }
       }
     }
+    options {
+      rank
+      question {
+        id
+        name
+      }
+      ups {
+        id
+        reason
+        user {
+          id
+        }
+      }
+      downs {
+        id
+        reason
+        user {
+          id
+        }
+      }
+      value
+    }
   }
 }
 `

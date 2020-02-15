@@ -3,6 +3,7 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import classNames from 'classnames'
 import noop from 'lodash/noop'
+import media from '../libs/media'
 import Box from './Box'
 import Counter from './Counter'
 import ReasonList from './ReasonList'
@@ -29,6 +30,7 @@ const StyledProductCell = styled(ProductCell)`
 box-shadow: none;
 border: 0;
 height: 44px;
+max-width: 250px;
 > div {
   padding: 0;
 }
@@ -52,10 +54,30 @@ line-height: 30px;
 a {
   color: #303030;
 }
+display: none;
+${media.sm`
+display: block;
+`}
 `
 
 const StyledCounter = styled(Counter)`
 padding-bottom: 8px;
+min-width: 70px;
+margin-right: 0;
+${media.sm`
+margin-right: 10px;
+`}
+`
+
+const ProductHeaderContent = styled.div`
+flex: 1;
+margin-left: 0;
+${media.sm`
+margin-left: 10px;
+`}
+> a > div {
+  padding-right: 0;
+}
 `
 
 export default ({ rank, ups, downs, questionId, product, mode = 'normal', onClick = noop }) => {
@@ -77,7 +99,7 @@ export default ({ rank, ups, downs, questionId, product, mode = 'normal', onClic
       <ProductHeader>
         <StyledCounter># 第<span>{rank}</span>名</StyledCounter>
         <Divider type='vertical' />
-        <div style={{ flex: 1, marginLeft: 10 }}>
+        <ProductHeaderContent>
           <Link
             href='/questions/[id]/products/[productId]'
             as={`/questions/${questionId}/products/${product.id}`}
@@ -86,7 +108,7 @@ export default ({ rank, ups, downs, questionId, product, mode = 'normal', onClic
               <StyledProductCell {...product} disabled size='small' withLike={false} />
             </a>
           </Link>
-        </div>
+        </ProductHeaderContent>
         <ProductLink>
           <Link
             href='/[id]'

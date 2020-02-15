@@ -1,5 +1,5 @@
 import React from 'react'
-import { Button, Col, Icon, Row, Spin } from 'antd'
+import { Button, Col, Row, Spin } from 'antd'
 import styled from 'styled-components'
 import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
@@ -22,7 +22,7 @@ margin-top: 24px;
 `
 
 const MoreButton = styled(Button)`
-margin: 0 auto;
+margin: 0 auto 24px;
 display: block;
 `
 
