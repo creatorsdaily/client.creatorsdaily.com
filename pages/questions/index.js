@@ -13,6 +13,7 @@ import withApollo from '../../libs/with-apollo'
 import QuestionBox from '../../components/QuestionBox'
 import useCreateOptionModal from '../../hooks/useCreateOptionModal'
 import { TopicList, TopicsBar } from '../../components/Topics'
+import MobileAuthBar from '../../components/MobileAuthBar'
 
 const StyledContainer = styled(Container)`
 ${media.lg`
@@ -88,6 +89,7 @@ export default withApollo(() => {
             <RightSide />
           </Col>
         </Row>
+        <MobileAuthBar />
       </StyledContainer>
     </Page>
   )

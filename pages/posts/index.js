@@ -14,6 +14,7 @@ import Time from '../../components/Time'
 import RightSide from '../../components/RightSide'
 import withApollo from '../../libs/with-apollo'
 import LeftSide from '../../components/LeftSide'
+import MobileAuthBar from '../../components/MobileAuthBar'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
@@ -101,6 +102,7 @@ export default withApollo(() => {
             <RightSide />
           </Col>
         </Row>
+        <MobileAuthBar />
       </StyledContainer>
     </Page>
   )

@@ -15,6 +15,7 @@ import ProductHeader from '../components/ProductHeader'
 import ProductLike from '../components/ProductLike'
 import media from '../libs/media'
 import { GET_PRODUCT } from '../queries'
+import MobileAuthBar from '../components/MobileAuthBar'
 
 const ProductLikeContainer = styled.div`
 margin: 24px 16px 0;
@@ -162,6 +163,7 @@ export default ({ children }) => {
       {React.Children.map(children, child => {
         return React.cloneElement(child, { id, product, loading })
       })}
+      <MobileAuthBar />
     </Page>
   )
 }

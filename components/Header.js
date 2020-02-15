@@ -12,7 +12,10 @@ import Search from './Search'
 
 const StyledContainer = styled(Container)`
 .ant-menu-item {
-padding: 0 15px;
+  padding: 0 10px;
+  ${media.md`
+    padding: 0 15px;
+  `}
 }
 `
 

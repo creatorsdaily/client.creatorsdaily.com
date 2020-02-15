@@ -55,6 +55,11 @@ const StyledIPFSImage = styled(IPFSImage)`
   background: #F5F5F5;
 `
 
+const SingleIPFSImage = styled(StyledIPFSImage)`
+object-fit: contain;
+width: 100%;
+`
+
 const PreviewIPFSImage = styled(IPFSImage)`
   max-width: 100%;
   margin: 0 auto;
@@ -73,17 +78,6 @@ export default forwardRef(({ children, height = 300, medias = [], onLoad = noop,
     setIsMobile(window.innerWidth <= 480)
   }, [])
 
-  if (typeof isMobile !== 'boolean') {
-    return (
-      <MobileContainer height={height} />
-    )
-  }
-
-  if ((!medias || !medias.length) && !children) {
-    return (
-      <StyledIPFSImage style={{ height }} />
-    )
-  }
   const handleClick = (hash) => {
     Modal.info({
       okText: '关闭',
@@ -103,12 +97,31 @@ export default forwardRef(({ children, height = 300, medias = [], onLoad = noop,
       <IPFSImage hash={x.hash} key={x.id} />
     </FileContainer>
   ))
+
+  if (typeof isMobile !== 'boolean') {
+    return (
+      <MobileContainer height={height} />
+    )
+  }
+
+  if ((!medias || !medias.length) && !children) {
+    return (
+      <StyledIPFSImage style={{ height }} />
+    )
+  }
+
   if (isMobile) {
     return (
       <MobileContainer height={height}>
         {images}
         {children}
       </MobileContainer>
+    )
+  }
+  if (medias.length === 1) {
+    const media = medias[0]
+    return (
+      <SingleIPFSImage hash={media.hash} style={{ height }} onClick={() => handleClick(media.hash)} />
     )
   }
   return (

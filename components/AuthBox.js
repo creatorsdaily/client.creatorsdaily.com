@@ -2,6 +2,8 @@ import styled from 'styled-components'
 import { useEffect, useState } from 'react'
 import { v4 } from 'slugid'
 import { useRouter } from 'next/router'
+import { Button, Divider } from 'antd'
+import Link from 'next/link'
 import useViewer from '../hooks/useViewer'
 import media from '../libs/media'
 import redirect from '../libs/redirect'
@@ -66,13 +68,17 @@ display: block;
 `}
 `
 
+const ElseButton = styled(Button)`
+margin-top: 8px;
+`
+
 export default ({ children }) => {
   const [code, setCode] = useState(v4())
   useEffect(() => {
     const timer = setInterval(() => setCode(v4()), 2 * 60 * 1000)
     return () => clearInterval(timer)
   }, [])
-  const { query } = useRouter()
+  const { query, pathname } = useRouter()
   const back = query.back || '/'
   const { viewer, loading } = useViewer()
   useEffect(() => {
@@ -80,6 +86,31 @@ export default ({ children }) => {
       redirect(back)
     }
   }, [loading])
+  const renderElse = () => {
+    if (pathname === '/auth/signin') {
+      return (
+        <>
+          <Divider>或者</Divider>
+          <Link href={`/auth/signup?back=${encodeURIComponent(back)}`}>
+            <a>
+              <ElseButton block type='dashed'>立刻注册账号</ElseButton>
+            </a>
+          </Link>
+        </>
+      )
+    } else if (pathname === '/auth/signup') {
+      return (
+        <>
+          <Divider>或者</Divider>
+          <Link href={`/auth/signin?back=${encodeURIComponent(back)}`}>
+            <a>
+              <ElseButton block type='dashed'>直接登录</ElseButton>
+            </a>
+          </Link>
+        </>
+      )
+    }
+  }
   return (
     <Container>
       <AuthBox>
@@ -91,6 +122,7 @@ export default ({ children }) => {
           </Header>
           <Body>
             {children}
+            {renderElse()}
             <ThirdSignin back={back} />
           </Body>
         </Content>

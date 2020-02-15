@@ -13,6 +13,7 @@ import RightSide from '../../components/RightSide'
 import MoreButton from '../../components/MoreButton'
 import media from '../../libs/media'
 import LeftSide from '../../components/LeftSide'
+import MobileAuthBar from '../../components/MobileAuthBar'
 
 const StyledMoreButton = styled(MoreButton)`
 margin-bottom: 24px;
@@ -116,6 +117,7 @@ export default withApollo(() => {
             <RightSide />
           </Col>
         </Row>
+        <MobileAuthBar />
       </StyledContainer>
     </Page>
   )

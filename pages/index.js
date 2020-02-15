@@ -17,6 +17,7 @@ import PostCell from '../components/PostCell'
 import SmallTitle from '../components/SmallTitle'
 import MilestoneList from '../components/MilestoneList'
 import withApollo from '../libs/with-apollo'
+import MobileAuthBar from '../components/MobileAuthBar'
 
 const StyledContainer = styled(Container)`
 ${media.lg`
@@ -139,6 +140,7 @@ export default withApollo(() => {
             <RightSide />
           </Col>
         </Row>
+        <MobileAuthBar />
       </StyledContainer>
     </Page>
   )

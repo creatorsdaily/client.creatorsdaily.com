@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Affix, Button, Col, Row } from 'antd'
+import { Affix, Button, Col, Row, Spin } from 'antd'
 import styled from 'styled-components'
 import get from 'lodash/get'
 import { useQuery } from '@apollo/react-hooks'
@@ -56,30 +56,32 @@ export default withApollo(() => {
               span: 14
             }} lg={18} md={16} xs={24}
           >
-            <QuestionBox {...question} onRecommend={() => show({ question: id })} />
-            <QuestionOptions
-              options={question.options}
-              onClick={(qid, pid, v) => show({
-                question: qid,
-                product: pid,
-                positive: v,
-                fixed: true
-              })}
-            />
-            <StyledBox>
-              <Affix offsetBottom={0}>
-                <AffixFooter>
-                  <RecommendTooltip>
-                    <Button
-                      type='primary'
-                      onClick={() => show()}
-                      icon={<PlusOutlined />}
-                    >我要推荐
-                    </Button>
-                  </RecommendTooltip>
-                </AffixFooter>
-              </Affix>
-            </StyledBox>
+            <Spin spinning={loading}>
+              <QuestionBox {...question} onRecommend={() => show({ question: id })} />
+              <QuestionOptions
+                options={question.options}
+                onClick={(qid, pid, v) => show({
+                  question: qid,
+                  product: pid,
+                  positive: v,
+                  fixed: true
+                })}
+              />
+              <StyledBox>
+                <Affix offsetBottom={0}>
+                  <AffixFooter>
+                    <RecommendTooltip>
+                      <Button
+                        type='primary'
+                        onClick={() => show({ question: id })}
+                        icon={<PlusOutlined />}
+                      >我要推荐
+                      </Button>
+                    </RecommendTooltip>
+                  </AffixFooter>
+                </Affix>
+              </StyledBox>
+            </Spin>
           </Col>
           <Col xl={4} md={0} xs={24}>
             <LeftSide />
