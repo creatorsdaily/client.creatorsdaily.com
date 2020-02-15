@@ -154,7 +154,8 @@ export default ({ user, children, ...rest }) => {
           </UserLink>
         )}
         {renderActive()}
-        {children || renderCreateds(user.createdProducts)}
+        {renderCreateds(user.createdProducts)}
+        {children}
       </UserContent>
     </Container>
   )

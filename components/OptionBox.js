@@ -30,7 +30,6 @@ const StyledProductCell = styled(ProductCell)`
 box-shadow: none;
 border: 0;
 height: 44px;
-max-width: 250px;
 > div {
   padding: 0;
 }
@@ -72,6 +71,8 @@ margin-right: 10px;
 const ProductHeaderContent = styled.div`
 flex: 1;
 margin-left: 0;
+width: 0;
+padding-right: 8px;
 ${media.sm`
 margin-left: 10px;
 `}

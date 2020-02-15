@@ -286,8 +286,8 @@ query($page: Int, $size: Int, $score: Int, $keyword: String!) {
 `
 
 export const GET_POSTS = gql`
-query($page: Int, $size: Int) {
-  getPosts(page: $page, size: $size) {
+query($page: Int, $size: Int, $user: String) {
+  getPosts(page: $page, size: $size, user: $user) {
     total
     data {
       ${postFragment}
@@ -524,8 +524,8 @@ query($id: String!) {
 `
 
 export const GET_QUESTIONS = gql`
-query($page: Int, $size: Int, $topic: [String!]) {
-  getQuestions(page: $page, size: $size, topic: $topic) {
+query($page: Int, $size: Int, $topic: [String!], $user: String) {
+  getQuestions(page: $page, size: $size, topic: $topic, user: $user) {
     total
     data {
       ${questionFragment}

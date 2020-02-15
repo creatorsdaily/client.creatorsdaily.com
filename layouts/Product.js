@@ -36,6 +36,12 @@ const MenuContainer = styled.div`
 background: #FFF;
 border-bottom: 1px solid #F0F0F0;
 border-top: 1px solid #F0F0F0;
+.ant-menu-item {
+  padding: 0 10px;
+  ${media.md`
+    padding: 0 15px;
+  `}
+}
 `
 
 const StyledWeChatButton = styled(WeChatButton)`
@@ -114,7 +120,7 @@ export default ({ children }) => {
             <Col xxl={6} xl={7} lg={8} md={10} sm={24} xs={24}>
               <ProductLikeContainer>
                 {renderButton()}
-                <ProductLike id={product.id} likeCount={product.likeCount} isLike={product.isLike} loading={loading} />
+                <ProductLike id={id} likeCount={product.likeCount} isLike={product.isLike} loading={loading} />
                 {renderWeChat()}
               </ProductLikeContainer>
             </Col>
@@ -125,7 +131,7 @@ export default ({ children }) => {
         <Container>
           <Menu selectedKeys={matched} mode='horizontal'>
             <Menu.Item key='/[id]'>
-              <Link href='/[id]' as={`/${product.id}`}>
+              <Link href='/[id]' as={`/${id}`}>
                 <a>
                   <AppstoreOutlined />
                   详情
@@ -133,7 +139,7 @@ export default ({ children }) => {
               </Link>
             </Menu.Item>
             <Menu.Item key='/[id]/milestones'>
-              <Link href='/[id]/milestones' as={`/${product.id}/milestones`}>
+              <Link href='/[id]/milestones' as={`/${id}/milestones`}>
                 <a>
                   <FlagOutlined />
                   里程碑
@@ -142,7 +148,7 @@ export default ({ children }) => {
             </Menu.Item>
             {(!!codes.length || canEdit) && (
               <Menu.Item key='/[id]/codes'>
-                <Link href='/[id]/codes' as={`/${product.id}/codes`}>
+                <Link href='/[id]/codes' as={`/${id}/codes`}>
                   <a>
                     <GiftOutlined />
                     兑换码
@@ -150,7 +156,7 @@ export default ({ children }) => {
                 </Link>
               </Menu.Item>)}
             <Menu.Item key='/[id]/wishes'>
-              <Link href='/[id]/wishes' as={`/${product.id}/wishes`}>
+              <Link href='/[id]/wishes' as={`/${id}/wishes`}>
                 <a>
                   <HeartOutlined />
                   心愿

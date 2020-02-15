@@ -12,7 +12,11 @@ export default ({
   query,
   props = {},
   options = {},
-  getTotal = () => 0
+  getTotal = () => 0,
+  getLink = (path, queryString) => ({
+    href: `${path}${queryString}`
+  }),
+  getQuery = query => query
 } = {}) => {
   let {
     query: {
@@ -28,23 +32,24 @@ export default ({
     variables: {
       page,
       size,
-      ...rest,
+      ...getQuery(rest),
       ...(options.variables || {})
     }
   })
   const total = getTotal(result)
   const itemRender = (current, type, originalElement) => {
     if (current === 0) return originalElement
-    let query = stringify({
-      ...rest,
+    const query = {
+      ...getQuery(rest),
       page: current === 1 ? undefined : current,
       size: size === defaultPageSize ? undefined : size
-    })
-    if (query) {
-      query = '?' + query
+    }
+    let queryStr = stringify(query)
+    if (queryStr) {
+      queryStr = '?' + queryStr
     }
     return (
-      <Link href={`${path}${query}`}>
+      <Link {...getLink(path, queryStr, query)}>
         {originalElement}
       </Link>
     )

@@ -1,6 +1,6 @@
-import React, { Fragment } from 'react'
+import React from 'react'
 import Head from 'next/head'
-import { Button, Col, Empty, Row, Spin } from 'antd'
+import { Button, Col, Row } from 'antd'
 import get from 'lodash/get'
 import styled from 'styled-components'
 import { LinkOutlined } from '@ant-design/icons'
@@ -9,12 +9,11 @@ import Container from '../../components/Container'
 import { GET_POSTS } from '../../queries'
 import usePagination from '../../hooks/usePagination'
 import media from '../../libs/media'
-import PostCell from '../../components/PostCell'
-import Time from '../../components/Time'
 import RightSide from '../../components/RightSide'
 import withApollo from '../../libs/with-apollo'
 import LeftSide from '../../components/LeftSide'
 import MobileAuthBar from '../../components/MobileAuthBar'
+import PostList from '../../components/PostList'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
@@ -34,14 +33,6 @@ const StyledFeed = styled.a`
   width: 160px;
 `
 
-const TimeContainer = styled.div`
-line-height: 30px;
-font-size: 12px;
-font-weight: bold;
-text-align: center;
-margin-bottom: 24px;
-`
-
 export default withApollo(() => {
   const {
     result: {
@@ -56,21 +47,7 @@ export default withApollo(() => {
   })
 
   const posts = get(data, 'getPosts.data', [])
-  const renderList = () => {
-    if (posts.length) {
-      return posts.map(post => (
-        <Fragment key={post.id}>
-          <TimeContainer>
-            <Time time={post.createdAt} format='YYYY 年 M 月 D 日' />
-          </TimeContainer>
-          <PostCell {...post} />
-        </Fragment>
-      ))
-    }
-    return (
-      <Empty description='暂无内容' image={Empty.PRESENTED_IMAGE_SIMPLE} />
-    )
-  }
+
   return (
     <Page>
       <Head>
@@ -85,9 +62,7 @@ export default withApollo(() => {
               span: 14
             }} lg={18} md={16} xs={24}
           >
-            <Spin spinning={loading}>
-              {renderList()}
-            </Spin>
+            <PostList list={posts} loading={loading} />
             <StyledFeed href='/api/posts.atom' rel='noreferrer' target='_blank'>
               <Button icon={<LinkOutlined />} block>订阅日报</Button>
             </StyledFeed>
