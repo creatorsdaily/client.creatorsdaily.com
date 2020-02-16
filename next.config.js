@@ -108,7 +108,7 @@ module.exports = withPlugins([
           expiration: {
             maxEntries: 512
           },
-          networkTimeoutSeconds: 3,
+          // networkTimeoutSeconds: 3,
           cacheableResponse: {
             statuses: [0, 200]
           }
