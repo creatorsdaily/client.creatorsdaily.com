@@ -49,6 +49,10 @@ const CreatorsApp = ({ pageProps, Component }) => {
         <meta key='description' name='description' content={process.env.DESCRIPTION} />
         <meta key='keywords' name='keywords' content={process.env.KEYWORDS} />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
+        <meta key='og-title' property='og:title' content={process.env.SLOGAN} />
+        <meta key='og-url' property='og:url' content='https://creatorsdaily.com' />
+        <meta key='og-site-name' property='og:site_name' content={process.env.NAME} />
+        <meta key='og-image' property='og:image' content='/icon.png' />
         <link rel='apple-touch-icon' sizes='57x57' href='/apple-icon-57x57.png' />
         <link rel='apple-touch-icon' sizes='60x60' href='/apple-icon-60x60.png' />
         <link rel='apple-touch-icon' sizes='72x72' href='/apple-icon-72x72.png' />
