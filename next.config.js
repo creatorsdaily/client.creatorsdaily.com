@@ -38,10 +38,13 @@ module.exports = withPlugins([
     workboxOpts: {
       swDest: path.join(__dirname, 'public/service-worker.js'),
       runtimeCaching: [{
+        urlPattern: /^https:\/\/matomo\.tengfei\.fun\/matomo\.php.*/i,
+        handler: 'NetworkOnly'
+      }, {
         urlPattern: /^https:\/\/www\.gravatar\.com\/.*/i,
         handler: 'CacheFirst',
         options: {
-          cacheName: 'one-signal',
+          cacheName: 'gravatar',
           expiration: {
             maxEntries: 512,
             maxAgeSeconds: 24 * 60 * 60 * 3
@@ -49,7 +52,7 @@ module.exports = withPlugins([
         }
       }, {
         urlPattern: /^https:\/\/cdn\.onesignal\.com\/.*/i,
-        handler: 'StaleWhileRevalidate',
+        handler: 'CacheFirst',
         options: {
           cacheName: 'one-signal',
           expiration: {
@@ -79,7 +82,7 @@ module.exports = withPlugins([
         }
       }, {
         urlPattern: /\.(?:js)(\?.*)?$/i,
-        handler: 'StaleWhileRevalidate',
+        handler: 'CacheFirst',
         options: {
           cacheName: 'static-js-assets',
           expiration: {
@@ -89,7 +92,7 @@ module.exports = withPlugins([
         }
       }, {
         urlPattern: /\.(?:css)(\?.*)?$/i,
-        handler: 'StaleWhileRevalidate',
+        handler: 'CacheFirst',
         options: {
           cacheName: 'static-style-assets',
           expiration: {
@@ -99,7 +102,7 @@ module.exports = withPlugins([
         }
       }, {
         urlPattern: /^https?.*/,
-        handler: 'NetworkFirst',
+        handler: 'StaleWhileRevalidate',
         options: {
           cacheName: 'others',
           expiration: {
