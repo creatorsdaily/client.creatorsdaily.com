@@ -1,10 +1,11 @@
 import { forwardRef, useState } from 'react'
 import { Button, Select } from 'antd'
 import gql from 'graphql-tag'
-import { useMutation, useQuery } from '@apollo/react-hooks'
+import { useLazyQuery, useMutation, useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
+import uniqBy from 'lodash/uniqBy'
 import useDebounce from 'react-use/lib/useDebounce'
 import { PlusOutlined } from '@ant-design/icons'
 import { GET_TOPICS } from '../queries'
@@ -28,7 +29,12 @@ const TopicName = styled.span`
 export default forwardRef((props, ref) => {
   const { onCreate = noop, ...rest } = props
   const [topic, setTopic] = useState()
-  const { data, loading, refetch } = useQuery(GET_TOPICS)
+  const { data, loading } = useQuery(GET_TOPICS, {
+    variables: {
+      size: 1000
+    }
+  })
+  const [search, { data: searchData, loading: searchLoading }] = useLazyQuery(GET_TOPICS)
   const [createTopic] = useMutation(CREATE_TOPIC, {
     variables: {
       topic: {
@@ -36,13 +42,6 @@ export default forwardRef((props, ref) => {
       }
     },
     refetchQueries: [{
-      query: GET_TOPICS
-    }, {
-      query: GET_TOPICS,
-      variables: {
-        keyword: [topic].filter(x => !!x)
-      }
-    }, {
       query: GET_TOPICS,
       variables: {
         size: 1000
@@ -53,10 +52,15 @@ export default forwardRef((props, ref) => {
     },
     awaitRefetchQueries: true
   })
-  useDebounce(() => refetch({
-    keyword: [topic].filter(x => !!x)
+  useDebounce(() => search({
+    variables: {
+      keyword: [topic].filter(x => !!x)
+    }
   }), 800, [topic])
-  const topics = get(data, 'getTopics.data', [])
+  const topics = uniqBy([].concat(
+    get(searchData, 'getTopics.data', []),
+    get(data, 'getTopics.data', [])
+  ), 'id')
   const renderButton = () => {
     if (!topic) return null
     return (
@@ -75,7 +79,7 @@ export default forwardRef((props, ref) => {
       mode='multiple'
       placeholder='选择所属话题'
       ref={ref}
-      loading={loading}
+      loading={loading || searchLoading}
       onSearch={setTopic}
       filterOption={(v, { props: { children: name } }) => name.includes(v)}
       dropdownRender={menu => (
