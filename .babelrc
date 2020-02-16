@@ -6,6 +6,7 @@
       "libraryDirectory": "es"
       // "style": true
     }],
-    ["styled-components", { "ssr": true }]
+    ["styled-components", { "ssr": true }],
+    "inline-react-svg"
   ]
 }

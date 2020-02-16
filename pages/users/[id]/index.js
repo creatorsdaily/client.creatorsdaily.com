@@ -6,7 +6,7 @@ import withApollo from '../../../libs/with-apollo'
 
 const Tip = styled.h1`
 text-align: center;
-margin-top: 60px;
+margin: 60px 0;
 color: #CCC;
 `
 

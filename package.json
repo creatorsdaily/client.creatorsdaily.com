@@ -65,6 +65,7 @@
     "@types/react-dom": "^16.9.5",
     "@types/styled-components": "^4.4.3",
     "babel-eslint": "^10.0.2",
+    "babel-plugin-inline-react-svg": "^1.1.1",
     "babel-plugin-styled-components": "^1.10.7",
     "eslint": "^6.8.0",
     "eslint-config-standard": "^14.1.0",

@@ -3,7 +3,9 @@ import styled from 'styled-components'
 import { Button, Divider, Input } from 'antd'
 import { forwardRef, useEffect, useState } from 'react'
 import noop from 'lodash/noop'
-import { AndroidFilled, AppleFilled, ChromeFilled, CompassFilled, DeleteOutlined, GithubFilled, PlusOutlined, RightOutlined, WechatFilled } from '@ant-design/icons'
+import Icon, { AndroidFilled, AppleFilled, ChromeFilled, CompassFilled, DeleteOutlined, GithubFilled, PlusOutlined, RightOutlined, WechatFilled } from '@ant-design/icons'
+import Firefox from './icons/Firefox.svg'
+import Edge from './icons/Edge.svg'
 
 const Links = styled.div`
 `
@@ -150,6 +152,14 @@ export default ({ links, ...rest }) => {
     if (host === 'chrome.google.com') {
       name = 'Chrome 应用商店'
       icon = <ChromeFilled />
+    }
+    if (host === 'addons.mozilla.org') {
+      name = 'Firefox 扩展'
+      icon = <Icon component={Firefox} />
+    }
+    if (host === 'microsoftedge.microsoft.com') {
+      name = 'Edge 扩展'
+      icon = <Icon component={Edge} />
     }
     return (
       <a key={x} href={x} target='_blank' rel='noopener noreferrer'>
