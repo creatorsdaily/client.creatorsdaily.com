@@ -1,13 +1,22 @@
 import styled from 'styled-components'
+import Link from 'next/link'
+import UserCell from './UserCell'
 
 const Reason = styled.div`
 margin-bottom: 24px;
-font-size: 12px;
-line-height: 20px;
+font-size: 13px;
+line-height: 32px;
+display: flex;
 `
 
 const ReasonTitle = styled.h3`
 margin: 16px 0;
+`
+
+const UserCellContainer = styled.a`
+display: block;
+float: left;
+margin-right: 12px;
 `
 
 export default ({ list = [], positive = false, withOutTitle = false, ...rest }) => {
@@ -18,6 +27,11 @@ export default ({ list = [], positive = false, withOutTitle = false, ...rest }) 
   }
   const reasonList = reasons.map(x => (
     <Reason key={x.id} positive={positive}>
+      <Link href='/users/[id]' as={`/users/${x.user.id}`} passHref>
+        <UserCellContainer>
+          <UserCell user={x.user} />
+        </UserCellContainer>
+      </Link>
       {x.reason}
     </Reason>
   ))

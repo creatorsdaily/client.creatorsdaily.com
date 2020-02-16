@@ -24,8 +24,6 @@ nickname
 username
 email
 number
-link
-description
 createdAt
 signinedAt
 avatar {
@@ -68,6 +66,8 @@ export const VIEWER = gql`
 query {
   viewer {
     ${userFragment}
+    link
+    description
     token
     oneSignal
   }
@@ -78,6 +78,8 @@ export const VIEWER_AUTHES = gql`
 query {
   viewer {
     ${userFragment}
+    link
+    description
     authes {
       id
       type
@@ -99,6 +101,8 @@ query(
 ) {
   user(id: $id) {
     ${userFragment}
+    link
+    description
     createdProducts(page: $createdPage, size: $createdSize) {
       total
       data {
@@ -133,6 +137,8 @@ query($page: Int, $size: Int, $isCreator: Boolean, $ids: [String!]) {
     total
     data {
       ${userFragment}
+      link
+      description
       createdProducts {
         total
         data {
@@ -228,14 +234,14 @@ query($id: String!) {
         id
         reason
         user {
-          id
+          ${userFragment}
         }
       }
       downs {
         id
         reason
         user {
-          id
+          ${userFragment}
         }
       }
       value
@@ -502,9 +508,7 @@ query($id: String!) {
         positive
         createdAt
         user {
-          id
-          nickname
-          username
+          ${userFragment}
         }
       }
       downs {
@@ -513,9 +517,7 @@ query($id: String!) {
         positive
         createdAt
         user {
-          id
-          nickname
-          username
+          ${userFragment}
         }
       }
     }
