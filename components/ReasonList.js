@@ -1,22 +1,18 @@
 import styled from 'styled-components'
-import Link from 'next/link'
-import UserCell from './UserCell'
+import Meta from './Meta'
 
 const Reason = styled.div`
 margin-bottom: 24px;
 font-size: 13px;
-line-height: 32px;
-display: flex;
+line-height: 24px;
 `
 
 const ReasonTitle = styled.h3`
 margin: 16px 0;
 `
 
-const UserCellContainer = styled.a`
-display: block;
-float: left;
-margin-right: 12px;
+const ReasonBody = styled.div`
+margin-left: 44px;
 `
 
 export default ({ list = [], positive = false, withOutTitle = false, ...rest }) => {
@@ -27,12 +23,8 @@ export default ({ list = [], positive = false, withOutTitle = false, ...rest }) 
   }
   const reasonList = reasons.map(x => (
     <Reason key={x.id} positive={positive}>
-      <Link href='/users/[id]' as={`/users/${x.user.id}`} passHref>
-        <UserCellContainer>
-          <UserCell user={x.user} />
-        </UserCellContainer>
-      </Link>
-      {x.reason}
+      <Meta createdAt={x.createdAt} user={x.user} />
+      <ReasonBody>{x.reason}</ReasonBody>
     </Reason>
   ))
   const renderTitle = () => {

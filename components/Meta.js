@@ -7,7 +7,6 @@ import UserCell from './UserCell'
 const Meta = styled.div`
 font-size: 12px;
 color: #808080;
-padding: 16px;
 line-height: 32px;
 `
 
@@ -16,7 +15,7 @@ display: block;
 float: left;
 `
 
-export default ({ user = {}, createdAt, ...rest }) => {
+export default ({ user = {}, createdAt, children, ...rest }) => {
   return (
     <Meta {...rest}>
       <Link href='/users/[id]' as={`/users/${user.id}`} passHref>
@@ -25,7 +24,7 @@ export default ({ user = {}, createdAt, ...rest }) => {
         </UserCellContainer>
       </Link>
       <Divider type='vertical' />
-      <Time time={createdAt} /> 提问
+      <Time time={createdAt} /> {children}
     </Meta>
   )
 }

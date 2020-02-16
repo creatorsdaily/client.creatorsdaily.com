@@ -64,6 +64,10 @@ span {
 }
 `
 
+const StyledMeta = styled(Meta)`
+padding: 16px;
+`
+
 export default ({ id, name, user, options = [], topics = [], createdAt, onRecommend, children }) => {
   const renderTag = (rank) => {
     switch (rank) {
@@ -123,7 +127,7 @@ export default ({ id, name, user, options = [], topics = [], createdAt, onRecomm
         </a>
       </Link>
       {renderContent()}
-      <Meta createdAt={createdAt} user={user} />
+      <StyledMeta createdAt={createdAt} user={user}>提问</StyledMeta>
     </StyledBox>
   )
 }
