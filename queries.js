@@ -233,6 +233,8 @@ query($id: String!) {
       ups {
         id
         reason
+        positive
+        createdAt
         user {
           ${userFragment}
         }
@@ -240,6 +242,8 @@ query($id: String!) {
       downs {
         id
         reason
+        positive
+        createdAt
         user {
           ${userFragment}
         }
