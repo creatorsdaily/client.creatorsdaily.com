@@ -104,7 +104,7 @@ export default forwardRef(({ children, height = 300, medias = [], onLoad = noop,
     )
   }
 
-  if ((!medias || !medias.length) && !children) {
+  if ((!list || !list.length) && !children) {
     return (
       <StyledIPFSImage style={{ height }} />
     )
@@ -118,8 +118,8 @@ export default forwardRef(({ children, height = 300, medias = [], onLoad = noop,
       </MobileContainer>
     )
   }
-  if (medias.length === 1) {
-    const media = medias[0]
+  if (list.length === 1) {
+    const media = list[0]
     return (
       <SingleIPFSImage hash={media.hash} style={{ height }} onClick={() => handleClick(media.hash)} />
     )

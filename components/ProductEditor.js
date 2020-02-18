@@ -11,6 +11,7 @@ import useViewer from '../hooks/useViewer'
 import { formToProduct, productToForm } from '../libs/form-utils'
 import Product from './Product'
 import Autofill from './Autofill'
+import Box from './Box'
 
 const CREATE_MEDIA = gql`
 mutation($media: IMedia!) {
@@ -31,12 +32,11 @@ const StyledProductCell = styled(ProductCell)`
   margin-bottom: 48px;
 `
 
-const ProductEditorForm = styled(ProductForm)`
-background: #FFF;
+const StyledBox = styled(Box)`
 padding: 24px;
 `
 
-export default ({ step, product = {}, ...rest }) => {
+export default ({ step, product = {}, children, ...rest }) => {
   const [form] = Form.useForm()
   const [preview, setPreview] = useState(product)
   const { viewer: user } = useViewer()
@@ -115,11 +115,8 @@ export default ({ step, product = {}, ...rest }) => {
       })
     }
   }
-  const handleValuesChange = (changed) => {
-    setPreview({
-      ...product,
-      ...formToProduct(changed)
-    })
+  const handleValuesChange = (changed, current) => {
+    setPreview(formToProduct(current))
   }
   const handleSet = async (type, value) => {
     let file
@@ -183,14 +180,17 @@ export default ({ step, product = {}, ...rest }) => {
     <>
       <Row type='flex' gutter={24} justify='center'>
         <Col md={12} xs={24}>
-          <ProductEditorForm
-            {...rest}
-            {...formItemLayout}
-            form={form}
-            step={step}
-            initialValues={productToForm(product)}
-            onValuesChange={handleValuesChange}
-          />
+          <StyledBox>
+            {children}
+            <ProductForm
+              {...rest}
+              {...formItemLayout}
+              form={form}
+              step={step}
+              initialValues={productToForm(product)}
+              onValuesChange={handleValuesChange}
+            />
+          </StyledBox>
         </Col>
         <Col md={step === 1 ? 0 : 12} xs={step === 1 ? 0 : 24}>
           {renderStep2Preview()}
