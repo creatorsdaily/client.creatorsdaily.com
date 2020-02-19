@@ -29,6 +29,7 @@ const {
   KEYWORDS,
   ONE_SIGNAL_APP_ID,
   GRAPHQL_WS,
+  CLOSE_TIP,
   DOMAIN
 } = process.env
 module.exports = withPlugins([
@@ -181,6 +182,7 @@ module.exports = withPlugins([
     ONE_SIGNAL_APP_ID,
     DOMAIN,
     GRAPHQL_WS,
+    CLOSE_TIP,
     VERSION: require('./package.json').version
   }
 })
