@@ -63,6 +63,7 @@ export default ({
           name='links'
           label='链接地址'
           colon={false}
+          extra='建议填写 AppStore / GooglePlay 链接，支持自动填充'
           rules={[{
             transform (v) {
               return v.filter(x => !!x)
