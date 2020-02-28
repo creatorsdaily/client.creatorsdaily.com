@@ -97,6 +97,14 @@ export default withRouter(({ router }) => {
       </Link>
     )
   }
+  const renderSearch = () => {
+    if (matched.includes('/questions')) {
+      return (
+        <StyledSearch placeholder='搜索你关心的问题' path='/questions' />
+      )
+    }
+    return (<StyledSearch placeholder='搜索你关心的产品' />)
+  }
   return (
     <Header>
       <StyledContainer>
@@ -126,7 +134,7 @@ export default withRouter(({ router }) => {
                   </Menu.Item>
                 ))}
               </Menu>
-              <StyledSearch />
+              {renderSearch()}
             </HeaderContent>
           </Col>
           <Col xl={4} lg={5} md={6} sm={8} xs={0}>

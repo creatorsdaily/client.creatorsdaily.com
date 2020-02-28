@@ -7,6 +7,12 @@ import noop from 'lodash/noop'
 
 const defaultPageSize = 20
 
+const ItemLink = ({ disabled, children, ...rest }) => {
+  return (
+    <Link {...rest}>{children}</Link>
+  )
+}
+
 export default ({
   path,
   query,
@@ -49,9 +55,9 @@ export default ({
       queryStr = '?' + queryStr
     }
     return (
-      <Link {...getLink(path, queryStr, query)}>
+      <ItemLink {...getLink(path, queryStr, query)} passHref>
         {originalElement}
-      </Link>
+      </ItemLink>
     )
   }
   return {

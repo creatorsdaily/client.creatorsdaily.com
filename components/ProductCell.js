@@ -192,6 +192,10 @@ export default ({
     hash,
     topics: newTopics
   } = useProductMeta({ icon, topics })
+  const renderTopicsBar = () => {
+    if (!newTopics.length) return null
+    return (<TopicsBar disabled={disabled} href='/' list={newTopics} checkable />)
+  }
   const renderMeta = () => {
     if (size !== 'normal') return null
     return (
@@ -203,7 +207,7 @@ export default ({
             </CommentsButton>
           </a>
         </Link>
-        {!!newTopics.length && (<TopicsBar disabled={disabled} href='/' list={newTopics} checkable />)}
+        {renderTopicsBar()}
       </ProductMeta>
     )
   }

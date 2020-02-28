@@ -7,7 +7,7 @@ const StyledSearch = styled(Input.Search)`
 max-width: 300px;
 `
 
-export default ({ ...rest }) => {
+export default ({ path = '/', ...rest }) => {
   const {
     query: {
       keyword
@@ -20,17 +20,17 @@ export default ({ ...rest }) => {
   }, [keyword])
   return (
     <>
-      <label htmlFor='product-search' style={{ width: 0, height: 0, overflow: 'hidden' }}>搜索</label>
+      <label htmlFor='search' style={{ width: 0, height: 0, overflow: 'hidden' }}>搜索</label>
       <StyledSearch
-        id='product-search'
-        placeholder='搜索你关心的产品'
+        id='search'
+        placeholder='搜索你关心的'
         {...rest}
         value={keywordValue}
         onChange={({ currentTarget }) => {
           setKeywordValue(currentTarget.value)
         }}
         onSearch={value => {
-          const url = value ? `/?keyword=${value}` : '/'
+          const url = value ? `${path}?keyword=${value}` : path
           replace(url, url, { shallow: true })
         }}
       />
