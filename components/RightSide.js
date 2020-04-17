@@ -4,7 +4,7 @@ import noop from 'lodash/noop'
 import Link from 'next/link'
 import BulbOutlined from '@ant-design/icons/BulbOutlined'
 import MessageOutlined from '@ant-design/icons/MessageOutlined'
-import { PlusOutlined } from '@ant-design/icons';
+import { PlusOutlined } from '@ant-design/icons'
 import media from '../libs/media'
 import Box from './Box'
 import WeChatOfficialAccount from './WeChatOfficialAccount'
@@ -13,6 +13,7 @@ import WeChatButton from './WeChatButton'
 import CoreUsers from './CoreUsers'
 import ActiveUsers from './ActiveUsers'
 import SmallTitle from './SmallTitle'
+import Cemetery from './icons/Cemetery.svg'
 
 const StyledBox = styled(Box)`
 padding: 16px;
@@ -126,6 +127,9 @@ svg {
 
 const Mbutton = styled(BigButton)`
 svg {
+  height: 28px;
+  width: 28px;
+  fill: #505050;
   color: #F0E63B;
 }
 `
@@ -167,11 +171,6 @@ const partners = [{
   link: 'https://www.maliquankai.com',
   slogan: '独立开发者交流、学习聚集地',
   icon: 'https://media.creatorsdaily.com/QmZN56juqA3hE4bExo7XSMSF1HoB4zBjTQRFWmZNL2ZWMy-160-160-contain'
-}, {
-  name: '电鸭社区',
-  link: 'https://eleduck.com',
-  slogan: '互联网工作者们的聚集地',
-  icon: 'https://media.creatorsdaily.com/QmSw56w7qPxST6UNiFfLRTKrVWC6AE8fCJbn5dXUB2JPWV-160-160-contain'
 }, {
   name: '独立开发者社区',
   link: 'https://indiehackers.net/topics',
@@ -227,9 +226,9 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
       <Buttons>
         <Row type='flex'>
           <Col span={12}>
-            <Link href='/milestones'>
+            <Link href='/cemetery'>
               <a>
-                <Mbutton size='large' block type='link' icon={<BulbOutlined />}>里程碑</Mbutton>
+                <Mbutton size='large' block type='link' icon={<Cemetery />}>产品公墓</Mbutton>
               </a>
             </Link>
           </Col>

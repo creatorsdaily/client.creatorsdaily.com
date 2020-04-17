@@ -4,10 +4,14 @@ export const productFragment = `
 id
 name
 description
+state
 isLike
 likeCount
 commentCount
 createdAt
+publishedAt
+diedAt
+causeOfDeath
 isMiniProgram
 topics {
   id
@@ -255,8 +259,8 @@ query($id: String!) {
 `
 
 export const GET_PRODUCTS = gql`
-query($page: Int, $size: Int, $topic: [String!], $keyword: [String!], $order: String) {
-  getProducts(page: $page, size: $size, topic: $topic, keyword: $keyword, order: $order) {
+query($page: Int, $size: Int, $topic: [String!], $keyword: [String!], $state: String, $order: String) {
+  getProducts(page: $page, size: $size, topic: $topic, keyword: $keyword, state: $state, order: $order) {
     total
     data {
       codeCount
