@@ -3,9 +3,10 @@ import Head from 'next/head'
 import { Col, Row } from 'antd'
 import get from 'lodash/get'
 import styled from 'styled-components'
+import { useRouter } from 'next/router'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
-import { GET_QUESTIONS } from '../../queries'
+import { GET_QUESTIONS, SEARCH_QUESTION } from '../../queries'
 import usePagination from '../../hooks/usePagination'
 import media from '../../libs/media'
 import RightSide from '../../components/RightSide'
@@ -36,6 +37,8 @@ ${media.sm`
 `
 
 export default withApollo(() => {
+  const { query: { keyword } } = useRouter()
+  const key = keyword ? 'searchQuestion' : 'getQuestions'
   const {
     result: {
       loading,
@@ -44,10 +47,10 @@ export default withApollo(() => {
     pagination
   } = usePagination({
     path: '/questions',
-    query: GET_QUESTIONS,
-    getTotal: ({ data }) => get(data, 'getQuestions.total', 0)
+    query: keyword ? SEARCH_QUESTION : GET_QUESTIONS,
+    getTotal: ({ data }) => get(data, `${key}.total`, 0)
   })
-  const questions = get(data, 'getQuestions.data', [])
+  const questions = get(data, `${key}.data`, [])
   return (
     <Page>
       <Head>

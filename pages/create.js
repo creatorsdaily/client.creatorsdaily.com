@@ -128,21 +128,7 @@ export default withApollo(() => {
     <Page id='page-create'>
       <StyledContainer>
         <Row type='flex' gutter={24} justify='center'>
-          <Col md={12} xs={24}>
-            <StyledTypography>
-              <StyledTitle level={4}>发布产品</StyledTitle>
-              <Paragraph>
-                这里是爱意满满的作品展示区，无论您是产品的 <Text strong>创造者</Text> ，还是产品的 <Text strong>发现者</Text> ，都可以在这里将它展示给全世界。
-              </Paragraph>
-              <Paragraph>
-                完成产品发布后，会自动推送至 <a href='https://kz.sync163.com/web/topic/vqNzr253b46Yk?uid=ZNlYrg5BAReny' target='_blank' rel='noopener noreferrer'>快知</a>、<a href='https://tophub.today/n/YKd6JwndaP' target='_blank' rel='noopener noreferrer'>今日热榜</a> 等平台，并有机会入选
-                <Text strong>
-                  今日产品
-                </Text>
-                推送至公众号、知乎等平台。
-              </Paragraph>
-            </StyledTypography>
-          </Col>
+          <Col md={12} xs={24} />
         </Row>
         <ProductEditor
           step={1}
@@ -151,7 +137,21 @@ export default withApollo(() => {
           renderFooter={() => (
             <StyledButton loading={searchLoading || loading} htmlType='submit' type='primary'>推荐产品</StyledButton>
           )}
-        />
+        >
+          <StyledTypography>
+            <StyledTitle level={4}>发布产品</StyledTitle>
+            <Paragraph>
+                这里是爱意满满的作品展示区，无论您是产品的 <Text strong>创造者</Text> ，还是产品的 <Text strong>发现者</Text> ，都可以在这里将它展示给全世界。
+            </Paragraph>
+            <Paragraph>
+                完成产品发布后，会自动推送至 <a href='https://kz.sync163.com/web/topic/vqNzr253b46Yk?uid=ZNlYrg5BAReny' target='_blank' rel='noopener noreferrer'>快知</a>、<a href='https://tophub.today/n/YKd6JwndaP' target='_blank' rel='noopener noreferrer'>今日热榜</a>、<a href='https://t.me/creatorsdaily' target='_blank' rel='noopener noreferrer'>Telegram</a> 等平台，并有机会入选
+              <Text strong>
+                  今日产品
+              </Text>
+                推荐至我们的媒体矩阵，目前可覆盖超 <Text strong>53000+</Text> 用户
+            </Paragraph>
+          </StyledTypography>
+        </ProductEditor>
       </StyledContainer>
     </Page>
   )

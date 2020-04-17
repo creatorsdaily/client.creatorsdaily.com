@@ -2,15 +2,15 @@ import React, { useState } from 'react'
 import styled from 'styled-components'
 import gql from 'graphql-tag'
 import { useMutation, useQuery } from '@apollo/react-hooks'
-import { Col, Form, Modal, Row, Typography, message } from 'antd'
+import { Button, Col, Form, Modal, Row, Typography, message } from 'antd'
 import get from 'lodash/get'
 import { useRouter } from 'next/router'
+import Link from 'next/link'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import useAuth from '../../hooks/useAuth'
 import { SEARCH_QUESTION } from '../../queries'
 import withApollo from '../../libs/with-apollo'
-import ProductCell from '../../components/ProductCell'
 import { formToQuestion } from '../../libs/form-utils'
 import graphqlError from '../../libs/graphql-error'
 import QuestionForm from '../../components/QuestionForm'
@@ -38,12 +38,6 @@ margin-top: 24px;
 margin-bottom: 24px;
 `
 
-const StyledProductCell = styled(ProductCell)`
-box-shadow: none;
-border: 1px solid #E0E0E0;
-margin-bottom: 16px;
-`
-
 const CREATE_QUESTION = gql`
 mutation($question: IQuestion!) {
   createQuestion(question: $question) {
@@ -58,7 +52,13 @@ const ModalContent = withApollo(({ list }) => {
     <div style={{ marginTop: 24 }}>
       {
         list.map(x => (
-          <StyledProductCell key={x.id} size='small' {...x} />
+          <Link key={x.id} href={`/questions/${x.id}`}>
+            <a>
+              <Button type='link'>
+                {x.name}
+              </Button>
+            </a>
+          </Link>
         ))
       }
     </div>
@@ -97,16 +97,16 @@ export default withApollo(() => {
         question: formToQuestion(values)
       }
     })
-    return runCreate()
+    // return runCreate()
     setSearchLoading(true)
     const { data } = await refetch({
       keyword: values.name,
-      score: 20,
-      size: 5
+      score: 3,
+      size: 3
     })
     setSearchLoading(false)
-    const list = get(data, 'searchProducts.data', [])
-    const total = get(data, 'searchProducts.total', 0)
+    const list = get(data, 'searchQuestion.data', [])
+    const total = get(data, 'searchQuestion.total', 0)
     if (total) {
       return Modal.confirm({
         getContainer: '#page-create',
@@ -126,7 +126,7 @@ export default withApollo(() => {
     runCreate()
   }
   return (
-    <Page>
+    <Page id='page-create'>
       <StyledContainer>
         <Row type='flex' gutter={24} justify='center'>
           <Col xxl={9} xl={10} lg={12} md={16} xs={24}>

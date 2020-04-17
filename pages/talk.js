@@ -21,7 +21,6 @@ margin: 24px auto;
 const StyledProductCell = styled(ProductCell)`
 border: 0px;
 box-shadow: none;
-height: 44px;
 margin-bottom: 16px;
 :hover {
   border: 0px;

@@ -113,6 +113,9 @@ export default withApollo(() => {
     if (!!keyword || !!topic || !!Number(page)) return null
     return (<SmallTitle>产品展区</SmallTitle>)
   }
+  if (process.env.CLOSE_TIP) {
+    return process.env.CLOSE_TIP
+  }
   return (
     <Page>
       <StyledContainer>

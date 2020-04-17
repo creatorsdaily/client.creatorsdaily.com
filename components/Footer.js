@@ -41,6 +41,8 @@ export default props => {
         <Row type='flex' gutter={24} justify='center' align='middle'>
           <Col md={14} sm={24} xs={24}>
             <Content>
+              <a href='http://www.beian.miit.gov.cn' target='_blank' rel='noopener noreferrer'>冀ICP备20003217号</a>
+              <Divider type='vertical' />
               <a href='/api/atom' rel='noreferrer' target='_blank'>ATOM</a>
               <Divider type='vertical' />
               <a href='/api/rss' rel='noreferrer' target='_blank'>RSS</a>
