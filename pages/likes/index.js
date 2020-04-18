@@ -71,7 +71,14 @@ export default withApollo(() => {
               </LikeImages>
               <h3>好心的老板们</h3>
               <div>网站纯兴趣驱动运营，你的「喜欢」将会用于支持她的发展</div>
-              <List />
+              <List
+                split={false}
+                dataSource={[]}
+                locale={{
+                  emptyText: '还没有好心老板'
+                }}
+                renderItem={item => null}
+              />
             </Content>
           </Col>
           <Col lg={6} md={7} xs={24}>
