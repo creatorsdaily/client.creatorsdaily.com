@@ -80,6 +80,8 @@ export default withApollo(() => {
       <Head>
         <title>{post.title} - {process.env.NAME}</title>
         <meta key='description' name='description' content={post.description} />
+        <meta key='og-title' property='og:title' content={post.name} />
+        <meta key='og-url' property='og:url' content={`https://creatorsdaily.com/posts/${id}`} />
       </Head>
       <Spin spinning={loading}>
         <PostTitle>{post.title}</PostTitle>
