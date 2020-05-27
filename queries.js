@@ -427,16 +427,13 @@ fragment CommentFields on Comment {
   content
   createdAt
   parentId
-  productId
-  milestoneId
-  wishId
   user {
     ${userFragment}
   }
 }
 query($id: String!) {
   getComment(id: $id) {
-    product {
+    products {
       ${productFragment}
       discovererId
       creators {
@@ -466,9 +463,6 @@ fragment CommentFields on Comment {
   content
   createdAt
   parentId
-  productId
-  milestoneId
-  wishId
   user {
     ${userFragment}
   }
@@ -476,7 +470,7 @@ fragment CommentFields on Comment {
 query($page: Int, $size: Int, $productId: String, $milestoneId: String, $wishId: String) {
   getComments(page: $page, size: $size, productId: $productId, milestoneId: $milestoneId, wishId: $wishId) {
     data {
-      product {
+      products {
         ${productFragment}
         discovererId
         creators {

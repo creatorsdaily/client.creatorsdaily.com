@@ -179,6 +179,7 @@ const partners = [{
 }]
 
 export default ({ onQuestion = noop, onProduct = noop }) => {
+  const productId = process.env.PRODUCT_ID
   const handleZSXQ = () => {
     Modal.info({
       okText: '关闭',
@@ -307,11 +308,13 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
         <StyledBox>
           <Title>微信公众号</Title>
           <WeChatOfficialAccount title='微信关注：一群创造者' />
-          <Link href='/[id]' as='/b256ab69-e72a-4491-bd3b-13da969f6c0c' passHref>
-            <VoteBtn aria-label='投票'>
-              <img alt='投票' src='/api/b256ab69-e72a-4491-bd3b-13da969f6c0c/vote.svg?theme=light' />
-            </VoteBtn>
-          </Link>
+          {productId && (
+            <Link href='/[id]' as={'/' + productId} passHref>
+              <VoteBtn aria-label='投票'>
+                <img alt='投票' src={`/api/${productId}/vote.svg?theme=light`} />
+              </VoteBtn>
+            </Link>
+          )}
         </StyledBox>
       </Affix>
     </>

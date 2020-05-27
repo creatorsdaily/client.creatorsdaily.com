@@ -32,6 +32,9 @@ margin-bottom: 16px;
 }
 a {
   padding: 0;
+  > div {
+    padding: 0;
+  }
 }
 `
 
@@ -48,11 +51,8 @@ export default withApollo(() => {
     }
   })
   const comment = get(data, 'getComment', {})
-  const [handleReply, { loading: createLoading }] = useCreateComment({
-    productId: comment.productId,
-    milestoneId: comment.milestoneId,
-    wishId: comment.wishId
-  }, {
+  const product = get(comment, 'products[0]', {})
+  const [handleReply, { loading: createLoading }] = useCreateComment({}, {
     refetchQueries: () => [{
       query: GET_COMMENT,
       variables: { id }
@@ -65,7 +65,7 @@ export default withApollo(() => {
     }
     return (
       <CommentCell
-        product={comment.product}
+        product={product}
         loading={loading || createLoading}
         comment={comment}
         onReply={handleReply}
@@ -82,7 +82,7 @@ export default withApollo(() => {
         <Row gutter={24}>
           <Col md={12} xs={24}>
             <StyledBox>
-              <StyledProductCell size='small' {...comment.product} />
+              <StyledProductCell size='small' {...product} />
               <Buttons />
               {renderComment()}
             </StyledBox>

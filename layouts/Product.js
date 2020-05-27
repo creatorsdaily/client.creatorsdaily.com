@@ -168,7 +168,7 @@ export default ({ children }) => {
               <Link href='/[id]/wishes' as={`/${id}/wishes`}>
                 <a>
                   <HeartOutlined />
-                  心愿
+                  新愿
                 </a>
               </Link>
             </Menu.Item>

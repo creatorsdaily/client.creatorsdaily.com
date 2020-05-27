@@ -68,7 +68,7 @@ export default (productId, {
         })
       }}
     >
-      <StyledAlert showIcon message='产品有了新的里程碑？' description='新版本更新？达到1000个用户？或者有重大消息发布？都可以通过新的里程碑告知用户！' />
+      <StyledAlert showIcon message='产品有了新的里程碑？' description='新版本更新？达到1000个用户？或者有重大消息发布？都可以通过新的里程碑分享给大家！' />
       <MilestoneForm form={form} />
     </Modal>
   ), show, hide]

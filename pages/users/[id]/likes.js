@@ -3,7 +3,7 @@ import { Empty, Spin } from 'antd'
 import get from 'lodash/get'
 import { useState } from 'react'
 import validate from 'uuid-validate'
-import Head from 'next/head';
+import Head from 'next/head'
 import User from '../../../layouts/User'
 import ProductCell from '../../../components/ProductCell'
 import SmallTitle from '../../../components/SmallTitle'

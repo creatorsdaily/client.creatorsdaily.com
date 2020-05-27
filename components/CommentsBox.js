@@ -90,9 +90,9 @@ export default ({
     content,
     setContent
   ] = useCreateComment({
-    productId,
-    milestoneId,
-    wishId
+    productIds: productId ? [productId] : [],
+    milestoneIds: milestoneId ? [milestoneId] : [],
+    wishIds: wishId ? [wishId] : []
   }, {
     update (cache, data) {
       updateComments(cache, data, query, product)

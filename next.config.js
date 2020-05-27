@@ -28,6 +28,7 @@ const {
   DESCRIPTION,
   KEYWORDS,
   ONE_SIGNAL_APP_ID,
+  PRODUCT_ID,
   GRAPHQL_WS,
   CLOSE_TIP,
   DOMAIN
@@ -180,6 +181,7 @@ module.exports = withPlugins([
     DESCRIPTION,
     KEYWORDS,
     ONE_SIGNAL_APP_ID,
+    PRODUCT_ID,
     DOMAIN,
     GRAPHQL_WS,
     CLOSE_TIP,
