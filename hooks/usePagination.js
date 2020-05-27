@@ -73,6 +73,7 @@ export default ({
         total={total}
         pageSize={size}
         itemRender={itemRender}
+        showSizeChanger={false}
         {...props}
       />
     )
