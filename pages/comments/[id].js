@@ -25,16 +25,13 @@ margin-bottom: 24px;
 const StyledProductCell = styled(ProductCell)`
 border: 0px;
 box-shadow: none;
-height: 44px;
+height: 60px;
 margin-bottom: 16px;
 :hover {
   border: 0px;
 }
 a {
   padding: 0;
-  > div {
-    padding: 0;
-  }
 }
 `
 
