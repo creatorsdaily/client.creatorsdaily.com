@@ -234,9 +234,9 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
             </Link>
           </Col>
           <Col span={12}>
-            <Link href='/milestones'>
+            <Link href='/talk'>
               <a>
-                <Mbutton size='large' block type='link' icon={<BulbOutlined />}>里程碑</Mbutton>
+                <BigButton size='large' block type='link' icon={<MessageOutlined />}>聊产品</BigButton>
               </a>
             </Link>
           </Col>

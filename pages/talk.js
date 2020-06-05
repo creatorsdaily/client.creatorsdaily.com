@@ -98,30 +98,33 @@ export default withApollo(() => {
         <Row gutter={24}>
           <Col md={12} xs={24}>
             <Spin spinning={loading}>
-              {list.map(x => (
-                <CommentsBox
-                  key={x.id}
-                  onFocus={() => setFocusProduct(x.product.id)}
-                  onBlur={() => setFocusProduct(null)}
-                  onMouseEnter={() => setHoverProduct(x.product.id)}
-                  onMouseLeave={() => setHoverProduct(null)}
-                  list={[x]}
-                  renderHeader={() => (
-                    <StyledProductCell {...x.product} size='small' />
-                  )}
-                  renderFooter={() => (
-                    <Link href='/[id]' as={`/${x.product.id}#comments`}>
-                      <a>
-                        <MoreButton size='small' type='link' block>更多「{x.product.name}」的评论</MoreButton>
-                      </a>
-                    </Link>
-                  )}
-                  query={query}
-                  loading={loading}
-                  product={x.product}
-                  productId={x.product.id}
-                />
-              ))}
+              {list.map(x => {
+                const product = x.products[0]
+                return (
+                  <CommentsBox
+                    key={x.id}
+                    onFocus={() => setFocusProduct(product.id)}
+                    onBlur={() => setFocusProduct(null)}
+                    onMouseEnter={() => setHoverProduct(product.id)}
+                    onMouseLeave={() => setHoverProduct(null)}
+                    list={[x]}
+                    renderHeader={() => (
+                      <StyledProductCell {...product} size='small' />
+                    )}
+                    renderFooter={() => (
+                      <Link href='/[id]' as={`/${product.id}#comments`}>
+                        <a>
+                          <MoreButton size='small' type='link' block>更多「{product.name}」的评论</MoreButton>
+                        </a>
+                      </Link>
+                    )}
+                    query={query}
+                    loading={loading}
+                    product={product}
+                    productId={product.id}
+                  />
+                )
+              })}
               {renderMore()}
             </Spin>
           </Col>
