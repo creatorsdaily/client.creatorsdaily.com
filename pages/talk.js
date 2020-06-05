@@ -99,7 +99,7 @@ export default withApollo(() => {
           <Col md={12} xs={24}>
             <Spin spinning={loading}>
               {list.map(x => {
-                const product = x.products[0]
+                const product = x.products[0] || {}
                 return (
                   <CommentsBox
                     key={x.id}
