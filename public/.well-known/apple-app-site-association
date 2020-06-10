@@ -2,7 +2,7 @@
   "applinks": {
     "details": [
       {
-        "appIDs": [ "E4A3D6D284.com.creatorsdaily.app"],
+        "appIDs": [ "86777JPC6J.com.creatorsdaily.app"],
         "components": [
           {
             "/": "/????????-????-????-????-????????????",
@@ -17,6 +17,6 @@
     ]
   },
   "webcredentials": {
-    "apps": ["E4A3D6D284.com.creatorsdaily.app"]
+    "apps": ["86777JPC6J.com.creatorsdaily.app"]
   }
 }
