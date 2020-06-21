@@ -73,6 +73,8 @@ export default props => {
               <Link href='/about'>
                 <a>关于</a>
               </Link>
+              <Divider type='vertical' />
+              <a href='mailto:tengfei@creatorsdaily.com'>联系我们</a>
             </Content>
           </Col>
           <Col md={10} sm={0} xs={0}>
