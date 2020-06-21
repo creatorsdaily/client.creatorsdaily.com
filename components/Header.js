@@ -57,19 +57,9 @@ const menu = [{
   name: '问题',
   href: '/questions'
 }, {
-  name: '日报',
-  href: '/posts'
-}/*, {
-  name: '聊产品',
-  href: '/talk'
-}, {
-  name: '里程碑',
-  href: '/milestones'
-}, {
   name: 'APP',
-  href: '/app',
-  disabled: true
-} */]
+  href: '/app'
+}]
 
 const Logo = styled.div`
   color: #262626;
