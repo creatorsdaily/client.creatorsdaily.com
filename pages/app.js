@@ -81,9 +81,9 @@ ${media.md`
 
 const AppContainer = styled.div`
 position: relative;
-width: 240px;
-margin: 80px auto 0;
-min-height: 500px;
+width: 320px;
+margin: 40px auto 0;
+min-height: 680px;
 `
 
 const AppMasker = styled.img`
@@ -113,7 +113,8 @@ export default withApollo(() => {
             <Content>创造者日报是一个爱意满满的创造者作品展示平台，你可以在这里分享、发现有趣且有爱的产品，还可以结识新的朋友，赶快下载体验吧！</Content>
             <Row align='middle'>
               <Col md={16} xs={24}>
-                <a href='https://apps.apple.com/cn/app/id1517824086' target='_blank' rel='noreferrer'>
+                <a href='https://testflight.apple.com/join/eh1xMlb8' target='_blank' rel='noreferrer'>
+                  {/* <a href='https://apps.apple.com/cn/app/id1517824086' target='_blank' rel='noreferrer'> */}
                   <StyledAppStore />
                 </a>
                 <Android>Android 版本敬请期待</Android>
