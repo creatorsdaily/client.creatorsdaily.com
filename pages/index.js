@@ -63,15 +63,7 @@ export default withApollo(() => {
     getTotal: ({ data }) => get(data, `${key}.total`, 0)
   })
 
-  const { data: postsData, loading: postsLoading } = useQuery(GET_POSTS, {
-    variables: {
-      size: 1
-    },
-    skip: (!!keyword || !!topic || !!Number(page))
-  })
-
   const products = get(data, `${key}.data`, [])
-  const posts = get(postsData, 'getPosts.data', [])
   const renderList = () => {
     if (products.length) {
       return products.map(product => (
@@ -82,18 +74,6 @@ export default withApollo(() => {
       <Empty description='暂无内容' image={Empty.PRESENTED_IMAGE_SIMPLE} />
     )
   }
-  const renderPosts = () => {
-    if (!posts.length) {
-      return (<div style={{ height: postsLoading ? 30 : 0 }} />)
-    }
-    return (
-      <>
-        {posts.map(post => (
-          <StyledPostCell flag='每日精选' {...post} key={post.id} />
-        ))}
-      </>
-    )
-  }
   const renderMilestones = () => {
     if (!!keyword || !!topic || !!Number(page)) return null
     return (
@@ -101,7 +81,7 @@ export default withApollo(() => {
         <SmallTitle>
           <Link href='/milestones'>
             <a>
-            里程碑
+              里程碑
             </a>
           </Link>
         </SmallTitle>
@@ -127,9 +107,6 @@ export default withApollo(() => {
             <TopicList href='/' />
           </Col>
           <Col xl={14} lg={13} md={16} xs={24}>
-            <Spin spinning={postsLoading}>
-              {renderPosts()}
-            </Spin>
             {renderMilestones()}
             {renderPostsTitle()}
             <Spin spinning={loading}>
