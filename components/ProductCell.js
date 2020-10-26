@@ -182,7 +182,7 @@ z-index: 1;
 font-size: 12px;
 `
 
-export default ({
+const ProductCell = ({
   id, disabled = false, topics = [], size = 'normal', isMiniProgram,
   likeCount, commentCount, codeCount, isLike, icon, name, description,
   overflow = false, withLike = true,
@@ -269,3 +269,4 @@ export default ({
     </Container>
   )
 }
+export default ProductCell

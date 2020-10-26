@@ -15,7 +15,7 @@ div {
 }
 `
 
-export default ({ user, back = '/', ...rest }) => {
+const UserButton = ({ user, back = '/', ...rest }) => {
   const router = useRouter()
   if (!user) {
     return (
@@ -77,3 +77,4 @@ export default ({ user, back = '/', ...rest }) => {
     </Popover>
   )
 }
+export default UserButton

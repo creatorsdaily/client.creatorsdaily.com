@@ -7,7 +7,7 @@ const StyledSearch = styled(Input.Search)`
 max-width: 300px;
 `
 
-export default ({ path = '/', ...rest }) => {
+const Search = ({ path = '/', ...rest }) => {
   const {
     query: {
       keyword
@@ -37,3 +37,5 @@ export default ({ path = '/', ...rest }) => {
     </>
   )
 }
+
+export default Search

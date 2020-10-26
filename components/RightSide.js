@@ -2,13 +2,11 @@ import { Affix, Button, Col, Modal, Row } from 'antd'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
 import Link from 'next/link'
-import BulbOutlined from '@ant-design/icons/BulbOutlined'
 import MessageOutlined from '@ant-design/icons/MessageOutlined'
 import { PlusOutlined } from '@ant-design/icons'
 import media from '../libs/media'
 import Box from './Box'
 import WeChatOfficialAccount from './WeChatOfficialAccount'
-import ZSXQ from './ZSXQ'
 import WeChatButton from './WeChatButton'
 import CoreUsers from './CoreUsers'
 import ActiveUsers from './ActiveUsers'
@@ -178,21 +176,8 @@ const partners = [{
   icon: 'https://media.creatorsdaily.com/QmVRA2A1BZomVauPCmD8y8jx2ko97NrmTm33FToanzV1im-160-160-contain'
 }]
 
-export default ({ onQuestion = noop, onProduct = noop }) => {
+const RightSide = ({ onQuestion = noop, onProduct = noop }) => {
   const productId = process.env.PRODUCT_ID
-  const handleZSXQ = () => {
-    Modal.info({
-      okText: '关闭',
-      className: 'preview-modal',
-      icon: null,
-      maskClosable: true,
-      autoFocusButton: null,
-      width: 500,
-      content: (
-        <ZSXQ title='知识星球' hideTitle />
-      )
-    })
-  }
   const handleWeApp = () => {
     Modal.info({
       okText: '关闭',
@@ -297,12 +282,6 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
             </Button>
           </a>
         </Contact>
-        <Contact>
-          <Button type='link' onClick={handleZSXQ}>
-            <img src='/zsxq.png' alt='知识星球' />
-            <div>加入我的「知识星球」</div>
-          </Button>
-        </Contact>
       </ContactBox>
       <Affix offsetTop={24}>
         <StyledBox>
@@ -320,3 +299,5 @@ export default ({ onQuestion = noop, onProduct = noop }) => {
     </>
   )
 }
+
+export default RightSide

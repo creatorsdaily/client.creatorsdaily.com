@@ -7,7 +7,7 @@ margin-bottom: 16px;
 display: block;
 `
 
-export default ({ list }) => {
+const Users = ({ list }) => {
   return list.map(user => (
     <Link key={user.id} href='/users/[id]' as={`/users/${user.id}`} passHref>
       <StyledLink>
@@ -16,3 +16,4 @@ export default ({ list }) => {
     </Link>
   ))
 }
+export default Users

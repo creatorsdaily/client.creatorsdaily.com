@@ -1,6 +1,6 @@
 import graphqlError from './graphql-error'
 
-export default (form, error, field) => {
+const FormError = (form, error, field) => {
   const errors = graphqlError(error)
   if (field) {
     form.setFields([{
@@ -13,3 +13,4 @@ export default (form, error, field) => {
   }
   return errors
 }
+export default FormError

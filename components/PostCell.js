@@ -95,7 +95,7 @@ z-index: 1;
 font-size: 12px;
 `
 
-export default ({ id, products, description, createdAt, disabled = false, media, title, flag, ...rest }) => {
+const PostCell = ({ id, products, description, createdAt, disabled = false, media, title, flag, ...rest }) => {
   const renderProduct = () => {
     if (!products.length) {
       return (
@@ -138,3 +138,4 @@ export default ({ id, products, description, createdAt, disabled = false, media,
     </Container>
   )
 }
+export default PostCell

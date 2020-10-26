@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Tag } from 'antd'
 import Link from 'next/link'
-import Avatar from './Avatar'
+import UserAvatar from './UserAvatar'
 import Time from './Time'
 import Box from './Box'
 import SmallTitle from './SmallTitle'
@@ -15,7 +15,7 @@ margin-top: 48px;
 margin-bottom: 24px;
 `
 
-const UserAvatar = styled(Avatar)`
+const StyledUserAvatar = styled(UserAvatar)`
 margin-top: -48px;
 margin-right: 12px;
 background: #FFF;
@@ -135,7 +135,7 @@ export default ({ user, children, ...rest }) => {
   }
   return (
     <Container {...rest}>
-      <UserAvatar user={user} size={72} />
+      <StyledUserAvatar user={user} size={72} />
       <UserContent>
         <UserTitle>
           <Link href='/users/[id]' as={`/users/${user.id}`}>

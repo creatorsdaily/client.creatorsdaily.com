@@ -2,7 +2,7 @@ import { Avatar } from 'antd'
 import md5 from 'crypto-js/md5'
 import UserOutlined from '@ant-design/icons/UserOutlined'
 
-export default ({ user, size = 32, ...rest }) => {
+const UserAvatar = ({ user, size = 32, ...rest }) => {
   const props = {
     ...rest
   }
@@ -15,3 +15,4 @@ export default ({ user, size = 32, ...rest }) => {
     <Avatar shape='square' icon={<UserOutlined />} size={size} alt={user.nickname} {...props} />
   )
 }
+export default UserAvatar

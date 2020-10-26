@@ -36,7 +36,7 @@ const SmallEmpty = styled(Empty)`
   }
 `
 
-export default ({ hash, size, ...rest }) => {
+const IPFSImage = ({ hash, size, ...rest }) => {
   if (!hash) {
     if (size === 'small') {
       return (
@@ -55,3 +55,4 @@ export default ({ hash, size, ...rest }) => {
     <img {...rest} src={`${process.env.FILES}/${hash}`} />
   )
 }
+export default IPFSImage

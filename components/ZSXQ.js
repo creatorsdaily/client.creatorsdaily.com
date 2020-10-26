@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Fragment } from 'react'
 
 const Image = styled.img`
 display: block;
@@ -12,11 +11,13 @@ color: #707070;
 text-align: center;
 `
 
-export default ({ title, hideTitle = false }) => {
+const ZSXQ = ({ title, hideTitle = false }) => {
   return (
-    <Fragment>
+    <>
       <Image alt={title} src='/zsxq.jpg' />
       {title && !hideTitle && (<Title>{title}</Title>)}
-    </Fragment>
+    </>
   )
 }
+
+export default ZSXQ

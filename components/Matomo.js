@@ -1,4 +1,4 @@
-export default () => {
+const Matomo = () => {
   if (process.env.NODE_ENV !== 'production') return null
   return (
     <script dangerouslySetInnerHTML={{
@@ -18,3 +18,5 @@ export default () => {
     />
   )
 }
+
+export default Matomo

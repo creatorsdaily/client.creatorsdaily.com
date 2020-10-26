@@ -10,7 +10,7 @@ const SmallButton = styled(Button)`
   color: #6C6C6C;
 `
 
-export default ({ tooltip, children, ...rest }) => {
+const WeChatButton = ({ tooltip, children, ...rest }) => {
   const handleWeChat = () => {
     Modal.info({
       okText: '关闭',
@@ -38,3 +38,4 @@ export default ({ tooltip, children, ...rest }) => {
     </Tooltip>
   )
 }
+export default WeChatButton

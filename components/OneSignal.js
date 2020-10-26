@@ -1,4 +1,4 @@
-export default () => {
+const OneSignal = () => {
   if (process.env.NODE_ENV !== 'production') return null
   return (
     <script dangerouslySetInnerHTML={{
@@ -32,3 +32,4 @@ export default () => {
     />
   )
 }
+export default OneSignal

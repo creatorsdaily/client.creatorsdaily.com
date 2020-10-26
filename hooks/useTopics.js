@@ -2,7 +2,7 @@ import qs from 'qs'
 import { useRouter } from 'next/router'
 import omit from 'lodash/omit'
 
-export default ({
+const useTopics = ({
   key = 'topic',
   path
 } = {}) => {
@@ -26,3 +26,4 @@ export default ({
     return url
   }]
 }
+export default useTopics

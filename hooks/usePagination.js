@@ -13,7 +13,7 @@ const ItemLink = ({ disabled, children, ...rest }) => {
   )
 }
 
-export default ({
+const usePagination = ({
   path,
   query,
   props = {},
@@ -79,3 +79,4 @@ export default ({
     )
   }
 }
+export default usePagination

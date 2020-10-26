@@ -1,4 +1,4 @@
-export default ({ ...rest }) => {
+const Logo = ({ ...rest }) => {
   return (
     <svg width='1024px' height='1024px' viewBox='0 0 1024 1024' version='1.1' {...rest}>
       <linearGradient x1='17.7452741%' y1='84.4896185%' x2='76.898702%' y2='22.7107947%' id='linearGradient-1'>
@@ -46,3 +46,4 @@ export default ({ ...rest }) => {
     </svg>
   )
 }
+export default Logo

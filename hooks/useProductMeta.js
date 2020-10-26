@@ -2,7 +2,7 @@ import { useQuery } from '@apollo/react-hooks'
 import get from 'lodash/get'
 import { GET_MEDIA, GET_TOPICS } from '../queries'
 
-export default ({ icon, topics = [] }) => {
+const useProductMeta = ({ icon, topics = [] }) => {
   icon = icon || {}
   const { data } = useQuery(GET_MEDIA, {
     variables: { id: icon.id },
@@ -24,3 +24,4 @@ export default ({ icon, topics = [] }) => {
     }))
   }
 }
+export default useProductMeta

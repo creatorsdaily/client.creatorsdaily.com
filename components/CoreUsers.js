@@ -12,7 +12,7 @@ const Container = styled.div`
   `}
 `
 
-export default () => {
+const CoreUsers = () => {
   const { data } = useQuery(GET_USERS, {
     variables: {
       ids: [
@@ -32,3 +32,5 @@ export default () => {
     </Container>
   )
 }
+
+export default CoreUsers

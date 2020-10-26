@@ -5,9 +5,7 @@ import media from '../libs/media'
 import Container from './Container'
 import FooterButtons from './FooterButtons'
 
-const { Footer } = Layout
-
-const StyledFooter = styled(Footer)`
+const StyledFooter = styled(Layout.Footer)`
 padding: 24px 0;
 `
 
@@ -34,7 +32,7 @@ const Bottom = styled(Row)`
 padding: 24px 0;
 `
 
-export default props => {
+const Footer = props => {
   return (
     <StyledFooter>
       <StyledContainer {...props}>
@@ -89,3 +87,4 @@ export default props => {
     </StyledFooter>
   )
 }
+export default Footer

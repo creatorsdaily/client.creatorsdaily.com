@@ -1,11 +1,23 @@
 {
   "presets": ["next/babel"],
   "plugins": [
-    ["import", {
-      "libraryName": "antd",
-      "libraryDirectory": "es"
-      // "style": true
-    }],
+    [
+      "import",
+      {
+        "libraryName": "antd",
+        "libraryDirectory": "lib",
+        "style": "index.css"
+      }
+    ],
+    [
+      "import",
+      {
+        "libraryName": "@ant-design/icons",
+        "libraryDirectory": "lib/icons",
+        "camel2DashComponentName": false
+      },
+      "@ant-design/icons"
+    ],
     ["styled-components", { "ssr": true }],
     "inline-react-svg"
   ]

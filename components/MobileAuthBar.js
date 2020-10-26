@@ -15,7 +15,7 @@ ${media.sm`
 `}
 `
 
-export default () => {
+const MobileAuthBar = () => {
   const { asPath } = useRouter()
   const { viewer, loading } = useViewer()
   const back = encodeURIComponent(asPath)
@@ -43,3 +43,4 @@ export default () => {
     </Affix>
   )
 }
+export default MobileAuthBar

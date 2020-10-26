@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import { Fragment } from 'react'
 
 const Image = styled.img`
 max-width: 180px;
@@ -14,11 +13,12 @@ color: #707070;
 text-align: center;
 `
 
-export default ({ title }) => {
+const WeChatOfficialAccount = ({ title }) => {
   return (
-    <Fragment>
+    <>
       <Image alt={title} src='/wechat-official-account.png' />
       {title && (<Title>{title}</Title>)}
-    </Fragment>
+    </>
   )
 }
+export default WeChatOfficialAccount

@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import LazyLoad from 'react-lazyload'
 import { Badge } from 'antd'
-import Avatar from './Avatar'
+import UserAvatar from './UserAvatar'
 
 const Container = styled.div`
 display: flex;
@@ -11,7 +11,7 @@ color: #333;
 }
 `
 
-const StyledAvatar = styled(Avatar)`
+const StyledAvatar = styled(UserAvatar)`
 width: 32px;
 height: 32px;
 img {
@@ -32,7 +32,7 @@ overflow: hidden;
 text-overflow:ellipsis;
 `
 
-export default ({ user, hideName = false, ...rest }) => {
+const UserCell = ({ user, hideName = false, ...rest }) => {
   const nickname = user.nickname || ''
   const renderAvatar = () => {
     const avatar = (
@@ -56,3 +56,4 @@ export default ({ user, hideName = false, ...rest }) => {
     </Container>
   )
 }
+export default UserCell

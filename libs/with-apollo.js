@@ -14,7 +14,7 @@ import graphqlError from './graphql-error'
  * @param {Object} [config]
  * @param {Boolean} [config.ssr=true]
  */
-export default (PageComponent, { ssr = true } = {}) => {
+const withApollo = (PageComponent, { ssr = true } = {}) => {
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
     const client = apolloClient || initApollo(apolloState, { getToken })
     return (
@@ -118,3 +118,4 @@ export function getToken (req) {
   const cookies = cookie.parse(req ? req.headers.cookie || '' : document.cookie)
   return cookies.token
 }
+export default withApollo

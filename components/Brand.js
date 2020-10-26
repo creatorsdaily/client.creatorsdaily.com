@@ -26,7 +26,7 @@ const StyledName = styled.h1`
   `}
 `
 
-export default ({ name, ...rest }) => {
+const Brand = ({ name, ...rest }) => {
   return (
     <Container {...rest}>
       <StyledLogo />
@@ -34,3 +34,4 @@ export default ({ name, ...rest }) => {
     </Container>
   )
 }
+export default Brand

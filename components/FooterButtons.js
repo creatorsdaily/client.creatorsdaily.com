@@ -44,7 +44,7 @@ button {
 
 let installPrompt
 
-export default () => {
+const FooterButtons = () => {
   const [canInstall, setCanInstall] = useToggle(false)
   const [isPushSupported, setIsPushSupported] = useToggle(false)
   const [permission, setPermission] = useState('loading')
@@ -155,3 +155,5 @@ export default () => {
     </Container>
   )
 }
+
+export default FooterButtons

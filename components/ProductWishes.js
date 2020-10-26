@@ -7,7 +7,7 @@ import useCreateWishModal from '../hooks/useCreateWishModal'
 import { GET_PRODUCT } from '../queries'
 import { wishTypeColors, wishTypes } from '../libs/enums'
 import Box from './Box'
-import Avatar from './Avatar'
+import UserAvatar from './UserAvatar'
 import Time from './Time'
 import WishLike from './WishLike'
 
@@ -116,7 +116,7 @@ export default ({
           <List.Item key={item.id}>
             <WishCell>
               <WishAvatar>
-                <Avatar user={item.user} size={38} />
+                <UserAvatar user={item.user} size={38} />
               </WishAvatar>
               <WishContent>
                 <WishMeta>

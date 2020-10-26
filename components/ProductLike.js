@@ -39,7 +39,7 @@ mutation($id: String!, $dislike: Boolean) {
 }
 `
 
-export default ({ title = '我喜欢', id, likeCount, isLike, loading: containerLoading, ...rest }) => {
+const ProductLike = ({ title = '我喜欢', id, likeCount, isLike, loading: containerLoading, ...rest }) => {
   const [like, { loading }] = useMutation(LIKE, {
     onError: error => {
       const errors = formError(null, error)
@@ -69,3 +69,4 @@ export default ({ title = '我喜欢', id, likeCount, isLike, loading: container
     </StyledButton>
   )
 }
+export default ProductLike

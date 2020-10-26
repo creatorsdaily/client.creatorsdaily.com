@@ -1,6 +1,6 @@
 import get from 'lodash/get'
 
-export default err => {
+const GraphQLError = err => {
   const { graphQLErrors = [], networkError, message } = err
   let errors = []
   if (!graphQLErrors.length && !networkError && message) {
@@ -23,3 +23,5 @@ export default err => {
   }
   return errors
 }
+
+export default GraphQLError

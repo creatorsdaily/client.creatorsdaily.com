@@ -7,7 +7,7 @@ import gql from 'graphql-tag'
 import { useMutation } from '@apollo/react-hooks'
 import useAuth from '../../hooks/useAuth'
 import ProfileForm, { formToProfile, profileToForm } from '../../components/ProfileForm'
-import Avatar from '../../components/Avatar'
+import UserAvatar from '../../components/UserAvatar'
 import formError from '../../libs/form-error'
 import withApollo from '../../libs/with-apollo'
 import Setting from '../../layouts/Setting'
@@ -34,7 +34,7 @@ align-items: center;
 margin-bottom: 24px;
 `
 
-const StyledAvatar = styled(Avatar)`
+const StyledAvatar = styled(UserAvatar)`
 margin-right: 12px;
 display: block;
 `

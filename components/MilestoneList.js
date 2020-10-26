@@ -58,7 +58,7 @@ const StyledDivider = styled(Divider)`
 margin: 10px 0;
 `
 
-export default ({ productId, size = 15 }) => {
+const MilestoneList = ({ productId, size = 15 }) => {
   const [page, setPage] = useState(1)
   const query = [GET_MILESTONES, {
     size,
@@ -136,3 +136,5 @@ export default ({ productId, size = 15 }) => {
     </Spin>
   )
 }
+
+export default MilestoneList
