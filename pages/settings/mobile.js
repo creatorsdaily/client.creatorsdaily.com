@@ -40,7 +40,6 @@ export default withApollo(() => {
     }
   })
   const isBound = viewer && viewer.mobile != null
-  console.log(viewer)
   const [getCode, { loading: codeLoading }] = useMutation(GET_CODE, {
     onCompleted: () => counter(),
     onError: error => {

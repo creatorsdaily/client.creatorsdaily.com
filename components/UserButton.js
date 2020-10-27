@@ -20,13 +20,13 @@ const UserButton = ({ user, back = '/', ...rest }) => {
   if (!user) {
     return (
       <div {...rest}>
-        <Link href={`/auth/signin?back=${encodeURIComponent(back)}`} passHref>
+        <Link href={`/auth?back=${encodeURIComponent(back)}`} passHref>
           <a>
             <Button>登录</Button>
           </a>
         </Link>
         <Divider type='vertical' />
-        <Link href={`/auth/signup?back=${encodeURIComponent(back)}`} passHref>
+        <Link href={`/auth?back=${encodeURIComponent(back)}`} passHref>
           <a>
             <Button type='primary'>快速注册</Button>
           </a>

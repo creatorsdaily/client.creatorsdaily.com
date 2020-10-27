@@ -9,7 +9,7 @@ const useAuth = ({ ...rest }) => {
   const { asPath } = useRouter()
   useEffect(() => {
     if (!viewer) {
-      Router.replace(`/auth/signin?back=${encodeURIComponent(asPath)}`)
+      Router.replace(`/auth?back=${encodeURIComponent(asPath)}`)
     }
   }, [loading])
   return { viewer, loading }

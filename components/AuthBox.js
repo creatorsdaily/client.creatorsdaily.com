@@ -1,13 +1,9 @@
 import styled from 'styled-components'
-import { useEffect, useState } from 'react'
-import { v4 } from 'slugid'
+import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { Button, Divider } from 'antd'
-import Link from 'next/link'
 import useViewer from '../hooks/useViewer'
 import media from '../libs/media'
 import redirect from '../libs/redirect'
-import WechatBox from './WechatBox'
 import ThirdSignin from './ThirdSignin'
 
 const Container = styled.div`
@@ -54,6 +50,7 @@ const Title = styled.h2`
 const Slogon = styled.p`
   color: #595959;
   margin-top: 8px;
+  margin-bottom: 32px;
   font-size: 18px;
 `
 
@@ -61,24 +58,8 @@ const Body = styled.div`
   margin-top: 16px;
 `
 
-const StyledWechatBox = styled(WechatBox)`
-display: none;
-${media.sm`
-display: block;
-`}
-`
-
-const ElseButton = styled(Button)`
-margin-top: 8px;
-`
-
 const AuthBox = ({ children }) => {
-  const [code, setCode] = useState(v4())
-  useEffect(() => {
-    const timer = setInterval(() => setCode(v4()), 2 * 60 * 1000)
-    return () => clearInterval(timer)
-  }, [])
-  const { query, pathname } = useRouter()
+  const { query } = useRouter()
   const back = query.back || '/'
   const { viewer, loading } = useViewer()
   useEffect(() => {
@@ -86,31 +67,6 @@ const AuthBox = ({ children }) => {
       redirect(back)
     }
   }, [loading])
-  const renderElse = () => {
-    if (pathname === '/auth/signin') {
-      return (
-        <>
-          <Divider>或者</Divider>
-          <Link href={`/auth/signup?back=${encodeURIComponent(back)}`}>
-            <a>
-              <ElseButton block type='dashed'>立刻注册账号</ElseButton>
-            </a>
-          </Link>
-        </>
-      )
-    } else if (pathname === '/auth/signup') {
-      return (
-        <>
-          <Divider>或者</Divider>
-          <Link href={`/auth/signin?back=${encodeURIComponent(back)}`}>
-            <a>
-              <ElseButton block type='dashed'>直接登录</ElseButton>
-            </a>
-          </Link>
-        </>
-      )
-    }
-  }
   return (
     <Container>
       <Box>
@@ -118,11 +74,9 @@ const AuthBox = ({ children }) => {
           <Header>
             <Title>{process.env.NAME}</Title>
             <Slogon>{process.env.SLOGAN}</Slogon>
-            <StyledWechatBox code={code} back={back} />
           </Header>
           <Body>
             {children}
-            {renderElse()}
             <ThirdSignin back={back} />
           </Body>
         </Content>

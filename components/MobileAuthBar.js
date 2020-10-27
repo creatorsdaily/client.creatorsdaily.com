@@ -25,14 +25,14 @@ const MobileAuthBar = () => {
       <StyledBox>
         <Row type='flex' gutter={24}>
           <Col span={16}>
-            <Link href={`/auth/signup?back=${back}`}>
+            <Link href={`/auth?back=${back}`}>
               <a>
                 <Button block type='primary'>快速注册</Button>
               </a>
             </Link>
           </Col>
           <Col span={8}>
-            <Link href={`/auth/signin?back=${back}`}>
+            <Link href={`/auth?back=${back}`}>
               <a>
                 <Button block>登录</Button>
               </a>
