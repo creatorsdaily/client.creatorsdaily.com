@@ -1,7 +1,6 @@
 import { useState } from 'react'
 import { Alert, Col, Divider, Form, Row, Typography } from 'antd'
 import styled from 'styled-components'
-import FormData from 'form-data'
 import axios from 'axios'
 import { useMutation } from '@apollo/react-hooks'
 import gql from 'graphql-tag'
@@ -36,7 +35,7 @@ const StyledBox = styled(Box)`
 padding: 24px;
 `
 
-export default ({ step, product = {}, children, ...rest }) => {
+const ProductEditor = ({ step, product = {}, children, ...rest }) => {
   const [form] = Form.useForm()
   const [preview, setPreview] = useState(product)
   const { viewer: user } = useViewer()
@@ -201,3 +200,4 @@ export default ({ step, product = {}, children, ...rest }) => {
     </>
   )
 }
+export default ProductEditor

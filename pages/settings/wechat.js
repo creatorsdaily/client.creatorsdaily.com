@@ -4,7 +4,7 @@ import gql from 'graphql-tag'
 import styled from 'styled-components'
 import { useQuery, useSubscription } from '@apollo/react-hooks'
 import get from 'lodash/get'
-import { Avatar } from 'antd'
+import { Avatar, Divider } from 'antd'
 import { UserOutlined } from '@ant-design/icons'
 import withApollo from '../../libs/with-apollo'
 import Setting from '../../layouts/Setting'
@@ -75,6 +75,7 @@ export default withApollo(() => {
         <Info>
           打开微信扫一扫，立刻绑定微信账号，实现快速登录。
         </Info>
+        <Divider />
         <StyledWXACode />
       </div>
     )

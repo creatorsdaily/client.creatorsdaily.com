@@ -123,7 +123,7 @@ export const Inputs = forwardRef(({ value = [''], onChange = noop, placeholder =
   )
 })
 
-export default ({ links, ...rest }) => {
+const ProductLinks = ({ links, ...rest }) => {
   if (!links.length) return null
   const list = links.map(x => {
     const { host } = url.parse(x)
@@ -181,3 +181,4 @@ export default ({ links, ...rest }) => {
     </Links>
   )
 }
+export default ProductLinks

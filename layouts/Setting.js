@@ -21,7 +21,7 @@ const MenuContainer = styled.div`
   margin-bottom: 24px;
 `
 
-export default ({ children }) => {
+const Setting = ({ children }) => {
   const { pathname } = useRouter()
   return (
     <Page>
@@ -37,6 +37,11 @@ export default ({ children }) => {
                 <Menu.Item key='/settings/profile'>
                   <Link href='/settings/profile'>
                     <a>个人信息</a>
+                  </Link>
+                </Menu.Item>
+                <Menu.Item key='/settings/mobile'>
+                  <Link href='/settings/mobile'>
+                    <a>绑定手机号</a>
                   </Link>
                 </Menu.Item>
                 <Menu.Item key='/settings/wechat'>
@@ -59,3 +64,4 @@ export default ({ children }) => {
     </Page>
   )
 }
+export default Setting

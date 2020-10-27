@@ -27,7 +27,7 @@ text-align: center;
 margin-top: 24px;
 `
 
-export default ({ code, back = '/', ...rest }) => {
+const WechatBox = ({ code, back = '/', ...rest }) => {
   useSubscription(MINI_PROGRAM_SINGINED, {
     variables: {
       code
@@ -51,3 +51,4 @@ export default ({ code, back = '/', ...rest }) => {
     </div>
   )
 }
+export default WechatBox

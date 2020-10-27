@@ -16,7 +16,7 @@ const StyledProductCell = styled(ProductCell)`
 margin-bottom: 12px;
 `
 
-export default () => {
+const LeftSide = () => {
   const { data, loading } = useQuery(GET_PRODUCTS, {
     variables: {
       order: 'likes',
@@ -35,3 +35,4 @@ export default () => {
     </Container>
   )
 }
+export default LeftSide

@@ -2,7 +2,7 @@ import { useEffect } from 'react'
 import Router, { useRouter } from 'next/router'
 import useViewer from './useViewer'
 
-export default ({ ...rest }) => {
+const useAuth = ({ ...rest }) => {
   const { viewer, loading } = useViewer({
     ...rest
   })
@@ -14,3 +14,5 @@ export default ({ ...rest }) => {
   }, [loading])
   return { viewer, loading }
 }
+
+export default useAuth

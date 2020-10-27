@@ -28,7 +28,7 @@ margin: 24px auto;
 
 const Div = styled.div``
 
-export default ({ ContentContainer = Div, children }) => {
+const User = ({ ContentContainer = Div, children }) => {
   const size = 15
   const { pathname, query: { id } } = useRouter()
   const query = [GET_USER, {
@@ -63,7 +63,7 @@ export default ({ ContentContainer = Div, children }) => {
                   <Link href='/users/[id]' as={`/users/${id}`}>
                     <a>
                       <BulbOutlined />
-                  动态
+                      动态
                     </a>
                   </Link>
                 </Menu.Item>
@@ -71,7 +71,7 @@ export default ({ ContentContainer = Div, children }) => {
                   <Link href='/users/[id]/products' as={`/users/${id}/products`}>
                     <a>
                       <AppstoreOutlined />
-                  产品
+                      产品
                     </a>
                   </Link>
                 </Menu.Item>
@@ -79,7 +79,7 @@ export default ({ ContentContainer = Div, children }) => {
                   <Link href='/users/[id]/questions' as={`/users/${id}/questions`}>
                     <a>
                       <QuestionOutlined />
-                  问题
+                      问题
                     </a>
                   </Link>
                 </Menu.Item>
@@ -87,7 +87,7 @@ export default ({ ContentContainer = Div, children }) => {
                   <Link href='/users/[id]/posts' as={`/users/${id}/posts`}>
                     <a>
                       <FileTextOutlined />
-                  文章
+                      文章
                     </a>
                   </Link>
                 </Menu.Item>
@@ -95,7 +95,7 @@ export default ({ ContentContainer = Div, children }) => {
                   <Link href='/users/[id]/likes' as={`/users/${id}/likes`}>
                     <a>
                       <HeartOutlined />
-                  喜欢
+                      喜欢
                     </a>
                   </Link>
                 </Menu.Item>
@@ -117,3 +117,4 @@ export default ({ ContentContainer = Div, children }) => {
     </Page>
   )
 }
+export default User

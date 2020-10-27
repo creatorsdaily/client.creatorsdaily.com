@@ -34,7 +34,7 @@ padding: 12px;
 margin: 16px 24px 0;
 `
 
-export default ({ id, name }) => {
+const ProductEmbed = ({ id, name }) => {
   const link = `https://creatorsdaily.com/${id}`
   const [dark, setDark] = useState(false)
   const code = `<a href="${link}?utm_source=vote" target="_blank"><img src="https://creatorsdaily.com/api/${id}/vote.svg?theme=${dark ? 'dark' : 'light'}" /></a>`
@@ -67,3 +67,4 @@ export default ({ id, name }) => {
     />
   )
 }
+export default ProductEmbed

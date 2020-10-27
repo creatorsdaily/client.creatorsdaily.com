@@ -1,6 +1,6 @@
 import Router from 'next/router'
 
-export default (target, context) => {
+const redirect = (target, context) => {
   if (context && context.res) {
     context.res.writeHead(303, { Location: target })
     context.res.end()
@@ -8,3 +8,4 @@ export default (target, context) => {
     Router.replace(target)
   }
 }
+export default redirect

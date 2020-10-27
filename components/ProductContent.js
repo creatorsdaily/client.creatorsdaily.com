@@ -33,7 +33,7 @@ const Container = styled.div`
   overflow: hidden;
 `
 
-export default ({
+const ProductContent = ({
   content,
   background = 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1))',
   height = 160,
@@ -72,3 +72,4 @@ export default ({
     </Container>
   )
 }
+export default ProductContent

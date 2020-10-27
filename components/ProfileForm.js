@@ -27,7 +27,7 @@ export const formToProfile = form => {
   return data
 }
 
-export default (props) => {
+const ProfileForm = (props) => {
   const {
     form, topics,
     loading,
@@ -89,3 +89,4 @@ export default (props) => {
     </Form>
   )
 }
+export default ProfileForm

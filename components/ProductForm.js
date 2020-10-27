@@ -22,7 +22,7 @@ const strlen = (str) => {
   return len
 }
 
-export default ({
+const ProductForm = ({
   form, topics,
   showButton = false, step = 'all',
   renderFooter = noop,
@@ -193,3 +193,4 @@ export default ({
     </Form>
   )
 }
+export default ProductForm

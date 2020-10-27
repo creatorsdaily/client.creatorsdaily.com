@@ -106,7 +106,7 @@ border: 1px solid #F0F0F0;
 }
 `
 
-export default ({ user, children, ...rest }) => {
+const UserCard = ({ user, children, ...rest }) => {
   const renderActive = () => {
     if (Date.now() - new Date(user.signinedAt) < 3 * 60 * 1000) {
       return (
@@ -160,3 +160,4 @@ export default ({ user, children, ...rest }) => {
     </Container>
   )
 }
+export default UserCard

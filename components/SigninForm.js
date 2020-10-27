@@ -4,7 +4,7 @@ import UserOutlined from '@ant-design/icons/UserOutlined'
 
 const { Item } = Form
 
-export default (props) => {
+const SigninForm = (props) => {
   const { loading, ...rest } = props
   return (
     <Form {...rest}>
@@ -15,7 +15,7 @@ export default (props) => {
         }]}
       >
         <Input
-          placeholder='用户名'
+          placeholder='手机号/用户名'
           prefix={<UserOutlined />}
         />
       </Item>
@@ -46,3 +46,4 @@ export default (props) => {
     </Form>
   )
 }
+export default SigninForm

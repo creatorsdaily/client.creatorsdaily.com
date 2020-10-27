@@ -21,7 +21,7 @@ const Container = styled.div`
   `}
 `
 
-const AuthBox = styled.div`
+const Box = styled.div`
   background-color: #fff;
   padding: 40px 8px 48px;
   margin-bottom: 64px;
@@ -72,7 +72,7 @@ const ElseButton = styled(Button)`
 margin-top: 8px;
 `
 
-export default ({ children }) => {
+const AuthBox = ({ children }) => {
   const [code, setCode] = useState(v4())
   useEffect(() => {
     const timer = setInterval(() => setCode(v4()), 2 * 60 * 1000)
@@ -113,7 +113,7 @@ export default ({ children }) => {
   }
   return (
     <Container>
-      <AuthBox>
+      <Box>
         <Content>
           <Header>
             <Title>{process.env.NAME}</Title>
@@ -126,7 +126,8 @@ export default ({ children }) => {
             <ThirdSignin back={back} />
           </Body>
         </Content>
-      </AuthBox>
+      </Box>
     </Container>
   )
 }
+export default AuthBox

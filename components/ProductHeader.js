@@ -58,7 +58,7 @@ padding: 0;
 margin: 0;
 `
 
-export default ({ id, name, description, icon, topics = [], ...rest }) => {
+const ProductHeader = ({ id, name, description, icon, topics = [], ...rest }) => {
   const {
     hash,
     topics: newTopics
@@ -82,3 +82,4 @@ export default ({ id, name, description, icon, topics = [], ...rest }) => {
     </Container>
   )
 }
+export default ProductHeader

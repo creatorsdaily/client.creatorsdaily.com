@@ -7,7 +7,7 @@ const Container = styled.div`
   position: relative;
 `
 
-export default ({
+const ThirdSignin = ({
   back = '/'
 }) => {
   return (
@@ -21,3 +21,4 @@ export default ({
     </Container>
   )
 }
+export default ThirdSignin

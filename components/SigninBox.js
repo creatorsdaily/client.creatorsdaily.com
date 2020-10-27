@@ -18,7 +18,7 @@ mutation($username: String!, $password: String!) {
 }
 `
 
-export default ({ back = '/' }) => {
+const SigninBox = ({ back = '/' }) => {
   const client = useApolloClient()
   const [form] = Form.useForm()
   const [signin, { loading }] = useMutation(SIGNIN, {
@@ -54,3 +54,4 @@ export default ({ back = '/' }) => {
     </>
   )
 }
+export default SigninBox

@@ -17,6 +17,9 @@ const StyledContainer = styled(Container)`
     padding: 0 15px;
   `}
 }
+.ant-menu-item-active {
+  border-bottom: 0 !important;
+}
 `
 
 const CreateButton = styled.a`

@@ -128,7 +128,7 @@ const urlRank = x => {
 
 let lastKey = 0
 
-export default ({ links = [], onSet = noop, step, onData = noop }) => {
+const Autofill = ({ links = [], onSet = noop, step, onData = noop }) => {
   const [iconLoading, setIconLoading] = useState(false)
   const [mediaLoading, setMediaLoading] = useState(false)
   const [closed, setClosed] = useState(true)
@@ -252,3 +252,4 @@ export default ({ links = [], onSet = noop, step, onData = noop }) => {
     </Container>
   )
 }
+export default Autofill

@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react'
 import axios from 'axios'
 import useViewer from '../hooks/useViewer'
 
-export default ({ ...rest }) => {
+const WXACode = ({ ...rest }) => {
   const [url, setUrl] = useState()
   const { viewer } = useViewer()
   if (!viewer || !viewer.token) return null
@@ -20,3 +20,4 @@ export default ({ ...rest }) => {
     <img src={url} {...rest} />
   )
 }
+export default WXACode
