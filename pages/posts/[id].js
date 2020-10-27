@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
 import ReactMarkdown from 'react-markdown'
 import { useRouter } from 'next/router'

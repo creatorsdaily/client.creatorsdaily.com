@@ -1,5 +1,4 @@
-import { useSubscription } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { gql, useSubscription } from '@apollo/client'
 import cookie from 'component-cookie'
 import styled from 'styled-components'
 import redirect from '../libs/redirect'

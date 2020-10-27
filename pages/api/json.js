@@ -1,5 +1,5 @@
 import get from 'lodash/get'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import initApollo from '../../libs/init-apollo'
 import createFeed from '../../libs/feed'
 import { productFragment, userFragment } from '../../queries'

@@ -1,5 +1,5 @@
 import { useState } from 'react'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
 import { GET_COMMENTS } from '../queries'
 import MoreButton from './MoreButton'

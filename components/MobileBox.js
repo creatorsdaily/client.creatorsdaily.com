@@ -1,7 +1,6 @@
 import { Button, Divider, Form, Input } from 'antd'
 import cookie from 'component-cookie'
-import gql from 'graphql-tag'
-import { useApolloClient, useLazyQuery, useMutation } from '@apollo/react-hooks'
+import { gql, useApolloClient, useLazyQuery, useMutation } from '@apollo/client'
 import get from 'lodash/get'
 import { useState } from 'react'
 import styled from 'styled-components'

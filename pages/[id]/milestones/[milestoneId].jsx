@@ -1,5 +1,5 @@
 import Head from 'next/head'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import get from 'lodash/get'
 import styled from 'styled-components'
@@ -89,13 +89,13 @@ const Content = ({ id, product, loading: productLoading }) => {
               </a>
             </Link>
             <div>
-                  在
+              在
               <span> </span>
               <strong>
                 <Time time={milestone.createdAt} />
               </strong>
               <span> </span>
-                  发布
+              发布
             </div>
             <Link href='/[id]/milestones' as={`/${product.id}/milestones`}>
               <a>

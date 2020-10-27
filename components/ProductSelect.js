@@ -1,7 +1,7 @@
 import { forwardRef, useEffect, useState } from 'react'
 import { Button, Input, Spin } from 'antd'
 import get from 'lodash/get'
-import { useLazyQuery, useQuery } from '@apollo/react-hooks'
+import { useLazyQuery, useQuery } from '@apollo/client'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
 import uniqBy from 'lodash/uniqBy'

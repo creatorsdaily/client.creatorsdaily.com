@@ -1,5 +1,5 @@
 import get from 'lodash/get'
-import gql from 'graphql-tag'
+import { gql } from '@apollo/client'
 import initApollo from '../../../libs/init-apollo'
 
 export const GET_PRODUCT = gql`

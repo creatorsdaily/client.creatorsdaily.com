@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Skeleton } from 'antd'
 import get from 'lodash/get'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { GET_PRODUCTS } from '../queries'
 import SmallTitle from './SmallTitle'
 import Box from './Box'

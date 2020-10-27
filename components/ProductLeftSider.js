@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
 import { Skeleton } from 'antd'
 import { GET_PRODUCTS } from '../queries'

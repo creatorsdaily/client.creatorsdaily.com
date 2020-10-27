@@ -157,6 +157,11 @@ module.exports = withPlugins([
         x.options.ignoreOrder = true
       }
     })
+    config.module.rules.push({
+      test: /\.(graphql|gql)$/,
+      exclude: /node_modules/,
+      loader: 'graphql-tag/loader'
+    })
     // if (!isServer) {
     //   const cacheGroups = config.optimization.splitChunks.cacheGroups
     //   delete cacheGroups.react

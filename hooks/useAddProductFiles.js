@@ -1,6 +1,5 @@
-import { useMutation } from '@apollo/react-hooks'
+import { gql, useMutation } from '@apollo/client'
 import { message } from 'antd'
-import gql from 'graphql-tag'
 import { GET_PRODUCT } from '../queries'
 
 const ADD_PRODUCT_FILES = gql`

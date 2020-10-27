@@ -1,7 +1,6 @@
 import { Divider, Form } from 'antd'
 import cookie from 'component-cookie'
-import gql from 'graphql-tag'
-import { useApolloClient, useMutation } from '@apollo/react-hooks'
+import { gql, useApolloClient, useMutation } from '@apollo/client'
 import redirect from '../libs/redirect'
 import formError from '../libs/form-error'
 import SignupForm from './SignupForm'

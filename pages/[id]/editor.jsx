@@ -1,7 +1,6 @@
 import React from 'react'
 import styled from 'styled-components'
-import gql from 'graphql-tag'
-import { useMutation, useQuery } from '@apollo/react-hooks'
+import { gql, useMutation, useQuery } from '@apollo/client'
 import { Button, Col, Row, Spin, message } from 'antd'
 import get from 'lodash/get'
 import { useRouter } from 'next/router'

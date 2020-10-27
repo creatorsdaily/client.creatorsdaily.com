@@ -1,7 +1,7 @@
 import { Tag } from 'antd'
 import styled from 'styled-components'
 import get from 'lodash/get'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import noop from 'lodash/noop'
 import Link from 'next/link'
 import LazyLoad from 'react-lazyload'

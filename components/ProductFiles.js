@@ -1,6 +1,6 @@
 import { Carousel, Modal } from 'antd'
 import styled from 'styled-components'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
 import noop from 'lodash/noop'
 import { forwardRef, useEffect, useState } from 'react'

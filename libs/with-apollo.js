@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import cookie from 'cookie'
 import Head from 'next/head'
-import { ApolloProvider } from '@apollo/react-hooks'
+import { ApolloProvider } from '@apollo/client'
 import initApollo from './init-apollo'
 import graphqlError from './graphql-error'
 
@@ -73,7 +73,7 @@ const withApollo = (PageComponent, { ssr = true } = {}) => {
         if (ssr) {
           try {
             // Run all GraphQL queries
-            const { getDataFromTree } = await import('@apollo/react-ssr')
+            const { getDataFromTree } = await import('@apollo/client/react/ssr')
             await getDataFromTree(
               <AppTree
                 pageProps={{

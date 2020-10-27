@@ -1,0 +1,23 @@
+fragment ProductFields on Product {
+  id
+  name
+  description
+  state
+  links
+  isLike
+  likeCount
+  commentCount
+  createdAt
+  publishedAt
+  diedAt
+  causeOfDeath
+  isMiniProgram
+  topics {
+    id
+    name
+  }
+  icon {
+    id
+    hash
+  }
+}

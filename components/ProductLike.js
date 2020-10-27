@@ -1,7 +1,6 @@
 import { Button, message } from 'antd'
 import styled from 'styled-components'
-import { useMutation } from '@apollo/react-hooks'
-import gql from 'graphql-tag'
+import { gql, useMutation } from '@apollo/client'
 import CaretUpOutlined from '@ant-design/icons/CaretUpOutlined'
 import formError from '../libs/form-error'
 

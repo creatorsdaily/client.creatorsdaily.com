@@ -1,11 +1,8 @@
-import { InMemoryCache } from 'apollo-cache-inmemory'
-import { HttpLink } from 'apollo-link-http'
-import ApolloClient from 'apollo-client'
-import { setContext } from 'apollo-link-context'
+import { ApolloClient, ApolloLink, HttpLink, InMemoryCache, split } from '@apollo/client'
+import { getMainDefinition } from '@apollo/client/utilities'
+import { WebSocketLink } from '@apollo/client/link/ws'
 import fetch from 'isomorphic-unfetch'
-import { WebSocketLink } from 'apollo-link-ws'
-import { split } from 'apollo-link'
-import { getMainDefinition } from 'apollo-utilities'
+import possibleTypes from '../possibleTypes'
 // import { persistCache } from 'apollo-cache-persist'
 
 let apolloClient = null
@@ -19,17 +16,21 @@ function create (initialState, {
     credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
     fetch: isBrowser ? undefined : fetch
   })
-  const authLink = setContext((_, { headers }) => {
-    if (!getToken) {
-      return { headers }
-    }
-    const token = getToken()
-    return {
-      headers: {
-        ...headers,
-        authorization: token ? `Bearer ${token}` : ''
+  const authLink = new ApolloLink((operation, forward) => {
+    operation.setContext(({ headers = {} }) => {
+      if (!getToken) {
+        return { headers }
       }
-    }
+      const token = getToken()
+      return {
+        headers: {
+          ...headers,
+          authorization: token ? `Bearer ${token}` : ''
+        }
+      }
+    })
+
+    return forward(operation)
   })
   let link = authLink.concat(httpLink)
   if (isBrowser) {
@@ -61,7 +62,9 @@ function create (initialState, {
       link
     )
   }
-  const cache = new InMemoryCache().restore(initialState)
+  const cache = new InMemoryCache({
+    possibleTypes
+  }).restore(initialState)
   // if (isBrowser) persistCache({ cache, storage: localStorage })
   return new ApolloClient({
     connectToDevTools: isBrowser,

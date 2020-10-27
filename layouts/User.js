@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Col, Menu, Row, Spin } from 'antd'
 import Head from 'next/head'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import get from 'lodash/get'
 import { Children, cloneElement } from 'react'

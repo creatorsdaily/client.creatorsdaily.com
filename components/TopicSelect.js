@@ -1,7 +1,6 @@
 import { forwardRef, useState } from 'react'
 import { Button, Select } from 'antd'
-import gql from 'graphql-tag'
-import { useLazyQuery, useMutation, useQuery } from '@apollo/react-hooks'
+import { gql, useLazyQuery, useMutation, useQuery } from '@apollo/client'
 import get from 'lodash/get'
 import styled from 'styled-components'
 import noop from 'lodash/noop'

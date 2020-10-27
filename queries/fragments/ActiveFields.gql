@@ -1,0 +1,23 @@
+#import "./UserFields.gql"
+#import "./ProductFields.gql"
+#import "./CommentFields.gql"
+
+fragment ActiveFields on Active {
+  id
+  type
+  user {
+    ...UserFields
+  }
+  createdAt
+  relation {
+    ... on Comment {
+      ...CommentFields
+    }
+    ... on Product {
+      ...ProductFields
+    }
+    ... on User {
+      ...UserFields
+    }
+  }
+}

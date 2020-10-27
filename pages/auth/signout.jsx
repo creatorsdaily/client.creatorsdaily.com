@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useRouter } from 'next/router'
-import { useApolloClient } from '@apollo/react-hooks'
+import { useApolloClient } from '@apollo/client'
 import setCookie from '../../libs/setCookie'
 import redirect from '../../libs/redirect'
 import withApollo from '../../libs/with-apollo'

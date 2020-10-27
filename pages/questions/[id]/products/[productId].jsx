@@ -1,7 +1,7 @@
 import React from 'react'
 import { Button, Col, Row, Spin } from 'antd'
 import styled from 'styled-components'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
 import Link from 'next/link'
 import Head from 'next/head'

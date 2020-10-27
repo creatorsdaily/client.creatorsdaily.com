@@ -2,7 +2,7 @@ import { useRouter } from 'next/router'
 import { Pagination } from 'antd'
 import Link from 'next/link'
 import { stringify } from 'qs'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import noop from 'lodash/noop'
 
 const defaultPageSize = 20

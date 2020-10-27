@@ -1,4 +1,4 @@
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
 import { useRouter } from 'next/router'
 import { Col, Row, Spin } from 'antd'

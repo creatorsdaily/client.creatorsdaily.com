@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { useQuery } from '@apollo/react-hooks'
+import { useQuery } from '@apollo/client'
 import { useState } from 'react'
 import { Affix, Col, Row, Spin } from 'antd'
 import get from 'lodash/get'

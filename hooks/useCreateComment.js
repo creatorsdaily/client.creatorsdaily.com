@@ -1,7 +1,6 @@
 import { useState } from 'react'
-import { useMutation } from '@apollo/react-hooks'
+import { gql, useMutation } from '@apollo/client'
 import { message } from 'antd'
-import gql from 'graphql-tag'
 import formError from '../libs/form-error'
 import { productFragment, userFragment } from '../queries'
 

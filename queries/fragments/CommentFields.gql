@@ -1,0 +1,15 @@
+#import "./UserFields.gql"
+#import "./ProductFields.gql"
+
+fragment CommentFields on Comment {
+  id
+  content
+  createdAt
+  parentId
+  user {
+    ...UserFields
+  }
+  products {
+    ...ProductFields
+  }
+}

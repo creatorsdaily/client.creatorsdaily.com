@@ -1,0 +1,17 @@
+fragment UserFields on User {
+  id
+  nickname
+  username
+  link
+  email
+  mobile
+  number
+  description
+  createdAt
+  signinedAt
+  isFollowing
+  avatar {
+    id
+    hash
+  }
+}
