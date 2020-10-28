@@ -1,6 +1,8 @@
 #import "./UserFields.gql"
+#import "./OptionFields.gql"
 #import "./ProductFields.gql"
 #import "./CommentFields.gql"
+#import "./QuestionFields.gql"
 
 fragment ActiveFields on Active {
   id
@@ -10,14 +12,29 @@ fragment ActiveFields on Active {
   }
   createdAt
   relation {
+    ... on User {
+      ...UserFields
+    }
+    ... on Option {
+      ...OptionFields
+      product {
+        ...ProductFields
+      }
+      question {
+        ...QuestionFields
+      }
+    }
     ... on Comment {
       ...CommentFields
+      user {
+        ...UserFields
+      }
+      products {
+        ...ProductFields
+      }
     }
     ... on Product {
       ...ProductFields
-    }
-    ... on User {
-      ...UserFields
     }
   }
 }

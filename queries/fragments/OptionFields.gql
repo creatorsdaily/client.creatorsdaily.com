@@ -1,0 +1,6 @@
+fragment OptionFields on Option {
+  id
+  reason
+  positive
+  createdAt
+}

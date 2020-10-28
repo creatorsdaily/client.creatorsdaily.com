@@ -1,5 +1,4 @@
 import styled from 'styled-components'
-import LazyLoad from 'react-lazyload'
 import { Badge } from 'antd'
 import UserAvatar from './UserAvatar'
 
@@ -27,18 +26,24 @@ font-weight: bold;
 margin-right: 0;
 margin-left: 12px;
 white-space: nowrap;
-flex: 1;
+overflow: hidden;
+text-overflow:ellipsis;
+`
+const Description = styled.div`
+font-size: 12px;
+margin-left: 8px;
+line-height: 32px;
+white-space: nowrap;
 overflow: hidden;
 text-overflow:ellipsis;
 `
 
-const UserCell = ({ user, hideName = false, ...rest }) => {
+const UserCell = ({ user, hideName = false, showDescription = false, ...rest }) => {
   const nickname = user.nickname || ''
+  const description = user.description || ''
   const renderAvatar = () => {
     const avatar = (
-      <LazyLoad height={32} throttle={200} once>
-        <StyledAvatar user={user} />
-      </LazyLoad>
+      <StyledAvatar user={user} />
     )
     if (nickname.indexOf('oOcAI')) {
       return avatar
@@ -53,6 +58,7 @@ const UserCell = ({ user, hideName = false, ...rest }) => {
     <Container {...rest}>
       {renderAvatar()}
       {!hideName && (<Username>{nickname}</Username>)}
+      {showDescription && <Description>{description}</Description>}
     </Container>
   )
 }

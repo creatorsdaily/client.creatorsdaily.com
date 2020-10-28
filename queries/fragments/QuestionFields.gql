@@ -1,0 +1,9 @@
+fragment QuestionFields on Question {
+  id
+  name
+  createdAt
+  topics {
+    id
+    name
+  }
+}

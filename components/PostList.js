@@ -12,7 +12,7 @@ text-align: center;
 margin-bottom: 24px;
 `
 
-export default ({ list, loading }) => {
+const PostList = ({ list, loading }) => {
   const renderList = () => {
     if (!list.length) {
       return (
@@ -34,3 +34,4 @@ export default ({ list, loading }) => {
     </Spin>
   )
 }
+export default PostList
