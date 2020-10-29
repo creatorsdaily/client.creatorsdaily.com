@@ -1,0 +1,12 @@
+#import "./fragments/ActiveFields.gql"
+query ActiveList($user: String, $timeline: String, $page: Int, $size: Int) {
+  getActives(user: $user, timeline: $timeline, page: $page, size: $size) {
+    total
+    count
+    page
+    size
+    data {
+      ...ActiveFields
+    }
+  }
+}

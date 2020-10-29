@@ -44,7 +44,7 @@ const StyledEditor = styled(SimpleMDE)`
     .cm-header-4,
     .cm-header-5,
     .cm-header-6 {
-      font-size: 14px;
+      font-size: 1em;
       line-height: 22px;
     }
     .cm-quote {
