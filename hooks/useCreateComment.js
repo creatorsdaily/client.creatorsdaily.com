@@ -56,7 +56,6 @@ export default ({
       comment.parentId = replyId
       comment.content = reply
     }
-    console.log(comment)
     return create({
       variables: {
         comment

@@ -1,21 +1,16 @@
 import React from 'react'
-import { Col, Empty, Row, Spin } from 'antd'
+import { Col, Empty, Modal, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import styled from 'styled-components'
-import Link from 'next/link'
-import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
 import ProductCell from '../components/ProductCell'
-import { GET_POSTS, GET_PRODUCTS, SEARCH_PRODUCTS } from '../queries'
+import { GET_PRODUCTS, SEARCH_PRODUCTS } from '../queries'
 import usePagination from '../hooks/usePagination'
 import { TopicList, TopicsBar } from '../components/Topics'
 import RightSide from '../components/RightSide'
 import media from '../libs/media'
-import PostCell from '../components/PostCell'
-import SmallTitle from '../components/SmallTitle'
-import MilestoneList from '../components/MilestoneList'
 import withApollo from '../libs/with-apollo'
 import MobileAuthBar from '../components/MobileAuthBar'
 
@@ -35,10 +30,6 @@ margin-bottom: 24px;
 ${media.sm`
   padding: 0;
 `}
-`
-
-const StyledPostCell = styled(PostCell)`
-margin-bottom: 12px;
 `
 
 const StyledTopicsBar = styled(TopicsBar)`
@@ -74,25 +65,6 @@ export default withApollo(() => {
       <Empty description='暂无内容' image={Empty.PRESENTED_IMAGE_SIMPLE} />
     )
   }
-  const renderMilestones = () => {
-    if (!!keyword || !!topic || !!Number(page)) return null
-    return (
-      <>
-        <SmallTitle>
-          <Link href='/milestones'>
-            <a>
-              里程碑
-            </a>
-          </Link>
-        </SmallTitle>
-        <MilestoneList size={3} />
-      </>
-    )
-  }
-  const renderPostsTitle = () => {
-    if (!!keyword || !!topic || !!Number(page)) return null
-    return (<SmallTitle>产品展区</SmallTitle>)
-  }
   if (process.env.CLOSE_TIP) {
     return process.env.CLOSE_TIP
   }
@@ -107,8 +79,6 @@ export default withApollo(() => {
             <TopicList href='/' />
           </Col>
           <Col xl={14} lg={13} md={16} xs={24}>
-            {renderMilestones()}
-            {renderPostsTitle()}
             <Spin spinning={loading}>
               {renderList()}
             </Spin>
@@ -122,6 +92,9 @@ export default withApollo(() => {
         </Row>
         <MobileAuthBar />
       </StyledContainer>
+      <Modal>
+        testtest
+      </Modal>
     </Page>
   )
 })

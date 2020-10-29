@@ -51,14 +51,14 @@ margin: 0 24px;
 const { Header } = Layout
 
 const menu = [{
+  name: '动态',
+  href: '/timeline'
+}, {
   name: '创造者们',
   href: '/creators'
 }, {
   name: '问题',
   href: '/questions'
-}, {
-  name: 'APP',
-  href: '/app'
 }]
 
 const Logo = styled.div`

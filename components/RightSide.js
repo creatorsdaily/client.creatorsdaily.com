@@ -227,8 +227,8 @@ const RightSide = ({ onQuestion = noop, onProduct = noop }) => {
           </Col>
         </Row>
       </Buttons>
-      <SmallTitle>活跃用户</SmallTitle>
-      <ActiveUsers />
+      {/* <SmallTitle>活跃用户</SmallTitle>
+      <ActiveUsers /> */}
       <WeApp>
         <Button type='link' onClick={handleWeApp}>
           <img src='/weapp.jpg' alt='小程序码' />
@@ -238,19 +238,8 @@ const RightSide = ({ onQuestion = noop, onProduct = noop }) => {
           </div>
         </Button>
       </WeApp>
-      <SmallTitle>核心用户</SmallTitle>
-      <CoreUsers />
-      {partners.map(x => (
-        <WeApp key={x.link}>
-          <Indie href={x.link} target='_blank' rel='noopener noreferrer'>
-            <img alt={x.name} src={x.icon} />
-            <div>
-              <h4>{x.name}</h4>
-              <div>{x.slogan}</div>
-            </div>
-          </Indie>
-        </WeApp>
-      ))}
+      {/* <SmallTitle>核心用户</SmallTitle>
+      <CoreUsers /> */}
       <ContactBox>
         <Contact>
           <WeChatButton>
@@ -283,6 +272,17 @@ const RightSide = ({ onQuestion = noop, onProduct = noop }) => {
           </a>
         </Contact>
       </ContactBox>
+      {partners.map(x => (
+        <WeApp key={x.link}>
+          <Indie href={x.link} target='_blank' rel='noopener noreferrer'>
+            <img alt={x.name} src={x.icon} />
+            <div>
+              <h4>{x.name}</h4>
+              <div>{x.slogan}</div>
+            </div>
+          </Indie>
+        </WeApp>
+      ))}
       <Affix offsetTop={24}>
         <StyledBox>
           <Title>微信公众号</Title>

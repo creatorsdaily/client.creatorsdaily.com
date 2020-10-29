@@ -8,6 +8,7 @@ import LazyLoad from 'react-lazyload'
 import { GET_TOPICS } from '../queries'
 import useTopics from '../hooks/useTopics'
 import IPFSImage from './IPFSImage'
+import HomeFilled from '@ant-design/icons/HomeFilled'
 
 const TopicImage = styled(IPFSImage)`
   transform: scale(0.75);
@@ -24,6 +25,8 @@ const TopicIcon = styled.div`
   border-radius: 3px;
   overflow: hidden;
   margin-right: 8px;
+  font-size: 18px;
+  text-align: center;
 `
 
 const { CheckableTag } = Tag
@@ -48,12 +51,11 @@ const TopicTitle = styled.h6`
   display: inline;
 `
 
-const TopicUl = styled.ul`
+const TopicGroup = styled.div`
   margin: 0 0 24px;
-  padding: 0;
 `
 
-const TopicLi = styled.li`
+export const TopicItem = styled.div`
   list-style: none;
   margin-bottom: 4px;
   a {
@@ -161,13 +163,13 @@ export const TopicList = ({
   const renderItem = ({ id: key, icon, name }) => {
     const checked = value.includes(key)
     return (
-      <TopicLi
+      <TopicItem
         key={key}
         active={checked}
         onChange={href ? noop : checked => handleCheck(key, checked, true)}
       >
         {href ? (
-          <Link key={key} href={handleCheck(key, !checked)}>
+          <Link href={handleCheck(key, !checked)}>
             <a>
               <TopicIcon>
                 <LazyLoad height={30} throttle={200} once>
@@ -178,13 +180,23 @@ export const TopicList = ({
             </a>
           </Link>
         ) : name}
-      </TopicLi>
+      </TopicItem>
     )
   }
   return (
-    <TopicUl>
+    <TopicGroup>
+      <TopicItem active={!value.length}>
+        <Link href={href}>
+          <a>
+            <TopicIcon>
+              <HomeFilled style={{ color: '#DE7B76' }} />
+            </TopicIcon>
+            全部
+          </a>
+        </Link>
+      </TopicItem>
       {list.map(renderItem)}
-    </TopicUl>
+    </TopicGroup>
   )
 }
 

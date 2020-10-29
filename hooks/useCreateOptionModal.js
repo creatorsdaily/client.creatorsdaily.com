@@ -91,7 +91,6 @@ export default ({
       visible={visible}
       title='推荐产品'
       onCancel={hide}
-      forceRender
       onOk={async () => {
         const { productId, reason } = await form.validateFields()
         create({

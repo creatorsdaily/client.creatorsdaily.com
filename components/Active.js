@@ -89,7 +89,11 @@ const getContent = ({ type, relation }) => {
 const Active = ({ active = {} }) => {
   return (
     <Container>
-      <UserCell user={active.user} showDescription />
+      <Link href={`/users/${active.user.id}`}>
+        <a>
+          <UserCell user={active.user} showDescription />
+        </a>
+      </Link>
       <Content>{getContent(active)}</Content>
       <TimeContainer>
         <Time time={active.createdAt} />

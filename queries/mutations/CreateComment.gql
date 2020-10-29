@@ -1,0 +1,34 @@
+#import "../fragments/CommentFields.gql"
+#import "../fragments/UserFields.gql"
+mutation CreateComment($comment: IComment!) {
+  createComment(comment: $comment) {
+    ...CommentFields
+    user {
+      ...UserFields
+    }
+    children {
+      ...CommentFields
+      user {
+        ...UserFields
+      }
+      children {
+        ...CommentFields
+        user {
+          ...UserFields
+        }
+        children {
+          ...CommentFields
+          user {
+            ...UserFields
+          }
+          children {
+            ...CommentFields
+            user {
+              ...UserFields
+            }
+          }
+        }
+      }
+    }
+  }
+}

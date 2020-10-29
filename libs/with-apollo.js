@@ -115,7 +115,13 @@ const withApollo = (PageComponent, { ssr = true } = {}) => {
  * @param {Object} req
  */
 export function getToken (req) {
-  const cookies = cookie.parse(req ? req.headers.cookie || '' : document.cookie)
+  let cookieStr = ''
+  if (req) {
+    cookieStr = req.headers.cookie || ''
+  } else if (typeof document !== 'undefined') {
+    cookieStr = document.cookie
+  }
+  const cookies = cookie.parse(cookieStr)
   return cookies.token
 }
 export default withApollo
