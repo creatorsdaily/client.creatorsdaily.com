@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { Badge } from 'antd'
-import UserAvatar from './UserAvatar'
 import Link from 'next/link'
+import UserAvatar from './UserAvatar'
 import FollowButton from './FollowButton'
 
 const Container = styled.div`
@@ -24,6 +24,7 @@ flex: 1;
 overflow: hidden;
 white-space: nowrap;
 text-overflow:ellipsis;
+margin-right: 8px;
 `
 const StyledLink = styled.a`
 color: #333;

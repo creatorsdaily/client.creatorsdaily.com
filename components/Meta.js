@@ -3,19 +3,22 @@ import { Divider } from 'antd'
 import Time from './Time'
 import UserCell from './UserCell'
 
-const Meta = styled.div`
+const Container = styled.div`
 font-size: 12px;
 color: #808080;
-height: 64px;
+height: 32px;
+box-sizing: border-box;
 `
 
-export default ({ user = {}, createdAt, children, ...rest }) => {
+const Meta = ({ user = {}, createdAt, children, ...rest }) => {
   return (
-    <Meta {...rest}>
+    <Container {...rest}>
       <UserCell user={user}>
         <Divider type='vertical' />
         <Time time={createdAt} /> {children}
       </UserCell>
-    </Meta>
+    </Container>
   )
 }
+
+export default Meta

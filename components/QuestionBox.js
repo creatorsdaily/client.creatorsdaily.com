@@ -66,6 +66,7 @@ span {
 
 const StyledMeta = styled(Meta)`
 padding: 16px;
+height: 64px;
 `
 
 export default ({ id, name, user, options = [], topics = [], createdAt, onRecommend, children }) => {
