@@ -11,7 +11,7 @@ import withApollo from '../../libs/with-apollo'
 import MobileAuthBar from '../../components/MobileAuthBar'
 import ActiveListQuery from '../../queries/ActiveList.gql'
 import ActiveList from '../../components/ActiveList'
-import Editor from '../../components/Editor.dynamic'
+import { Large } from '../../components/Editor.dynamic'
 import MoreButton from '../../components/MoreButton'
 import CreateComment from '../../queries/mutations/CreateComment.gql'
 import FormError from '../../libs/form-error'
@@ -31,21 +31,28 @@ align-items: center;
 `
 export default withApollo(() => {
   const size = 30
+  const [content, setContent] = useState('')
   const [page, setPage] = useState(1)
   const { query: { type } } = useRouter()
   const [create] = useMutation(CreateComment, {
     onCompleted: data => {
       message.success('提交成功')
-      // setContent('')
+      setContent('')
     },
     onError: error => {
       const errors = FormError(null, error)
       message.error(errors[0].message)
-    }
+    },
+    refetchQueries: () => [{
+      query: ActiveListQuery,
+      variables: {
+        size
+      }
+    }]
   })
   const { data, loading, fetchMore } = useQuery(ActiveListQuery, {
     variables: {
-      size: 30
+      size
     },
     notifyOnNetworkStatusChange: true
   })
@@ -72,6 +79,15 @@ export default withApollo(() => {
       }
     })
   }
+  const publish = () => {
+    create({
+      variables: {
+        comment: {
+          content
+        }
+      }
+    })
+  }
   const renderMore = () => {
     if (page * size >= total) return null
     return (
@@ -83,13 +99,13 @@ export default withApollo(() => {
       <StyledContainer>
         <Row type='flex' gutter={24}>
           <Col lg={12} md={15} xs={24}>
-            {/* <EditorBox>
-              <Editor placeholder='说点什么...' options={{ minHeight: '74px' }} />
+            <EditorBox>
+              <Large value={content} onChange={setContent} placeholder='说点什么...' options={{ minHeight: '74px' }} />
               <EditorToolbar>
                 <div style={{ fontSize: 12, color: '#666' }}>文明礼貌，友善发言</div>
-                <Button type='primary'>发布</Button>
+                <Button onClick={publish} type='primary' disabled={!content.length}>发布</Button>
               </EditorToolbar>
-            </EditorBox> */}
+            </EditorBox>
             <ActiveList list={list} loading={loading} />
             {renderMore()}
           </Col>
