@@ -13,6 +13,7 @@ publishedAt
 diedAt
 causeOfDeath
 isMiniProgram
+links
 topics {
   id
   name
@@ -26,11 +27,14 @@ export const userFragment = `
 id
 nickname
 username
+link
 email
-number
 mobile
+number
+description
 createdAt
 signinedAt
+isFollowing
 avatar {
   id
   hash
@@ -54,8 +58,6 @@ export const VIEWER_AUTHES = gql`
 query {
   viewer {
     ${userFragment}
-    link
-    description
     authes {
       id
       type
