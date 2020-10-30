@@ -15,6 +15,7 @@ import { Large } from '../../components/Editor.dynamic'
 import MoreButton from '../../components/MoreButton'
 import CreateComment from '../../queries/mutations/CreateComment.gql'
 import FormError from '../../libs/form-error'
+import useAuth from '../../hooks/useAuth'
 
 const EditorBox = styled.div`
 margin-bottom: 24px;
@@ -30,6 +31,7 @@ padding: 4px 23px;
 `
 export default withApollo(({ type = 'follow' }) => {
   const size = 30
+  useAuth()
   const [content, setContent] = useState('')
   const [page, setPage] = useState(1)
   const [create] = useMutation(CreateComment, {

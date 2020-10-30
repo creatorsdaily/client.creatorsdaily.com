@@ -50,17 +50,6 @@ margin: 0 24px;
 
 const { Header } = Layout
 
-const menu = [{
-  name: '动态',
-  href: '/timeline'
-}, {
-  name: '创造者们',
-  href: '/creators'
-}, {
-  name: '问题',
-  href: '/questions'
-}]
-
 const Logo = styled.div`
   color: #262626;
   font-size: 18px;
@@ -72,6 +61,16 @@ const Logo = styled.div`
 
 export default withRouter(({ router }) => {
   const { viewer: user } = useViewer()
+  const menu = [{
+    name: '动态',
+    href: user ? '/timeline' : '/timeline/public'
+  }, {
+    name: '创造者们',
+    href: '/creators'
+  }, {
+    name: '问题',
+    href: '/questions'
+  }]
   const matched = menu
     .filter(({ href }) => href === '/' ? router.asPath === '/' : router.asPath.indexOf(href) === 0)
     .map(x => x.href)

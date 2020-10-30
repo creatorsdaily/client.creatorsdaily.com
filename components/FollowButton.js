@@ -40,7 +40,7 @@ const FollowButton = ({ user, ...rest }) => {
       })
     }
   }
-  if (viewer.id === user.id) return null
+  if (!viewer || viewer.id === user.id) return null
   return (
     <StyledButton
       loading={followLoading && unfollowLoading}
