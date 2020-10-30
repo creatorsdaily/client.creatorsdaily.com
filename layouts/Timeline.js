@@ -6,6 +6,7 @@ import Link from 'next/link'
 import { useRouter } from 'next/router'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
+import useViewer from '../hooks/useViewer'
 
 const StyledContainer = styled(Container)`
 margin: 24px auto;
@@ -28,6 +29,7 @@ border-right: 0;
 
 const Timeline = ({ children }) => {
   const { pathname } = useRouter()
+  const { viewer } = useViewer()
   return (
     <Page>
       <Head>
@@ -39,11 +41,13 @@ const Timeline = ({ children }) => {
             <Affix offsetTop={24}>
               <MenuContainer>
                 <StyledMenu selectedKeys={[pathname]} mode='inline'>
-                  <Menu.Item key='/timeline'>
-                    <Link href='/timeline'>
-                      <a>关注</a>
-                    </Link>
-                  </Menu.Item>
+                  {viewer && (
+                    <Menu.Item key='/timeline'>
+                      <Link href='/timeline'>
+                        <a>关注</a>
+                      </Link>
+                    </Menu.Item>
+                  )}
                   <Menu.Item key='/timeline/public'>
                     <Link href='/timeline/public'>
                       <a>发现</a>

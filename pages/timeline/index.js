@@ -31,7 +31,6 @@ padding: 4px 23px;
 `
 export default withApollo(({ type = 'follow' }) => {
   const size = 30
-  useAuth()
   const [content, setContent] = useState('')
   const [page, setPage] = useState(1)
   const [create] = useMutation(CreateComment, {
