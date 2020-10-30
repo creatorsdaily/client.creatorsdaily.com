@@ -5,10 +5,11 @@ import { useQuery } from '@apollo/client'
 import noop from 'lodash/noop'
 import Link from 'next/link'
 import LazyLoad from 'react-lazyload'
+import HomeFilled from '@ant-design/icons/HomeFilled'
 import { GET_TOPICS } from '../queries'
 import useTopics from '../hooks/useTopics'
+import { blue } from '../libs/colors'
 import IPFSImage from './IPFSImage'
-import HomeFilled from '@ant-design/icons/HomeFilled'
 
 const TopicImage = styled(IPFSImage)`
   transform: scale(0.75);
@@ -189,7 +190,7 @@ export const TopicList = ({
         <Link href={href}>
           <a>
             <TopicIcon>
-              <HomeFilled style={{ color: '#DE7B76' }} />
+              <HomeFilled style={{ color: blue }} />
             </TopicIcon>
             全部
           </a>

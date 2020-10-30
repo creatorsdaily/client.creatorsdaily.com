@@ -14,6 +14,7 @@ import MoreButton from '../../components/MoreButton'
 import media from '../../libs/media'
 import LeftSide from '../../components/LeftSide'
 import MobileAuthBar from '../../components/MobileAuthBar'
+import UserList from '../../queries/UserList.gql'
 
 const StyledMoreButton = styled(MoreButton)`
 margin-bottom: 24px;
@@ -38,12 +39,11 @@ ${media.sm`
 export default withApollo(() => {
   const size = 30
   const [page, setPage] = useState(1)
-  const query = [GET_USERS, {
-    size,
-    isCreator: true
-  }]
-  const { data, loading, fetchMore } = useQuery(query[0], {
-    variables: query[1],
+  const { data, loading, fetchMore } = useQuery(UserList, {
+    variables: {
+      size,
+      isCreator: true
+    },
     notifyOnNetworkStatusChange: true
   })
   const creators = get(data, 'getUsers.data', [])

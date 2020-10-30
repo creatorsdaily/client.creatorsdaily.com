@@ -11,6 +11,7 @@ import { GET_PRODUCTS } from '../queries'
 import ProductCell from '../components/ProductCell'
 import media from '../libs/media'
 import Time from '../components/Time'
+import { blue } from '../libs/colors'
 
 const StyledPage = styled(Page)`
 background-image: url(/cemetery.png);
@@ -89,7 +90,7 @@ img {
 &:hover {
   border-color: #4F5155;
   .ant-btn-block svg {
-    color: #DE7B76;
+    color: ${blue};
   }
 }
 `

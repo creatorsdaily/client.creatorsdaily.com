@@ -4,6 +4,7 @@ import { Button, Divider, Input } from 'antd'
 import { forwardRef, useEffect, useState } from 'react'
 import noop from 'lodash/noop'
 import Icon, { AndroidFilled, AppleFilled, ChromeFilled, CompassFilled, DeleteOutlined, GithubFilled, PlusOutlined, RightOutlined, WechatFilled } from '@ant-design/icons'
+import { blue } from '../libs/colors'
 import Firefox from './icons/Firefox.svg'
 import Edge from './icons/Edge.svg'
 
@@ -29,7 +30,7 @@ const StyledButton = styled(Button)`
   }
   :hover {
     svg {
-      color: #DE7B76;
+      color: ${blue};
     }
   }
 `

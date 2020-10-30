@@ -1,6 +1,7 @@
 import { forwardRef } from 'react'
 import styled from 'styled-components'
 import SimpleMDE from 'react-simplemde-editor'
+import { blue } from '../libs/colors'
 
 const StyledEditor = styled(SimpleMDE)`
   line-height: 22px;
@@ -17,7 +18,7 @@ const StyledEditor = styled(SimpleMDE)`
     padding: 4px 10px;
   }
   .CodeMirror-focused {
-    border: 1px solid #e06c72 !important;
+    border: 1px solid ${blue} !important;
   }
   .CodeMirror-wrap::placeholder {
     color: #bfbfbf;

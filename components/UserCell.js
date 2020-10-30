@@ -2,6 +2,7 @@ import styled from 'styled-components'
 import { Badge } from 'antd'
 import UserAvatar from './UserAvatar'
 import Link from 'next/link'
+import FollowButton from './FollowButton'
 
 const Container = styled.div`
 display: flex;
@@ -41,7 +42,7 @@ margin-left: 8px;
 line-height: 32px;
 `
 
-const UserCell = ({ user, hideName = false, link = true, showDescription = false, children, ...rest }) => {
+const UserCell = ({ user, hideName = false, link = true, showDescription = false, showFollow = false, children, ...rest }) => {
   const nickname = user.nickname || ''
   const description = user.description || ''
   const renderAvatar = () => {
@@ -85,9 +86,12 @@ const UserCell = ({ user, hideName = false, link = true, showDescription = false
       {renderAvatar()}
       <Content>
         {renderNickname()}
-        {showDescription && <Description>{description}</Description>}
+        {showDescription && (<Description>{description}</Description>)}
         {children}
       </Content>
+      {showFollow && (
+        <FollowButton user={user} />
+      )}
     </Container>
   )
 }

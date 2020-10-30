@@ -5,9 +5,10 @@ import useToggle from 'react-use/lib/useToggle'
 import BellFilled from '@ant-design/icons/BellFilled'
 import ChromeFilled from '@ant-design/icons/ChromeFilled'
 import RocketFilled from '@ant-design/icons/RocketFilled'
+import { blue } from '../libs/colors'
 
 const ActiveBell = styled(BellFilled)`
-color: #DE7B76;
+color: ${blue};
 `
 
 const StyledIcon = styled.img`

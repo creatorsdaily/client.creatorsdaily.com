@@ -6,7 +6,7 @@ import UserCell from './UserCell'
 const Meta = styled.div`
 font-size: 12px;
 color: #808080;
-height: 32px;
+height: 64px;
 `
 
 export default ({ user = {}, createdAt, children, ...rest }) => {

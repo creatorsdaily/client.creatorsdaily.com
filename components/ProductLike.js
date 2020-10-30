@@ -3,22 +3,32 @@ import styled from 'styled-components'
 import { gql, useMutation } from '@apollo/client'
 import CaretUpOutlined from '@ant-design/icons/CaretUpOutlined'
 import formError from '../libs/form-error'
+import { red } from '../libs/colors'
 
 const StyledButton = styled(Button)`
   min-height: 50px;
   ${({ islike }) => islike === 'true' ? `
     background: rgba(222, 123, 118, 0.1);
-    color: #DE7B76;
-    border-color: #DE7B76;
+    color: ${red};
+    border-color: ${red};
     :active, :focus {
       background: rgba(222, 123, 118, 0.1);
-      color: #DE7B76;
-      border-color: #DE7B76;
+      color: ${red};
+      border-color: ${red};
     }
   ` : ''}
-  :active, :focus {
+  :hover, :active, :focus {
     color: rgba(0, 0, 0, 0.65);
     border-color: #d9d9d9;
+  }
+  :hover {
+    border-color: ${red};
+    svg {
+      color: ${red};
+    }
+  }
+  svg {
+    transition: color 0.3s;
   }
 `
 

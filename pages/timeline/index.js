@@ -29,6 +29,9 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 `
+const PublishButton = styled(Button)`
+padding: 4px 23px;
+`
 export default withApollo(() => {
   const size = 30
   const [content, setContent] = useState('')
@@ -104,7 +107,7 @@ export default withApollo(() => {
               <Large value={content} onChange={setContent} placeholder='说点什么...' options={{ minHeight: '74px' }} />
               <EditorToolbar>
                 <div style={{ fontSize: 12, color: '#666' }}>文明礼貌，友善发言</div>
-                <Button onClick={publish} type='primary' disabled={!content.length}>发布</Button>
+                <PublishButton onClick={publish} type='primary' disabled={!content.length}>发布</PublishButton>
               </EditorToolbar>
             </EditorBox>
             <ActiveList list={list} loading={loading} />

@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { blue } from '../libs/colors'
 
 export default styled.div`
 color: rgba(0, 0, 0, 0.75);
@@ -49,7 +50,7 @@ em, i {
 }
 
 hr {
-  border-top: 1px solid #DE7B76;
+  border-top: 1px solid ${blue};
   margin: 1.5em 0;
 }
 
@@ -98,7 +99,7 @@ dl dd {
 }
 
 blockquote, q {
-  border-left: 3px solid #DE7B76;
+  border-left: 3px solid ${blue};
   padding: 0 10px;
   color: #606060;
   quotes: none;
@@ -137,7 +138,7 @@ h3 {
 
 h4 {
   font-size: 16px;
-  border-left: 5px solid #DE7B76;
+  border-left: 5px solid ${blue};
   padding: 0 0.5em !important;
 }
 
@@ -180,7 +181,7 @@ table tr th, table tr td {
 table tr th {
   font-weight: bold;
   color: #eee;
-  border: 1px solid #DE7B76;
-  background-color: #DE7B76;
+  border: 1px solid ${blue};
+  background-color: ${blue};
 }
 `

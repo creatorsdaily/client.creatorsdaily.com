@@ -85,7 +85,7 @@ const getContent = ({ type, relation }) => {
 const Active = ({ active = {} }) => {
   return (
     <Container>
-      <UserCell user={active.user} showDescription />
+      <UserCell user={active.user} showDescription showFollow />
       <Content>{getContent(active)}</Content>
       <TimeContainer>
         <Time time={active.createdAt} />

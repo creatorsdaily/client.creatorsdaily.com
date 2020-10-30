@@ -4,6 +4,7 @@ import { Button } from 'antd'
 import { HeartFilled, HeartOutlined, MessageOutlined } from '@ant-design/icons'
 import LazyLoad from 'react-lazyload'
 import useProductMeta from '../hooks/useProductMeta'
+import { red } from '../libs/colors'
 import { TopicsBar } from './Topics'
 import Box from './Box'
 import IPFSImage from './IPFSImage'
@@ -34,7 +35,7 @@ right: 12px;
 top: 0;
 line-height: 60px;
 font-size: 12px;
-${({ isLike }) => isLike ? 'color: #DE7B76;' : ''}
+${({ isLike }) => isLike ? `color: ${red};` : ''}
 span {
   margin-right: 4px;
   font-weight: bold;
@@ -171,7 +172,7 @@ const ProductTag = styled.div`
 height: 24px;
 line-height: 24px;
 color: #FFF;
-background: #DE7B76;
+background: ${red};
 position: absolute;
 width: 100px;
 text-align: center;

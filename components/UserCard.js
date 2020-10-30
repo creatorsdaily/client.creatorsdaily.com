@@ -1,11 +1,13 @@
 import styled from 'styled-components'
 import { Tag } from 'antd'
 import Link from 'next/link'
+import { blue } from '../libs/colors'
 import UserAvatar from './UserAvatar'
 import Time from './Time'
 import Box from './Box'
 import SmallTitle from './SmallTitle'
 import ProductCell from './ProductCell'
+import FollowButton from './FollowButton'
 
 const Container = styled(Box)`
 display: flex;
@@ -49,7 +51,7 @@ transition: color 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
 font-size: 20px !important;
 margin-right: 8px;
 :hover {
-  color: #DE7B76;
+  color: ${blue};
 }
 `
 
@@ -82,7 +84,7 @@ white-space: nowrap;
 overflow: hidden;
 text-overflow:ellipsis;
 a {
-  color: #DE7B76;
+  color: ${blue};
   font-family: 'SFMono-Regular', Consolas, 'Liberation Mono', Menlo, Courier, monospace;
 }
 `
@@ -105,7 +107,9 @@ border: 1px solid #F0F0F0;
   margin-bottom: 0;
 }
 `
-
+const StyledFollowButton = styled(FollowButton)`
+float: right;
+`
 const UserCard = ({ user, children, ...rest }) => {
   const renderActive = () => {
     if (Date.now() - new Date(user.signinedAt) < 3 * 60 * 1000) {
@@ -144,6 +148,7 @@ const UserCard = ({ user, children, ...rest }) => {
             </a>
           </Link>
           {user.description}
+          <StyledFollowButton user={user} />
         </UserTitle>
         <UserJoin>
           第 <b>{user.number}</b> 位成员，<b><Time time={user.createdAt} format='YYYY年M月D日' /></b> 加入社区

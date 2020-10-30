@@ -8,9 +8,6 @@ import media from '../libs/media'
 import Box from './Box'
 import WeChatOfficialAccount from './WeChatOfficialAccount'
 import WeChatButton from './WeChatButton'
-import CoreUsers from './CoreUsers'
-import ActiveUsers from './ActiveUsers'
-import SmallTitle from './SmallTitle'
 import Cemetery from './icons/Cemetery.svg'
 
 const StyledBox = styled(Box)`
