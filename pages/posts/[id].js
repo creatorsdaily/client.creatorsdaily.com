@@ -52,6 +52,7 @@ align-items: center;
 `
 
 const PostTime = styled.div`
+margin-left: 8px;
 font-size: 12px;
 `
 
@@ -86,11 +87,7 @@ export default withApollo(() => {
       <Spin spinning={loading}>
         <PostTitle>{post.title}</PostTitle>
         <PostMeta>
-          <Link href='/users/[id]' as={`/users/${user.id}`}>
-            <a>
-              <UserCell user={user} />
-            </a>
-          </Link>
+          <UserCell user={user} />
           <PostTime>
             在 <Time time={post.createdAt} /> 发布
           </PostTime>

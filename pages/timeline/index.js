@@ -43,6 +43,7 @@ export default withApollo(() => {
       const errors = FormError(null, error)
       message.error(errors[0].message)
     },
+    // TODO: 订阅更新后不再需要刷新
     refetchQueries: () => [{
       query: ActiveListQuery,
       variables: {

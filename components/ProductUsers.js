@@ -1,6 +1,5 @@
 import styled from 'styled-components'
 import { Divider } from 'antd'
-import Link from 'next/link'
 import UserCell from './UserCell'
 
 const List = styled.div`
@@ -22,11 +21,7 @@ export default ({ discoverer, creators = [], ...rest }) => {
       <List>
         <Divider orientation='left'>创造者们</Divider>
         {creators.map(x => (
-          <Link key={x.id} href='/users/[id]' as={`/users/${x.id}`}>
-            <a>
-              <StyledUserCell user={x} />
-            </a>
-          </Link>
+          <StyledUserCell key={x.id} user={x} />
         ))}
       </List>
     )
@@ -36,11 +31,7 @@ export default ({ discoverer, creators = [], ...rest }) => {
     return (
       <List>
         <Divider orientation='left'>发现者</Divider>
-        <Link href='/users/[id]' as={`/users/${discoverer.id}`}>
-          <a>
-            <StyledUserCell user={discoverer} />
-          </a>
-        </Link>
+        <StyledUserCell user={discoverer} />
       </List>
     )
   }

@@ -98,17 +98,14 @@ const Content = ({ id, product, loading }) => {
             <WishTitle>{wish.title}</WishTitle>
           </WishHeader>
           <WishMeta>
-            <Link href='/users/[id]' as={`/users/${user.id}`}>
-              <a>
-                <UserCell user={user} />
-              </a>
-            </Link>
-            <div>在 <strong><Time time={wish.createdAt} /></strong> 发布</div>
-            <Link href='/[id]' as={`/${product.id}#wishes`}>
-              <a>
-                <Button type='link'>全部</Button>
-              </a>
-            </Link>
+            <UserCell user={user}>
+              <span> </span>在 <strong><Time time={wish.createdAt} /></strong> 发布
+              <Link href='/[id]' as={`/${product.id}#wishes`}>
+                <a>
+                  <Button type='link'>全部</Button>
+                </a>
+              </Link>
+            </UserCell>
             <WishLikeContainer>
               <Tooltip title='支持这个「新愿」' placement='left'>
                 <div>

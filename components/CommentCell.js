@@ -129,11 +129,7 @@ const CommentCell = ({ product, comment, loading, onReply = noop, level = 1 }) =
   return (
     <Comment hasParent={!!comment.parentId} hasChildren={!!comment.children.length}>
       <CommentHeader id={`comments-${comment.id}`} name={`comments-${comment.id}`}>
-        <Link href='/users/[id]' as={`/users/${comment.user.id}`}>
-          <a>
-            <UserCell user={comment.user} />
-          </a>
-        </Link>
+        <UserCell user={comment.user} />
         {isDiscoverer && (<StyledTag color='gold'>发现者</StyledTag>)}
         {isCreator && (<StyledTag color='volcano'>创造者</StyledTag>)}
       </CommentHeader>

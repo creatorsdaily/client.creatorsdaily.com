@@ -1,19 +1,13 @@
 import styled from 'styled-components'
-import Link from 'next/link'
 import UserCell from './UserCell'
 
-const StyledLink = styled.a`
+const StyledUserCell = styled(UserCell)`
 margin-bottom: 16px;
-display: block;
 `
 
 const Users = ({ list }) => {
   return list.map(user => (
-    <Link key={user.id} href='/users/[id]' as={`/users/${user.id}`} passHref>
-      <StyledLink>
-        <UserCell user={user} />
-      </StyledLink>
-    </Link>
+    <StyledUserCell key={user.id} user={user} />
   ))
 }
 export default Users

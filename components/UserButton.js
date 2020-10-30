@@ -66,13 +66,9 @@ const UserButton = ({ user, back = '/', ...rest }) => {
   return (
     <Popover content={menu} overlayClassName='user-button-popover'>
       <div {...rest}>
-        <Link href='/users/[id]' as={`/users/${user.id}`}>
-          <a style={{ display: 'block', overflow: 'hidden' }}>
-            <StyledButton {...rest}>
-              <UserCell user={user} hideName />
-            </StyledButton>
-          </a>
-        </Link>
+        <StyledButton {...rest}>
+          <UserCell user={user} hideName />
+        </StyledButton>
       </div>
     </Popover>
   )

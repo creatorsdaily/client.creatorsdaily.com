@@ -74,11 +74,7 @@ const getContent = ({ type, relation }) => {
       return (
         <>
           <strong>关注</strong><span>了</span>
-          <Link href={`/users/${relation.id}`}>
-            <a>
-              <StyledUserCell user={relation} />
-            </a>
-          </Link>
+          <StyledUserCell user={relation} />
         </>
       )
     default:
@@ -89,11 +85,7 @@ const getContent = ({ type, relation }) => {
 const Active = ({ active = {} }) => {
   return (
     <Container>
-      <Link href={`/users/${active.user.id}`}>
-        <a>
-          <UserCell user={active.user} showDescription />
-        </a>
-      </Link>
+      <UserCell user={active.user} showDescription />
       <Content>{getContent(active)}</Content>
       <TimeContainer>
         <Time time={active.createdAt} />

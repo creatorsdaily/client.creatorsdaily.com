@@ -83,12 +83,8 @@ const Content = ({ id, product, loading: productLoading }) => {
             <MilestoneTitle>{milestone.title}</MilestoneTitle>
           </MilestoneHeader>
           <MilestoneMeta>
-            <Link href='/users/[id]' as={`/users/${user.id}`}>
-              <a>
-                <UserCell user={user} />
-              </a>
-            </Link>
-            <div>
+            <UserCell user={user}>
+              <span> </span>
               在
               <span> </span>
               <strong>
@@ -96,12 +92,12 @@ const Content = ({ id, product, loading: productLoading }) => {
               </strong>
               <span> </span>
               发布
-            </div>
-            <Link href='/[id]/milestones' as={`/${product.id}/milestones`}>
-              <a>
-                <Button type='link'>全部</Button>
-              </a>
-            </Link>
+              <Link href={`/${product.id}/milestones`}>
+                <a>
+                  <Button type='link'>全部</Button>
+                </a>
+              </Link>
+            </UserCell>
           </MilestoneMeta>
           <MilestoneContent content={milestone.content} full />
         </Spin>
