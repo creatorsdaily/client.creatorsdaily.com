@@ -7,7 +7,7 @@
     "build": "next build",
     "start": "next start",
     "type-check": "tsc",
-    "possible-types": "node script/possibleTypes.js"
+    "possible-types": "node scripts/possibleTypes.js"
   },
   "dependencies": {
     "@apollo/client": "^3.2.5",

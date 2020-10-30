@@ -1,9 +1,8 @@
 const fs = require('fs')
 const fetch = require('cross-fetch')
+require('dotenv').config()
 
-const API = 'https://api.creatorsdaily.com'
-
-fetch(`${API}/graphql`, {
+fetch(process.env.GRAPHQL, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({

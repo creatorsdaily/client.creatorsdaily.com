@@ -12,7 +12,6 @@ import UserCell from './UserCell'
 
 const Comment = styled.div`
 font-size: 13px;
-margin-bottom: 24px;
 position: relative;
 ${({ hasParent, hasChildren }) => (hasParent || !hasChildren) ? '' : `
   :before {
@@ -57,7 +56,6 @@ line-height: 20px;
 height: 20px;
 font-weight: 300;
 font-size: 12px;
-margin-bottom: 12px;
 `
 
 const ReplyBox = styled.div`
@@ -84,6 +82,10 @@ min-height: 32px;
 const MoreButton = styled(Button)`
 padding: 0;
 font-size: 12px;
+`
+
+const Spacer = styled.div`
+margin-bottom: 12px;
 `
 
 const CommentCell = ({ product, comment, loading, onReply = noop, level = 1 }) => {
@@ -122,9 +124,15 @@ const CommentCell = ({ product, comment, loading, onReply = noop, level = 1 }) =
         </Link>
       )
     }
-    return comment.children.map(x => (
+    const children = comment.children.map(x => (
       <CommentCell key={x.id} product={product} comment={x} loading={loading} onReply={onReply} level={level + 1} />
     ))
+    return (
+      <>
+        {children.length !== 0 && (<Spacer />)}
+        {children}
+      </>
+    )
   }
   return (
     <Comment hasParent={!!comment.parentId} hasChildren={!!comment.children.length}>

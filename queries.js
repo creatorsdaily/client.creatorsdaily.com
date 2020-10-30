@@ -136,25 +136,6 @@ query(
 }
 `
 
-export const GET_USERS = gql`
-query($page: Int, $size: Int, $isCreator: Boolean, $ids: [String!]) {
-  getUsers(page: $page, size: $size, isCreator: $isCreator, ids: $ids) {
-    total
-    data {
-      ${userFragment}
-      link
-      description
-      createdProducts {
-        total
-        data {
-          ${productFragment}
-        }
-      }
-    }
-  }
-}
-`
-
 export const GET_MEDIA = gql`
 query($id: String!) {
   getMedia(id: $id) {

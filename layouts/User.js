@@ -9,12 +9,12 @@ import Link from 'next/link'
 import { AppstoreOutlined, BulbOutlined, FileTextOutlined, HeartOutlined, QuestionOutlined } from '@ant-design/icons'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
-import { GET_USER } from '../queries'
 import UserCard from '../components/UserCard'
 import RightSide from '../components/RightSide'
 import LeftSide from '../components/LeftSide'
 import MobileAuthBar from '../components/MobileAuthBar'
 import media from '../libs/media'
+import UserDetail from '../queries/UserDetail.gql'
 
 const StyledContainer = styled(Container)`
 margin: 24px auto;
@@ -31,7 +31,7 @@ const Div = styled.div``
 const User = ({ ContentContainer = Div, children }) => {
   const size = 15
   const { pathname, query: { id } } = useRouter()
-  const query = [GET_USER, {
+  const query = [UserDetail, {
     id,
     discoveredSize: size
   }]

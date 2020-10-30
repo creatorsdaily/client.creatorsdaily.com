@@ -1,7 +1,7 @@
 import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
 import styled from 'styled-components'
-import { GET_USERS } from '../queries'
+import UserList from '../queries/UserList.gql'
 import media from '../libs/media'
 import Users from './Users'
 
@@ -13,7 +13,7 @@ const Container = styled.div`
 `
 
 const CoreUsers = () => {
-  const { data } = useQuery(GET_USERS, {
+  const { data } = useQuery(UserList, {
     variables: {
       ids: [
         '588c9fbf-adeb-4380-9d9c-f042b0059f58',

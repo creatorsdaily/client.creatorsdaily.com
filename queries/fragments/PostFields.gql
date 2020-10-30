@@ -1,0 +1,10 @@
+fragment PostFields on Post {
+  id
+  title
+  description
+  createdAt
+  media {
+    id
+    hash
+  }
+}

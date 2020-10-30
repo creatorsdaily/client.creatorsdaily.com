@@ -1,0 +1,30 @@
+#import "./fragments/UserFields.gql"
+#import "./fragments/ProductFields.gql"
+query(
+  $id: String!,
+  $createdPage: Int, $createdSize: Int,
+  $discoveredPage: Int, $discoveredSize: Int,
+  $likedPage: Int, $likedSize: Int
+) {
+  user(id: $id) {
+    ...UserFields
+    createdProducts(page: $createdPage, size: $createdSize) {
+      total
+      data {
+        ...ProductFields
+      }
+    }
+    discoveredProducts(page: $discoveredPage, size: $discoveredSize) {
+      total
+      data {
+        ...ProductFields
+      }
+    }
+    likedProducts(page: $likedPage, size: $likedSize) {
+      total
+      data {
+        ...ProductFields
+      }
+    }
+  }
+}

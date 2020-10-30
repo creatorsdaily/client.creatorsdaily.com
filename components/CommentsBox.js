@@ -78,12 +78,14 @@ export default ({
   wishId,
   product,
   query,
+  hideInput = false,
   onFocus = noop,
   onBlur = noop,
   renderFooter = noop,
   renderHeader = noop,
   ...rest
 }) => {
+  productId = productId || (product && product.id)
   const [
     handleReply,
     { loading: createLoading },
@@ -117,12 +119,14 @@ export default ({
   return (
     <StyledBox {...rest}>
       {renderHeader()}
-      <CommentBox>
-        <EditorBox>
-          <StyledEditor value={content} type='mini' placeholder='吐槽一下？' onChange={setContent} onFocus={onFocus} onBlur={onBlur} />
-        </EditorBox>
-        <StyledButton loading={createLoading} type='primary' onClick={() => handleReply()}>来一发</StyledButton>
-      </CommentBox>
+      {!hideInput && (
+        <CommentBox>
+          <EditorBox>
+            <StyledEditor value={content} type='mini' placeholder='吐槽一下？' onChange={setContent} onFocus={onFocus} onBlur={onBlur} />
+          </EditorBox>
+          <StyledButton loading={createLoading} type='primary' onClick={() => handleReply()}>来一发</StyledButton>
+        </CommentBox>
+      )}
       <Spin spinning={loading}>
         {renderList()}
       </Spin>
