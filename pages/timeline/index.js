@@ -4,7 +4,7 @@ import get from 'lodash/get'
 import { useMutation, useQuery } from '@apollo/client'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
-import Page from '../../layouts/Page'
+import Timeline from '../../layouts/Timeline'
 import Container from '../../components/Container'
 import media from '../../libs/media'
 import withApollo from '../../libs/with-apollo'
@@ -16,10 +16,6 @@ import MoreButton from '../../components/MoreButton'
 import CreateComment from '../../queries/mutations/CreateComment.gql'
 import FormError from '../../libs/form-error'
 
-const StyledContainer = styled(Container)`
-margin-top: 24px;
-margin-bottom: 24px;
-`
 const EditorBox = styled.div`
 margin-bottom: 24px;
 `
@@ -32,11 +28,10 @@ align-items: center;
 const PublishButton = styled(Button)`
 padding: 4px 23px;
 `
-export default withApollo(() => {
+export default withApollo(({ type = 'follow' }) => {
   const size = 30
   const [content, setContent] = useState('')
   const [page, setPage] = useState(1)
-  const { query: { type } } = useRouter()
   const [create] = useMutation(CreateComment, {
     onCompleted: data => {
       message.success('提交成功')
@@ -56,6 +51,7 @@ export default withApollo(() => {
   })
   const { data, loading, fetchMore } = useQuery(ActiveListQuery, {
     variables: {
+      timeline: type,
       size
     },
     notifyOnNetworkStatusChange: true
@@ -99,24 +95,17 @@ export default withApollo(() => {
     )
   }
   return (
-    <Page>
-      <StyledContainer>
-        <Row type='flex' gutter={24}>
-          <Col lg={12} md={15} xs={24}>
-            <EditorBox>
-              <Large value={content} onChange={setContent} placeholder='说点什么...' options={{ minHeight: '74px' }} />
-              <EditorToolbar>
-                <div style={{ fontSize: 12, color: '#666' }}>文明礼貌，友善发言</div>
-                <PublishButton onClick={publish} type='primary' disabled={!content.length}>发布</PublishButton>
-              </EditorToolbar>
-            </EditorBox>
-            <ActiveList list={list} loading={loading} />
-            {renderMore()}
-          </Col>
-          <Col lg={6} md={8} xs={24} />
-        </Row>
-        <MobileAuthBar />
-      </StyledContainer>
-    </Page>
+    <Timeline>
+      {/* <EditorBox>
+        <Large value={content} onChange={setContent} placeholder='说点什么...' options={{ minHeight: '74px' }} />
+        <EditorToolbar>
+          <div style={{ fontSize: 12, color: '#666' }}>文明礼貌，友善发言</div>
+          <PublishButton onClick={publish} type='primary' disabled={!content.length}>发布</PublishButton>
+        </EditorToolbar>
+      </EditorBox> */}
+      <ActiveList list={list} loading={loading} />
+      {renderMore()}
+      <MobileAuthBar />
+    </Timeline>
   )
 })

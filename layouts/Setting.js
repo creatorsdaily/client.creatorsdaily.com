@@ -15,10 +15,26 @@ margin: 24px auto;
 const FormContainer = styled.div`
 background: #FFF;
 padding: 24px;
+border-radius: 3px;
 `
 
 const MenuContainer = styled.div`
-  margin-bottom: 24px;
+margin-bottom: 24px;
+background: #FFF;
+overflow: hidden;
+border-radius: 3px;
+`
+
+const StyledTitle = styled(SmallTitle)`
+margin-left: 24px;
+margin-top: 12px;
+`
+
+const StyledMenu = styled(Menu)`
+border-right: 0;
+.ant-menu-item-selected:after {
+  display: none;
+}
 `
 
 const Setting = ({ children }) => {
@@ -32,8 +48,8 @@ const Setting = ({ children }) => {
         <Row gutter={24}>
           <Col xl={4} lg={5} md={6} sm={24}>
             <MenuContainer>
-              <SmallTitle>设置</SmallTitle>
-              <Menu selectedKeys={[pathname]} mode='inline'>
+              <StyledTitle>设置</StyledTitle>
+              <StyledMenu selectedKeys={[pathname]} mode='inline'>
                 <Menu.Item key='/settings/profile'>
                   <Link href='/settings/profile'>
                     <a>个人信息</a>
@@ -50,7 +66,7 @@ const Setting = ({ children }) => {
                   </Link>
                 </Menu.Item>
                 <Menu.Item disabled key='password'>修改密码</Menu.Item>
-              </Menu>
+              </StyledMenu>
             </MenuContainer>
           </Col>
           <Col xl={12} lg={14} md={18} sm={24}>
