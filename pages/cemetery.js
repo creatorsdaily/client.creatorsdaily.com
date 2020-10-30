@@ -7,7 +7,7 @@ import Page from '../layouts/Page'
 import Container from '../components/Container'
 import withApollo from '../libs/with-apollo'
 import usePagination from '../hooks/usePagination'
-import { GET_PRODUCTS } from '../queries'
+import ProductList from '../queries/ProductList.gql'
 import ProductCell from '../components/ProductCell'
 import media from '../libs/media'
 import Time from '../components/Time'
@@ -123,7 +123,7 @@ export default withApollo(() => {
     pagination
   } = usePagination({
     path: '/cemetery',
-    query: GET_PRODUCTS,
+    query: ProductList,
     options: {
       variables: {
         state: 'died'

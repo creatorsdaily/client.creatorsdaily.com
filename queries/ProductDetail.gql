@@ -1,0 +1,83 @@
+#import "./fragments/ProductFields.gql"
+#import "./fragments/UserFields.gql"
+query($id: String!) {
+  product(id: $id) {
+    ...ProductFields
+    content
+    discovererId
+    links
+    codes {
+      id
+      code
+      redeemedAt
+      redeemer {
+        ...UserFields
+      }
+    }
+    miniProgramQRCode {
+      id
+      hash
+    }
+    discoverer {
+      ...UserFields
+    }
+    creators {
+      ...UserFields
+    }
+    likes {
+      ...UserFields
+    }
+    medias {
+      id
+      hash
+    }
+    milestones {
+      data {
+        id
+        title
+        content
+        createdAt
+      }
+    }
+    wishes(size: 10) {
+      data {
+        id
+        type
+        title
+        content
+        isLike
+        likeCount
+        createdAt
+        user {
+          ...UserFields
+        }
+      }
+    }
+    options {
+      rank
+      question {
+        id
+        name
+      }
+      ups {
+        id
+        reason
+        positive
+        createdAt
+        user {
+          ...UserFields
+        }
+      }
+      downs {
+        id
+        reason
+        positive
+        createdAt
+        user {
+          ...UserFields
+        }
+      }
+      value
+    }
+  }
+}

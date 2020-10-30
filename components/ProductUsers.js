@@ -21,7 +21,7 @@ export default ({ discoverer, creators = [], ...rest }) => {
       <List>
         <Divider orientation='left'>创造者们</Divider>
         {creators.map(x => (
-          <StyledUserCell key={x.id} user={x} />
+          <StyledUserCell key={x.id} user={x} showDescription showFollow />
         ))}
       </List>
     )
@@ -31,7 +31,7 @@ export default ({ discoverer, creators = [], ...rest }) => {
     return (
       <List>
         <Divider orientation='left'>发现者</Divider>
-        <StyledUserCell user={discoverer} />
+        <StyledUserCell user={discoverer} showDescription showFollow />
       </List>
     )
   }

@@ -5,7 +5,7 @@ import Link from 'next/link'
 import { ClockCircleOutlined, FlagFilled, PlusOutlined } from '@ant-design/icons'
 import useCreateMilestoneModal from '../hooks/useCreateMilestoneModal'
 import useCanEditProduct from '../hooks/useCanEditProduct'
-import { GET_PRODUCT } from '../queries'
+import ProductDetail from '../queries/ProductDetail.gql'
 import Time from './Time'
 import ProductContent from './ProductContent.dynamic'
 
@@ -62,7 +62,7 @@ export default ({
   const milestonesList = get(milestones, 'data', [])
   const [modal, show] = useCreateMilestoneModal(productId, {
     refetchQueries: () => [{
-      query: GET_PRODUCT,
+      query: ProductDetail,
       variables: { id: productId }
     }]
   })

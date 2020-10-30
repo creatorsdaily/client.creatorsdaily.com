@@ -22,6 +22,7 @@ ENV API=$API GRAPHQL=$GRAPHQL UPLOAD=$UPLOAD FILES=$FILES NAME=$NAME SLOGAN=$SLO
 WORKDIR /app
 RUN yarn
 COPY . .
+RUN yarn possible-types
 RUN yarn build
 
 FROM base
@@ -29,7 +30,6 @@ WORKDIR /app
 COPY . .
 COPY --from=builder /app/.next ./.next
 COPY --from=builder /app/public/service-worker.js ./public/service-worker.js
-RUN yarn possible-types
 EXPOSE 3000
 RUN cp /usr/share/zoneinfo/Asia/Shanghai /etc/localtime 
 CMD ["yarn", "start"]

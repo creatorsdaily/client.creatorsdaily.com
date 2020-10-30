@@ -4,7 +4,7 @@ import get from 'lodash/get'
 import Link from 'next/link'
 import PlusOutlined from '@ant-design/icons/PlusOutlined'
 import useCreateWishModal from '../hooks/useCreateWishModal'
-import { GET_PRODUCT } from '../queries'
+import ProductDetail from '../queries/ProductDetail.gql'
 import { wishTypeColors, wishTypes } from '../libs/enums'
 import Box from './Box'
 import UserAvatar from './UserAvatar'
@@ -95,7 +95,7 @@ export default ({
   } = product
   const [modal, show] = useCreateWishModal(productId, {
     refetchQueries: () => [{
-      query: GET_PRODUCT,
+      query: ProductDetail,
       variables: { id: productId }
     }]
   })

@@ -8,7 +8,7 @@ import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import useAuth from '../../hooks/useAuth'
 import ProductEditor from '../../components/ProductEditor.dynamic'
-import { GET_PRODUCT } from '../../queries'
+import ProductDetail from '../queries/ProductDetail.gql'
 import withApollo from '../../libs/with-apollo'
 import { formToProduct } from '../../libs/form-utils'
 import graphqlError from '../../libs/graphql-error'
@@ -49,11 +49,11 @@ export default withApollo(() => {
       message.error(errors[0].message)
     },
     refetchQueries: () => [{
-      query: GET_PRODUCT,
+      query: ProductDetail,
       variables: { id: query.id }
     }]
   })
-  const { data, loading: getLoading } = useQuery(GET_PRODUCT, {
+  const { data, loading: getLoading } = useQuery(ProductDetail, {
     variables: {
       id: query.id
     }

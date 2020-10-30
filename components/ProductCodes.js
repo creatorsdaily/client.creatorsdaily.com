@@ -4,7 +4,8 @@ import styled from 'styled-components'
 import { gql, useMutation } from '@apollo/client'
 import { GiftOutlined } from '@ant-design/icons'
 import useCreateCodeModal from '../hooks/useCreateCodeModal'
-import { GET_PRODUCT, userFragment } from '../queries'
+import { userFragment } from '../queries'
+import ProductDetail from '../queries/ProductDetail.gql'
 import graphqlError from '../libs/graphql-error'
 import Box from './Box'
 import Time from './Time'
@@ -80,7 +81,7 @@ export default ({
   } = product
   const [modal, show] = useCreateCodeModal(productId, {
     refetchQueries: () => [{
-      query: GET_PRODUCT,
+      query: ProductDetail,
       variables: { id: productId }
     }]
   })

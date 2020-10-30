@@ -14,7 +14,7 @@ import WeChatButton from '../components/WeChatButton'
 import ProductHeader from '../components/ProductHeader'
 import ProductLike from '../components/ProductLike'
 import media from '../libs/media'
-import { GET_PRODUCT } from '../queries'
+import ProductDetail from '../queries/ProductDetail.gql'
 import MobileAuthBar from '../components/MobileAuthBar'
 
 const ProductLikeContainer = styled.div`
@@ -56,9 +56,9 @@ ${media.sm`
 `}
 `
 
-export default ({ children }) => {
+const Product = ({ children }) => {
   const { pathname, query: { id } } = useRouter()
-  const { loading, data } = useQuery(GET_PRODUCT, { variables: { id } })
+  const { loading, data } = useQuery(ProductDetail, { variables: { id } })
   const product = get(data, 'product', {})
   const creators = get(product, 'creators', [])
   const canEdit = useCanEditProduct(product)
@@ -182,3 +182,4 @@ export default ({ children }) => {
     </Page>
   )
 }
+export default Product

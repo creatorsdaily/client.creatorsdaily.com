@@ -1,6 +1,6 @@
 import { gql, useMutation } from '@apollo/client'
 import { message } from 'antd'
-import { GET_PRODUCT } from '../queries'
+import ProductDetail from '../queries/ProductDetail.gql'
 
 const ADD_PRODUCT_FILES = gql`
   mutation($id: String!, $files: [IFile!], $url: String) {
@@ -12,7 +12,7 @@ const ADD_PRODUCT_FILES = gql`
 
 export default (id) => {
   const refetchQueries = [{
-    query: GET_PRODUCT,
+    query: ProductDetail,
     variables: {
       id
     }

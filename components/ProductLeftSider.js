@@ -2,7 +2,7 @@ import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
 import { Skeleton } from 'antd'
-import { GET_PRODUCTS } from '../queries'
+import ProductList from '../queries/ProductList.gql'
 import Users from './Users'
 import Box from './Box'
 import SmallTitle from './SmallTitle'
@@ -17,8 +17,8 @@ const StyledProductCell = styled(ProductCell)`
 margin-bottom: 12px;
 `
 
-export default ({ likes = [], loading: productLoading }) => {
-  const { data, loading } = useQuery(GET_PRODUCTS, {
+const ProductLeftSider = ({ likes = [], loading: productLoading }) => {
+  const { data, loading } = useQuery(ProductList, {
     variables: {
       order: 'likes',
       size: 10
@@ -50,3 +50,4 @@ export default ({ likes = [], loading: productLoading }) => {
     </>
   )
 }
+export default ProductLeftSider

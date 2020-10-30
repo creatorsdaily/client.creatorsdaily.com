@@ -6,7 +6,7 @@ import QrcodeOutlined from '@ant-design/icons/QrcodeOutlined'
 import WeiboOutlined from '@ant-design/icons/WeiboOutlined'
 import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
-import { GET_PRODUCT } from '../queries'
+import ProductDetail from '../queries/ProductDetail.gql'
 import ProductHeader from './ProductHeader'
 import ProductContent from './ProductContent.dynamic'
 import ProductFiles from './ProductFiles.dynamic'
@@ -108,7 +108,7 @@ const Product = ({
 
 export const ProductContainer = ({ id, full = false }) => {
   if (!id) return null
-  const { loading, data } = useQuery(GET_PRODUCT, {
+  const { loading, data } = useQuery(ProductDetail, {
     variables: {
       id
     }

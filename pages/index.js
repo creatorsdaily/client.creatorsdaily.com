@@ -6,7 +6,8 @@ import { useRouter } from 'next/router'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
 import ProductCell from '../components/ProductCell'
-import { GET_PRODUCTS, SEARCH_PRODUCTS } from '../queries'
+import { SEARCH_PRODUCTS } from '../queries'
+import ProductList from '../queries/ProductList.gql'
 import usePagination from '../hooks/usePagination'
 import { TopicList, TopicsBar } from '../components/Topics'
 import RightSide from '../components/RightSide'
@@ -50,7 +51,7 @@ export default withApollo(() => {
     pagination
   } = usePagination({
     path: '/',
-    query: keyword ? SEARCH_PRODUCTS : GET_PRODUCTS,
+    query: keyword ? SEARCH_PRODUCTS : ProductList,
     getTotal: ({ data }) => get(data, `${key}.total`, 0)
   })
 
