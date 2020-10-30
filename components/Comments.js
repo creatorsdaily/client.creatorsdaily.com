@@ -1,14 +1,14 @@
 import { useState } from 'react'
 import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
-import { GET_COMMENTS } from '../queries'
+import CommentList from '../queries/CommentList.gql'
 import MoreButton from './MoreButton'
 import CommentsBox from './CommentsBox.dynamic'
 
 export default ({ productId, milestoneId, wishId, ...rest }) => {
   const size = 10
   const [page, setPage] = useState(1)
-  const query = [GET_COMMENTS, {
+  const query = [CommentList, {
     size,
     productId,
     milestoneId,

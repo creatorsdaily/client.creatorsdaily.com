@@ -1,0 +1,41 @@
+#import "./fragments/ProductFields.gql"
+#import "./fragments/QuestionFields.gql"
+#import "./fragments/UserFields.gql"
+query($id: String!) {
+  getQuestion(id: $id) {
+    ...QuestionFields
+    user {
+      ...UserFields
+    }
+    options {
+      rank
+      value
+      questionId
+      product {
+        ...ProductFields
+        medias {
+          id
+          hash
+        }
+      }
+      ups {
+        id
+        reason
+        positive
+        createdAt
+        user {
+          ...UserFields
+        }
+      }
+      downs {
+        id
+        reason
+        positive
+        createdAt
+        user {
+          ...UserFields
+        }
+      }
+    }
+  }
+}

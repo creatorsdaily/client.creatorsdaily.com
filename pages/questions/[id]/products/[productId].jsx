@@ -12,7 +12,7 @@ import Container from '../../../../components/Container'
 import useCreateOptionModal from '../../../../hooks/useCreateOptionModal'
 import QuestionBox from '../../../../components/QuestionBox'
 import OptionBox from '../../../../components/OptionBox'
-import { GET_QUESTION } from '../../../../queries'
+import QuestionDetail from '../../../../queries/QuestionDetail.gql'
 import withApollo from '../../../../libs/with-apollo'
 import LeftSide from '../../../../components/LeftSide'
 import RightSide from '../../../../components/RightSide'
@@ -29,7 +29,7 @@ display: block;
 export default withApollo(() => {
   const { query: { id, productId } } = useRouter()
   const [modal, show] = useCreateOptionModal({ question: id })
-  const { loading, data } = useQuery(GET_QUESTION, {
+  const { loading, data } = useQuery(QuestionDetail, {
     variables: { id }
   })
   const question = get(data, 'getQuestion')

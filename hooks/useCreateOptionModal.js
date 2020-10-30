@@ -6,7 +6,7 @@ import noop from 'lodash/noop'
 import { useRouter } from 'next/router'
 import OptionForm from '../components/OptionForm'
 import formError from '../libs/form-error'
-import { GET_QUESTION } from '../queries'
+import QuestionDetail from '../queries/QuestionDetail.gql'
 
 const CREATE_OPTION = gql`
 mutation($option: IOption!) {
@@ -17,7 +17,7 @@ mutation($option: IOption!) {
 }
 `
 
-export default ({
+const useCreateOptionModal = ({
   question,
   product,
   positive = true
@@ -36,7 +36,7 @@ export default ({
   const [create, { loading }] = useMutation(CREATE_OPTION, {
     ...rest,
     refetchQueries: ({ data: { createOption } }) => [{
-      query: GET_QUESTION,
+      query: QuestionDetail,
       variables: { id: createOption.questionId }
     }],
     onError: error => {
@@ -116,3 +116,4 @@ export default ({
     </Modal>
   ), show, hide]
 }
+export default useCreateOptionModal

@@ -31,11 +31,6 @@ height: 22px;
 margin-left: 10px;
 `
 
-const CommentHeader = styled.div`
-  display: flex;
-  align-items: center;
-`
-
 const CommentContent = styled.div`
 margin-left: 44px;
 margin-top: 10px;
@@ -88,7 +83,7 @@ const Spacer = styled.div`
 margin-bottom: 12px;
 `
 
-const CommentCell = ({ product, comment, loading, onReply = noop, level = 1 }) => {
+const CommentCell = ({ product, comment, loading, onReply = noop, level = 1, ...rest }) => {
   const isCreator = get(product, 'creators', []).some(x => x.id === comment.user.id)
   const isDiscoverer = get(product, 'discovererId') === comment.user.id && !isCreator
   const [reply, setReply] = useState('')
@@ -135,12 +130,11 @@ const CommentCell = ({ product, comment, loading, onReply = noop, level = 1 }) =
     )
   }
   return (
-    <Comment hasParent={!!comment.parentId} hasChildren={!!comment.children.length}>
-      <CommentHeader id={`comments-${comment.id}`} name={`comments-${comment.id}`}>
-        <UserCell user={comment.user} />
+    <Comment hasParent={!!comment.parentId} hasChildren={!!comment.children.length} {...rest}>
+      <UserCell user={comment.user} showDescription showFollow id={`comments-${comment.id}`} name={`comments-${comment.id}`}>
         {isDiscoverer && (<StyledTag color='gold'>发现者</StyledTag>)}
         {isCreator && (<StyledTag color='volcano'>创造者</StyledTag>)}
-      </CommentHeader>
+      </UserCell>
       <CommentContent>
         <ReactMarkdown key={comment.id} source={comment.content} />
         <CommentMeta>

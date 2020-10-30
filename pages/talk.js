@@ -7,7 +7,7 @@ import Link from 'next/link'
 import Head from 'next/head'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
-import { GET_COMMENTS } from '../queries'
+import CommentList from '../queries/CommentList.gql'
 import CommentsBox from '../components/CommentsBox.dynamic'
 import ProductCell from '../components/ProductCell'
 import { ProductContainer } from '../components/Product'
@@ -65,7 +65,7 @@ export default withApollo(() => {
   const [content, setContent] = useState('')
   const [hoverProduct, setHoverProduct] = useState()
   const [focusProduct, setFocusProduct] = useState()
-  const query = [GET_COMMENTS, {
+  const query = [CommentList, {
     size
   }]
   const [page, setPage] = useState(1)

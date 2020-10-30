@@ -11,7 +11,7 @@ import Container from '../../../components/Container'
 import RightSide from '../../../components/RightSide'
 import withApollo from '../../../libs/with-apollo'
 import LeftSide from '../../../components/LeftSide'
-import { GET_QUESTION } from '../../../queries'
+import QuestionDetail from '../../../queries/QuestionDetail.gql'
 import QuestionBox from '../../../components/QuestionBox'
 import useCreateOptionModal from '../../../hooks/useCreateOptionModal'
 import Box from '../../../components/Box'
@@ -34,7 +34,7 @@ const AffixFooter = styled.div`
 
 export default withApollo(() => {
   const { query: { id } } = useRouter()
-  const { data, loading } = useQuery(GET_QUESTION, {
+  const { data, loading } = useQuery(QuestionDetail, {
     variables: {
       id
     }

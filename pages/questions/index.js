@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
-import { GET_QUESTIONS, SEARCH_QUESTION } from '../../queries'
+import { SEARCH_QUESTION } from '../../queries'
 import usePagination from '../../hooks/usePagination'
 import media from '../../libs/media'
 import RightSide from '../../components/RightSide'
@@ -14,6 +14,7 @@ import withApollo from '../../libs/with-apollo'
 import { TopicList, TopicsBar } from '../../components/Topics'
 import MobileAuthBar from '../../components/MobileAuthBar'
 import QuestionList from '../../components/QuestionList'
+import QuestionListQuery from '../../queries/QuestionList.gql'
 
 const StyledContainer = styled(Container)`
 ${media.lg`
@@ -47,7 +48,7 @@ export default withApollo(() => {
     pagination
   } = usePagination({
     path: '/questions',
-    query: keyword ? SEARCH_QUESTION : GET_QUESTIONS,
+    query: keyword ? SEARCH_QUESTION : QuestionListQuery,
     getTotal: ({ data }) => get(data, `${key}.total`, 0)
   })
   const questions = get(data, `${key}.data`, [])

@@ -1,0 +1,45 @@
+#import "./fragments/ProductFields.gql"
+#import "./fragments/UserFields.gql"
+#import "./fragments/CommentFields.gql"
+query($page: Int, $size: Int, $productId: String, $milestoneId: String, $wishId: String) {
+  getComments(page: $page, size: $size, productId: $productId, milestoneId: $milestoneId, wishId: $wishId) {
+    data {
+      products {
+        ...ProductFields
+        discovererId
+        creators {
+          ...UserFields
+        }
+      }
+      ...CommentFields
+      user {
+        ...UserFields
+      }
+      children {
+        ...CommentFields
+        user {
+          ...UserFields
+        }
+        children {
+          ...CommentFields
+          user {
+            ...UserFields
+          }
+          children {
+            ...CommentFields
+            user {
+              ...UserFields
+            }
+            children {
+              ...CommentFields
+              user {
+                ...UserFields
+              }
+            }
+          }
+        }
+      }
+    }
+    total
+  }
+}

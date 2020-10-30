@@ -42,6 +42,7 @@ const Description = styled.span`
 font-size: 12px;
 margin-left: 8px;
 line-height: 32px;
+color: #606060;
 `
 
 const UserCell = ({ user, hideName = false, link = true, showDescription = false, showFollow = false, children, ...rest }) => {
@@ -88,7 +89,7 @@ const UserCell = ({ user, hideName = false, link = true, showDescription = false
       {renderAvatar()}
       <Content>
         {renderNickname()}
-        {showDescription && (<Description>{description}</Description>)}
+        {showDescription && description && (<Description>{description}</Description>)}
         {children}
       </Content>
       {showFollow && (

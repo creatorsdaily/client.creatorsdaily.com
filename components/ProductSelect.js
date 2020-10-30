@@ -6,9 +6,10 @@ import styled from 'styled-components'
 import noop from 'lodash/noop'
 import uniqBy from 'lodash/uniqBy'
 import { CloseOutlined } from '@ant-design/icons'
-import { GET_QUESTION, SEARCH_PRODUCTS } from '../queries'
+import { SEARCH_PRODUCTS } from '../queries'
 import ProductList from '../queries/ProductList.gql'
 import ProductDetail from '../queries/ProductDetail.gql'
+import QuestionDetail from '../queries/QuestionDetail.gql'
 import ProductCell from './ProductCell'
 
 const { Search } = Input
@@ -70,7 +71,7 @@ export default forwardRef((props, ref) => {
   const { defaultValue, value: nValue, onChange = noop, fixed, question, ...rest } = props
   const [value, setValue] = useState(nValue || defaultValue)
   const { data: defaultProducts, loading } = useQuery(ProductList)
-  const { data: questionData, loading: questionLoading } = useQuery(GET_QUESTION, {
+  const { data: questionData, loading: questionLoading } = useQuery(QuestionDetail, {
     variables: {
       id: question
     },

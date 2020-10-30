@@ -3,7 +3,16 @@ import styled from 'styled-components'
 import { Button, Divider, Input } from 'antd'
 import { forwardRef, useEffect, useState } from 'react'
 import noop from 'lodash/noop'
-import Icon, { AndroidFilled, AppleFilled, ChromeFilled, CompassFilled, DeleteOutlined, GithubFilled, PlusOutlined, RightOutlined, WechatFilled } from '@ant-design/icons'
+import Icon from '@ant-design/icons'
+import AndroidFilled from '@ant-design/icons/AndroidFilled'
+import AppleFilled from '@ant-design/icons/AppleFilled'
+import ChromeFilled from '@ant-design/icons/ChromeFilled'
+import CompassFilled from '@ant-design/icons/CompassFilled'
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined'
+import GithubFilled from '@ant-design/icons/GithubFilled'
+import PlusOutlined from '@ant-design/icons/PlusOutlined'
+import RightOutlined from '@ant-design/icons/RightOutlined'
+import WechatFilled from '@ant-design/icons/WechatFilled'
 import { blue } from '../libs/colors'
 import Firefox from './icons/Firefox.svg'
 import Edge from './icons/Edge.svg'
@@ -156,11 +165,15 @@ const ProductLinks = ({ links, ...rest }) => {
     }
     if (host === 'addons.mozilla.org') {
       name = 'Firefox 扩展'
-      icon = <Icon component={Firefox} />
+      if (typeof Icon !== 'undefined') {
+        icon = <Icon component={Firefox} />
+      }
     }
     if (host === 'microsoftedge.microsoft.com') {
       name = 'Edge 扩展'
-      icon = <Icon component={Edge} />
+      if (typeof Icon !== 'undefined') {
+        icon = <Icon component={Edge} />
+      }
     }
     return (
       <a key={x} href={x} target='_blank' rel='noopener noreferrer'>

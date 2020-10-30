@@ -33,6 +33,10 @@ font-size: 14px;
 font-weight: bold;
 `
 
+const StyledCommentCell = styled(CommentCell)`
+margin-bottom: 10px;
+`
+
 export const updateComments = (cache, { data: { createComment } }, query, product) => {
   const { getComments } = cache.readQuery({
     query: query[0],
@@ -107,7 +111,7 @@ export default ({
       )
     }
     return list.map(x => (
-      <CommentCell
+      <StyledCommentCell
         product={product}
         loading={createLoading}
         key={x.id}

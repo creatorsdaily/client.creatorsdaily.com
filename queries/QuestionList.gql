@@ -1,0 +1,21 @@
+#import "./fragments/ProductFields.gql"
+#import "./fragments/QuestionFields.gql"
+#import "./fragments/UserFields.gql"
+query($page: Int, $size: Int, $topic: [String!], $user: String) {
+  getQuestions(page: $page, size: $size, topic: $topic, user: $user) {
+    total
+    data {
+      ...QuestionFields
+      user {
+        ...UserFields
+      }
+      options {
+        rank
+        value
+        product {
+          ...ProductFields
+        }
+      }
+    }
+  }
+}
