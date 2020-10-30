@@ -7,7 +7,7 @@ import noop from 'lodash/noop'
 import uniqBy from 'lodash/uniqBy'
 import useDebounce from 'react-use/lib/useDebounce'
 import { PlusOutlined } from '@ant-design/icons'
-import { GET_TOPICS } from '../queries'
+import TopicListQuery from '../queries/TopicList.gql'
 
 const { Option } = Select
 
@@ -28,12 +28,12 @@ const TopicName = styled.span`
 export default forwardRef((props, ref) => {
   const { onCreate = noop, ...rest } = props
   const [topic, setTopic] = useState()
-  const { data, loading } = useQuery(GET_TOPICS, {
+  const { data, loading } = useQuery(TopicListQuery, {
     variables: {
       size: 1000
     }
   })
-  const [search, { data: searchData, loading: searchLoading }] = useLazyQuery(GET_TOPICS)
+  const [search, { data: searchData, loading: searchLoading }] = useLazyQuery(TopicListQuery)
   const [createTopic] = useMutation(CREATE_TOPIC, {
     variables: {
       topic: {
@@ -41,7 +41,7 @@ export default forwardRef((props, ref) => {
       }
     },
     refetchQueries: [{
-      query: GET_TOPICS,
+      query: TopicListQuery,
       variables: {
         size: 1000
       }

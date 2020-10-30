@@ -2,13 +2,13 @@ import styled from 'styled-components'
 import { Spin } from 'antd'
 import get from 'lodash/get'
 import validate from 'uuid-validate'
-import Head from 'next/head';
+import Head from 'next/head'
 import User from '../../../layouts/User'
 import SmallTitle from '../../../components/SmallTitle'
 import withApollo from '../../../libs/with-apollo'
 import usePagination from '../../../hooks/usePagination'
 import media from '../../../libs/media'
-import { GET_POSTS } from '../../../queries'
+import PostListQuery from '../../../queries/PostList.gql'
 import PostList from '../../../components/PostList'
 
 const Container = styled.div`
@@ -31,7 +31,7 @@ const Content = ({ id, user, loading }) => {
     pagination
   } = usePagination({
     path: '/users/[id]/posts',
-    query: GET_POSTS,
+    query: PostListQuery,
     getTotal: ({ data }) => get(data, 'getPosts.total', 0),
     getLink: (path, queryString) => ({
       href: `${path}${queryString}`,

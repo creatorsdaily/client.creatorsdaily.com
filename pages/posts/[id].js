@@ -5,8 +5,7 @@ import { useRouter } from 'next/router'
 import { Spin } from 'antd'
 import Head from 'next/head'
 import styled from 'styled-components'
-import Link from 'next/link'
-import { GET_POST } from '../../queries'
+import PostDetail from '../../queries/PostDetail.gql'
 import Article from '../../layouts/Article'
 import ProductCell from '../../components/ProductCell'
 import SmallTitle from '../../components/SmallTitle'
@@ -58,7 +57,7 @@ font-size: 12px;
 
 export default withApollo(() => {
   const { query: { id } } = useRouter()
-  const { loading, data } = useQuery(GET_POST, {
+  const { loading, data } = useQuery(PostDetail, {
     variables: {
       id
     }

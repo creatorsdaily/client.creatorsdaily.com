@@ -50,35 +50,6 @@ topics {
 }
 `
 
-const postFragment = `
-id
-title
-description
-createdAt
-media {
-  id
-  hash
-}
-user {
-  ${userFragment}
-}
-products {
-  ${productFragment}
-}
-`
-
-export const VIEWER = gql`
-query {
-  viewer {
-    ${userFragment}
-    link
-    description
-    token
-    oneSignal
-  }
-}
-`
-
 export const VIEWER_AUTHES = gql`
 query {
   viewer {
@@ -149,17 +120,6 @@ query($page: Int, $size: Int, $score: Int, $keyword: String!) {
 }
 `
 
-export const GET_POSTS = gql`
-query($page: Int, $size: Int, $user: String) {
-  getPosts(page: $page, size: $size, user: $user) {
-    total
-    data {
-      ${postFragment}
-    }
-  }
-}
-`
-
 export const GET_LINKS = gql`
 query($page: Int, $size: Int) {
   getLinks(page: $page, size: $size) {
@@ -173,31 +133,6 @@ query($page: Int, $size: Int) {
         hash
       }
     }
-  }
-}
-`
-
-export const GET_POST = gql`
-query($id: String!) {
-  getPost(id: $id) {
-    content
-    ${postFragment}
-  }
-}
-`
-
-export const GET_TOPICS = gql`
-query($page: Int, $size: Int, $keyword: [String!]) {
-  getTopics(page: $page, size: $size, keyword: $keyword) {
-    data {
-      id
-      name
-      icon {
-        id
-        hash
-      }
-    }
-    count
   }
 }
 `
@@ -258,42 +193,6 @@ query($id: String!) {
       discovererId
       creators {
         ${userFragment}
-      }
-    }
-  }
-}
-`
-
-export const GET_COMMENT = gql`
-fragment CommentFields on Comment {
-  id
-  content
-  createdAt
-  parentId
-  user {
-    ${userFragment}
-  }
-}
-query($id: String!) {
-  getComment(id: $id) {
-    products {
-      ${productFragment}
-      discovererId
-      creators {
-        ${userFragment}
-      }
-    }
-    ...CommentFields
-    children {
-      ...CommentFields
-      children {
-        ...CommentFields
-        children {
-          ...CommentFields
-          children {
-            ...CommentFields
-          }
-        }
       }
     }
   }

@@ -1,0 +1,13 @@
+#import "./fragments/PostFields.gql"
+query($id: String!) {
+  getPost(id: $id) {
+    ...PostFields
+    content
+    user {
+      ...UserFields
+    }
+    products {
+      ...ProductFields
+    }
+  }
+}

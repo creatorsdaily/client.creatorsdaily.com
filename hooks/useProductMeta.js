@@ -1,6 +1,7 @@
 import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
-import { GET_MEDIA, GET_TOPICS } from '../queries'
+import { GET_MEDIA } from '../queries'
+import TopicListQuery from '../queries/TopicList.gql'
 
 const useProductMeta = ({ icon, topics = [] }) => {
   icon = icon || {}
@@ -8,7 +9,7 @@ const useProductMeta = ({ icon, topics = [] }) => {
     variables: { id: icon.id },
     skip: icon.hash || !icon.id
   })
-  const { data: topicsData } = useQuery(GET_TOPICS, {
+  const { data: topicsData } = useQuery(TopicListQuery, {
     variables: {
       size: 1000
     },

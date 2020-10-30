@@ -1,0 +1,13 @@
+query($page: Int, $size: Int, $keyword: [String!]) {
+  getTopics(page: $page, size: $size, keyword: $keyword) {
+    data {
+      id
+      name
+      icon {
+        id
+        hash
+      }
+    }
+    count
+  }
+}

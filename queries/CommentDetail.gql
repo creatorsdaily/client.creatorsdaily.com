@@ -1,0 +1,42 @@
+#import "./fragments/ProductFields.gql"
+#import "./fragments/UserFields.gql"
+#import "./fragments/CommentFields.gql"
+query($id: String!) {
+  getComment(id: $id) {
+    products {
+      ...ProductFields
+      discovererId
+      creators {
+        ...UserFields
+      }
+    }
+    ...CommentFields
+    user {
+      ...UserFields
+    }
+    children {
+      ...CommentFields
+      user {
+        ...UserFields
+      }
+      children {
+        ...CommentFields
+        user {
+          ...UserFields
+        }
+        children {
+          ...CommentFields
+          user {
+            ...UserFields
+          }
+          children {
+            ...CommentFields
+            user {
+              ...UserFields
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -6,7 +6,7 @@ import noop from 'lodash/noop'
 import Link from 'next/link'
 import LazyLoad from 'react-lazyload'
 import HomeFilled from '@ant-design/icons/HomeFilled'
-import { GET_TOPICS } from '../queries'
+import TopicListQuery from '../queries/TopicList.gql'
 import useTopics from '../hooks/useTopics'
 import { blue } from '../libs/colors'
 import IPFSImage from './IPFSImage'
@@ -120,7 +120,7 @@ const Topics = ({
 }
 
 export const TopicsBar = ({ list, disabled = false, checkable = false, hideTitle = false, ...rest }) => {
-  const { data: topicsData } = useQuery(GET_TOPICS, {
+  const { data: topicsData } = useQuery(TopicListQuery, {
     variables: {
       size: 50
     }
@@ -144,7 +144,7 @@ export const TopicList = ({
   href,
   key
 }) => {
-  const { data: topicsData } = useQuery(GET_TOPICS, {
+  const { data: topicsData } = useQuery(TopicListQuery, {
     variables: {
       size: 50
     }

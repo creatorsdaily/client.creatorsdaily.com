@@ -1,9 +1,9 @@
 import cookie from 'component-cookie'
-import { VIEWER } from '../queries'
+import Viewer from '../queries/Viewer.gql'
 
 export default async client => {
   const { data: { viewer } } = await client.query({
-    query: VIEWER,
+    query: Viewer,
     fetchPolicy: 'cache-and-network'
   })
   if (!viewer) {

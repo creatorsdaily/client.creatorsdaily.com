@@ -7,7 +7,7 @@ import Setting from '../../layouts/Setting'
 import useAuth from '../../hooks/useAuth'
 import graphqlError from '../../libs/graphql-error'
 import useTimer from '../../hooks/useTimer'
-import { VIEWER } from '../../queries'
+import Viewer from '../../queries/Viewer.gql'
 
 const GET_CODE = gql`
 mutation GetCode($func: String!, $account: String!, $type: String) {
@@ -54,7 +54,7 @@ export default withApollo(() => {
     update (cache, { data: { changeMobile } }) {
       console.log(cache, changeMobile)
       cache.writeQuery({
-        query: VIEWER,
+        query: Viewer,
         data: {
           viewer: {
             ...viewer,

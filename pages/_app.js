@@ -7,7 +7,7 @@ import zhCN from 'antd/lib/locale-provider/zh_CN'
 import { Router } from 'next/router'
 import Matomo from '../components/Matomo'
 import OneSignal from '../components/OneSignal'
-import { VIEWER } from '../queries'
+import Viewer from '../queries/Viewer.gql'
 import Error from './_error'
 import '../styles/index.less'
 
@@ -84,7 +84,7 @@ class Creators extends App {
     super(props)
     if (!props.pageProps.apolloClient) return
     props.pageProps.apolloClient.query({
-      query: VIEWER
+      query: Viewer
     })
       .catch(() => ({}))
       .then(({ data }) => {

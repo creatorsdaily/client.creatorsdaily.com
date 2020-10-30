@@ -6,7 +6,7 @@ import styled from 'styled-components'
 import { LinkOutlined } from '@ant-design/icons'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
-import { GET_POSTS } from '../../queries'
+import PostListQuery from '../../queries/PostList.gql'
 import usePagination from '../../hooks/usePagination'
 import media from '../../libs/media'
 import RightSide from '../../components/RightSide'
@@ -42,7 +42,7 @@ export default withApollo(() => {
     pagination
   } = usePagination({
     path: '/posts',
-    query: GET_POSTS,
+    query: PostListQuery,
     getTotal: ({ data }) => get(data, 'getPosts.total', 0)
   })
 

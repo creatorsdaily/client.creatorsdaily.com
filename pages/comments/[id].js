@@ -4,7 +4,6 @@ import { useRouter } from 'next/router'
 import { Col, Row, Spin } from 'antd'
 import Head from 'next/head'
 import styled from 'styled-components'
-import { GET_COMMENT } from '../../queries'
 import withApollo from '../../libs/with-apollo'
 import CommentCell from '../../components/CommentCell'
 import useCreateComment from '../../hooks/useCreateComment'
@@ -12,6 +11,7 @@ import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import Box from '../../components/Box'
 import ProductCell from '../../components/ProductCell'
+import CommentDetail from '../../queries/CommentDetail.gql'
 
 const StyledContainer = styled(Container)`
 margin: 24px auto;
@@ -42,7 +42,7 @@ margin-bottom: 16px;
 
 export default withApollo(() => {
   const { query: { id } } = useRouter()
-  const { loading, data } = useQuery(GET_COMMENT, {
+  const { loading, data } = useQuery(CommentDetail, {
     variables: {
       id
     }
@@ -51,7 +51,7 @@ export default withApollo(() => {
   const product = get(comment, 'products[0]', {})
   const [handleReply, { loading: createLoading }] = useCreateComment({}, {
     refetchQueries: () => [{
-      query: GET_COMMENT,
+      query: CommentDetail,
       variables: { id }
     }]
   })
