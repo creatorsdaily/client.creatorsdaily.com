@@ -8,6 +8,12 @@ query(
 ) {
   user(id: $id) {
     ...UserFields
+    followers {
+      total
+    }
+    following {
+      total
+    }
     createdProducts(page: $createdPage, size: $createdSize) {
       total
       data {

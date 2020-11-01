@@ -1,0 +1,12 @@
+#import "./fragments/UserFields.gql"
+query($id: String!, $page: Int, $size: Int) {
+  user(id: $id) {
+    ...UserFields
+    followers(page: $page, size: $size) {
+      total
+      data {
+        ...UserFields
+      }
+    }
+  }
+}

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { Tag } from 'antd'
+import { Button, Tag } from 'antd'
 import Link from 'next/link'
 import { blue } from '../libs/colors'
 import UserAvatar from './UserAvatar'
@@ -110,6 +110,18 @@ border: 1px solid #F0F0F0;
 const StyledFollowButton = styled(FollowButton)`
 float: right;
 `
+const CounterContainer = styled.div`
+margin-bottom: 6px;
+`
+const CounterButton = styled.a`
+font-size: 12px;
+margin-right: 8px;
+color: rgba(0,0,0,0.65);
+span {
+  font-weight: bold;
+  margin-right: 4px;
+}
+`
 const UserCard = ({ user, children, ...rest }) => {
   const renderActive = () => {
     if (Date.now() - new Date(user.signinedAt) < 3 * 60 * 1000) {
@@ -137,6 +149,25 @@ const UserCard = ({ user, children, ...rest }) => {
       </ProductList>
     )
   }
+
+  const renderFollow = () => {
+    const { following, followers } = user
+    if (!following || !followers) return null
+    return (
+      <CounterContainer>
+        <Link href={`/users/${user.id}/followers`} passHref>
+          <CounterButton>
+            <span>{followers.total}</span>粉丝
+          </CounterButton>
+        </Link>
+        <Link href={`/users/${user.id}/following`} passHref>
+          <CounterButton>
+            <span>{following.total}</span>关注
+          </CounterButton>
+        </Link>
+      </CounterContainer>
+    )
+  }
   return (
     <Container {...rest}>
       <StyledUserAvatar user={user} size={72} />
@@ -153,6 +184,7 @@ const UserCard = ({ user, children, ...rest }) => {
         <UserJoin>
           第 <b>{user.number}</b> 位成员，<b><Time time={user.createdAt} format='YYYY年M月D日' /></b> 加入社区
         </UserJoin>
+        {renderFollow()}
         {user.link && (
           <UserLink>
             个人链接：<a href={user.link} target='_blank' rel='noopener noreferrer'>{user.link}</a>

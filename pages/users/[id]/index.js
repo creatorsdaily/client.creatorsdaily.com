@@ -45,7 +45,7 @@ const Content = ({ id, user, loading }) => {
   return (
     <Spin spinning={loading}>
       <Head>
-        <title>{user.nickname}发布的动态 - {process.env.NAME}</title>
+        <title>{user.nickname}的动态 - {process.env.NAME}</title>
       </Head>
       <Container>
         <ActiveList loading={activesLoading} list={actives} />

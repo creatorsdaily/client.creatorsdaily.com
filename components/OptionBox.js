@@ -48,17 +48,6 @@ const OptionContent = styled.div`
 padding: 16px;
 `
 
-const ProductLink = styled.div`
-line-height: 30px;
-a {
-  color: #303030;
-}
-display: none;
-${media.sm`
-display: block;
-`}
-`
-
 const StyledCounter = styled(Counter)`
 padding-bottom: 8px;
 min-width: 70px;
@@ -86,7 +75,7 @@ export default ({ rank, ups, downs, questionId, product, mode = 'normal', onClic
     if (mode === 'mini') return null
     return (
       <>
-        <ProductFiles medias={product.medias} height={240} />
+        <ProductFiles medias={product.medias} autoplay={false} height={240} />
         <OptionContent>
           <OptionCounter productId={product.id} questionId={questionId} ups={ups} downs={downs} onClick={onClick} />
           <ReasonList id={`product-${product.id}-ups`} list={ups} positive />
@@ -101,25 +90,12 @@ export default ({ rank, ups, downs, questionId, product, mode = 'normal', onClic
         <StyledCounter># 第<span>{rank}</span>名</StyledCounter>
         <Divider type='vertical' />
         <ProductHeaderContent>
-          <Link
-            href='/questions/[id]/products/[productId]'
-            as={`/questions/${questionId}/products/${product.id}`}
-          >
+          <Link href={`/${product.id}`}>
             <a>
               <StyledProductCell {...product} disabled size='small' withLike={false} />
             </a>
           </Link>
         </ProductHeaderContent>
-        <ProductLink>
-          <Link
-            href='/[id]'
-            as={`/${product.id}`}
-          >
-            <a>
-              查看产品
-            </a>
-          </Link>
-        </ProductLink>
       </ProductHeader>
       {renderBody()}
     </StyledBox>
