@@ -8,6 +8,12 @@ query UserList($page: Int, $size: Int, $isCreator: Boolean, $ids: [String!]) {
     size
     data {
       ...UserFields
+      followers {
+        total
+      }
+      following {
+        total
+      }
       createdProducts {
         total
         data {
