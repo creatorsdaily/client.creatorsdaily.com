@@ -56,6 +56,10 @@ ${media.sm`
 `}
 `
 
+const StyledPage = styled(Page)`
+${({ state }) => state === 'died' ? 'filter: grayscale(100%);' : ''}
+`
+
 const Product = ({ children }) => {
   const { pathname, query: { id } } = useRouter()
   const { loading, data } = useQuery(ProductDetail, { variables: { id } })
@@ -110,7 +114,7 @@ const Product = ({ children }) => {
     )
   }
   return (
-    <Page>
+    <StyledPage state={product.state}>
       <Head>
         <title>{product.name} - {process.env.NAME}</title>
         <meta key='description' name='description' content={description} />
@@ -179,7 +183,7 @@ const Product = ({ children }) => {
         return React.cloneElement(child, { id, product, loading })
       })}
       <MobileAuthBar />
-    </Page>
+    </StyledPage>
   )
 }
 export default Product

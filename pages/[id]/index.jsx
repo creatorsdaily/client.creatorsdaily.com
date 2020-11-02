@@ -1,5 +1,5 @@
 import React from 'react'
-import { Divider, Spin } from 'antd'
+import { Alert, Divider, Spin } from 'antd'
 import validate from 'uuid-validate'
 import styled from 'styled-components'
 import Link from 'next/link'
@@ -52,6 +52,10 @@ margin-right: 10px;
 `}
 `
 
+const StyledAlert = styled(Alert)`
+margin-bottom: 24px;
+`
+
 const Content = ({ id, product, loading }) => {
   const [modal, show] = useCreateOptionModal({ question: id })
   const renderOptions = (options = []) => {
@@ -90,6 +94,17 @@ const Content = ({ id, product, loading }) => {
       {modal}
       <ProductInner loading={loading} product={product}>
         <Spin spinning={loading}>
+          {product.state === 'died' && (
+            <StyledAlert
+              showIcon message={(
+                <div>
+                  <span>我们很遗憾地告知您，当前产品已经终止运营寿终正寝，并被收录至 </span>
+                  <Link href='/cemetery'><a>产品公墓</a></Link>
+                  <span> ，感谢您对该产品的持续关注。</span>
+                </div>
+              )} type='info'
+            />
+          )}
           <Product {...product} full />
           {renderOptions(product.options)}
         </Spin>
