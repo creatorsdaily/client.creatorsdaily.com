@@ -4,6 +4,7 @@ import Box from './Box'
 import UserCell from './UserCell'
 import Time from './Time'
 import ProductCell from './ProductCell'
+import ReactMarkdown from 'react-markdown'
 
 const Container = styled(Box)`
 margin-bottom: 24px;
@@ -50,7 +51,7 @@ const getContent = ({ type, relation }) => {
     case 'comment':
       return (
         <>
-          <span>{relation.content}</span>
+          <ReactMarkdown source={relation.content} />
           {relation.products.map(x => (
             <StyledProductCell key={x.id} {...x} size='small' />
           ))}
