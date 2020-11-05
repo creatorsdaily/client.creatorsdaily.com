@@ -1,6 +1,6 @@
 import Link from 'next/link'
 import styled from 'styled-components'
-import { Button, Divider, Menu, Popover } from 'antd'
+import { Button, Menu, Popover } from 'antd'
 import { useRouter } from 'next/router'
 import UserOutlined from '@ant-design/icons/UserOutlined'
 import SettingOutlined from '@ant-design/icons/SettingOutlined'
@@ -22,13 +22,7 @@ const UserButton = ({ user, back = '/', ...rest }) => {
       <div {...rest}>
         <Link href={`/auth?back=${encodeURIComponent(back)}`} passHref>
           <a>
-            <Button>登录</Button>
-          </a>
-        </Link>
-        <Divider type='vertical' />
-        <Link href={`/auth?back=${encodeURIComponent(back)}`} passHref>
-          <a>
-            <Button type='primary'>快速注册</Button>
+            <Button type='dashed' icon={<UserOutlined />}>注册 或 登录</Button>
           </a>
         </Link>
       </div>

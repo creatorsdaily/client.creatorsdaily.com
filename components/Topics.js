@@ -1,4 +1,4 @@
-import { Tag } from 'antd'
+import { Tag, Select } from 'antd'
 import styled from 'styled-components'
 import get from 'lodash/get'
 import { useQuery } from '@apollo/client'
@@ -28,6 +28,31 @@ const TopicIcon = styled.div`
   margin-right: 8px;
   font-size: 18px;
   text-align: center;
+`
+
+const SelectTopicImage = styled(IPFSImage)`
+  transform: scale(0.5);
+  width: 44px;
+  height: 44px;
+  margin-top: -11px;
+  margin-left: -11px;
+`
+
+const SelectTopicIcon = styled.div`
+width: 22px;
+height: 22px;
+line-height: 22px;
+background: #F5F5F5;
+border-radius: 3px;
+overflow: hidden;
+margin: 4px 8px 4px 0;
+text-align: center;
+display: inline-block;
+`
+
+const SelectOption = styled.div`
+display: flex;
+align-items: center;
 `
 
 const { CheckableTag } = Tag
@@ -198,6 +223,44 @@ export const TopicList = ({
       </TopicItem>
       {list.map(renderItem)}
     </TopicGroup>
+  )
+}
+
+export const TopicSelect = ({ href }) => {
+  const { data: topicsData } = useQuery(TopicListQuery, {
+    variables: {
+      size: 50
+    }
+  })
+  const [[value], replace] = useTopics({
+    path: href
+  })
+  const list = get(topicsData, 'getTopics.data', [])
+  const handleChange = v => {
+    v = v === 'all' ? [] : v
+    replace(v, true)
+  }
+  return (
+    <Select value={value || 'all'} style={{width: '100%'}} onChange={handleChange}>
+      <Select.Option value="all">
+        <SelectOption>
+          <SelectTopicIcon>
+            <HomeFilled style={{ color: blue }} />
+          </SelectTopicIcon>
+          全部
+        </SelectOption>
+      </Select.Option>
+      {list.map(({ id, name, icon }) => (
+        <Select.Option key={id} value={id}>
+          <SelectOption>
+            <SelectTopicIcon>
+              <SelectTopicImage alt={name} hash={icon && `${icon.hash}-60-60`} size='small' />
+            </SelectTopicIcon>
+            {name}
+          </SelectOption>
+        </Select.Option>
+      ))}
+    </Select>
   )
 }
 

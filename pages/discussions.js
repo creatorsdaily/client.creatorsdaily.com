@@ -1,22 +1,22 @@
 import styled from 'styled-components'
 import { useMutation, useQuery } from '@apollo/client'
 import { useState } from 'react'
-import { Affix, Button, Col, Row, Spin, message } from 'antd'
+import { Button, Col, Row, Spin, message } from 'antd'
 import get from 'lodash/get'
 import Link from 'next/link'
 import Head from 'next/head'
-import Page from '../layouts/Page'
+import Home from '../layouts/Home'
 import Container from '../components/Container'
 import CommentList from '../queries/CommentList.gql'
 import CommentsBox from '../components/CommentsBox.dynamic'
 import ProductCell from '../components/ProductCell'
-import { ProductContainer } from '../components/Product'
 import withApollo from '../libs/with-apollo'
 import MoreButton from '../components/MoreButton'
 import { Large } from '../components/Editor.dynamic'
 import CreateComment from '../queries/mutations/CreateComment.gql'
 import FormError from '../libs/form-error'
 import Box from '../components/Box'
+import HomeRightSide from '../components/HomeRightSide'
 
 const EditorToolbar = styled.div`
 margin-top: 12px;
@@ -26,10 +26,6 @@ align-items: center;
 `
 const PublishButton = styled(Button)`
 padding: 4px 23px;
-`
-
-const StyledContainer = styled(Container)`
-margin: 24px auto;
 `
 
 const StyledProductCell = styled(ProductCell)`
@@ -44,13 +40,6 @@ a {
 }
 `
 
-const Tip = styled.h1`
-  font-size: 32px;
-  color: rgba(0,0,0,0.1);
-  text-align: center;
-  line-height: 400px;
-`
-
 const StyledMoreButton = styled(MoreButton)`
 margin-top: 16px;
 `
@@ -63,8 +52,6 @@ margin-bottom: 24px;
 export default withApollo(() => {
   const size = 10
   const [content, setContent] = useState('')
-  const [hoverProduct, setHoverProduct] = useState()
-  const [focusProduct, setFocusProduct] = useState()
   const query = [CommentList, {
     size
   }]
@@ -99,16 +86,6 @@ export default withApollo(() => {
       }
     })
   }
-  const renderProduct = () => {
-    if (!hoverProduct && !focusProduct) {
-      return (
-        <Tip>快来和创造者们聊聊</Tip>
-      )
-    }
-    return (
-      <ProductContainer id={hoverProduct || focusProduct} full />
-    )
-  }
   const handleFetchMore = () => {
     fetchMore({
       variables: {
@@ -137,14 +114,14 @@ export default withApollo(() => {
     )
   }
   return (
-    <Page>
+    <Home>
       <Head>
-        <title>聊产品 - {process.env.NAME}</title>
+        <title>讨论 - {process.env.NAME}</title>
         <meta key='description' name='description' content='快来和各位创造者们聊一聊～' />
       </Head>
-      <StyledContainer>
+      <Container>
         <Row gutter={24}>
-          <Col md={12} xs={24}>
+          <Col lg={14} xs={24}>
             <StyledBox>
               <Large value={content} onChange={setContent} placeholder='说点什么...' options={{ minHeight: '74px' }} />
               <EditorToolbar>
@@ -159,10 +136,6 @@ export default withApollo(() => {
                   <CommentsBox
                     key={x.id}
                     hideInput={!product}
-                    onFocus={() => product && setFocusProduct(product.id)}
-                    onBlur={() => setFocusProduct(null)}
-                    onMouseEnter={() => product && setHoverProduct(product.id)}
-                    onMouseLeave={() => setHoverProduct(null)}
                     list={[x]}
                     renderHeader={() => {
                       if (!product) return null
@@ -189,13 +162,11 @@ export default withApollo(() => {
               {renderMore()}
             </Spin>
           </Col>
-          <Col md={12} xs={0}>
-            <Affix offsetTop={24}>
-              {renderProduct()}
-            </Affix>
+          <Col lg={10} xs={0}>
+            <HomeRightSide />
           </Col>
         </Row>
-      </StyledContainer>
-    </Page>
+      </Container>
+    </Home>
   )
 })

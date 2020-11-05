@@ -65,9 +65,9 @@ export const updateComments = (cache, { data: { createComment } }, query, produc
         total: getComments.total + 1,
         data: !createComment.parentId
           ? [{
-            product,
-            ...createComment
-          }].concat(getComments.data)
+              product,
+              ...createComment
+            }].concat(getComments.data)
           : getComments.data.map(x => addComment(x, createComment))
       }
     }
@@ -126,7 +126,7 @@ export default ({
       {!hideInput && (
         <CommentBox>
           <EditorBox>
-            <StyledEditor value={content} type='mini' placeholder='吐槽一下？' onChange={setContent} onFocus={onFocus} onBlur={onBlur} />
+            <StyledEditor value={content} type='mini' placeholder='输入你的评论...' onChange={setContent} onFocus={onFocus} onBlur={onBlur} />
           </EditorBox>
           <StyledButton loading={createLoading} type='primary' onClick={() => handleReply()}>来一发</StyledButton>
         </CommentBox>

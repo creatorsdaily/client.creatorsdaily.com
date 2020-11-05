@@ -191,5 +191,14 @@ module.exports = withPlugins([
     GRAPHQL_WS,
     CLOSE_TIP,
     VERSION: require('./package.json').version
+  },
+  async redirects () {
+    return [
+      {
+        source: '/talk',
+        destination: '/discussions',
+        permanent: true
+      }
+    ]
   }
 })

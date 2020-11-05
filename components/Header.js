@@ -45,7 +45,7 @@ align-items: center;
 `
 
 const StyledSearch = styled(Search)`
-margin: 0 24px;
+margin: 0 8px;
 `
 
 const { Header } = Layout
@@ -62,14 +62,14 @@ const Logo = styled.div`
 export default withRouter(({ router }) => {
   const { viewer: user } = useViewer()
   const menu = [{
-    name: '动态',
-    href: user ? '/timeline' : '/timeline/public'
-  }, {
-    name: '创造者们',
-    href: '/creators'
+    name: '讨论',
+    href: '/discussions'
   }, {
     name: '问题',
     href: '/questions'
+  }, {
+    name: '创造者们',
+    href: '/creators'
   }]
   const matched = menu
     .filter(({ href }) => href === '/' ? router.asPath === '/' : router.asPath.indexOf(href) === 0)
@@ -97,8 +97,8 @@ export default withRouter(({ router }) => {
   return (
     <Header>
       <StyledContainer>
-        <Row type='flex' align='middle'>
-          <Col xl={4} lg={5} md={5} sm={2} xs={4}>
+        <Row type='flex' gutter={24} align='middle'>
+          <Col xl={4} lg={5} md={6} sm={2} xs={4}>
             <Link href='/' passHref>
               <a>
                 <Logo>
@@ -107,7 +107,7 @@ export default withRouter(({ router }) => {
               </a>
             </Link>
           </Col>
-          <Col xl={16} lg={14} md={13} sm={14} xs={20}>
+          <Col xl={16} lg={14} md={12} sm={14} xs={20}>
             <HeaderContent>
               <Menu
                 mode='horizontal'

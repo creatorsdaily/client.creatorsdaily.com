@@ -1,7 +1,7 @@
 import get from 'lodash/get'
 import { gql } from '@apollo/client'
 import initApollo from '../../../libs/init-apollo'
-import { blue } from '../../../libs/colors'
+import { red } from '../../../libs/colors'
 
 export const GET_PRODUCT = gql`
 query($id: String!) {
@@ -27,7 +27,7 @@ export default async (req, res) => {
   })
   const product = get(data, 'data.product')
   if (!product) return res.statusCode(404).end()
-  const color = theme === 'dark' ? '#FFFFFF' : blue
+  const color = theme === 'dark' ? '#FFFFFF' : red
   const titleColor = theme === 'dark' ? '#FFFFFF' : '#505050'
   const tipColor = theme === 'dark' ? '#FFFFFF' : '#707070'
   const backgroundColor = theme === 'dark' ? '#24273f' : '#F5F5F5'

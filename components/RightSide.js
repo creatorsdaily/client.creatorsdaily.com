@@ -2,9 +2,10 @@ import { Affix, Button, Col, Modal, Row } from 'antd'
 import styled from 'styled-components'
 import noop from 'lodash/noop'
 import Link from 'next/link'
-import MessageOutlined from '@ant-design/icons/MessageOutlined'
-import { PlusOutlined } from '@ant-design/icons'
+import BulbOutlined from '@ant-design/icons/BulbOutlined'
+import PlusOutlined from '@ant-design/icons/PlusOutlined'
 import media from '../libs/media'
+import { red } from '../libs/colors'
 import Box from './Box'
 import WeChatOfficialAccount from './WeChatOfficialAccount'
 import WeChatButton from './WeChatButton'
@@ -115,7 +116,7 @@ span {
 }
 svg {
   font-size: 26px;
-  color: #6C9DF7;
+  color: ${red};
   margin-bottom: 8px;
 }
 `
@@ -216,9 +217,9 @@ const RightSide = ({ onQuestion = noop, onProduct = noop }) => {
             </Link>
           </Col>
           <Col span={12}>
-            <Link href='/talk'>
+            <Link href='/milestones'>
               <a>
-                <BigButton size='large' block type='link' icon={<MessageOutlined />}>聊产品</BigButton>
+                <BigButton size='large' block type='link' icon={<BulbOutlined />}>里程碑</BigButton>
               </a>
             </Link>
           </Col>
