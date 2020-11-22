@@ -5,6 +5,9 @@ query($page: Int, $size: Int, $score: Int, $keyword: String!) {
     total
     data {
       ...QuestionFields
+      user {
+        ...UserFields
+      }
       options {
         rank
         value
