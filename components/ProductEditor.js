@@ -112,7 +112,10 @@ const ProductEditor = ({ step, product = {}, children, ...rest }) => {
     }
   }
   const handleValuesChange = (changed, current) => {
-    setPreview(formToProduct(current))
+    setPreview({
+      ...product,
+      ...formToProduct(current)
+    })
   }
   const handleSet = async (type, value) => {
     let file
