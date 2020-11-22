@@ -2,7 +2,7 @@ import { Empty, Spin } from 'antd'
 import QuestionBox from '../components/QuestionBox'
 import useCreateOptionModal from '../hooks/useCreateOptionModal'
 
-export default ({ list, loading }) => {
+const QuestionList = ({ list, loading }) => {
   const [modal, show] = useCreateOptionModal()
   const renderList = () => {
     if (!list.length) {
@@ -21,3 +21,4 @@ export default ({ list, loading }) => {
     </Spin>
   )
 }
+export default QuestionList

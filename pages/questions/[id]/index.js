@@ -65,7 +65,6 @@ export default withApollo(() => {
   const [modal, show] = useCreateOptionModal()
   const question = get(data, 'getQuestion', {})
   const list = get(listData, 'getQuestions.data', [])
-  console.log(list)
 
   const renderOptions = () => {
     const options = question.options || []
@@ -109,19 +108,21 @@ export default withApollo(() => {
           >
             <Affix offsetTop={24}>
               <QuestionListBox>
-                <SmallTitle>热门问题</SmallTitle>
-                <QuestionList>
-                  {list.map(x => (
-                    <QuestionItem key={x.id}>
-                      <Link href={`/questions/${x.id}`}>
-                        <a>
-                          {x.name}
-                        </a>
-                      </Link>
-                      <Tag>共 {x.options.length} 项推荐</Tag>
-                    </QuestionItem>
-                  ))}
-                </QuestionList>
+                <Spin spinning={listLoading}>
+                  <SmallTitle>热门问题</SmallTitle>
+                  <QuestionList>
+                    {list.map(x => (
+                      <QuestionItem key={x.id}>
+                        <Link href={`/questions/${x.id}`}>
+                          <a>
+                            {x.name}
+                          </a>
+                        </Link>
+                        <Tag>{x.options.length ? `共 ${x.options.length} 项推荐` : '暂无推荐'}</Tag>
+                      </QuestionItem>
+                    ))}
+                  </QuestionList>
+                </Spin>
               </QuestionListBox>
             </Affix>
           </Col>

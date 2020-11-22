@@ -104,17 +104,17 @@ const QuestionBox = ({ id, name, user, options = [], topics = [], createdAt, onR
     )
   }
   const renderContent = () => {
-    if (!withContent) {
-      return null
-    }
     if (!options.length) {
       return (
         <CenterContent>
           <RecommendTooltip>
-            <Button icon={<PlusOutlined />} onClick={onRecommend} size='large'>新问题？我要推荐产品</Button>
+            <Button type='primary' icon={<PlusOutlined />} onClick={onRecommend} size='large'>新问题？我要推荐产品</Button>
           </RecommendTooltip>
         </CenterContent>
       )
+    }
+    if (!withContent) {
+      return null
     }
     return (
       <Content>

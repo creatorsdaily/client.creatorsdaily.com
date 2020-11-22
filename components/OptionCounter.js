@@ -16,7 +16,7 @@ const Liks = styled.div`
   `}
 `
 
-export default ({ productId, ups = [], downs = [], questionId, onClick = noop }) => {
+const OptionCounter = ({ productId, ups = [], downs = [], questionId, onClick = noop }) => {
   const { viewer } = useViewer()
   const buttonDisabled = viewer &&
     (ups.some(x => x.user.id === viewer.id) ||
@@ -56,3 +56,4 @@ export default ({ productId, ups = [], downs = [], questionId, onClick = noop })
     </>
   )
 }
+export default OptionCounter
