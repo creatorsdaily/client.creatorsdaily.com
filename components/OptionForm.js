@@ -10,7 +10,7 @@ const OptionForm = (props) => {
   const { showButton = false, product, question, positive, fixed, ...rest } = props
   const [productId, setProductId] = useState(product)
   const handleValuesChange = ({ productId: nValue }) => {
-    if (!nValue || nValue === productId) return
+    if (nValue === productId) return
     setProductId(nValue)
   }
   useEffect(() => {

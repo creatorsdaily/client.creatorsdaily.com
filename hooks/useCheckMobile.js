@@ -8,7 +8,6 @@ const useCheckMobile = ({ ...rest }) => {
     ...rest
   })
   useEffect(() => {
-    console.log(viewer)
     if (!viewer.mobile) {
       Modal.confirm({
         title: '请先绑定手机号码',

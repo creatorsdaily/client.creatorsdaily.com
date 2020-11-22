@@ -24,7 +24,6 @@ fetch(process.env.GRAPHQL, {
 }).then(result => result.json())
   .then(result => {
     const possibleTypes = {}
-    console.log(result)
     result.data.__schema.types.forEach(supertype => {
       if (supertype.possibleTypes) {
         possibleTypes[supertype.name] =

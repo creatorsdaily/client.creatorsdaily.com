@@ -53,7 +53,6 @@ export default withApollo(() => {
       message.error(err.message)
     },
     update (cache, { data: { changeMobile } }) {
-      console.log(cache, changeMobile)
       cache.writeQuery({
         query: Viewer,
         data: {

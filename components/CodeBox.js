@@ -62,7 +62,6 @@ const CodeBox = ({ value, length = 4, onChange }) => {
         if (e.target.value === '') {
           // 如果空的话，那么就退回到上一个输入框
           removeDefaultBehavior(e)
-          console.log(111111)
           focusOn(i - 1)
         }
         break
