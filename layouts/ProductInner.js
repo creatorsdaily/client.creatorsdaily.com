@@ -2,7 +2,7 @@ import { Col, Row } from 'antd'
 import PorductSider from '../components/ProductSider'
 import ProductLeftSider from '../components/ProductLeftSider'
 
-export default ({ product, loading, children }) => {
+const ProductInner = ({ product, loading, children }) => {
   return (
     <Row type='flex' gutter={24}>
       <Col
@@ -42,3 +42,4 @@ export default ({ product, loading, children }) => {
     </Row>
   )
 }
+export default ProductInner

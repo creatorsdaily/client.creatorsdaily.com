@@ -25,7 +25,7 @@ div {
 }
 `
 
-export default ({ hash, ...rest }) => {
+const MiniProgram = ({ hash, ...rest }) => {
   const handleClick = () => {
     Modal.info({
       okText: '关闭',
@@ -49,3 +49,4 @@ export default ({ hash, ...rest }) => {
     </Container>
   )
 }
+export default MiniProgram

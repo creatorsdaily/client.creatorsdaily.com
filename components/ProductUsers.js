@@ -14,7 +14,7 @@ const StyledUserCell = styled(UserCell)`
 margin-bottom: 12px;
 `
 
-export default ({ discoverer, creators = [], ...rest }) => {
+const ProductUsers = ({ discoverer, creators = [], ...rest }) => {
   const renderCreators = () => {
     if (!creators.length) return null
     return (
@@ -42,3 +42,4 @@ export default ({ discoverer, creators = [], ...rest }) => {
     </Users>
   )
 }
+export default ProductUsers

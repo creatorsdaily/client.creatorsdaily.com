@@ -11,7 +11,7 @@ ${media.sm`
   padding: 0;
 `}
 `
-export default ({ name, isMiniProgram, miniProgramQRCode, links = [], discoverer, creators = [] }) => {
+const ProductSider = ({ name, isMiniProgram, miniProgramQRCode, links = [], discoverer, creators = [] }) => {
   const renderMiniProgram = () => {
     if (!isMiniProgram) return null
     return (
@@ -30,3 +30,4 @@ export default ({ name, isMiniProgram, miniProgramQRCode, links = [], discoverer
     </Container>
   )
 }
+export default ProductSider

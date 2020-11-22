@@ -10,6 +10,7 @@ fragment UserFields on User {
   createdAt
   signinedAt
   isFollowing
+  emailMD5
   avatar {
     id
     hash

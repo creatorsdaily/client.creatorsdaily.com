@@ -9,10 +9,11 @@ const Container = styled.span`
   }
 `
 
-export default ({ children }) => {
+const Fraction = ({ children }) => {
   return (
     <Container>
       {children}
     </Container>
   )
 }
+export default Fraction

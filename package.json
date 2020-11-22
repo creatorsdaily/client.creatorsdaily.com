@@ -24,7 +24,6 @@
     "component-cookie": "^1.1.4",
     "compression-webpack-plugin": "^6.1.1",
     "cross-env": "^7.0.2",
-    "crypto-js": "^4.0.0",
     "dayjs": "^1.9.6",
     "dotenv": "^8.0.0",
     "esm": "^3.2.25",
