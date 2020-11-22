@@ -31,6 +31,7 @@ const {
   PRODUCT_ID,
   GRAPHQL_WS,
   CLOSE_TIP,
+  BAIDU_TONGJI,
   DOMAIN
 } = process.env
 module.exports = withPlugins([
@@ -190,6 +191,7 @@ module.exports = withPlugins([
     DOMAIN,
     GRAPHQL_WS,
     CLOSE_TIP,
+    BAIDU_TONGJI,
     VERSION: require('./package.json').version
   },
   async redirects () {

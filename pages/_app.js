@@ -7,6 +7,7 @@ import zhCN from 'antd/lib/locale-provider/zh_CN'
 import { Router } from 'next/router'
 import Matomo from '../components/Matomo'
 import OneSignal from '../components/OneSignal'
+import BaiduTongji from '../components/BaiduTongji'
 import Viewer from '../queries/Viewer.gql'
 import Error from './_error'
 import '../styles/index.less'
@@ -71,7 +72,7 @@ const CreatorsApp = ({ pageProps, Component }) => {
         <meta name='msapplication-TileImage' content='/ms-icon-144x144.png' />
         <meta name='theme-color' content='#ffffff' />
         <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
-        <Matomo />
+        <BaiduTongji id={process.env.BAIDU_TONGJI} />
         <OneSignal />
       </Head>
       <Component {...pageProps} />

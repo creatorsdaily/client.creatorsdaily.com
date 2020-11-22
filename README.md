@@ -5,7 +5,19 @@
 
 ![首页](https://user-images.githubusercontent.com/1763168/68320851-aac43c80-00fb-11ea-84cc-b0e08f36729a.png)
 
+### 快速开始
+
 ```
+// 复制示例环境变量配置，并对应修改
+cp .env.example .env
+
 // 为 apollo client 生成 possibleTypes
 yarn possible-types
+
+// 开发环境启动
+yarn dev
+
+// 或者 构建生产环境并启动
+yarn build
+yarn start
 ```
