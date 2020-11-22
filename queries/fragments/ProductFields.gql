@@ -12,6 +12,7 @@ fragment ProductFields on Product {
   diedAt
   causeOfDeath
   isMiniProgram
+  discovererId
   topics {
     id
     name

@@ -52,9 +52,11 @@ export const updateComments = (cache, { data: { createComment } }, query, produc
         ]
       }
     } else {
-      comment.children = comment.children.map(x => addComment(x, current))
+      return {
+        ...comment,
+        children: comment.children.map(x => addComment(x, current))
+      }
     }
-    return comment
   }
   cache.writeQuery({
     query: query[0],
@@ -74,7 +76,7 @@ export const updateComments = (cache, { data: { createComment } }, query, produc
   })
 }
 
-export default ({
+const CommentsBox = ({
   loading,
   list,
   productId,
@@ -138,3 +140,4 @@ export default ({
     </StyledBox>
   )
 }
+export default CommentsBox

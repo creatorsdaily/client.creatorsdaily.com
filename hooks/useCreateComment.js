@@ -1,40 +1,16 @@
 import { useState } from 'react'
-import { gql, useMutation } from '@apollo/client'
+import { useMutation } from '@apollo/client'
 import { message } from 'antd'
 import formError from '../libs/form-error'
-import { productFragment, userFragment } from '../queries'
+import CreateComment from '../queries/mutations/CreateComment.gql'
 
-const CREATE_COMMENT = gql`
-mutation($comment: IComment!) {
-  createComment(comment: $comment) {
-    id
-    content
-    createdAt
-    parentId
-    children {
-      id
-    }
-    products {
-      ${productFragment}
-      discovererId
-      creators {
-        ${userFragment}
-      }
-    }
-    user {
-      ${userFragment}
-    }
-  }
-}
-`
-
-export default ({
+const useCreateComment = ({
   productIds,
   milestoneIds,
   wishIds
 }, option = {}) => {
   const [content, setContent] = useState('')
-  const [create, result] = useMutation(CREATE_COMMENT, {
+  const [create, result] = useMutation(CreateComment, {
     onCompleted: data => {
       message.success('提交成功')
       setContent('')
@@ -64,3 +40,4 @@ export default ({
   }
   return [handleReply, result, content, setContent]
 }
+export default useCreateComment

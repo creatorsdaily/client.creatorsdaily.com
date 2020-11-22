@@ -1,10 +1,17 @@
 #import "../fragments/CommentFields.gql"
 #import "../fragments/UserFields.gql"
+#import "../fragments/ProductFields.gql"
 mutation CreateComment($comment: IComment!) {
   createComment(comment: $comment) {
     ...CommentFields
     user {
       ...UserFields
+    }
+    products {
+      ...ProductFields
+      creators {
+        ...UserFields
+      }
     }
     children {
       ...CommentFields
