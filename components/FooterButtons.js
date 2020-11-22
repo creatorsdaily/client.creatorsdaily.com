@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { BackTop, Button, Tooltip, notification } from 'antd'
+import { BackTop, Button, Tooltip } from 'antd'
 import { useEffect, useState } from 'react'
 import useToggle from 'react-use/lib/useToggle'
 import BellFilled from '@ant-design/icons/BellFilled'
@@ -82,8 +82,9 @@ const FooterButtons = () => {
     installPrompt = e
   }
 
-  const handleAppInstalled = () => {
+  const handleAppInstalled = async () => {
     setCanInstall(false)
+    const { default: notification } = await import('antd/lib/notification')
     notification.open({
       message: '应用安装成功',
       description: `安装成功，点击图标直接打开「${process.env.NAME}」`,

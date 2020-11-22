@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
-import { Col, Empty, Row, Spin, Typography } from 'antd'
+import { Col, Empty, Row, Spin } from 'antd'
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
@@ -101,8 +101,8 @@ export default withApollo(() => {
             }} lg={18} md={16} xs={24}
           >
             <Header>
-              <Typography.Title level={4}>创造者们</Typography.Title>
-              创造者们是创造者日报的灵魂，目前已入驻 <Typography.Text type='danger'>{total}</Typography.Text> 位创造者，你也是创造者？加入我们吧～
+              <h1>创造者们</h1>
+              创造者们是创造者日报的灵魂，目前已入驻 <strong>{total}</strong> 位创造者，你也是创造者？加入我们吧～
             </Header>
             <Spin spinning={loading}>
               {renderList()}

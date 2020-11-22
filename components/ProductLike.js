@@ -1,9 +1,10 @@
-import { Button, message } from 'antd'
+import { Button } from 'antd'
 import styled from 'styled-components'
 import { gql, useMutation } from '@apollo/client'
 import CaretUpOutlined from '@ant-design/icons/CaretUpOutlined'
 import formError from '../libs/form-error'
 import { red } from '../libs/colors'
+import message from '../libs/message.dynamic'
 
 const StyledButton = styled(Button)`
   min-height: 50px;

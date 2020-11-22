@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { gql, useMutation, useQuery } from '@apollo/client'
-import { Button, Col, Modal, Row, Typography, message } from 'antd'
+import { Button, Col, Modal, Row } from 'antd'
 import get from 'lodash/get'
 import { useRouter } from 'next/router'
 import Page from '../layouts/Page'
@@ -13,16 +13,15 @@ import ProductCell from '../components/ProductCell'
 import { formToProduct } from '../libs/form-utils'
 import graphqlError from '../libs/graphql-error'
 import useCheckMobile from '../hooks/useCheckMobile'
+import message from '../libs/message.dynamic'
 
-const { Title, Paragraph, Text } = Typography
-
-const StyledTitle = styled(Title)`
+const StyledTitle = styled.h1`
 text-align: center;
 margin-top: 24px;
 margin-bottom: 24px !important;
 `
 
-const StyledTypography = styled(Typography)`
+const StyledTypography = styled.div`
 margin-bottom: 24px;
 `
 
@@ -139,16 +138,16 @@ export default withApollo(() => {
         >
           <StyledTypography>
             <StyledTitle level={4}>发布产品</StyledTitle>
-            <Paragraph>
-              这里是爱意满满的作品展示区，无论您是产品的 <Text strong>创造者</Text> ，还是产品的 <Text strong>发现者</Text> ，都可以在这里将它展示给全世界。
-            </Paragraph>
-            <Paragraph>
+            <p>
+              这里是爱意满满的作品展示区，无论您是产品的 <strong>创造者</strong> ，还是产品的 <strong>发现者</strong> ，都可以在这里将它展示给全世界。
+            </p>
+            <p>
               完成产品发布后，会自动推送至 <a href='https://kz.sync163.com/web/topic/vqNzr253b46Yk?uid=ZNlYrg5BAReny' target='_blank' rel='noopener noreferrer'>快知</a>、<a href='https://tophub.today/n/YKd6JwndaP' target='_blank' rel='noopener noreferrer'>今日热榜</a>、<a href='https://t.me/creatorsdaily' target='_blank' rel='noopener noreferrer'>Telegram</a> 等平台，并有机会入选
-              <Text strong>
+              <strong>
                 今日产品
-              </Text>
-              推荐至我们的媒体矩阵，目前可覆盖超 <Text strong>53000+</Text> 用户
-            </Paragraph>
+              </strong>
+              推荐至我们的媒体矩阵，目前可覆盖超 <strong>53000+</strong> 用户
+            </p>
           </StyledTypography>
         </ProductEditor>
       </StyledContainer>

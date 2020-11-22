@@ -1,7 +1,7 @@
 import styled from 'styled-components'
 import { useMutation, useQuery } from '@apollo/client'
 import { useState } from 'react'
-import { Button, Col, Row, Spin, message } from 'antd'
+import { Button, Col, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import Link from 'next/link'
 import Head from 'next/head'
@@ -17,6 +17,7 @@ import CreateComment from '../queries/mutations/CreateComment.gql'
 import FormError from '../libs/form-error'
 import Box from '../components/Box'
 import HomeRightSide from '../components/HomeRightSide'
+import message from '../libs/message.dynamic'
 
 const EditorToolbar = styled.div`
 margin-top: 12px;

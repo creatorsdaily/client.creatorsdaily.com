@@ -1,6 +1,6 @@
 import { gql, useMutation } from '@apollo/client'
-import { message } from 'antd'
 import ProductDetail from '../queries/ProductDetail.gql'
+import message from '../libs/message.dynamic'
 
 const ADD_PRODUCT_FILES = gql`
   mutation($id: String!, $files: [IFile!], $url: String) {

@@ -1,6 +1,6 @@
 import Head from 'next/head'
 import styled from 'styled-components'
-import { Col, Row, Typography } from 'antd'
+import { Col, Row } from 'antd'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
 import MilestoneList from '../components/MilestoneList'
@@ -37,7 +37,7 @@ export default withApollo(() => {
             }} lg={18} md={16} xs={24}
           >
             <Content>
-              <Typography.Title level={4}>里程碑</Typography.Title>
+              <h1>里程碑</h1>
               产品新动态
             </Content>
             <MilestoneList />

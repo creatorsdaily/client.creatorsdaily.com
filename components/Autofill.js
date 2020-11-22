@@ -3,10 +3,11 @@ import base64url from 'base64url'
 import * as url from 'native-url'
 import axios from 'axios'
 import styled from 'styled-components'
-import { Button, Form, Popover, Spin, message } from 'antd'
+import { Button, Form, Popover, Spin } from 'antd'
 import noop from 'lodash/noop'
 import useDebounce from 'react-use/lib/useDebounce'
 import DownOutlined from '@ant-design/icons/DownOutlined'
+import message from '../libs/message.dynamic'
 import Box from './Box'
 
 const { Item } = Form

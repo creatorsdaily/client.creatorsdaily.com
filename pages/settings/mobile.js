@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Head from 'next/head'
-import { Button, Col, Divider, Form, Input, Row, Spin, message } from 'antd'
+import { Button, Col, Divider, Form, Input, Row, Spin } from 'antd'
 import { gql, useMutation } from '@apollo/client'
 import withApollo from '../../libs/with-apollo'
 import Setting from '../../layouts/Setting'
@@ -8,6 +8,7 @@ import useAuth from '../../hooks/useAuth'
 import graphqlError from '../../libs/graphql-error'
 import useTimer from '../../hooks/useTimer'
 import Viewer from '../../queries/Viewer.gql'
+import message from '../../libs/message.dynamic'
 
 const GET_CODE = gql`
 mutation GetCode($func: String!, $account: String!, $type: String) {

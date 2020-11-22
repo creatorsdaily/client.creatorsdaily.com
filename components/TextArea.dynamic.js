@@ -6,7 +6,7 @@ const LoadingPlaceholder = styled.div`
 min-height: 56px;
 `
 
-export default dynamic(() => import('./ProductCodes'), {
+export default dynamic(() => import('antd/lib/input/TextArea'), {
   ssr: false,
   loading: () => (
     <Spin>

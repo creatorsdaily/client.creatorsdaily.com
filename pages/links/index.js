@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Col, Row, Spin, Typography } from 'antd'
+import { Col, Row, Spin } from 'antd'
 import styled from 'styled-components'
 import { useQuery } from '@apollo/client'
 import get from 'lodash/get'
@@ -65,8 +65,8 @@ export default withApollo(() => {
         <Row gutter={24}>
           <Col lg={18} md={17} xs={24}>
             <LinkContent>
-              <Typography.Title level={4}>友情链接</Typography.Title>
-              如果你有自己的<Typography.Text type='danger'>网站</Typography.Text>或者<Typography.Text type='danger'>博客</Typography.Text>，非常欢迎你可以和创造者日报交换友情链接，请右侧添加微信详细沟通。
+              <h1>友情链接</h1>
+              如果你有自己的<strong>网站</strong>或者<strong>博客</strong>，非常欢迎你可以和创造者日报交换友情链接，请右侧添加微信详细沟通。
             </LinkContent>
             <Spin spinning={loading}>
               <Row gutter={24}>

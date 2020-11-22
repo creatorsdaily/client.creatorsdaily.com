@@ -20,7 +20,7 @@ const StyledAlert = styled(Alert)`
   margin-bottom: 24px;
 `
 
-export default (productId, {
+const useCreateCodeModal = (productId, {
   onCompleted = noop,
   onError = noop,
   ...rest
@@ -68,3 +68,4 @@ export default (productId, {
     </Modal>
   ), show, hide]
 }
+export default useCreateCodeModal

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import styled from 'styled-components'
 import { gql, useMutation, useQuery } from '@apollo/client'
-import { Button, Col, Form, Modal, Row, Typography, message } from 'antd'
+import { Button, Col, Form, Modal, Row } from 'antd'
 import get from 'lodash/get'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
@@ -14,21 +14,20 @@ import { formToQuestion } from '../../libs/form-utils'
 import graphqlError from '../../libs/graphql-error'
 import QuestionForm from '../../components/QuestionForm'
 import Box from '../../components/Box'
-
-const { Title, Paragraph, Text } = Typography
+import message from '../../libs/message.dynamic'
 
 const StyledBox = styled(Box)`
 padding: 0 24px;
 margin-bottom: 24px;
 `
 
-const StyledTitle = styled(Title)`
+const StyledTitle = styled.h1`
 text-align: center;
 margin-top: 24px;
 margin-bottom: 24px !important;
 `
 
-const StyledTypography = styled(Typography)`
+const StyledTypography = styled.div`
 margin-bottom: 24px;
 `
 
@@ -131,11 +130,9 @@ export default withApollo(() => {
           <Col xxl={9} xl={10} lg={12} md={16} xs={24}>
             <StyledBox>
               <StyledTypography>
-                <StyledTitle level={4}>发起问题</StyledTitle>
-                <Paragraph>
-                  <Text strong>请注意！</Text>这里不适合提问如 <Text delete strong>女生长得特别丑怎么办?</Text> 这类泛回答问题，更多支持您提问产品推荐相关问题，比如：
-                  <br /><br /><Text strong>最好的5G手机是什么？</Text><br /><br /><Text strong>好用的图片压缩工具有哪些？</Text>
-                </Paragraph>
+                <StyledTitle>发起问题</StyledTitle>
+                <strong>请注意！</strong>这里不适合提问如 <strong style={{ textDecoration: 'line-through' }}>女生长得特别丑怎么办?</strong> 这类开放问题，仅支持您提问产品推荐相关问题，比如：
+                <br /><br /><strong>最好的5G手机是什么？</strong><br /><br /><strong>好用的图片压缩工具有哪些？</strong>
               </StyledTypography>
               <QuestionForm
                 form={form}

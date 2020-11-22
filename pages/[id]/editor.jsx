@@ -1,7 +1,7 @@
 import React from 'react'
 import styled from 'styled-components'
 import { gql, useMutation, useQuery } from '@apollo/client'
-import { Button, Col, Row, Spin, message } from 'antd'
+import { Button, Col, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import { useRouter } from 'next/router'
 import Page from '../../layouts/Page'
@@ -12,6 +12,7 @@ import ProductDetail from '../../queries/ProductDetail.gql'
 import withApollo from '../../libs/with-apollo'
 import { formToProduct } from '../../libs/form-utils'
 import graphqlError from '../../libs/graphql-error'
+import message from '../../libs/message.dynamic'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;

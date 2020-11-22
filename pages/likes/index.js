@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Col, List, Row, Typography } from 'antd'
+import { Col, List, Row } from 'antd'
 import styled from 'styled-components'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
@@ -60,8 +60,8 @@ export default withApollo(() => {
         <Row gutter={24}>
           <Col lg={18} md={17} xs={24}>
             <LikeContent>
-              <Typography.Title level={4}>喜欢</Typography.Title>
-              如果你真的<Typography.Text type='danger'>抑制不住</Typography.Text>地喜欢我，那么非常欢迎你的赞赏，让你的喜欢来得更猛烈些吧！
+              <h1>喜欢</h1>
+              如果你真的<strong>抑制不住</strong>地喜欢我，那么非常欢迎你的赞赏，让你的喜欢来得更猛烈些吧！
             </LikeContent>
             <Content>
               <LikeImages>

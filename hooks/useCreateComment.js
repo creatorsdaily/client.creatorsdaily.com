@@ -1,8 +1,8 @@
 import { useState } from 'react'
 import { useMutation } from '@apollo/client'
-import { message } from 'antd'
 import formError from '../libs/form-error'
 import CreateComment from '../queries/mutations/CreateComment.gql'
+import message from '../libs/message.dynamic'
 
 const useCreateComment = ({
   productIds,
@@ -12,7 +12,7 @@ const useCreateComment = ({
   const [content, setContent] = useState('')
   const [create, result] = useMutation(CreateComment, {
     onCompleted: data => {
-      message.success('提交成功')
+      message.success('提交成功！')
       setContent('')
     },
     onError: error => {

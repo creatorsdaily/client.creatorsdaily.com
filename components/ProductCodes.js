@@ -1,4 +1,4 @@
-import { Button, List, Modal, Popconfirm, Result, Tooltip, message } from 'antd'
+import { Button, List, Modal, Popconfirm, Result, Tooltip } from 'antd'
 import PlusOutlined from '@ant-design/icons/PlusOutlined'
 import styled from 'styled-components'
 import { gql, useMutation } from '@apollo/client'
@@ -7,6 +7,7 @@ import useCreateCodeModal from '../hooks/useCreateCodeModal'
 import { userFragment } from '../queries'
 import ProductDetail from '../queries/ProductDetail.gql'
 import graphqlError from '../libs/graphql-error'
+import message from '../libs/message.dynamic'
 import Box from './Box'
 import Time from './Time'
 import UserCell from './UserCell'
@@ -72,7 +73,7 @@ mutation($productId: String!, $id: String) {
 }
 `
 
-export default ({
+const ProductCodes = ({
   productId,
   product
 }) => {
@@ -167,3 +168,4 @@ export default ({
     </StyledBox>
   )
 }
+export default ProductCodes

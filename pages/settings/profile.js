@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Divider, Form, message } from 'antd'
+import { Divider, Form } from 'antd'
 import styled from 'styled-components'
 import get from 'lodash/get'
 import { gql, useMutation } from '@apollo/client'
@@ -10,6 +10,7 @@ import UserAvatar from '../../components/UserAvatar'
 import formError from '../../libs/form-error'
 import withApollo from '../../libs/with-apollo'
 import Setting from '../../layouts/Setting'
+import message from '../../libs/message.dynamic'
 
 const UPDATE_USER = gql`
 mutation($user: IUser!) {

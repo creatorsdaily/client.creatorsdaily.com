@@ -1,12 +1,12 @@
-import { Button, Form, Input } from 'antd'
+import { Button, Form } from 'antd'
 import Link from 'next/link'
 import { useEffect, useState } from 'react'
 import ProductSelect from './ProductSelect'
+import TextAreaDynamic from './TextArea.dynamic'
 
 const { Item } = Form
-const { TextArea } = Input
 
-export default (props) => {
+const OptionForm = (props) => {
   const { showButton = false, product, question, positive, fixed, ...rest } = props
   const [productId, setProductId] = useState(product)
   const handleValuesChange = ({ productId: nValue }) => {
@@ -22,7 +22,7 @@ export default (props) => {
       <Item
         name='reason'
       >
-        <TextArea placeholder={`${positive ? '推荐' : '反对'}理由(选填)`} />
+        <TextAreaDynamic placeholder={`${positive ? '推荐' : '反对'}理由(选填)`} />
       </Item>
     )
   }
@@ -56,3 +56,4 @@ export default (props) => {
     </Form>
   )
 }
+export default OptionForm

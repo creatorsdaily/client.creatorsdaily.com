@@ -1,6 +1,6 @@
 import React from 'react'
 import Head from 'next/head'
-import { Col, Row, Spin, Typography } from 'antd'
+import { Col, Empty, Row, Spin } from 'antd'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import get from 'lodash/get'
@@ -33,6 +33,9 @@ display: flex;
 align-items: center;
 flex-direction: column;
 margin-bottom: 24px;
+.ant-spin-nested-loading {
+  width: 100%;
+}
 `
 
 export default withApollo(() => {
@@ -60,6 +63,22 @@ export default withApollo(() => {
   })
   const user = get(data, 'user', {})
   const list = get(user, 'followers.data', [])
+  const renderList = () => {
+    if (!list.length) {
+      return (
+        <Empty description='暂无粉丝' image={Empty.PRESENTED_IMAGE_SIMPLE} />
+      )
+    }
+    return (
+      <Row gutter={[16, 16]}>
+        {list.map(x => (
+          <Col key={x.id} span={12}>
+            <UserCell user={x} showDescription showFollow />
+          </Col>
+        ))}
+      </Row>
+    )
+  }
   return (
     <Page>
       <Head>
@@ -69,18 +88,12 @@ export default withApollo(() => {
         <Row gutter={24}>
           <Col lg={18} md={17} xs={24}>
             <LikeContent>
-              <Typography.Title level={4}>粉丝</Typography.Title>
+              <h1>粉丝</h1>
               关注 <Link href={`/users/${user.id}`}><a>{user.nickname}</a></Link> 的用户
             </LikeContent>
             <Content>
               <Spin spinning={loading}>
-                <Row gutter={[16, 16]}>
-                  {list.map(x => (
-                    <Col key={x.id} span={12}>
-                      <UserCell user={x} showDescription showFollow />
-                    </Col>
-                  ))}
-                </Row>
+                {renderList()}
               </Spin>
               {pagination}
             </Content>

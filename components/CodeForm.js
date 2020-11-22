@@ -2,7 +2,7 @@ import { Form, Input } from 'antd'
 
 const { Item } = Form
 
-export default (props) => {
+const CodeForm = (props) => {
   return (
     <Form {...props}>
       <Item
@@ -17,3 +17,4 @@ export default (props) => {
     </Form>
   )
 }
+export default CodeForm

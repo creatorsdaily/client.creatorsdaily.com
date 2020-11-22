@@ -163,16 +163,6 @@ module.exports = withPlugins([
       exclude: /node_modules/,
       loader: 'graphql-tag/loader'
     })
-    // if (!isServer) {
-    //   const cacheGroups = config.optimization.splitChunks.cacheGroups
-    //   delete cacheGroups.react
-    //   cacheGroups.default = false
-    //   cacheGroups.commons = {
-    //     name: 'commons',
-    //     minChunks: 3,
-    //     priority: 10
-    //   }
-    // }
     return config
   },
   poweredByHeader: false,

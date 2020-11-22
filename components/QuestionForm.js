@@ -17,7 +17,7 @@ const strlen = (str) => {
   return len
 }
 
-export default ({
+const QuestionForm = ({
   form, topics, loading,
   showButton = false, step = 'all',
   renderFooter = noop,
@@ -72,3 +72,4 @@ export default ({
     </Form>
   )
 }
+export default QuestionForm
