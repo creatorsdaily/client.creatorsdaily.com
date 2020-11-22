@@ -3,18 +3,19 @@ import styled from 'styled-components'
 import { gql, useMutation, useQuery } from '@apollo/client'
 import { Button, Col, Form, Modal, Row } from 'antd'
 import get from 'lodash/get'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
 import Link from 'next/link'
+import { RouterContext } from 'next/dist/next-server/lib/router-context'
 import Page from '../../layouts/Page'
 import Container from '../../components/Container'
 import useAuth from '../../hooks/useAuth'
-import { SEARCH_QUESTION } from '../../queries'
 import withApollo from '../../libs/with-apollo'
 import { formToQuestion } from '../../libs/form-utils'
 import graphqlError from '../../libs/graphql-error'
 import QuestionForm from '../../components/QuestionForm'
 import Box from '../../components/Box'
 import message from '../../libs/message.dynamic'
+import SearchQuestion from '../../queries/SearchQuestion.gql'
 
 const StyledBox = styled(Box)`
 padding: 0 24px;
@@ -70,19 +71,14 @@ export default withApollo(() => {
   const { replace } = useRouter()
   const {
     refetch
-  } = useQuery(SEARCH_QUESTION, {
+  } = useQuery(SearchQuestion, {
     skip: true
   })
   const [create, { loading }] = useMutation(CREATE_QUESTION, {
     onCompleted: data => {
       const id = get(data, 'createQuestion.id')
       message.success('提问成功')
-      replace({
-        pathname: '/questions/[id]',
-        query: {
-          id
-        }
-      }, `/questions/${id}`)
+      replace(`/questions/${id}`)
     },
     onError: error => {
       const errors = graphqlError(error)
@@ -99,7 +95,7 @@ export default withApollo(() => {
     setSearchLoading(true)
     const { data } = await refetch({
       keyword: values.name,
-      score: 3,
+      score: 10,
       size: 3
     })
     setSearchLoading(false)
@@ -114,7 +110,9 @@ export default withApollo(() => {
         autoFocusButton: null,
         icon: null,
         content: (
-          <ModalContent list={list} />
+          <RouterContext.Provider value={Router}>
+            <ModalContent list={list} />
+          </RouterContext.Provider>
         ),
         onOk () {
           runCreate()

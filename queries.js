@@ -104,24 +104,6 @@ query($page: Int, $size: Int, $score: Int, $keyword: String!) {
 }
 `
 
-export const SEARCH_QUESTION = gql`
-query($page: Int, $size: Int, $score: Int, $keyword: String!) {
-  searchQuestion(page: $page, size: $size, score: $score, keyword: $keyword) {
-    total
-    data {
-      ${questionFragment}
-      options {
-        rank
-        value
-        product {
-          ${productFragment}
-        }
-      }
-    }
-  }
-}
-`
-
 export const GET_LINKS = gql`
 query($page: Int, $size: Int) {
   getLinks(page: $page, size: $size) {
