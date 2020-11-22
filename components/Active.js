@@ -78,6 +78,16 @@ const getContent = ({ type, relation }) => {
           <StyledUserCell user={relation} />
         </>
       )
+    case 'question':
+      return (
+        <div>
+          发起<strong>问题</strong>：<Link href={`/questions/${relation.id}`}>
+            <a>
+              {relation.name}
+            </a>
+          </Link>
+        </div>
+      )
     default:
       console.log(type, relation)
   }

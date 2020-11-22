@@ -36,5 +36,8 @@ fragment ActiveFields on Active {
     ... on Product {
       ...ProductFields
     }
+    ... on Question {
+      ...QuestionFields
+    }
   }
 }
