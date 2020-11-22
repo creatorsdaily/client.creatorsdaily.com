@@ -3,7 +3,8 @@ import styled from 'styled-components'
 import { gql, useMutation, useQuery } from '@apollo/client'
 import { Button, Col, Modal, Row } from 'antd'
 import get from 'lodash/get'
-import { useRouter } from 'next/router'
+import Router, { useRouter } from 'next/router'
+import { RouterContext } from 'next/dist/next-server/lib/router-context'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
 import ProductEditor from '../components/ProductEditor.dynamic'
@@ -113,7 +114,9 @@ export default withApollo(() => {
         autoFocusButton: null,
         icon: null,
         content: (
-          <ModalContent list={list} />
+          <RouterContext.Provider value={Router}>
+            <ModalContent list={list} />
+          </RouterContext.Provider>
         ),
         onOk () {
           runCreate()

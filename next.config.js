@@ -32,6 +32,7 @@ const {
   GRAPHQL_WS,
   CLOSE_TIP,
   BAIDU_TONGJI,
+  PARSER,
   DOMAIN
 } = process.env
 module.exports = withPlugins([
@@ -182,6 +183,7 @@ module.exports = withPlugins([
     GRAPHQL_WS,
     CLOSE_TIP,
     BAIDU_TONGJI,
+    PARSER,
     VERSION: require('./package.json').version
   },
   async redirects () {
