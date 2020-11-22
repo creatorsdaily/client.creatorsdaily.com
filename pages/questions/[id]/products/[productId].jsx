@@ -16,6 +16,7 @@ import QuestionDetail from '../../../../queries/QuestionDetail.gql'
 import withApollo from '../../../../libs/with-apollo'
 import LeftSide from '../../../../components/LeftSide'
 import RightSide from '../../../../components/RightSide'
+import OptionBoxV2 from '../../../../components/OptionBox.v2'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
@@ -38,12 +39,12 @@ export default withApollo(() => {
     if (!question) return null
     return (
       <>
-        <QuestionBox {...question} onRecommend={() => show({ question: question.id })} />
-        <OptionBox
-          {...currentOption} mode='full' onClick={(qid, pid, v) => show({
-            question: qid,
-            product: pid,
-            positive: v,
+        <QuestionBox {...question} onRecommend={() => show({ question: question.id })} withContent />
+        <OptionBoxV2
+          option={currentOption} onVote={positive => show({
+            question: id,
+            product: productId,
+            positive,
             fixed: true
           })}
         />

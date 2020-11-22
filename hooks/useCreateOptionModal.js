@@ -3,7 +3,6 @@ import { Form, Modal } from 'antd'
 import useToggle from 'react-use/lib/useToggle'
 import { gql, useMutation } from '@apollo/client'
 import noop from 'lodash/noop'
-import { useRouter } from 'next/router'
 import OptionForm from '../components/OptionForm'
 import formError from '../libs/form-error'
 import QuestionDetail from '../queries/QuestionDetail.gql'
@@ -27,7 +26,6 @@ const useCreateOptionModal = ({
   ...rest
 } = {}) => {
   const [form] = Form.useForm()
-  const { replace } = useRouter()
   const [questionId, setQuestionId] = useState(question)
   const [productId, setProductId] = useState(product)
   const [isPositive, setIsPositive] = useState(positive)
@@ -47,12 +45,6 @@ const useCreateOptionModal = ({
       form.resetFields()
       hide()
       onCompleted(data)
-      replace({
-        pathname: '/questions/[id]',
-        query: {
-          id: questionId
-        }
-      }, `/questions/${questionId}`)
     }
   })
   useEffect(() => {

@@ -1,5 +1,5 @@
 import React from 'react'
-import { Col, Empty, Modal, Row, Spin } from 'antd'
+import { Col, Empty, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
@@ -10,7 +10,7 @@ import ProductCell from '../components/ProductCell'
 import { SEARCH_PRODUCTS } from '../queries'
 import ProductList from '../queries/ProductList.gql'
 import usePagination from '../hooks/usePagination'
-import { TopicList, TopicsBar, TopicSelect } from '../components/Topics'
+import { TopicList, TopicSelect, TopicsBar } from '../components/Topics'
 import RightSide from '../components/RightSide'
 import media from '../libs/media'
 import withApollo from '../libs/with-apollo'
@@ -109,7 +109,7 @@ export default withApollo(() => {
     <Home>
       <Row type='flex' gutter={24}>
         <Col xl={17} lg={16} xs={24}>
-          <Row style={{marginBottom: 24}}>
+          <Row style={{ marginBottom: 24 }}>
             <Col xl={6} lg={7} md={8}>
               <TopicSelect href='/' />
             </Col>

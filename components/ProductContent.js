@@ -19,23 +19,25 @@ const More = styled.div`
   display: flex;
   justify-content: center;
   align-items: flex-end;
+  .ant-btn {
+    margin-bottom: 12px;
+  }
 `
 
 const StyledArticle = styled(Article)`
 font-size: 14px;
 overflow: hidden;
 position: relative;
-height: ${({ more }) => more === 'true' ? 'auto' : `${({ height }) => height - 60}px`};
+height: ${({ more, height }) => (more === 'true' ? 'auto' : `${height}px`)};
 `
 
 const Container = styled.div`
-  height: ${({ height }) => height};
-  overflow: hidden;
+overflow: hidden;
 `
 
 const ProductContent = ({
   content,
-  background = 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1))',
+  background = 'linear-gradient(rgba(255,255,255,0), rgba(255,255,255,1), rgba(255,255,255,1))',
   height = 160,
   full = false,
   ...rest
@@ -59,12 +61,12 @@ const ProductContent = ({
     if (more) return null
     return (
       <More height={height} background={background}>
-        <Button icon={<DownOutlined />} type='link' onClick={() => setMore(true)}>查看全部</Button>
+        <Button icon={<DownOutlined />} type='link' onClick={() => setMore(true)}>展开全部内容</Button>
       </More>
     )
   }
   return (
-    <Container height={full ? 'auto' : (checked ? 'auto' : `${height}px`)}>
+    <Container style={{ height: full ? 'auto' : (checked ? 'auto' : `${height}px`) }}>
       <StyledArticle {...rest} height={height} ref={ref} more={more.toString()}>
         <ReactMarkdown source={content} />
         {renderMore()}

@@ -1,14 +1,11 @@
 import styled from 'styled-components'
+import { Divider } from 'antd'
 import Meta from './Meta'
 
 const Reason = styled.div`
 margin-bottom: 24px;
 font-size: 13px;
 line-height: 24px;
-`
-
-const ReasonTitle = styled.h3`
-margin: 16px 0;
 `
 
 const ReasonBody = styled.div`
@@ -30,7 +27,7 @@ export default ({ list = [], positive = false, withOutTitle = false, ...rest }) 
   const renderTitle = () => {
     if (withOutTitle) return null
     return (
-      <ReasonTitle>{positive ? '优点' : '缺点'}</ReasonTitle>
+      <Divider orientation='left'>{positive ? '优点' : '缺点'}</Divider>
     )
   }
   return (

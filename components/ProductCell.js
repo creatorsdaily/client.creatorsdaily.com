@@ -33,7 +33,9 @@ const SmallProductLike = styled.div`
 position: absolute;
 right: 12px;
 top: 0;
-line-height: 60px;
+height: 100%;
+align-items: center;
+display: flex;
 font-size: 12px;
 ${({ isLike }) => isLike ? `color: ${red};` : ''}
 span {
@@ -101,7 +103,7 @@ const ProductContent = styled.div`
   }[size])}px;
 `
 
-const ProductName = styled.h3`
+const ProductName = styled.h2`
   font-size: ${({ size }) => ({
     normal: 16,
     small: 14,

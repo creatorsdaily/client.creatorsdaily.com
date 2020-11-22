@@ -10,10 +10,6 @@ const Buttons = styled(Row)`
   margin-bottom: 24px;
 `
 
-const Title = styled.h3`
-  margin: 16px 0;
-`
-
 const Liks = styled.div`
   ${media.sm`
     float: right
@@ -27,7 +23,6 @@ export default ({ productId, ups = [], downs = [], questionId, onClick = noop })
     downs.some(x => x.user.id === viewer.id))
   return (
     <>
-      <Title id={`product-${productId}-rank`}>得分</Title>
       <Buttons type='flex' gutter={16} align='middle'>
         <Col xl={10} lg={10} md={10} sm={10} xs={24}>
           <Rate allowHalf disabled defaultValue={ups.length / (ups.length + downs.length) * 5} />

@@ -2,13 +2,14 @@ import styled from 'styled-components'
 import Link from 'next/link'
 import { Button, Statistic, Tag } from 'antd'
 import { LikeOutlined, PlusOutlined } from '@ant-design/icons'
-import Box from './Box'
 import QuestionHeader from './QuestionHeader'
 import Meta from './Meta'
 import RecommendTooltip from './RecommendTooltip'
 import ProductCell from './ProductCell'
 
-const StyledBox = styled(Box)`
+const Container = styled.header`
+background: #FFF;
+border: 1px solid #F0F0F0;
 margin-bottom: 24px;
 .ant-statistic-content-suffix {
   color: #999;
@@ -20,15 +21,13 @@ margin-bottom: 24px;
 }
 `
 
-const QuestionTitle = styled.h1`
-font-size: 18px;
-padding: 0 16px;
-margin: 0 0 16px;
+const Title = styled.h1`
+font-size: 20px;
+margin: 16px;
 `
 
 const Content = styled.div`
 padding: 16px;
-border-bottom: 1px solid #F0F0F0;
 `
 
 const CenterContent = styled(Content)`
@@ -65,11 +64,12 @@ span {
 `
 
 const StyledMeta = styled(Meta)`
-padding: 16px;
-height: 64px;
+padding: 12px 16px;
+box-sizing: content-box;
+border-top: 1px solid #F0F0F0;
 `
 
-export default ({ id, name, user, options = [], topics = [], createdAt, onRecommend, children }) => {
+const QuestionBox = ({ id, name, user, options = [], topics = [], createdAt, onRecommend, children, withContent = false }) => {
   const renderTag = (rank) => {
     switch (rank) {
       case 1:
@@ -104,6 +104,9 @@ export default ({ id, name, user, options = [], topics = [], createdAt, onRecomm
     )
   }
   const renderContent = () => {
+    if (!withContent) {
+      return null
+    }
     if (!options.length) {
       return (
         <CenterContent>
@@ -120,15 +123,17 @@ export default ({ id, name, user, options = [], topics = [], createdAt, onRecomm
     )
   }
   return (
-    <StyledBox>
+    <Container>
       <QuestionHeader options={options} topics={topics} onClick={onRecommend} />
       <Link href='/questions/[id]' as={`/questions/${id}`}>
         <a>
-          <QuestionTitle>{name}</QuestionTitle>
+          <Title>{name}</Title>
         </a>
       </Link>
       {renderContent()}
       <StyledMeta createdAt={createdAt} user={user}>提问</StyledMeta>
-    </StyledBox>
+    </Container>
   )
 }
+
+export default QuestionBox

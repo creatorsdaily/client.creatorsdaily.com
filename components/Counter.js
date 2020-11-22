@@ -7,7 +7,7 @@ export default styled.div`
   color: #808080;
   span {
     margin: 0 8px;
-    font-size: 20px;
+    font-size: 18px;
     color: #262626;
   }
 `

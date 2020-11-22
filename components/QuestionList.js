@@ -11,7 +11,7 @@ export default ({ list, loading }) => {
       )
     }
     return list.map(question => (
-      <QuestionBox key={question.id} {...question} onRecommend={() => show({ question: question.id })} />
+      <QuestionBox key={question.id} {...question} withContent onRecommend={() => show({ question: question.id })} />
     ))
   }
   return (

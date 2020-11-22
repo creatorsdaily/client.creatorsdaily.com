@@ -10,7 +10,7 @@ const Header = styled.div`
   margin: 16px 0;
 `
 
-export default ({ options, topics, onClick }) => {
+const QuestionHeader = ({ options = [], topics = [], onClick }) => {
   const renderTopics = () => {
     if (!topics.length) return null
     return (
@@ -60,3 +60,4 @@ export default ({ options, topics, onClick }) => {
     </Header>
   )
 }
+export default QuestionHeader

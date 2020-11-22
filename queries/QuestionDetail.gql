@@ -13,6 +13,7 @@ query($id: String!) {
       questionId
       product {
         ...ProductFields
+        content
         medias {
           id
           hash

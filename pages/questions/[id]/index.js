@@ -1,35 +1,53 @@
 import React from 'react'
 import Head from 'next/head'
-import { Affix, Button, Col, Row, Spin } from 'antd'
+import { Affix, Col, Row, Spin, Tag } from 'antd'
 import styled from 'styled-components'
 import get from 'lodash/get'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
-import { PlusOutlined } from '@ant-design/icons'
+import Link from 'next/link'
 import Page from '../../../layouts/Page'
 import Container from '../../../components/Container'
-import RightSide from '../../../components/RightSide'
 import withApollo from '../../../libs/with-apollo'
-import LeftSide from '../../../components/LeftSide'
 import QuestionDetail from '../../../queries/QuestionDetail.gql'
-import QuestionBox from '../../../components/QuestionBox'
+import QuestionListQuery from '../../../queries/QuestionList.gql'
 import useCreateOptionModal from '../../../hooks/useCreateOptionModal'
+import OptionBoxV2 from '../../../components/OptionBox.v2'
+import QuestionBox from '../../../components/QuestionBox'
 import Box from '../../../components/Box'
-import RecommendTooltip from '../../../components/RecommendTooltip'
-import QuestionOptions from '../../../components/QuestionOptions'
+import SmallTitle from '../../../components/SmallTitle'
+import media from '../../../libs/media'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
 `
 
-const StyledBox = styled(Box)`
-margin-bottom: 24px;
+const QuestionListBox = styled(Box)`
+padding: 16px;
 `
 
-const AffixFooter = styled.div`
-  padding: 16px;
-  display: flex;
-  justify-content: center;
+const QuestionList = styled.ul`
+padding: 0;
+`
+
+const QuestionItem = styled.li`
+display: flex;
+justify-content: space-between;
+margin-bottom: 8px;
+a {
+  margin-right: 8px;
+  overflow: hidden;
+  text-overflow:ellipsis;
+  white-space: nowrap;
+}
+.ant-tag {
+  ${media.md`
+    display: none;
+  `}
+  ${media.lg`
+    display: block;
+  `}
+}
 `
 
 export default withApollo(() => {
@@ -39,8 +57,30 @@ export default withApollo(() => {
       id
     }
   })
+  const { data: listData, loading: listLoading } = useQuery(QuestionListQuery, {
+    variables: {
+      size: 15
+    }
+  })
   const [modal, show] = useCreateOptionModal()
   const question = get(data, 'getQuestion', {})
+  const list = get(listData, 'getQuestions.data', [])
+  console.log(list)
+
+  const renderOptions = () => {
+    const options = question.options || []
+    return options.map(option => (
+      <OptionBoxV2
+        key={option.product.id}
+        option={option} onVote={(positive) => show({
+          question: id,
+          product: option.product.id,
+          positive: positive,
+          fixed: true
+        })}
+      />
+    ))
+  }
   return (
     <Page>
       <Head>
@@ -51,43 +91,39 @@ export default withApollo(() => {
       <StyledContainer>
         <Row type='flex' gutter={24}>
           <Col
-            xl={{
-              order: 1,
-              span: 14
-            }} lg={18} md={16} xs={24}
+            xl={12} lg={14} md={16} xs={24}
           >
             <Spin spinning={loading}>
-              <QuestionBox {...question} onRecommend={() => show({ question: id })} />
-              <QuestionOptions
-                options={question.options}
-                onClick={(qid, pid, v) => show({
-                  question: qid,
-                  product: pid,
-                  positive: v,
-                  fixed: true
-                })}
-              />
-              <StyledBox>
-                <Affix offsetBottom={0}>
-                  <AffixFooter>
-                    <RecommendTooltip>
-                      <Button
-                        type='primary'
-                        onClick={() => show({ question: id })}
-                        icon={<PlusOutlined />}
-                      >我要推荐
-                      </Button>
-                    </RecommendTooltip>
-                  </AffixFooter>
-                </Affix>
-              </StyledBox>
+              <article>
+                <QuestionBox
+                  {...question} onRecommend={() => show({
+                    question: id
+                  })}
+                />
+                {renderOptions()}
+              </article>
             </Spin>
           </Col>
-          <Col xl={4} md={0} xs={24}>
-            <LeftSide />
-          </Col>
-          <Col xl={{ order: 2 }} lg={6} md={8} xs={24}>
-            <RightSide />
+          <Col
+            xl={12} lg={10} md={8} xs={24}
+          >
+            <Affix offsetTop={24}>
+              <QuestionListBox>
+                <SmallTitle>热门问题</SmallTitle>
+                <QuestionList>
+                  {list.map(x => (
+                    <QuestionItem key={x.id}>
+                      <Link href={`/questions/${x.id}`}>
+                        <a>
+                          {x.name}
+                        </a>
+                      </Link>
+                      <Tag>共 {x.options.length} 项推荐</Tag>
+                    </QuestionItem>
+                  ))}
+                </QuestionList>
+              </QuestionListBox>
+            </Affix>
           </Col>
         </Row>
       </StyledContainer>
