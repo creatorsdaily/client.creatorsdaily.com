@@ -66,6 +66,10 @@ height: 160px;
 display: block;
 overflow: hidden;
 position: relative;
+background: #F5F5FF;
+.lazyload-wrapper {
+  height: 100%;
+}
 img {
   object-fit: cover;
   height: 100%;

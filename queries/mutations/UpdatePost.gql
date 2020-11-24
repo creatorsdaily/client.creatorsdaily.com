@@ -1,0 +1,11 @@
+#import "../fragments/ProductFields.gql"
+#import "../fragments/PostFields.gql"
+mutation($id: String!,$title: String!, $content: String!, $media: String, $products: [String!]) {
+  updatePost(id: $id, title: $title, content: $content, media: $media, products: $products) {
+    ...PostFields
+    content
+    products {
+      ...ProductFields
+    }
+  }
+}

@@ -1,6 +1,6 @@
 import React from 'react'
 import get from 'lodash/get'
-import { Button, Divider, Table } from 'antd'
+import { Button, Divider, Table, Tag } from 'antd'
 import styled from 'styled-components'
 import Link from 'next/link'
 import DeleteOutlined from '@ant-design/icons/DeleteOutlined'
@@ -35,6 +35,15 @@ img {
 }
 `
 
+const TableHeader = styled.div`
+margin-bottom: 16px;
+display: flex;
+justify-content: flex-end;
+`
+
+const stateMapping = { published: '已发布', review: '审核中', rejected: '已拒绝' }
+const stateColorMapping = { published: 'green', review: 'gold', rejected: 'red' }
+
 export default withApollo(() => {
   const {
     result: {
@@ -43,7 +52,6 @@ export default withApollo(() => {
     },
     pagination
   } = usePagination({
-    path: '/home/posts',
     query: ViewerPostList,
     pageSize: 10,
     getTotal: ({ data }) => get(data, 'viewer.posts.total', 0)
@@ -73,6 +81,15 @@ export default withApollo(() => {
       )
     }
   }, {
+    title: '状态',
+    dataIndex: 'state',
+    width: 68,
+    render: (data) => {
+      return (
+        <Tag color={stateColorMapping[data]}>{stateMapping[data]}</Tag>
+      )
+    }
+  }, {
     title: '操作',
     width: 165,
     render: (data) => {
@@ -92,7 +109,14 @@ export default withApollo(() => {
   return (
     <Home>
       <Content>
-        <Table size='small' dataSource={posts} columns={columns} loading={loading} pagination={false} />
+        <TableHeader>
+          <Link href='/write'>
+            <a>
+              <Button icon={<EditOutlined />}>撰写文章</Button>
+            </a>
+          </Link>
+        </TableHeader>
+        <Table size='small' rowKey='id' dataSource={posts} columns={columns} loading={loading} pagination={false} />
         <Pagination>
           {pagination}
         </Pagination>

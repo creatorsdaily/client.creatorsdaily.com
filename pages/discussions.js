@@ -19,6 +19,7 @@ import HomeRightSide from '../components/HomeRightSide'
 import message from '../libs/message.dynamic'
 import Page from '../layouts/Page'
 import LeftSide from '../components/LeftSide'
+import useViewer from '../hooks/useViewer'
 
 const StyledContainer = styled(Container)`
 margin-top: 24px;
@@ -51,12 +52,31 @@ margin-top: 16px;
 `
 
 const StyledBox = styled(Box)`
+position: relative;
 padding: 16px;
 margin-bottom: 24px;
+overflow: hidden;
+`
+
+const EditorBox = styled.div`
+${({ disabled }) => disabled ? 'filter: blur(3px);' : ''}
+`
+
+const DisableMask = styled.div`
+position: absolute;
+display: flex;
+top: 0;
+left: 0;
+width: 100%;
+height: 100%;
+justify-content: center;
+align-items: center;
+z-index: 1;
 `
 
 export default withApollo(() => {
   const size = 10
+  const { viewer } = useViewer()
   const [content, setContent] = useState('')
   const query = [CommentList, {
     size
@@ -119,6 +139,18 @@ export default withApollo(() => {
       <MoreButton size='small' type='link' block loading={loading} onClick={handleFetchMore}>加载更多</MoreButton>
     )
   }
+  const renderDisableMask = () => {
+    if (viewer) return null
+    return (
+      <DisableMask>
+        <Link href='/auth'>
+          <a>
+            <Button type='primary'>注册 或 登录</Button>
+          </a>
+        </Link>
+      </DisableMask>
+    )
+  }
   return (
     <Page>
       <Head>
@@ -134,11 +166,14 @@ export default withApollo(() => {
             }} lg={14} md={15} xs={24}
           >
             <StyledBox>
-              <Large value={content} onChange={setContent} placeholder='说点什么...' options={{ minHeight: '74px' }} />
-              <EditorToolbar>
-                <div style={{ fontSize: 12, color: '#666' }}>文明礼貌，友善发言</div>
-                <PublishButton onClick={publish} type='primary' disabled={!content.length}>发布</PublishButton>
-              </EditorToolbar>
+              {renderDisableMask()}
+              <EditorBox disabled={!viewer}>
+                <Large value={content} onChange={setContent} placeholder='说点什么...' options={{ minHeight: '74px' }} />
+                <EditorToolbar>
+                  <div style={{ fontSize: 12, color: '#666' }}>文明礼貌，友善发言</div>
+                  <PublishButton onClick={publish} type='primary' disabled={!content.length}>发布</PublishButton>
+                </EditorToolbar>
+              </EditorBox>
             </StyledBox>
             <Spin spinning={loading}>
               {list.map(x => {

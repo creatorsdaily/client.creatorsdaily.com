@@ -1,18 +1,18 @@
 import React from 'react'
 import get from 'lodash/get'
-import { Button, Table, Tabs, Divider, Tag, Tooltip } from 'antd'
+import { Button, Divider, Table, Tabs, Tag, Tooltip } from 'antd'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import PlusOutlined from '@ant-design/icons/PlusOutlined'
+import Link from 'next/link'
+import DeleteOutlined from '@ant-design/icons/DeleteOutlined'
+import EditOutlined from '@ant-design/icons/EditOutlined'
 import Home from '../../../layouts/Home'
 import withApollo from '../../../libs/with-apollo'
 import ViewerCreatedProductList from '../../../queries/ViewerCreatedProductList.gql'
 import ViewerDiscoveredProductList from '../../../queries/ViewerDiscoveredProductList.gql'
 import usePagination from '../../../hooks/usePagination'
 import IPFSImage from '../../../components/IPFSImage'
-import Link from 'next/link'
-import DeleteOutlined from '@ant-design/icons/DeleteOutlined'
-import EditOutlined from '@ant-design/icons/EditOutlined'
 import Time from '../../../components/Time'
 import useCanEditProduct from '../../../hooks/useCanEditProduct'
 
@@ -34,8 +34,8 @@ height: 32px;
 object-fit: contain;
 `
 
-const stateMapping = {published: '已发布', 'review': '审核中', 'died': '已死亡'}
-const stateColorMapping = {published: 'green', review: 'gold', 'died': 'magenta'}
+const stateMapping = { published: '已发布', review: '审核中', rejected: '已拒绝', died: '已死亡' }
+const stateColorMapping = { published: 'green', review: 'gold', rejected: 'red', died: 'magenta' }
 
 const EditButton = ({ product }) => {
   const canEdit = useCanEditProduct(product)
@@ -67,7 +67,6 @@ export default withApollo(() => {
     pagination
   } = usePagination({
     pageSize: 10,
-    path: pathname,
     query: type === 'created' ? ViewerCreatedProductList : ViewerDiscoveredProductList,
     getTotal: ({ data }) => get(data, `viewer.${type}Products.total`, 0)
   })

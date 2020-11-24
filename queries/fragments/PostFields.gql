@@ -3,6 +3,7 @@ fragment PostFields on Post {
   title
   description
   createdAt
+  state
   media {
     id
     hash

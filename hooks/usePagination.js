@@ -26,6 +26,7 @@ const usePagination = ({
   getQuery = query => query
 } = {}) => {
   let {
+    pathname,
     query: {
       page = 1,
       size = pageSize,
@@ -56,7 +57,7 @@ const usePagination = ({
       queryStr = '?' + queryStr
     }
     return (
-      <ItemLink {...getLink(path, queryStr, query)} passHref>
+      <ItemLink {...getLink(path || pathname, queryStr, query)} passHref>
         {originalElement}
       </ItemLink>
     )

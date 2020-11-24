@@ -17,13 +17,17 @@ margin-bottom: 24px;
 background: #FFF;
 overflow: hidden;
 border-radius: 3px;
-padding: 16px 0;
+padding: 12px 0;
 `
 
 const StyledMenu = styled(Menu)`
 border-right: 0;
 .ant-menu-item-selected:after {
   display: none;
+}
+.ant-menu-item-divider {
+  margin-top: 12px;
+  margin-bottom: 12px;
 }
 `
 
@@ -46,6 +50,7 @@ const Timeline = ({ children }) => {
                       <a>动态</a>
                     </Link>
                   </Menu.Item>
+                  <Menu.Divider />
                   <Menu.Item key='/home/products'>
                     <Link href='/home/products'>
                       <a>我的产品</a>
@@ -56,6 +61,7 @@ const Timeline = ({ children }) => {
                       <a>我的文章</a>
                     </Link>
                   </Menu.Item>
+                  <Menu.Divider />
                   <Menu.Item key='/home/explore'>
                     <Link href='/home/explore'>
                       <a>发现</a>

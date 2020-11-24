@@ -1,13 +1,23 @@
 import React, { useState } from 'react'
 import get from 'lodash/get'
 import { useQuery } from '@apollo/client'
-import { Col, Row } from 'antd'
+import { Button, Col, Row } from 'antd'
+import styled from 'styled-components'
+import PlusOutlined from '@ant-design/icons/PlusOutlined'
+import EditOutlined from '@ant-design/icons/EditOutlined'
+import Link from 'next/link'
 import Home from '../../layouts/Home'
 import withApollo from '../../libs/with-apollo'
 import ActiveListQuery from '../../queries/ActiveList.gql'
 import ActiveList from '../../components/ActiveList'
 import MoreButton from '../../components/MoreButton'
 import HomeRightSide from '../../components/HomeRightSide'
+import Box from '../../components/Box'
+
+const Buttons = styled(Box)`
+padding: 16px;
+margin-bottom: 24px;
+`
 
 export default withApollo(({ type = 'follow' }) => {
   const size = 30
@@ -56,6 +66,24 @@ export default withApollo(({ type = 'follow' }) => {
           {renderMore()}
         </Col>
         <Col xl={10} lg={9} sm={0} xs={0}>
+          <Buttons>
+            <Row gutter={16}>
+              <Col span={12}>
+                <Link href='/create'>
+                  <a>
+                    <Button icon={<PlusOutlined />} block>发布产品</Button>
+                  </a>
+                </Link>
+              </Col>
+              <Col span={12}>
+                <Link href='/write'>
+                  <a>
+                    <Button icon={<EditOutlined />} block>撰写文章</Button>
+                  </a>
+                </Link>
+              </Col>
+            </Row>
+          </Buttons>
           <HomeRightSide />
         </Col>
       </Row>
