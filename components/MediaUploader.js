@@ -4,15 +4,15 @@ import { useToggle } from 'react-use'
 import noop from 'lodash/noop'
 import { forwardRef, useEffect, useState } from 'react'
 import get from 'lodash/get'
-import { gql, useMutation, useQuery } from '@apollo/client'
+import { useMutation, useQuery } from '@apollo/client'
 import LoadingOutlined from '@ant-design/icons/LoadingOutlined'
 import PlusOutlined from '@ant-design/icons/PlusOutlined'
 import { GET_MEDIA } from '../queries'
 import useViewer from '../hooks/useViewer'
+import CreateMedia from '../queries/mutations/CreateMedia.gql'
 import IPFSImage from './IPFSImage'
 
 const StyledUpload = styled(Upload)`
-width: auto;
 .ant-upload-select-picture-card i {
   font-size: 32px;
   color: #999;
@@ -30,20 +30,11 @@ height: 80px;
 object-fit: contain;
 `
 
-const CREATE_MEDIA = gql`
-mutation($media: IMedia!) {
-  createMedia(media: $media) {
-    id,
-    hash
-  }
-}
-`
-
-export default forwardRef(({ value, onChange = noop, onError = noop }, ref) => {
+const MediaUploader = forwardRef(({ value, onChange = noop, onError = noop, ...rest }, ref) => {
   const { viewer: user } = useViewer()
   const [loading, setLoading] = useToggle(false)
   const [id, setId] = useState(value)
-  const [create, { loading: createLoading }] = useMutation(CREATE_MEDIA, {
+  const [create, { loading: createLoading }] = useMutation(CreateMedia, {
     onCompleted: data => {
       fireChange(get(data, 'createMedia.id'))
     },
@@ -96,8 +87,10 @@ export default forwardRef(({ value, onChange = noop, onError = noop }, ref) => {
         authorization: `Bearer ${user && user.token}`
       }}
       ref={ref}
+      {...rest}
     >
       {hash ? <StyledIPFSImage hash={hash} /> : uploadButton}
     </StyledUpload>
   )
 })
+export default MediaUploader

@@ -188,7 +188,7 @@ font-size: 12px;
 const ProductCell = ({
   id, disabled = false, topics = [], size = 'normal', isMiniProgram,
   likeCount, commentCount, codeCount, isLike, icon, name, description,
-  overflow = false, withLike = true,
+  overflow = false, withLike = true, lazyLoad = false,
   ...rest
 }) => {
   const {
@@ -218,11 +218,20 @@ const ProductCell = ({
     if (size === 'mini') return null
     return (<Description size={size}>{description || '暂无'}</Description>)
   }
+  const renderIcon = () => {
+    const icon = (<ProductIcon alt={name} size={size} hash={hash && `${hash}-160-160-contain`} />)
+    if (!lazyLoad) {
+      return icon
+    }
+    return (
+      <LazyLoad throttle={200} once overflow={overflow}>
+        {icon}
+      </LazyLoad>
+    )
+  }
   const renderCell = () => (
     <Cell size={size}>
-      <LazyLoad throttle={200} once overflow={overflow}>
-        <ProductIcon alt={name} size={size} hash={hash && `${hash}-160-160-contain`} />
-      </LazyLoad>
+      {renderIcon()}
       <ProductContent size={size}>
         <ProductName size={size}>
           {name}

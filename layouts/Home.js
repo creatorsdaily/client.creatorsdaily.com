@@ -17,7 +17,7 @@ margin-bottom: 24px;
 background: #FFF;
 overflow: hidden;
 border-radius: 3px;
-padding: 32px 0;
+padding: 16px 0;
 `
 
 const StyledMenu = styled(Menu)`
@@ -41,23 +41,23 @@ const Timeline = ({ children }) => {
             <Affix offsetTop={24}>
               <MenuContainer>
                 <StyledMenu selectedKeys={[pathname]} mode='inline'>
-                  <Menu.Item key='/'>
-                    <Link href='/'>
-                      <a>产品</a>
-                    </Link>
-                  </Menu.Item>
-                  <Menu.Item key='/timeline'>
-                    <Link href='/timeline'>
+                  <Menu.Item key='/home'>
+                    <Link href='/home'>
                       <a>动态</a>
                     </Link>
                   </Menu.Item>
-                  <Menu.Item key='/discussions'>
-                    <Link href='/discussions'>
-                      <a>讨论</a>
+                  <Menu.Item key='/home/products'>
+                    <Link href='/home/products'>
+                      <a>我的产品</a>
                     </Link>
                   </Menu.Item>
-                  <Menu.Item key='/timeline/public'>
-                    <Link href='/timeline/public'>
+                  <Menu.Item key='/home/posts'>
+                    <Link href='/home/posts'>
+                      <a>我的文章</a>
+                    </Link>
+                  </Menu.Item>
+                  <Menu.Item key='/home/explore'>
+                    <Link href='/home/explore'>
                       <a>发现</a>
                     </Link>
                   </Menu.Item>

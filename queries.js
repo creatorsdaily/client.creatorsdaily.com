@@ -89,21 +89,6 @@ query($ids: [String!]) {
 }
 `
 
-export const SEARCH_PRODUCTS = gql`
-query($page: Int, $size: Int, $score: Int, $keyword: String!) {
-  searchProducts(page: $page, size: $size, score: $score, keyword: $keyword) {
-    total
-    data {
-      codeCount
-      ${productFragment}
-      discoverer {
-        ${userFragment}
-      }
-    }
-  }
-}
-`
-
 export const GET_LINKS = gql`
 query($page: Int, $size: Int) {
   getLinks(page: $page, size: $size) {

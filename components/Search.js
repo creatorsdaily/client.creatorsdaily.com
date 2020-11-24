@@ -4,7 +4,7 @@ import { useRouter } from 'next/router'
 import { useEffect, useState } from 'react'
 
 const StyledSearch = styled(Input.Search)`
-max-width: 300px;
+max-width: 260px;
 `
 
 const Search = ({ path = '/', ...rest }) => {

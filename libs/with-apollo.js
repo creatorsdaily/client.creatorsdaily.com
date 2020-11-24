@@ -6,14 +6,6 @@ import { ApolloProvider } from '@apollo/client'
 import initApollo from './init-apollo'
 import graphqlError from './graphql-error'
 
-/**
- * Creates and provides the apolloContext
- * to a next.js PageTree. Use it by wrapping
- * your PageComponent via HOC pattern.
- * @param {Function|Class} PageComponent
- * @param {Object} [config]
- * @param {Boolean} [config.ssr=true]
- */
 const withApollo = (PageComponent, { ssr = true } = {}) => {
   const WithApollo = ({ apolloClient, apolloState, ...pageProps }) => {
     const client = apolloClient || initApollo(apolloState, { getToken })
@@ -25,23 +17,17 @@ const withApollo = (PageComponent, { ssr = true } = {}) => {
   }
 
   if (process.env.NODE_ENV !== 'production') {
-    // Find correct display name
     const displayName =
       PageComponent.displayName || PageComponent.name || 'Component'
 
-    // Warn if old way of installing apollo is used
     if (displayName === 'App') {
       console.warn('This withApollo HOC only works with PageComponents.')
     }
 
-    // Set correct display name for devtools
     WithApollo.displayName = `withApollo(${displayName})`
 
-    // Add some prop types
     WithApollo.propTypes = {
-      // Used for getDataFromTree rendering
       apolloClient: PropTypes.object,
-      // Used for client/server rendering
       apolloState: PropTypes.object
     }
   }
@@ -50,8 +36,6 @@ const withApollo = (PageComponent, { ssr = true } = {}) => {
     WithApollo.getInitialProps = async ctx => {
       const { AppTree } = ctx
 
-      // Run all GraphQL queries in the component tree
-      // and extract the resulting data
       const apolloClient = (ctx.apolloClient = initApollo(
         {},
         {
@@ -62,17 +46,14 @@ const withApollo = (PageComponent, { ssr = true } = {}) => {
         ? await PageComponent.getInitialProps(ctx)
         : {}
 
-      // Only on the server
       if (typeof window === 'undefined') {
-        // When redirecting, the response is finished.
-        // No point in continuing to render
+        // 响应完成时，没必要继续渲染
         if (ctx.res && ctx.res.finished) {
           return {}
         }
 
         if (ssr) {
           try {
-            // Run all GraphQL queries
             const { getDataFromTree } = await import('@apollo/client/react/ssr')
             await getDataFromTree(
               <AppTree
@@ -93,12 +74,9 @@ const withApollo = (PageComponent, { ssr = true } = {}) => {
           }
         }
 
-        // getDataFromTree does not call componentWillUnmount
-        // head side effect therefore need to be cleared manually
         Head.rewind()
       }
 
-      // Extract query data from the Apollo store
       const apolloState = apolloClient.cache.extract()
       return {
         ...pageProps,
@@ -110,10 +88,6 @@ const withApollo = (PageComponent, { ssr = true } = {}) => {
   return WithApollo
 }
 
-/**
- * Get the user token from cookie
- * @param {Object} req
- */
 export function getToken (req) {
   let cookieStr = ''
   if (req) {

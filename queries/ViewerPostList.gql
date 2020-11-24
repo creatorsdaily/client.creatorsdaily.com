@@ -1,0 +1,12 @@
+#import "./fragments/PostFields.gql"
+query($page: Int, $size: Int) {
+  viewer {
+    id
+    posts(page: $page, size: $size) {
+      total
+      data {
+        ...PostFields
+      }
+    }
+  }
+}

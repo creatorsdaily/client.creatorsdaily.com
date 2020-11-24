@@ -1,0 +1,19 @@
+#import "./fragments/ProductFields.gql"
+#import "./fragments/UserFields.gql"
+query($page: Int, $size: Int) {
+  viewer {
+    id
+    discoveredProducts(page: $page, size: $size) {
+      total
+      data {
+        ...ProductFields
+        discoverer {
+          ...UserFields
+        }
+        creators {
+          ...UserFields
+        }
+      }
+    }
+  }
+}

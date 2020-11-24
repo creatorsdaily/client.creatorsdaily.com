@@ -8,13 +8,13 @@ import { RouterContext } from 'next/dist/next-server/lib/router-context'
 import Page from '../layouts/Page'
 import Container from '../components/Container'
 import ProductEditor from '../components/ProductEditor.dynamic'
-import { SEARCH_PRODUCTS } from '../queries'
 import withApollo from '../libs/with-apollo'
 import ProductCell from '../components/ProductCell'
 import { formToProduct } from '../libs/form-utils'
 import graphqlError from '../libs/graphql-error'
 import useCheckMobile from '../hooks/useCheckMobile'
 import message from '../libs/message.dynamic'
+import SearchProduct from '../queries/SearchProduct.gql'
 
 const StyledTitle = styled.h1`
 text-align: center;
@@ -69,7 +69,7 @@ export default withApollo(() => {
   const { replace } = useRouter()
   const {
     refetch
-  } = useQuery(SEARCH_PRODUCTS, {
+  } = useQuery(SearchProduct, {
     skip: true
   })
   const [create, { loading }] = useMutation(CREATE_PRODUCT, {

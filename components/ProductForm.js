@@ -3,7 +3,7 @@ import noop from 'lodash/noop'
 import formError from '../libs/form-error'
 import TopicSelect from './TopicSelect'
 import Editor from './Editor.dynamic'
-import ProductIcon from './ProductIcon'
+import MediaUploader from './MediaUploader'
 import ProductMedias from './ProductMedias'
 import { Inputs } from './ProductLinks'
 
@@ -51,7 +51,7 @@ const ProductForm = ({
         colon={false}
         style={{ display: isMiniProgram ? 'block' : 'none' }}
       >
-        <ProductIcon onError={handleQRCodeError} />
+        <MediaUploader onError={handleQRCodeError} />
       </Item>
     )
   }
@@ -119,7 +119,7 @@ const ProductForm = ({
           label='图标'
           colon={false}
         >
-          <ProductIcon onError={handleIconError} />
+          <MediaUploader onError={handleIconError} />
         </Item>
         <Item
           name='description'

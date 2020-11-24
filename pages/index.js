@@ -4,18 +4,16 @@ import get from 'lodash/get'
 import styled from 'styled-components'
 import { useRouter } from 'next/router'
 import Page from '../layouts/Page'
-import Home from '../layouts/Home'
 import Container from '../components/Container'
 import ProductCell from '../components/ProductCell'
-import { SEARCH_PRODUCTS } from '../queries'
 import ProductList from '../queries/ProductList.gql'
 import usePagination from '../hooks/usePagination'
-import { TopicList, TopicSelect, TopicsBar } from '../components/Topics'
+import { TopicList, TopicsBar } from '../components/Topics'
 import RightSide from '../components/RightSide'
 import media from '../libs/media'
 import withApollo from '../libs/with-apollo'
 import MobileAuthBar from '../components/MobileAuthBar'
-import useViewer from '../hooks/useViewer'
+import SearchProduct from '../queries/SearchProduct.gql'
 
 const StyledContainer = styled(Container)`
 ${media.lg`
@@ -44,7 +42,6 @@ ${media.sm`
 
 export default withApollo(() => {
   const { query: { keyword } } = useRouter()
-  const { viewer } = useViewer()
   const key = keyword ? 'searchProducts' : 'getProducts'
   const {
     result: {
@@ -54,7 +51,7 @@ export default withApollo(() => {
     pagination
   } = usePagination({
     path: '/',
-    query: keyword ? SEARCH_PRODUCTS : ProductList,
+    query: keyword ? SearchProduct : ProductList,
     getTotal: ({ data }) => get(data, `${key}.total`, 0)
   })
 
@@ -82,44 +79,25 @@ export default withApollo(() => {
       </Pagination>
     </>
   )
-  if (!viewer) {
-    return (
-      <Page>
-        <StyledContainer>
-          <Row type='flex' gutter={24}>
-            <Col lg={0} xs={24}>
-              <StyledTopicsBar href='/' checkable />
-            </Col>
-            <Col xl={4} lg={5} xs={0}>
-              <TopicList href='/' />
-            </Col>
-            <Col xl={14} lg={13} md={16} xs={24}>
-              {content}
-            </Col>
-            <Col lg={6} md={8} xs={24}>
-              <RightSide />
-            </Col>
-          </Row>
-          <MobileAuthBar />
-        </StyledContainer>
-      </Page>
-    )
-  }
   return (
-    <Home>
-      <Row type='flex' gutter={24}>
-        <Col xl={17} lg={16} xs={24}>
-          <Row style={{ marginBottom: 24 }}>
-            <Col xl={6} lg={7} md={8}>
-              <TopicSelect href='/' />
-            </Col>
-          </Row>
-          {content}
-        </Col>
-        <Col xl={7} lg={8} sm={0} xs={0}>
-          <RightSide />
-        </Col>
-      </Row>
-    </Home>
+    <Page>
+      <StyledContainer>
+        <Row type='flex' gutter={24}>
+          <Col lg={0} xs={24}>
+            <StyledTopicsBar href='/' checkable />
+          </Col>
+          <Col xl={4} lg={5} xs={0}>
+            <TopicList href='/' />
+          </Col>
+          <Col xl={14} lg={13} md={16} xs={24}>
+            {content}
+          </Col>
+          <Col lg={6} md={8} xs={24}>
+            <RightSide />
+          </Col>
+        </Row>
+        <MobileAuthBar />
+      </StyledContainer>
+    </Page>
   )
 })

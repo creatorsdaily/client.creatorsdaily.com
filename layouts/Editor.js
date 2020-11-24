@@ -5,11 +5,8 @@ import Header from '../components/Header'
 
 const { Content } = Layout
 
-const StyledContent = styled(Content)`
-height: 100%;
-`
 const StyledLayout = styled(Layout)`
-height: 100%;
+min-height: 100%;
 `
 
 export default React.memo(({
@@ -22,9 +19,9 @@ export default React.memo(({
   return (
     <StyledLayout>
       {header}
-      <StyledContent {...rest}>
+      <Content {...rest}>
         {children}
-      </StyledContent>
+      </Content>
     </StyledLayout>
   )
 })

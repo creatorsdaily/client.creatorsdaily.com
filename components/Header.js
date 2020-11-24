@@ -62,15 +62,21 @@ const Logo = styled.div`
 export default withRouter(({ router }) => {
   const { viewer: user } = useViewer()
   const menu = [{
-    name: '讨论',
-    href: '/discussions'
-  }, {
     name: '问题',
     href: '/questions'
+  }, {
+    name: '讨论',
+    href: '/discussions'
   }, {
     name: '创造者们',
     href: '/creators'
   }]
+  if (user) {
+    menu.unshift({
+      name: '个人中心',
+      href: '/home'
+    })
+  }
   const matched = menu
     .filter(({ href }) => href === '/' ? router.asPath === '/' : router.asPath.indexOf(href) === 0)
     .map(x => x.href)

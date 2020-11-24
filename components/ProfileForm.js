@@ -3,7 +3,7 @@ import isUndefined from 'lodash/isUndefined'
 import omitBy from 'lodash/omitBy'
 import pick from 'lodash/pick'
 import formError from '../libs/form-error'
-import ProductIcon from './ProductIcon'
+import MediaUploader from './MediaUploader'
 
 const { Item } = Form
 
@@ -61,7 +61,7 @@ const ProfileForm = (props) => {
         <Input placeholder='输入你的电子邮件地址' />
       </Item>
       <Item name='avatar' label='头像'>
-        <ProductIcon onError={handleAvatarError} />
+        <MediaUploader onError={handleAvatarError} />
       </Item>
       <Item
         name='link'

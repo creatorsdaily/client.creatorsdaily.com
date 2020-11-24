@@ -1,5 +1,6 @@
 const fs = require('fs')
 const path = require('path')
+const URL = require('url').URL
 const withPlugins = require('next-compose-plugins')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
   enabled: process.env.ANALYZE === 'true'
@@ -168,6 +169,9 @@ module.exports = withPlugins([
   },
   poweredByHeader: false,
   pageExtensions: ['js', 'jsx', 'mdx'],
+  images: {
+    domains: [new URL(FILES).host]
+  },
   env: {
     API,
     GRAPHQL,

@@ -83,6 +83,7 @@ const useCreateOptionModal = ({
       visible={visible}
       title='推荐产品'
       onCancel={hide}
+      destroyOnClose
       onOk={async () => {
         const { productId, reason } = await form.validateFields()
         create({

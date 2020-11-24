@@ -1,0 +1,14 @@
+#import "./fragments/ProductFields.gql"
+#import "./fragments/UserFields.gql"
+query($page: Int, $size: Int, $user: String!) {
+  getCreatedProducts(page: $page, size: $size, user: $user) {
+    total
+    data {
+      codeCount
+      ...ProductFields
+      discoverer {
+        ...UserFields
+      }
+    }
+  }
+}

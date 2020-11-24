@@ -5,6 +5,9 @@ import { useRouter } from 'next/router'
 import UserOutlined from '@ant-design/icons/UserOutlined'
 import SettingOutlined from '@ant-design/icons/SettingOutlined'
 import LogoutOutlined from '@ant-design/icons/LogoutOutlined'
+import FileTextOutlined from '@ant-design/icons/FileTextOutlined'
+import AppstoreOutlined from '@ant-design/icons/AppstoreOutlined'
+import HomeOutlined from '@ant-design/icons/HomeOutlined'
 import UserCell from './UserCell'
 
 const StyledButton = styled(Button)`
@@ -30,8 +33,33 @@ const UserButton = ({ user, back = '/', ...rest }) => {
   }
   const menu = (
     <Menu selectedKeys={[router.pathname]}>
+      <Menu.Item key='/home'>
+        <Link href='/home'>
+          <a>
+            <HomeOutlined />
+            个人中心
+          </a>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key='/home/products'>
+        <Link href='/home/products'>
+          <a>
+            <AppstoreOutlined />
+            我的产品
+          </a>
+        </Link>
+      </Menu.Item>
+      <Menu.Item key='/home/posts'>
+        <Link href='/home/posts'>
+          <a>
+            <FileTextOutlined />
+            我的文章
+          </a>
+        </Link>
+      </Menu.Item>
+      <Menu.Divider />
       <Menu.Item key='/users/[id]'>
-        <Link href='/users/[id]' as={`/users/${user.id}`}>
+        <Link href={`/users/${user.id}`}>
           <a>
             <UserOutlined />
             我的主页

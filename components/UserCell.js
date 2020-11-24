@@ -25,7 +25,6 @@ flex: 1;
 overflow: hidden;
 white-space: nowrap;
 text-overflow:ellipsis;
-margin-right: 8px;
 `
 const StyledLink = styled.a`
 color: #333;
@@ -43,6 +42,10 @@ font-size: 12px;
 margin-left: 8px;
 line-height: 32px;
 color: #606060;
+`
+
+const StyledFollowButton = styled(FollowButton)`
+margin-left: 8px;
 `
 
 const UserCell = ({ user, hideName = false, link = true, showDescription = false, showFollow = false, children, ...rest }) => {
@@ -93,7 +96,7 @@ const UserCell = ({ user, hideName = false, link = true, showDescription = false
         {children}
       </Content>
       {showFollow && (
-        <FollowButton user={user} />
+        <StyledFollowButton user={user} />
       )}
     </Container>
   )

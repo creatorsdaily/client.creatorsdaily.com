@@ -6,10 +6,10 @@ import styled from 'styled-components'
 import noop from 'lodash/noop'
 import uniqBy from 'lodash/uniqBy'
 import { CloseOutlined } from '@ant-design/icons'
-import { SEARCH_PRODUCTS } from '../queries'
 import ProductList from '../queries/ProductList.gql'
 import ProductDetail from '../queries/ProductDetail.gql'
 import QuestionDetail from '../queries/QuestionDetail.gql'
+import SearchProduct from '../queries/SearchProduct.gql'
 import ProductCell from './ProductCell'
 
 const { Search } = Input
@@ -77,7 +77,7 @@ export default forwardRef((props, ref) => {
     },
     skip: !question
   })
-  const [search, { data, loading: searchLoading }] = useLazyQuery(SEARCH_PRODUCTS)
+  const [search, { data, loading: searchLoading }] = useLazyQuery(SearchProduct)
   const searchList = get(data, 'searchProducts.data', [])
   useEffect(() => setValue(nValue), [nValue])
   const products = searchList.length ? searchList : uniqBy([].concat(

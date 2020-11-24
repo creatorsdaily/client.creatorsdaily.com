@@ -16,6 +16,7 @@ const ItemLink = ({ disabled, children, ...rest }) => {
 const usePagination = ({
   path,
   query,
+  pageSize = defaultPageSize,
   props = {},
   options = {},
   getTotal = () => 0,
@@ -27,7 +28,7 @@ const usePagination = ({
   let {
     query: {
       page = 1,
-      size = defaultPageSize,
+      size = pageSize,
       ...rest
     }
   } = useRouter()
@@ -48,7 +49,7 @@ const usePagination = ({
     const query = {
       ...getQuery(rest),
       page: current === 1 ? undefined : current,
-      size: size === defaultPageSize ? undefined : size
+      size: size === pageSize ? undefined : size
     }
     let queryStr = stringify(query)
     if (queryStr) {

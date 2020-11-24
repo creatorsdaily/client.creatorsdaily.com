@@ -1,0 +1,6 @@
+mutation($media: IMedia!) {
+  createMedia(media: $media) {
+    id,
+    hash
+  }
+}

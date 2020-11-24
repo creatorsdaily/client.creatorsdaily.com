@@ -109,11 +109,11 @@ export default withApollo(() => {
             </Spin>
             {renderMore()}
           </Col>
-          <Col xl={4} md={0} xs={24}>
-            <LeftSide />
-          </Col>
           <Col xl={{ order: 2 }} lg={6} md={8} xs={24}>
             <RightSide />
+          </Col>
+          <Col xl={4} md={0} xs={24}>
+            <LeftSide />
           </Col>
         </Row>
         <MobileAuthBar />

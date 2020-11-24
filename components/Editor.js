@@ -7,7 +7,7 @@ const StyledEditor = styled(SimpleMDE)`
   line-height: 22px;
   .CodeMirror-wrap {
     border-radius: 4px;
-    border: 1px solid #E8E8E8 !important;
+    border: 1px solid #d9d9d9 !important;
     transition: border 0.3s cubic-bezier(0.645, 0.045, 0.355, 1);
     padding: 0 5px;
   }
@@ -20,8 +20,8 @@ const StyledEditor = styled(SimpleMDE)`
   .CodeMirror-focused {
     border: 1px solid ${blue} !important;
   }
-  .CodeMirror-wrap::placeholder {
-    color: #bfbfbf;
+  .CodeMirror-lines .CodeMirror-placeholder {
+    color: #8C8C8C;
   }
 
   .cm-s-easymde {

@@ -5,7 +5,6 @@ import { Button, Col, Row, Spin } from 'antd'
 import get from 'lodash/get'
 import Link from 'next/link'
 import Head from 'next/head'
-import Home from '../layouts/Home'
 import Container from '../components/Container'
 import CommentList from '../queries/CommentList.gql'
 import CommentsBox from '../components/CommentsBox.dynamic'
@@ -18,6 +17,12 @@ import FormError from '../libs/form-error'
 import Box from '../components/Box'
 import HomeRightSide from '../components/HomeRightSide'
 import message from '../libs/message.dynamic'
+import Page from '../layouts/Page'
+import LeftSide from '../components/LeftSide'
+
+const StyledContainer = styled(Container)`
+margin-top: 24px;
+`
 
 const EditorToolbar = styled.div`
 margin-top: 12px;
@@ -115,14 +120,19 @@ export default withApollo(() => {
     )
   }
   return (
-    <Home>
+    <Page>
       <Head>
         <title>讨论 - {process.env.NAME}</title>
         <meta key='description' name='description' content='快来和各位创造者们聊一聊～' />
       </Head>
-      <Container>
+      <StyledContainer>
         <Row gutter={24}>
-          <Col lg={14} xs={24}>
+          <Col
+            xl={{
+              order: 1,
+              span: 12
+            }} lg={14} md={15} xs={24}
+          >
             <StyledBox>
               <Large value={content} onChange={setContent} placeholder='说点什么...' options={{ minHeight: '74px' }} />
               <EditorToolbar>
@@ -163,11 +173,14 @@ export default withApollo(() => {
               {renderMore()}
             </Spin>
           </Col>
-          <Col lg={10} xs={0}>
+          <Col xl={{ order: 2, span: 8 }} lg={10} md={9} xs={24}>
             <HomeRightSide />
           </Col>
+          <Col xl={4} xs={0}>
+            <LeftSide />
+          </Col>
         </Row>
-      </Container>
-    </Home>
+      </StyledContainer>
+    </Page>
   )
 })

@@ -1,4 +1,6 @@
 #import "./fragments/PostFields.gql"
+#import "./fragments/UserFields.gql"
+#import "./fragments/ProductFields.gql"
 query($id: String!) {
   getPost(id: $id) {
     ...PostFields
