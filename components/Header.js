@@ -68,6 +68,9 @@ export default withRouter(({ router }) => {
     name: '讨论',
     href: '/discussions'
   }, {
+    name: '日报',
+    href: '/posts'
+  }, {
     name: '创造者们',
     href: '/creators'
   }]
