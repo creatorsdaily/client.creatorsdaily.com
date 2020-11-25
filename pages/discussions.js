@@ -136,7 +136,7 @@ export default withApollo(() => {
   const renderMore = () => {
     if (page * size >= total) return null
     return (
-      <MoreButton size='small' type='link' block loading={loading} onClick={handleFetchMore}>加载更多</MoreButton>
+      <MoreButton style={{ marginBottom: 24 }} size='small' type='link' block loading={loading} onClick={handleFetchMore}>加载更多</MoreButton>
     )
   }
   const renderDisableMask = () => {

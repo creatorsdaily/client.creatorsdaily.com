@@ -6,11 +6,13 @@ import get from 'lodash/get'
 import { useQuery } from '@apollo/client'
 import { useRouter } from 'next/router'
 import Link from 'next/link'
+import flatten from 'lodash/flatten'
+import uniq from 'lodash/uniq'
 import Page from '../../../layouts/Page'
 import Container from '../../../components/Container'
 import withApollo from '../../../libs/with-apollo'
 import QuestionDetail from '../../../queries/QuestionDetail.gql'
-import QuestionListQuery from '../../../queries/QuestionList.gql'
+import QuestionListWithoutOptions from '../../../queries/QuestionListWithoutOptions.gql'
 import useCreateOptionModal from '../../../hooks/useCreateOptionModal'
 import OptionBoxV2 from '../../../components/OptionBox.v2'
 import QuestionBox from '../../../components/QuestionBox'
@@ -57,17 +59,17 @@ export default withApollo(() => {
       id
     }
   })
-  const { data: listData, loading: listLoading } = useQuery(QuestionListQuery, {
+  const { data: listData, loading: listLoading } = useQuery(QuestionListWithoutOptions, {
     variables: {
       size: 15
     }
   })
   const [modal, show] = useCreateOptionModal()
   const question = get(data, 'getQuestion', {})
+  const options = question.options || []
   const list = get(listData, 'getQuestions.data', [])
 
   const renderOptions = () => {
-    const options = question.options || []
     return options.map(option => (
       <OptionBoxV2
         key={option.product.id}
@@ -80,11 +82,30 @@ export default withApollo(() => {
       />
     ))
   }
+  const getKeywords = () => {
+    const questionTopics = question.topics || []
+    const optionsTopics = flatten(options.map(x => {
+      const productTopics = x.product.topics || []
+      return productTopics.map(x => x.name)
+    }))
+    return uniq([
+      ...questionTopics.map(x => x.name),
+      ...optionsTopics
+    ]).join(',')
+  }
+  const getDescription = () => {
+    const products = options.map(x => x.product.name)
+    if (!products.length) {
+      return `快来帮帮我，问题「${question.name}」正在等你回答！`
+    }
+    return `为你推荐 ${options.length} 款「${question.name}」：${products.join('，')}，建议您选择「${products[0]}」。`
+  }
   return (
     <Page>
       <Head>
         <title>{question.name} - {process.env.NAME}</title>
-        <meta key='description' name='description' content={question.name} />
+        <meta key='keywords' name='keywords' content={getKeywords()} />
+        <meta key='description' name='description' content={getDescription()} />
       </Head>
       {modal}
       <StyledContainer>
@@ -118,7 +139,7 @@ export default withApollo(() => {
                             {x.name}
                           </a>
                         </Link>
-                        <Tag>{x.options.length ? `共 ${x.options.length} 项推荐` : '暂无推荐'}</Tag>
+                        <Tag>{x.optionsCount ? `共 ${x.optionsCount} 项推荐` : '暂无推荐'}</Tag>
                       </QuestionItem>
                     ))}
                   </QuestionList>
