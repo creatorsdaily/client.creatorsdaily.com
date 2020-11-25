@@ -1,0 +1,10 @@
+#import "./fragments/QuestionFields.gql"
+query($page: Int, $size: Int, $topic: [String!], $user: String) {
+  getQuestions(page: $page, size: $size, topic: $topic, user: $user) {
+    total
+    data {
+      ...QuestionFields
+      optionsCount
+    }
+  }
+}
