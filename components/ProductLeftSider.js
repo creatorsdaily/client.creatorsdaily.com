@@ -31,7 +31,7 @@ const ProductLeftSider = ({ likes = [], loading: productLoading }) => {
       <Container>
         <SmallTitle>喜欢它的用户</SmallTitle>
         <Skeleton active loading={productLoading}>
-          <Users list={likes} />
+          <Users list={likes.slice(0, 20)} />
         </Skeleton>
       </Container>
     )
