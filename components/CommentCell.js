@@ -35,6 +35,9 @@ margin-left: 10px;
 const CommentContent = styled.div`
 margin-left: 44px;
 margin-top: 10px;
+p:last-child {
+  margin-bottom: 0;
+}
 `
 
 const CommentButton = styled(Button)`
@@ -84,7 +87,8 @@ const Spacer = styled.div`
 margin-bottom: 12px;
 `
 
-const CommentCell = ({ product, comment, loading, onReply = noop, level = 1, ...rest }) => {
+const CommentCell = ({ product, comment, loading, onReply = noop, level = 1, hideToolbar = false, ...rest }) => {
+  const children = comment.children || []
   const isCreator = get(product, 'creators', []).some(x => x.id === comment.user.id)
   const isDiscoverer = get(product, 'discovererId') === comment.user.id && !isCreator
   const [reply, setReply] = useState('')
@@ -111,7 +115,7 @@ const CommentCell = ({ product, comment, loading, onReply = noop, level = 1, ...
     )
   }
   const renderChildren = () => {
-    if (level >= 4 && comment.children.length) {
+    if (level >= 4 && children.length) {
       return (
         <Link href='/comments/[id]' as={`/comments/${comment.id}`}>
           <a>
@@ -120,28 +124,30 @@ const CommentCell = ({ product, comment, loading, onReply = noop, level = 1, ...
         </Link>
       )
     }
-    const children = comment.children.map(x => (
+    const list = children.map(x => (
       <CommentCell key={x.id} product={product} comment={x} loading={loading} onReply={onReply} level={level + 1} />
     ))
     return (
       <>
-        {children.length !== 0 && (<Spacer />)}
-        {children}
+        {list.length !== 0 && (<Spacer />)}
+        {list}
       </>
     )
   }
   return (
-    <Comment hasParent={!!comment.parentId} hasChildren={!!comment.children.length} {...rest}>
+    <Comment hasParent={!!comment.parentId} hasChildren={!!children.length} {...rest}>
       <UserCell user={comment.user} showDescription showFollow id={`comments-${comment.id}`} name={`comments-${comment.id}`}>
         {isDiscoverer && (<StyledTag color='gold'>发现者</StyledTag>)}
         {isCreator && (<StyledTag color='volcano'>创造者</StyledTag>)}
       </UserCell>
       <CommentContent>
         <ReactMarkdown key={comment.id} source={comment.content} />
-        <CommentMeta>
-          <CommentButton type='link' onClick={handleClick}>回复</CommentButton>
-          <Time time={comment.createdAt} />
-        </CommentMeta>
+        {!hideToolbar && (
+          <CommentMeta>
+            <CommentButton type='link' onClick={handleClick}>回复</CommentButton>
+            <Time time={comment.createdAt} />
+          </CommentMeta>
+        )}
         {renderReplyBox(comment)}
         {renderChildren()}
       </CommentContent>

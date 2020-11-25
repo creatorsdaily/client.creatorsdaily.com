@@ -5,6 +5,7 @@ import UserCell from './UserCell'
 import Time from './Time'
 import ProductCell from './ProductCell'
 import ReactMarkdown from 'react-markdown'
+import CommentCell from './CommentCell'
 
 const Container = styled(Box)`
 margin-bottom: 24px;
@@ -33,6 +34,12 @@ border: 1px solid #F0F0F0;
 const StyledUserCell = styled(UserCell)`
 margin-top: 12px;
 `
+const StyledCommentCell = styled(CommentCell)`
+padding: 12px;
+margin-bottom: 12px;
+border: 1px solid #F0F0F0;
+border-radius: 2px;
+`
 const getContent = ({ type, relation }) => {
   switch (type) {
     case 'option':
@@ -52,6 +59,7 @@ const getContent = ({ type, relation }) => {
       return (
         <>
           <ReactMarkdown source={relation.content} />
+          {relation.parent && (<StyledCommentCell comment={relation.parent} hideToolbar />)}
           {relation.products.map(x => (
             <StyledProductCell key={x.id} {...x} size='small' />
           ))}

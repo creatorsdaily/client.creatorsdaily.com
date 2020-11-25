@@ -26,6 +26,12 @@ fragment ActiveFields on Active {
     }
     ... on Comment {
       ...CommentFields
+      parent {
+        ...CommentFields
+        user {
+          ...UserFields
+        }
+      }
       user {
         ...UserFields
       }

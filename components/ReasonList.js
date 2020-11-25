@@ -6,6 +6,9 @@ const Reason = styled.div`
 margin-bottom: 24px;
 font-size: 13px;
 line-height: 24px;
+&:last-child {
+  margin-bottom: 0;
+}
 `
 
 const ReasonBody = styled.div`
