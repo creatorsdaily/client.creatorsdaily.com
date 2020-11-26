@@ -1,8 +1,6 @@
 import { Feed } from 'feed'
 
-const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN
-
-const site = `https://${DOMAIN}`
+const site = process.env.NEXT_PUBLIC_INDEX
 
 const createFeed = () => new Feed({
   title: process.env.NEXT_PUBLIC_NAME,
