@@ -35,9 +35,9 @@ margin: 16px 24px 0;
 `
 
 const ProductEmbed = ({ id, name }) => {
-  const link = `https://creatorsdaily.com/${id}`
+  const link = `${process.env.NEXT_PUBLIC_INDEX}/${id}`
   const [dark, setDark] = useState(false)
-  const code = `<a href="${link}?utm_source=vote" target="_blank"><img src="https://creatorsdaily.com/api/${id}/vote.svg?theme=${dark ? 'dark' : 'light'}" /></a>`
+  const code = `<a href="${link}?utm_source=vote" target="_blank"><img src="${process.env.NEXT_PUBLIC_INDEX}/api/${id}/vote.svg?theme=${dark ? 'dark' : 'light'}" /></a>`
   return (
     <Result
       status='info'

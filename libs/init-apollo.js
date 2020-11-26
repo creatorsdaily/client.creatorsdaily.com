@@ -12,7 +12,7 @@ function create (initialState, {
 }) {
   const isBrowser = typeof window !== 'undefined'
   const httpLink = new HttpLink({
-    uri: process.env.GRAPHQL, // Server URL (must be absolute)
+    uri: process.env.NEXT_PUBLIC_GRAPHQL, // Server URL (must be absolute)
     credentials: 'same-origin', // Additional fetch() options like `credentials` or `headers`
     fetch: isBrowser ? undefined : fetch
   })
@@ -35,7 +35,7 @@ function create (initialState, {
   let link = authLink.concat(httpLink)
   if (isBrowser) {
     const wsLink = new WebSocketLink({
-      uri: process.env.GRAPHQL_WS,
+      uri: process.env.NEXT_PUBLIC_GRAPHQL_WS,
       options: {
         reconnect: true,
         connectionParams: () => {

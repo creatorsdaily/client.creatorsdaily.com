@@ -94,7 +94,7 @@ export default ({
           <MilestoneTime>
             <Time time={createdAt} />
           </MilestoneTime>
-          <MilestoneTitle style={{ fontWeight: 'normal' }}>在 <strong>{process.env.NAME}</strong> 首次发布</MilestoneTitle>
+          <MilestoneTitle style={{ fontWeight: 'normal' }}>在 <strong>{process.env.NEXT_PUBLIC_NAME}</strong> 首次发布</MilestoneTitle>
         </Timeline.Item>
       </Timeline>
     </Milestones>

@@ -54,13 +54,13 @@ const Product = ({
       autoFocusButton: null,
       width: 500,
       content: (
-        <img src={`${process.env.API}/products/${id}/wxacode`} />
+        <img src={`${process.env.NEXT_PUBLIC_API}/products/${id}/wxacode`} />
       )
     })
   }
   const handleWeibo = () => {
-    const url = encodeURIComponent(`https://creatorsdaily.com/${id}`)
-    const pic = encodeURIComponent(icon ? `${process.env.FILES}/${icon.hash}` : '')
+    const url = encodeURIComponent(`${process.env.NEXT_PUBLIC_INDEX}/${id}`)
+    const pic = encodeURIComponent(icon ? `${process.env.NEXT_PUBLIC_FILES}/${icon.hash}` : '')
     const shareText = encodeURIComponent(`这个叫「${name}」的产品非常有趣～分享给大家～`)
     window.open(`http://v.t.sina.com.cn/share/share.php?url=${url}&pic=${pic}&title=${shareText}`, '_blank', 'scrollbars=no,width=600,height=450,left=75,top=20,status=no,resizable=yes')
   }

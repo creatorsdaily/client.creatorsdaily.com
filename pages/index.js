@@ -66,8 +66,8 @@ export default withApollo(() => {
       <StyledProductCell {...product} key={product.id} />
     ))
   }
-  if (process.env.CLOSE_TIP) {
-    return process.env.CLOSE_TIP
+  if (process.env.NEXT_PUBLIC_CLOSE_TIP) {
+    return process.env.NEXT_PUBLIC_CLOSE_TIP
   }
   const content = (
     <>

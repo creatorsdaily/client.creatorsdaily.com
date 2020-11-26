@@ -48,7 +48,7 @@ const Content = ({ id, user, loading }) => {
   return (
     <Spin spinning={loading}>
       <Head>
-        <title>{user.nickname}发起的问题 - {process.env.NAME}</title>
+        <title>{user.nickname}发起的问题 - {process.env.NEXT_PUBLIC_NAME}</title>
       </Head>
       <Container>
         <SmallTitle>{user.nickname} 发起的问题</SmallTitle>

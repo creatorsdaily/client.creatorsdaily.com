@@ -6,7 +6,7 @@ const GithubSignin = () => null
 GithubSignin.getInitialProps = async context => {
   const { res, query } = context
   const maxage = 7 * 24 * 60 * 60
-  const { data: user } = await axios.get(`${process.env.API}/auth/github/callback`, {
+  const { data: user } = await axios.get(`${process.env.NEXT_PUBLIC_API}/auth/github/callback`, {
     params: query
   })
 
@@ -15,7 +15,7 @@ GithubSignin.getInitialProps = async context => {
     path: '/'
   })
 
-  redirect(`/`, context)
+  redirect('/', context)
   return {}
 }
 export default GithubSignin

@@ -45,7 +45,7 @@ const WechatBox = ({ code, back = '/', ...rest }) => {
   })
   return (
     <div {...rest}>
-      <Image src={`${process.env.API}/auth/wxacode?code=${code}&size=200`} />
+      <Image src={`${process.env.NEXT_PUBLIC_API}/auth/wxacode?code=${code}&size=200`} />
       <Tips>打开微信扫一扫，快速登录</Tips>
     </div>
   )

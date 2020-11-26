@@ -83,7 +83,7 @@ const Content = ({ id, product, loading }) => {
   return (
     <StyledContainer>
       <Head>
-        <title>{wish.title} · {product.name} - {process.env.NAME}</title>
+        <title>{wish.title} · {product.name} - {process.env.NEXT_PUBLIC_NAME}</title>
         <meta key='description' name='description' content={description} />
       </Head>
       <ProductInner loading={loading} product={product}>

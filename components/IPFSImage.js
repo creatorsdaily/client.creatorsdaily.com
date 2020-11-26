@@ -52,7 +52,7 @@ const IPFSImage = ({ hash, size, ...rest }) => {
     )
   }
   return (
-    <img {...rest} src={`${process.env.FILES}/${hash}`} />
+    <img {...rest} src={`${process.env.NEXT_PUBLIC_FILES}/${hash}`} />
   )
 }
 export default IPFSImage

@@ -54,7 +54,7 @@ export default withApollo(() => {
   return (
     <Page>
       <Head>
-        <title>喜欢 - {process.env.NAME}</title>
+        <title>喜欢 - {process.env.NEXT_PUBLIC_NAME}</title>
       </Head>
       <StyledContainer>
         <Row gutter={24}>

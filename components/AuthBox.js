@@ -72,8 +72,8 @@ const AuthBox = ({ children }) => {
       <Box>
         <Content>
           <Header>
-            <Title>{process.env.NAME}</Title>
-            <Slogon>{process.env.SLOGAN}</Slogon>
+            <Title>{process.env.NEXT_PUBLIC_NAME}</Title>
+            <Slogon>{process.env.NEXT_PUBLIC_SLOGAN}</Slogon>
           </Header>
           <Body>
             {children}

@@ -6,13 +6,13 @@ const OneSignal = () => {
     window.OneSignal = window.OneSignal || [];
     OneSignal.push(function() {
       OneSignal.init({
-        appId: '${process.env.ONE_SIGNAL_APP_ID}',
+        appId: '${process.env.NEXT_PUBLIC_ONE_SIGNAL_APP_ID}',
         notifyButton: {
           enable: false,
         },
         welcomeNotification: {
           disable: false,
-          title: '${process.env.NAME}',
+          title: '${process.env.NEXT_PUBLIC_NAME}',
           message: '感谢订阅！'
         },
         persistNotification: true,

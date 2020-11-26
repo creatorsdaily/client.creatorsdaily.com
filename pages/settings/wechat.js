@@ -82,7 +82,7 @@ export default withApollo(() => {
   return (
     <Setting>
       <Head>
-        <title>绑定微信 - {process.env.NAME}</title>
+        <title>绑定微信 - {process.env.NEXT_PUBLIC_NAME}</title>
       </Head>
       {renderQrCode()}
       {renderUserCell()}

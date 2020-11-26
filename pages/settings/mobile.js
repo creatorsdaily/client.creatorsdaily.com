@@ -154,7 +154,7 @@ export default withApollo(() => {
   return (
     <Setting>
       <Head>
-        <title>绑定手机号 - {process.env.NAME}</title>
+        <title>绑定手机号 - {process.env.NEXT_PUBLIC_NAME}</title>
       </Head>
       <Spin spinning={loading}>
         <div>绑定手机号</div>

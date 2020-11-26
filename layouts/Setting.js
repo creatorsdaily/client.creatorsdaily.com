@@ -42,7 +42,7 @@ const Setting = ({ children }) => {
   return (
     <Page>
       <Head>
-        <title>设置 - {process.env.NAME}</title>
+        <title>设置 - {process.env.NEXT_PUBLIC_NAME}</title>
       </Head>
       <StyledContainer>
         <Row gutter={24}>

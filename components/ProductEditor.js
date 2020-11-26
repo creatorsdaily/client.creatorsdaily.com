@@ -44,7 +44,7 @@ const ProductEditor = ({ step, product = {}, children, ...rest }) => {
   const upload = async url => {
     const formData = new FormData()
     formData.append('urls', url)
-    const { data } = await axios.post(process.env.UPLOAD, formData, {
+    const { data } = await axios.post(process.env.NEXT_PUBLIC_UPLOAD, formData, {
       headers: {
         authorization: `Bearer ${user && user.token}`,
         'content-type': 'multipart/form-data'

@@ -55,7 +55,7 @@ export default withApollo(() => {
   return (
     <Page>
       <Head>
-        <title>问题 - {process.env.NAME}</title>
+        <title>问题 - {process.env.NEXT_PUBLIC_NAME}</title>
         <meta key='description' name='description' content='产品推荐，帮您决策' />
       </Head>
       <StyledContainer>

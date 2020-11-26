@@ -78,10 +78,10 @@ export default withApollo(() => {
       )}
     >
       <Head>
-        <title>{post.title} - {process.env.NAME}</title>
+        <title>{post.title} - {process.env.NEXT_PUBLIC_NAME}</title>
         <meta key='description' name='description' content={post.description} />
         <meta key='og-title' property='og:title' content={post.name} />
-        <meta key='og-url' property='og:url' content={`https://creatorsdaily.com/posts/${id}`} />
+        <meta key='og-url' property='og:url' content={`${process.env.NEXT_PUBLIC_INDEX}/posts/${id}`} />
       </Head>
       <Spin spinning={loading}>
         <PostTitle>{post.title}</PostTitle>
@@ -93,7 +93,7 @@ export default withApollo(() => {
         </PostMeta>
         <ReactMarkdown
           source={post.content} transformImageUri={(uri) => {
-            if (uri.indexOf(process.env.FILES) !== 0) {
+            if (uri.indexOf(process.env.NEXT_PUBLIC_FILES) !== 0) {
               return uri
             }
             return `${uri}-1000-1000-inside`

@@ -8,8 +8,6 @@
 ### 快速开始
 
 ```
-// 复制示例环境变量配置，并对应修改
-cp .env.example .env
 
 // 为 apollo client 生成 possibleTypes
 yarn possible-types

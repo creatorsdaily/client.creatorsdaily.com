@@ -79,11 +79,11 @@ export default withApollo(() => {
   return (
     <Setting>
       <Head>
-        <title>个人信息 - {process.env.NAME}</title>
+        <title>个人信息 - {process.env.NEXT_PUBLIC_NAME}</title>
       </Head>
       <FormHeader>
         <StyledAvatar user={user} />
-        <StyledInfo>{user.username}，{process.env.NAME}第 <Counter>{user.number}</Counter> 位成员</StyledInfo>
+        <StyledInfo>{user.username}，{process.env.NEXT_PUBLIC_NAME}第 <Counter>{user.number}</Counter> 位成员</StyledInfo>
       </FormHeader>
       <Divider />
       <ProfileForm

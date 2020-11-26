@@ -17,7 +17,7 @@ const Content = ({ id, product, loading }) => {
   return (
     <StyledContainer>
       <Head>
-        <title>新愿 · {product.name} - {process.env.NAME}</title>
+        <title>新愿 · {product.name} - {process.env.NEXT_PUBLIC_NAME}</title>
       </Head>
       <ProductInner loading={loading} product={product}>
         <Spin spinning={loading}>

@@ -110,17 +110,17 @@ const Product = ({ children }) => {
   const renderOGImage = () => {
     if (!product.icon || !product.icon.hash) return null
     return (
-      <meta key='og-image' property='og:image' content={`${process.env.FILES}/${product.icon.hash}-300-300-contain`} />
+      <meta key='og-image' property='og:image' content={`${process.env.NEXT_PUBLIC_FILES}/${product.icon.hash}-300-300-contain`} />
     )
   }
   return (
     <StyledPage state={product.state}>
       <Head>
-        <title>{product.name} - {process.env.NAME}</title>
+        <title>{product.name} - {process.env.NEXT_PUBLIC_NAME}</title>
         <meta key='description' name='description' content={description} />
         <meta key='keywords' name='keywords' content={keywords} />
         <meta key='og-title' property='og:title' content={product.name} />
-        <meta key='og-url' property='og:url' content={`https://creatorsdaily.com/${id}`} />
+        <meta key='og-url' property='og:url' content={`${process.env.NEXT_PUBLIC_INDEX}/${id}`} />
         {renderOGImage()}
       </Head>
       <Content>

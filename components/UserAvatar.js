@@ -6,7 +6,7 @@ const UserAvatar = ({ user, size = 32, ...rest }) => {
     ...rest
   }
   if (user.avatar) {
-    props.src = `${process.env.FILES}/${user.avatar.hash}-${size * 2}-${size * 2}`
+    props.src = `${process.env.NEXT_PUBLIC_FILES}/${user.avatar.hash}-${size * 2}-${size * 2}`
   } else if (user.emailMD5) {
     props.src = `https://www.gravatar.com/avatar/${user.emailMD5}?size=${size * 2}&d=monsterid`
   }

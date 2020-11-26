@@ -2,7 +2,7 @@ const fs = require('fs')
 const fetch = require('cross-fetch')
 require('dotenv').config()
 
-fetch(process.env.GRAPHQL, {
+fetch(process.env.NEXT_PUBLIC_GRAPHQL, {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify({

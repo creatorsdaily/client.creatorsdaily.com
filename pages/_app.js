@@ -45,14 +45,15 @@ const CreatorsApp = ({ pageProps, Component }) => {
   return (
     <ConfigProvider locale={zhCN} renderEmpty={renderEmpty}>
       <Head>
-        <title>{process.env.NAME} - {process.env.SLOGAN}</title>
-        <meta key='description' name='description' content={process.env.DESCRIPTION} />
-        <meta key='keywords' name='keywords' content={process.env.KEYWORDS} />
+        <title>{process.env.NEXT_PUBLIC_NAME} - {process.env.NEXT_PUBLIC_SLOGAN}</title>
+        <meta key='description' name='description' content={process.env.NEXT_PUBLIC_DESCRIPTION} />
+        <meta key='keywords' name='keywords' content={process.env.NEXT_PUBLIC_KEYWORDS} />
         <meta name='viewport' content='width=device-width, initial-scale=1.0' />
-        <meta key='og-title' property='og:title' content={process.env.SLOGAN} />
-        <meta key='og-url' property='og:url' content='https://creatorsdaily.com' />
-        <meta key='og-site-name' property='og:site_name' content={process.env.NAME} />
+        <meta key='og-title' property='og:title' content={process.env.NEXT_PUBLIC_SLOGAN} />
+        <meta key='og-url' property='og:url' content={process.env.NEXT_PUBLIC_INDEX} />
+        <meta key='og-site-name' property='og:site_name' content={process.env.NEXT_PUBLIC_NAME} />
         <meta key='og-image' property='og:image' content='/icon.png' />
+        <meta name='baidu_union_verify' content='8ab015e1777db0d6884090731e9d85d3' />
         <link rel='apple-touch-icon' sizes='57x57' href='/apple-icon-57x57.png' />
         <link rel='apple-touch-icon' sizes='60x60' href='/apple-icon-60x60.png' />
         <link rel='apple-touch-icon' sizes='72x72' href='/apple-icon-72x72.png' />
@@ -66,12 +67,12 @@ const CreatorsApp = ({ pageProps, Component }) => {
         <link rel='icon' type='image/png' sizes='32x32' href='/favicon-32x32.png' />
         <link rel='icon' type='image/png' sizes='96x96' href='/favicon-96x96.png' />
         <link rel='icon' type='image/png' sizes='16x16' href='/favicon-16x16.png' />
-        <link href='/api/atom' type='application/atom+xml' rel='alternate' title={`${process.env.NAME} ATOM Feed`} />
+        <link href='/api/atom' type='application/atom+xml' rel='alternate' title={`${process.env.NEXT_PUBLIC_NAME} ATOM Feed`} />
         <meta name='msapplication-TileColor' content='#ffffff' />
         <meta name='msapplication-TileImage' content='/ms-icon-144x144.png' />
         <meta name='theme-color' content='#ffffff' />
         <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
-        <BaiduTongji id={process.env.BAIDU_TONGJI} />
+        <BaiduTongji id={process.env.NEXT_PUBLIC_BAIDU_TONGJI} />
         <OneSignal />
       </Head>
       <Component {...pageProps} />

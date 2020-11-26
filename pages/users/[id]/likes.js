@@ -77,7 +77,7 @@ const Content = ({ id, user, loading, fetchMore }) => {
   return (
     <Spin spinning={loading}>
       <Head>
-        <title>{user.nickname}喜欢的产品 - {process.env.NAME}</title>
+        <title>{user.nickname}喜欢的产品 - {process.env.NEXT_PUBLIC_NAME}</title>
       </Head>
       <Container>
         <SmallTitle>{user.nickname} 喜欢的产品</SmallTitle>

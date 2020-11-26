@@ -7,7 +7,7 @@ const WXACode = ({ ...rest }) => {
   const { viewer } = useViewer()
   if (!viewer || !viewer.token) return null
   useEffect(() => {
-    axios.get(`${process.env.API}/auth/wxaticket`, {
+    axios.get(`${process.env.NEXT_PUBLIC_API}/auth/wxaticket`, {
       headers: {
         authorization: `Bearer ${viewer.token}`
       },

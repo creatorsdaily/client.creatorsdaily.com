@@ -89,7 +89,7 @@ export default withApollo(() => {
   return (
     <Page>
       <Head>
-        <title>创造者们 - {process.env.NAME}</title>
+        <title>创造者们 - {process.env.NEXT_PUBLIC_NAME}</title>
         <meta key='description' name='description' content='已经入驻日报的创造者们' />
       </Head>
       <StyledContainer>

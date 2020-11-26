@@ -144,7 +144,7 @@ const Autofill = ({ links = [], onSet = noop, step, onData = noop }) => {
     setLoading(true)
     lastKey += 1;
     ((currentKey) => {
-      axios.get(`${process.env.PARSER}/${key}`).then(({ data }) => {
+      axios.get(`${process.env.NEXT_PUBLIC_PARSER}/${key}`).then(({ data }) => {
         if (currentKey !== lastKey) return
         setLoading(false)
         setClosed(false)

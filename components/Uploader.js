@@ -65,7 +65,7 @@ const Uploader = ({ height = 260, onUpload = noop, allowUrl = false, autoUpload 
     value.forEach(x => {
       formData.append(`${type}`, x)
     })
-    const { data } = await axios.post(process.env.UPLOAD, formData, {
+    const { data } = await axios.post(process.env.NEXT_PUBLIC_UPLOAD, formData, {
       headers: {
         'content-type': 'multipart/form-data'
       }

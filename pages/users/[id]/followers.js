@@ -82,7 +82,7 @@ export default withApollo(() => {
   return (
     <Page>
       <Head>
-        <title>{user.nickname}的粉丝 - {process.env.NAME}</title>
+        <title>{user.nickname}的粉丝 - {process.env.NEXT_PUBLIC_NAME}</title>
       </Head>
       <StyledContainer>
         <Row gutter={24}>

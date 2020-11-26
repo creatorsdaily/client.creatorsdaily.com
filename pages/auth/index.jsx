@@ -12,7 +12,7 @@ export default withApollo(() => {
   return (
     <Page header={null}>
       <Head>
-        <title>登录或注册 - {process.env.NAME}</title>
+        <title>登录或注册 - {process.env.NEXT_PUBLIC_NAME}</title>
       </Head>
       <AuthBox>
         <MobileBox back={back} />

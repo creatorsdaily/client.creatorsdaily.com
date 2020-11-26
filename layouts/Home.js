@@ -37,7 +37,7 @@ const Timeline = ({ children }) => {
   return (
     <Page>
       <Head>
-        <title>个人中心 - {process.env.NAME}</title>
+        <title>个人中心 - {process.env.NEXT_PUBLIC_NAME}</title>
       </Head>
       <StyledContainer>
         <Row gutter={24}>

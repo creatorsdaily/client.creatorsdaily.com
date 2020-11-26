@@ -87,7 +87,7 @@ const FooterButtons = () => {
     const { default: notification } = await import('antd/lib/notification')
     notification.open({
       message: '应用安装成功',
-      description: `安装成功，点击图标直接打开「${process.env.NAME}」`,
+      description: `安装成功，点击图标直接打开「${process.env.NEXT_PUBLIC_NAME}」`,
       icon: (<StyledIcon src='/apple-icon-180x180.png' />),
       duration: 3000,
       placement: 'bottomRight'

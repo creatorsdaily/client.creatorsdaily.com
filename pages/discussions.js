@@ -154,7 +154,7 @@ export default withApollo(() => {
   return (
     <Page>
       <Head>
-        <title>讨论 - {process.env.NAME}</title>
+        <title>讨论 - {process.env.NEXT_PUBLIC_NAME}</title>
         <meta key='description' name='description' content='快来和各位创造者们聊一聊～' />
       </Head>
       <StyledContainer>

@@ -1,24 +1,24 @@
 import { Feed } from 'feed'
 
-const DOMAIN = process.env.DOMAIN
+const DOMAIN = process.env.NEXT_PUBLIC_DOMAIN
 
 const site = `https://${DOMAIN}`
 
 const createFeed = () => new Feed({
-  title: process.env.NAME,
-  description: process.env.DESCRIPTION,
+  title: process.env.NEXT_PUBLIC_NAME,
+  description: process.env.NEXT_PUBLIC_DESCRIPTION,
   id: site,
   link: site,
   language: 'zh', // optional, used only in RSS 2.0, possible values: http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes
   image: `${site}/icon.png`,
   favicon: `${site}/favicon.ico`,
-  copyright: process.env.NAME,
+  copyright: process.env.NEXT_PUBLIC_NAME,
   feedLinks: {
     json: `${site}/api/json`,
     atom: `${site}/api/atom`
   },
   author: {
-    name: process.env.NAME,
+    name: process.env.NEXT_PUBLIC_NAME,
     email: 'tengfei@tengfei.fun',
     link: site
   }
@@ -41,7 +41,7 @@ export default (list = []) => {
       date: new Date(x.createdAt)
     }
     if (x.icon && x.icon.hash) {
-      item.image = `${process.env.FILES}/${x.icon.hash}-100-100`
+      item.image = `${process.env.NEXT_PUBLIC_FILES}/${x.icon.hash}-100-100`
     }
     feed.addItem(item)
   })
@@ -65,7 +65,7 @@ export const posts = (list = []) => {
       date: new Date(x.createdAt)
     }
     if (x.media && x.media.hash) {
-      item.image = `${process.env.FILES}/${x.media.hash}`
+      item.image = `${process.env.NEXT_PUBLIC_FILES}/${x.media.hash}`
     }
     feed.addItem(item)
   })

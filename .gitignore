@@ -54,7 +54,7 @@ npm-debug.log.*
 log.txt
 
 .next
-.env
+.env.local
 bundles/*
 public/service-worker.js
 *.pem

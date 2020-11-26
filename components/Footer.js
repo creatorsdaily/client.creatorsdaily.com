@@ -63,10 +63,10 @@ const Footer = props => {
           <Col md={14} sm={24} xs={24}>
             <Content>
               <Link href='/'>
-                <a>{process.env.NAME}</a>
+                <a>{process.env.NEXT_PUBLIC_NAME}</a>
               </Link>
               <span style={{ padding: '0 8px' }}>-</span>
-              {process.env.SLOGAN} <span style={{ display: 'none' }}>v{process.env.VERSION}</span>
+              {process.env.NEXT_PUBLIC_SLOGAN} <span style={{ display: 'none' }}>v{process.env.VERSION}</span>
               <Divider type='vertical' />
               <Link href='/about'>
                 <a>关于</a>

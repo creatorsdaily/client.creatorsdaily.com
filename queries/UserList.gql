@@ -1,7 +1,7 @@
 #import "./fragments/UserFields.gql"
 #import "./fragments/ProductFields.gql"
-query UserList($page: Int, $size: Int, $isCreator: Boolean, $ids: [String!]) {
-  getUsers(page: $page, size: $size, isCreator: $isCreator, ids: $ids) {
+query UserList($page: Int, $size: Int, $isCreator: Boolean, $ids: [String!], $startTime: DateTime, $endTime: DateTime) {
+  getUsers(page: $page, size: $size, isCreator: $isCreator, ids: $ids, startTime: $startTime, endTime: $endTime) {
     total
     count
     page

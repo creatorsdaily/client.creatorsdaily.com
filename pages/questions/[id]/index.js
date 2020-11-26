@@ -103,7 +103,7 @@ export default withApollo(() => {
   return (
     <Page>
       <Head>
-        <title>{question.name} - {process.env.NAME}</title>
+        <title>{question.name} - {process.env.NEXT_PUBLIC_NAME}</title>
         <meta key='keywords' name='keywords' content={getKeywords()} />
         <meta key='description' name='description' content={getDescription()} />
       </Head>

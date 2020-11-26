@@ -111,7 +111,7 @@ export default withRouter(({ router }) => {
             <Link href='/' passHref>
               <a>
                 <Logo>
-                  <Brand name={process.env.NAME} />
+                  <Brand name={process.env.NEXT_PUBLIC_NAME} />
                 </Logo>
               </a>
             </Link>

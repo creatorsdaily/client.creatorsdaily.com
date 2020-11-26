@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="952px" height="624px" viewBox="0 0 952 624" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>{{name}}产品卡</title>
+    <desc>产品「{{product.name}}」分享卡</desc>
+    <defs>
+        <rect id="path-1" x="32" y="32" width="888" height="560" rx="24"></rect>
+        <filter x="-4.2%" y="-6.7%" width="108.4%" height="113.4%" filterUnits="objectBoundingBox" id="filter-2">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="12.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.05 0" type="matrix" in="shadowBlurOuter1"></feColorMatrix>
+        </filter>
+        <rect id="path-3" x="0" y="0" width="128" height="128" rx="24"></rect>
+        <linearGradient x1="17.7452741%" y1="84.8840572%" x2="76.898702%" y2="22.3987031%" id="linearGradient-5">
+            <stop stop-color="#E95952" offset="0%"></stop>
+            <stop stop-color="#EC735E" offset="9%"></stop>
+            <stop stop-color="#F08C6A" offset="21%"></stop>
+            <stop stop-color="#F29F72" offset="33%"></stop>
+            <stop stop-color="#F4A977" offset="45%"></stop>
+            <stop stop-color="#F4AD79" offset="59%"></stop>
+            <stop stop-color="#F1B38A" offset="78%"></stop>
+            <stop stop-color="#EDBDA3" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="99.9988381%" y1="49.9987193%" x2="0%" y2="49.9987193%" id="linearGradient-6">
+            <stop stop-color="#DE7B76" offset="0%"></stop>
+            <stop stop-color="#E36A64" offset="31%"></stop>
+            <stop stop-color="#E85D57" offset="66%"></stop>
+            <stop stop-color="#E95952" offset="97%"></stop>
+        </linearGradient>
+        <linearGradient x1="2.98985685e-14%" y1="49.9959344%" x2="100.001045%" y2="49.9959344%" id="linearGradient-7">
+            <stop stop-color="#E95952" offset="0%"></stop>
+            <stop stop-color="#EB6859" offset="9%"></stop>
+            <stop stop-color="#F0906A" offset="34%"></stop>
+            <stop stop-color="#F19A6F" offset="41%"></stop>
+            <stop stop-color="#F3A876" offset="56%"></stop>
+            <stop stop-color="#F4AD79" offset="69%"></stop>
+            <stop stop-color="#F1B38A" offset="83%"></stop>
+            <stop stop-color="#EDBDA3" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="3.24211406e-14%" y1="50.0034177%" x2="99.9990961%" y2="50.0034177%" id="linearGradient-8">
+            <stop stop-color="#E95952" offset="0%"></stop>
+            <stop stop-color="#ED7A5F" offset="53%"></stop>
+            <stop stop-color="#EE8263" offset="58%"></stop>
+            <stop stop-color="#F19A6F" offset="73%"></stop>
+            <stop stop-color="#F3A876" offset="88%"></stop>
+            <stop stop-color="#F4AD79" offset="100%"></stop>
+        </linearGradient>
+        <rect id="path-9" x="0" y="0" width="32" height="32" rx="8"></rect>
+        <rect id="path-11" x="0" y="0" width="32" height="32" rx="8"></rect>
+        <rect id="path-13" x="0" y="0" width="32" height="32" rx="8"></rect>
+        <filter x="-7.7%" y="-5.8%" width="115.4%" height="111.5%" filterUnits="objectBoundingBox" id="filter-15">
+            <feOffset dx="0" dy="0" in="SourceAlpha" result="shadowOffsetOuter1"></feOffset>
+            <feGaussianBlur stdDeviation="7.5" in="shadowOffsetOuter1" result="shadowBlurOuter1"></feGaussianBlur>
+            <feColorMatrix values="0 0 0 0 0   0 0 0 0 0   0 0 0 0 0  0 0 0 0.1 0" type="matrix" in="shadowBlurOuter1" result="shadowMatrixOuter1"></feColorMatrix>
+            <feMerge>
+                <feMergeNode in="shadowMatrixOuter1"></feMergeNode>
+                <feMergeNode in="SourceGraphic"></feMergeNode>
+            </feMerge>
+        </filter>
+        <rect id="path-16" x="0" y="0" width="384" height="512" rx="24"></rect>
+    </defs>
+    <g id="画板" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect fill="#E5E9ED" x="0" y="0" width="952" height="624"></rect>
+        <g id="card">
+            <use fill="black" fill-opacity="1" filter="url(#filter-2)" xlink:href="#path-1"></use>
+            <use fill="#FFFFFF" fill-rule="evenodd" xlink:href="#path-1"></use>
+        </g>
+        <g id="icon" transform="translate(56.000000, 110.000000)">
+            <mask id="mask-4" fill="white">
+                <use xlink:href="#path-3"></use>
+            </mask>
+            <use id="iconMasker" fill="#F5F5FF" xlink:href="#path-3"></use>
+            <image mask="url(#mask-4)" x="0" y="0" width="128" height="128" xlink:href="{{icon}}"></image>
+        </g>
+        <foreignObject x="56" y="308" width="280" height="50">
+          <body style="margin:0;" xmlns="http://www.w3.org/1999/xhtml">
+            <p style="font-size:18px;margin:0;color:#5A6165;">{{product.description}}</p>
+          </body>
+        </foreignObject>
+        <text id="name" font-family="PingFangSC-Semibold, PingFang SC" font-size="26" font-weight="500" fill="#363636">
+            <tspan x="56" y="290">{{product.name}}</tspan>
+        </text>
+        <g id="wxacodeGroup" transform="translate(768.000000, 56.000000)">
+            <text id="wxacodeTitle" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#606060">
+                <tspan x="4" y="157">长按「小程序码」打开</tspan>
+            </text>
+            <image id="wxacode" x="0" y="0" width="128" height="128" xlink:href="{{wxacode}}"></image>
+        </g>
+        <g id="qrcodeGroup" transform="translate(772.000000, 241.000000)">
+            <text id="qrcodeTitle" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#606060">
+                <tspan x="10" y="157">长按「二维码」打开</tspan>
+            </text>
+            <g id="qrcode">
+                <g id="border" opacity="0.4" fill="#000000" fill-rule="nonzero">
+                    <path d="M103.93985,128 L123.989975,128 L128,123.989975 L128,103.93985 L123.989975,103.93985 C123.989975,111.9599 123.989975,115.969925 121.984962,121.984962 C115.969925,123.989975 111.9599,123.989975 103.93985,123.989975 L103.93985,128 Z" id="路径"></path>
+                    <path d="M1.77635684e-14,123.989975 L4.01002506,128 L24.0601504,128 L24.0601504,123.989975 C16.0401003,123.989975 12.0300752,123.989975 6.01503759,121.984962 C4.01002506,115.969925 4.01002506,111.9599 4.01002506,103.93985 L1.77635684e-14,103.93985 L1.77635684e-14,123.989975 Z" id="路径"></path>
+                    <path d="M0,4.01002506 L0,24.0601504 L4.01002506,24.0601504 C4.01002506,16.0401003 4.01002506,12.0300752 6.01503759,6.01503759 C12.0300752,4.01002506 16.0401003,4.01002506 24.0601504,4.01002506 L24.0601504,0 L4.01002506,0 L0,4.01002506 Z" id="路径"></path>
+                    <path d="M128,24.0601504 L128,4.01002506 L123.989975,1.77635684e-14 L103.93985,1.77635684e-14 L103.93985,4.01002506 C111.9599,4.01002506 115.969925,4.01002506 121.984962,6.01503759 C123.989975,12.0300752 123.989975,16.0401003 123.989975,24.0601504 L128,24.0601504 Z" id="路径"></path>
+                </g>
+                <image opacity="0.75" x="14" y="14" width="100" height="100" xlink:href="/api/{{product.id}}/qrcode.png"></image>
+            </g>
+        </g>
+        <g id="brand" transform="translate(56.000000, 56.000000)">
+            <text id="sitename" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#606060">
+                <tspan x="38" y="21">{{name}}</tspan>
+            </text>
+            <g id="logo" transform="translate(0.000000, 0.000000)" fill-rule="nonzero">
+                <path d="M27.3686211,20.3425427 C26.4560525,19.4293471 25.2200232,18.9183377 23.9326752,18.9220257 C22.6453273,18.9257136 21.4122127,19.4437967 20.504832,20.3622061 C19.3217954,21.5659773 17.7074833,22.2412836 16.0245595,22.2364141 C12.5410698,22.2364141 9.70713635,19.3859575 9.70713635,15.8818768 C9.70713635,12.377796 12.5410698,9.52733944 16.0245595,9.52733944 C17.7011411,9.52274664 19.3098696,10.1929058 20.4921595,11.3884385 C20.9318946,11.8314795 21.4525468,12.18497 22.0255322,12.4295034 C21.8863052,11.9429548 21.7145331,11.4664283 21.5113907,11.0031826 C19.7683786,7.03410024 15.8217995,4.26666667 11.2321814,4.26666667 C5.56395241,4.26666667 0.876937124,8.49064425 0.110793873,13.9796303 C0.0439551031,14.5573538 0.00769680951,15.1382418 0.00217242886,15.7198362 C0.00217242886,15.7515161 0.00217242886,15.7831959 0.00434485775,15.8148757 C0.00434485775,15.7831959 0.00434485775,15.7515161 0.00217242886,15.7198362 C0.00217242886,15.7737284 0,15.829077 0,15.8815126 C0,20.1866926 1.66552881,24.2344283 4.69353258,27.2789694 C7.72153638,30.3235105 11.7445126,32 16.0245595,32 C20.291564,32.0040605 24.3831264,30.2924721 27.388535,27.2461972 C29.2782373,25.3341176 29.2693225,22.2435637 27.3686211,20.3425427 Z" id="路径" fill="url(#linearGradient-5)"></path>
+                <path d="M11.1729927,4.39253775 C15.7839073,4.39253775 19.7487992,7.09192217 21.4998992,10.9634077 C21.7039842,11.4152625 21.8765534,11.8800716 22.0164264,12.3546562 C24.165364,13.2462522 26.6600055,12.5253663 27.9658955,10.635416 C29.2717854,8.7454656 29.0224321,6.21685606 27.371213,4.60493668 C24.3306138,1.63383793 20.2867878,0 15.9876082,0 C11.6884286,0 7.64460263,1.63383793 4.60400339,4.60493668 C2.0159111,7.13241293 0.418314284,10.3691879 0,13.8666667 C0.769698284,8.51265079 5.47846211,4.39253775 11.1729927,4.39253775 Z" id="路径" fill="url(#linearGradient-6)"></path>
+                <path d="M27.3424649,20.3791325 C27.2724142,20.3105311 27.2005201,20.2451965 27.1275199,20.1816766 C25.1668642,18.4774732 22.196796,18.5729563 20.353251,20.3994589 C19.1485962,21.5993768 17.5047852,22.2725216 15.7911087,22.2676676 C12.2439637,22.2676676 9.35824462,19.4263352 9.35824462,15.9334709 C9.35824462,12.4598439 12.2126253,9.63085249 15.7332247,9.6 L15.7055731,9.6 C9.38810835,9.6 4.26666667,14.6144363 4.26666667,20.8001782 C4.26666667,26.8193167 9.11601677,31.7284915 15.1978901,31.9887415 C15.3807592,31.9952748 15.563997,31.9990255 15.7476035,32 L15.7911087,32 C20.1361924,32.0038566 24.3025368,30.2974791 27.3627427,27.2606887 C29.2869764,25.3547296 29.2778986,22.2740684 27.3424649,20.3791325 Z" id="路径" fill="url(#linearGradient-7)"></path>
+                <path d="M20.4373635,19.7436647 C19.2446615,20.9638079 17.6171606,21.6482989 15.9204874,21.6433632 C12.6757393,21.6433632 9.98985159,19.1767447 9.6,16 C9.99897733,21.9585647 14.90461,26.6666667 20.898761,26.6666667 C23.8494785,26.6704143 26.6843364,25.5057115 28.7961762,23.4220006 C28.8756581,21.3843059 27.7100535,19.5061941 25.8607974,18.6922922 C24.0115412,17.8783903 21.8578143,18.2955849 20.4369985,19.7429265 L20.4373635,19.7436647 Z" id="路径" fill="url(#linearGradient-8)"></path>
+            </g>
+        </g>
+        <g id="discoverer" transform="translate(56.000000, 512.000000)">
+            <text id="title" font-family="PingFangSC-Semibold, PingFang SC" font-size="10" font-weight="500" fill="#5A6165">
+                <tspan x="0" y="11">发现者</tspan>
+            </text>
+            <g id="user" transform="translate(0.000000, 24.000000)">
+                <text id="username" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#363636">
+                    <tspan x="40" y="21">日报测试君</tspan>
+                </text>
+                <g id="avatar">
+                    <mask id="mask-10" fill="white">
+                        <use xlink:href="#path-9"></use>
+                    </mask>
+                    <use id="avatarMasker" fill="#D8D8D8" xlink:href="#path-9"></use>
+                    <image mask="url(#mask-10)" x="0" y="0" width="32" height="32" ></image>
+                </g>
+            </g>
+        </g>
+        <g id="creators" transform="translate(56.000000, 392.000000)">
+            <text id="title" font-family="PingFangSC-Semibold, PingFang SC" font-size="10" font-weight="500" fill="#5A6165">
+                <tspan x="0" y="11">创造者们</tspan>
+            </text>
+            <g id="user" transform="translate(0.000000, 24.000000)">
+                <text id="username" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#363636">
+                    <tspan x="40" y="21">腾飞</tspan>
+                </text>
+                <g id="avatar">
+                    <mask id="mask-12" fill="white">
+                        <use xlink:href="#path-11"></use>
+                    </mask>
+                    <use id="avatarMasker" fill="#D8D8D8" xlink:href="#path-11"></use>
+                    <image mask="url(#mask-12)" x="0" y="0" width="32" height="32" ></image>
+                </g>
+            </g>
+            <g id="user" transform="translate(0.000000, 64.000000)">
+                <text id="username" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#363636">
+                    <tspan x="40" y="21">日报测试君</tspan>
+                </text>
+                <g id="avatar">
+                    <mask id="mask-14" fill="white">
+                        <use xlink:href="#path-13"></use>
+                    </mask>
+                    <use id="avatarMasker" fill="#D8D8D8" xlink:href="#path-13"></use>
+                    <image mask="url(#mask-14)" x="0" y="0" width="32" height="32" ></image>
+                </g>
+            </g>
+        </g>
+        <g id="image" filter="url(#filter-15)" transform="translate(360.000000, 56.000000)">
+            <mask id="mask-17" fill="white">
+                <use xlink:href="#path-16"></use>
+            </mask>
+            <use id="imageMasker" fill="#F5F5FF" xlink:href="#path-16"></use>
+            <image mask="url(#mask-17)" width="384" height="512" xlink:href="{{media}}" preserveAspectRatio="xMinYMin slice"></image>
+        </g>
+        <text id="medianame" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal">
+            <tspan x="772" y="564" fill="#5A6165">公众号「</tspan>
+            <tspan x="820" y="564" font-family="PingFangSC-Semibold, PingFang SC" font-weight="500" fill="#363636">一群创造者</tspan>
+            <tspan x="880" y="564" fill="#5A6165">」</tspan>
+        </text>
+    </g>
+</svg>

@@ -11,9 +11,11 @@ const Container = styled.div`
 `
 
 export default withApollo(() => {
-  const { query: {
-    id
-  } } = useRouter()
+  const {
+    query: {
+      id
+    }
+  } = useRouter()
   useEffect(() => {
     const timer = setTimeout(() => {
       location.href = id
@@ -27,7 +29,7 @@ export default withApollo(() => {
       <Container>
         <Alert
           message='请注意'
-          description={`您即将离开${process.env.NAME}前往 ${id}`}
+          description={`您即将离开${process.env.NEXT_PUBLIC_NAME}前往 ${id}`}
           type='warning'
           showIcon
         />

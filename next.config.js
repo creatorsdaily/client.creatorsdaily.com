@@ -12,29 +12,11 @@ const withMDX = require('@zeit/next-mdx')({
 })
 const lessToJS = require('less-vars-to-js')
 const withOffline = require('next-offline')
-require('dotenv').config()
 
 const themeVariables = lessToJS(
   fs.readFileSync(path.resolve(__dirname, './styles/antd-custom.less'), 'utf8')
 )
 
-const {
-  API,
-  GRAPHQL,
-  UPLOAD,
-  FILES,
-  NAME,
-  SLOGAN,
-  DESCRIPTION,
-  KEYWORDS,
-  ONE_SIGNAL_APP_ID,
-  PRODUCT_ID,
-  GRAPHQL_WS,
-  CLOSE_TIP,
-  BAIDU_TONGJI,
-  PARSER,
-  DOMAIN
-} = process.env
 module.exports = withPlugins([
   withMDX,
   [withOffline, {
@@ -169,21 +151,6 @@ module.exports = withPlugins([
   poweredByHeader: false,
   pageExtensions: ['js', 'jsx', 'mdx'],
   env: {
-    API,
-    GRAPHQL,
-    UPLOAD,
-    FILES,
-    NAME,
-    SLOGAN,
-    DESCRIPTION,
-    KEYWORDS,
-    ONE_SIGNAL_APP_ID,
-    PRODUCT_ID,
-    DOMAIN,
-    GRAPHQL_WS,
-    CLOSE_TIP,
-    BAIDU_TONGJI,
-    PARSER,
     VERSION: require('./package.json').version
   },
   async redirects () {

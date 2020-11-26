@@ -20,5 +20,6 @@ fragment ProductFields on Product {
   icon {
     id
     hash
+    ext
   }
 }

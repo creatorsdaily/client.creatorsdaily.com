@@ -43,8 +43,8 @@ const User = ({ ContentContainer = Div, children }) => {
   return (
     <Page>
       <Head>
-        <title>{user.nickname} - {process.env.NAME}</title>
-        <meta key='description' name='description' content={`${user.nickname}，${process.env.NAME}第 ${user.number} 位成员`} />
+        <title>{user.nickname} - {process.env.NEXT_PUBLIC_NAME}</title>
+        <meta key='description' name='description' content={`${user.nickname}，${process.env.NEXT_PUBLIC_NAME}第 ${user.number} 位成员`} />
       </Head>
       <StyledContainer>
         <Row type='flex' gutter={24}>

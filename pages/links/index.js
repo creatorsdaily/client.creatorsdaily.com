@@ -59,7 +59,7 @@ export default withApollo(() => {
   return (
     <Page>
       <Head>
-        <title>友情链接 - {process.env.NAME}</title>
+        <title>友情链接 - {process.env.NEXT_PUBLIC_NAME}</title>
       </Head>
       <StyledContainer>
         <Row gutter={24}>

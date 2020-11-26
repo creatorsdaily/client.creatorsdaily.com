@@ -156,7 +156,7 @@ export default withApollo(() => {
   return (
     <StyledPage>
       <Head>
-        <title>产品公墓 - {process.env.NAME}</title>
+        <title>产品公墓 - {process.env.NEXT_PUBLIC_NAME}</title>
         <meta key='description' name='description' content='为了纪念那些已经无法使用的产品，建造此公墓。' />
       </Head>
       <Inner>

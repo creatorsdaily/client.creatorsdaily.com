@@ -175,7 +175,7 @@ const partners = [{
 }]
 
 const RightSide = ({ onQuestion = noop, onProduct = noop }) => {
-  const productId = process.env.PRODUCT_ID
+  const productId = process.env.NEXT_PUBLIC_PRODUCT_ID
   const handleWeApp = () => {
     Modal.info({
       okText: '关闭',

@@ -130,7 +130,7 @@ export default forwardRef(({ value = [], onChange = noop, onError = noop }, ref)
         listType='picture-card'
         className='avatar-uploader'
         showUploadList={false}
-        action={process.env.UPLOAD}
+        action={process.env.NEXT_PUBLIC_UPLOAD}
         onChange={handleChange}
         headers={{
           authorization: `Bearer ${user && user.token}`
