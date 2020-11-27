@@ -73,22 +73,22 @@
         </g>
         <foreignObject x="56" y="262" width="280" height="37">
           <body style="margin:0;" xmlns="http://www.w3.org/1999/xhtml">
-            <p style="font-family:PingFangSC-Semibold,PingFang SC;font-size:26px;font-weight:500;margin:0;color:#363636;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{product.name}}</p>
+            <p style="font-family:PingFangSC-Semibold,PingFang SC,.PingFang SC;font-size:26px;font-weight:500;margin:0;color:#363636;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{product.name}}</p>
           </body>
         </foreignObject>
         <foreignObject x="56" y="307" width="280" height="50">
           <body style="margin:0;" xmlns="http://www.w3.org/1999/xhtml">
-            <p style="font-family:PingFangSC-Regular,PingFang SC;font-size:18px;line-height:25px;margin:0;color:#5A6165;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{{product.description}}</p>
+            <p style="font-family:PingFangSC-Regular,PingFang SC,.PingFang SC;font-size:18px;line-height:25px;margin:0;color:#5A6165;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{{product.description}}</p>
           </body>
         </foreignObject>
         <g id="wxacodeGroup" transform="translate(768.000000, 56.000000)">
-            <text id="wxacodeTitle" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#606060">
+            <text id="wxacodeTitle" font-family="PingFangSC-Regular, PingFang SC,.PingFang SC" font-size="12" font-weight="normal" fill="#606060">
                 <tspan x="4" y="157">长按「小程序码」打开</tspan>
             </text>
             <image id="wxacode" x="0" y="0" width="128" height="128" xlink:href="{{wxacode}}"></image>
         </g>
         <g id="qrcodeGroup" transform="translate(772.000000, 241.000000)">
-            <text id="qrcodeTitle" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#606060">
+            <text id="qrcodeTitle" font-family="PingFangSC-Regular, PingFang SC,.PingFang SC" font-size="12" font-weight="normal" fill="#606060">
                 <tspan x="10" y="157">长按「二维码」打开</tspan>
             </text>
             <g id="qrcode">
@@ -102,7 +102,7 @@
             </g>
         </g>
         <g id="brand" transform="translate(56.000000, 56.000000)">
-            <text id="sitename" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#606060">
+            <text id="sitename" font-family="PingFangSC-Semibold, PingFang SC,.PingFang SC" font-size="14" font-weight="500" fill="#606060">
                 <tspan x="38" y="21">{{name}}</tspan>
             </text>
             <g id="logo" transform="translate(0.000000, 0.000000)" fill-rule="nonzero">
@@ -114,11 +114,11 @@
         </g>
         {{#if showDiscoverer}}
         <g id="discoverer" transform="translate(56.000000, 512.000000)">
-            <text id="title" font-family="PingFangSC-Semibold, PingFang SC" font-size="10" font-weight="500" fill="#5A6165">
+            <text id="title" font-family="PingFangSC-Semibold, PingFang SC,.PingFang SC" font-size="10" font-weight="500" fill="#5A6165">
                 <tspan x="0" y="11">发现者</tspan>
             </text>
             <g id="user" transform="translate(0.000000, 24.000000)">
-                <text id="username" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#363636">
+                <text id="username" font-family="PingFangSC-Semibold, PingFang SC,.PingFang SC" font-size="14" font-weight="500" fill="#363636">
                     <tspan x="40" y="21">{{nickname product.discoverer}}</tspan>
                 </text>
                 <g id="avatar">
@@ -133,12 +133,12 @@
         {{/if}}
         {{#if product.creators.length}}
         <g id="creators" transform="translate(56.000000, {{creatorsOffset}})">
-            <text id="title" font-family="PingFangSC-Semibold, PingFang SC" font-size="10" font-weight="500" fill="#5A6165">
+            <text id="title" font-family="PingFangSC-Semibold, PingFang SC,.PingFang SC" font-size="10" font-weight="500" fill="#5A6165">
                 <tspan x="0" y="11">创造者们</tspan>
             </text>
             {{#each product.creators}}
             <g id="user" transform="translate(0.000000, {{offset @index}})">
-                <text id="username" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#363636">
+                <text id="username" font-family="PingFangSC-Semibold, PingFang SC,.PingFang SC" font-size="14" font-weight="500" fill="#363636">
                     <tspan x="40" y="21">{{nickname this}}</tspan>
                 </text>
                 <g id="avatar">
@@ -159,9 +159,9 @@
             <use id="imageMasker" fill="#F5F5FF" xlink:href="#path-16"></use>
             <image mask="url(#mask-17)" width="384" height="512" xlink:href="{{media}}" preserveAspectRatio="xMinYMin slice"></image>
         </g>
-        <text id="medianame" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal">
+        <text id="medianame" font-family="PingFangSC-Regular, PingFang SC,.PingFang SC" font-size="12" font-weight="normal">
             <tspan x="772" y="564" fill="#5A6165">公众号「</tspan>
-            <tspan x="820" y="564" font-family="PingFangSC-Semibold, PingFang SC" font-weight="500" fill="#363636">一群创造者</tspan>
+            <tspan x="820" y="564" font-family="PingFangSC-Semibold, PingFang SC,.PingFang SC" font-weight="500" fill="#363636">一群创造者</tspan>
             <tspan x="880" y="564" fill="#5A6165">」</tspan>
         </text>
     </g>
