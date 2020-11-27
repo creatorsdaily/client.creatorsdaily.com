@@ -71,14 +71,16 @@
             <use id="iconMasker" fill="#F5F5FF" xlink:href="#path-3"></use>
             <image mask="url(#mask-4)" x="0" y="0" width="128" height="128" xlink:href="{{icon}}"></image>
         </g>
-        <foreignObject x="56" y="308" width="280" height="50">
+        <foreignObject x="56" y="262" width="280" height="37">
           <body style="margin:0;" xmlns="http://www.w3.org/1999/xhtml">
-            <p style="font-size:18px;margin:0;color:#5A6165;">{{product.description}}</p>
+            <p style="font-family:PingFangSC-Semibold,PingFang SC;font-size:26px;font-weight:500;margin:0;color:#363636;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{product.name}}</p>
           </body>
         </foreignObject>
-        <text id="name" font-family="PingFangSC-Semibold, PingFang SC" font-size="26" font-weight="500" fill="#363636">
-            <tspan x="56" y="290">{{product.name}}</tspan>
-        </text>
+        <foreignObject x="56" y="307" width="280" height="50">
+          <body style="margin:0;" xmlns="http://www.w3.org/1999/xhtml">
+            <p style="font-family:PingFangSC-Regular,PingFang SC;font-size:18px;line-height:25px;margin:0;color:#5A6165;overflow:hidden;text-overflow:ellipsis;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;">{{product.description}}</p>
+          </body>
+        </foreignObject>
         <g id="wxacodeGroup" transform="translate(768.000000, 56.000000)">
             <text id="wxacodeTitle" font-family="PingFangSC-Regular, PingFang SC" font-size="12" font-weight="normal" fill="#606060">
                 <tspan x="4" y="157">长按「小程序码」打开</tspan>
@@ -110,52 +112,46 @@
                 <path d="M20.4373635,19.7436647 C19.2446615,20.9638079 17.6171606,21.6482989 15.9204874,21.6433632 C12.6757393,21.6433632 9.98985159,19.1767447 9.6,16 C9.99897733,21.9585647 14.90461,26.6666667 20.898761,26.6666667 C23.8494785,26.6704143 26.6843364,25.5057115 28.7961762,23.4220006 C28.8756581,21.3843059 27.7100535,19.5061941 25.8607974,18.6922922 C24.0115412,17.8783903 21.8578143,18.2955849 20.4369985,19.7429265 L20.4373635,19.7436647 Z" id="路径" fill="url(#linearGradient-8)"></path>
             </g>
         </g>
+        {{#if showDiscoverer}}
         <g id="discoverer" transform="translate(56.000000, 512.000000)">
             <text id="title" font-family="PingFangSC-Semibold, PingFang SC" font-size="10" font-weight="500" fill="#5A6165">
                 <tspan x="0" y="11">发现者</tspan>
             </text>
             <g id="user" transform="translate(0.000000, 24.000000)">
                 <text id="username" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#363636">
-                    <tspan x="40" y="21">日报测试君</tspan>
+                    <tspan x="40" y="21">{{nickname product.discoverer}}</tspan>
                 </text>
                 <g id="avatar">
                     <mask id="mask-10" fill="white">
                         <use xlink:href="#path-9"></use>
                     </mask>
                     <use id="avatarMasker" fill="#D8D8D8" xlink:href="#path-9"></use>
-                    <image mask="url(#mask-10)" x="0" y="0" width="32" height="32" ></image>
+                    <image mask="url(#mask-10)" x="0" y="0" width="32" height="32" xlink:href="{{avatar product.discoverer}}"></image>
                 </g>
             </g>
         </g>
-        <g id="creators" transform="translate(56.000000, 392.000000)">
+        {{/if}}
+        {{#if product.creators.length}}
+        <g id="creators" transform="translate(56.000000, {{creatorsOffset}})">
             <text id="title" font-family="PingFangSC-Semibold, PingFang SC" font-size="10" font-weight="500" fill="#5A6165">
                 <tspan x="0" y="11">创造者们</tspan>
             </text>
-            <g id="user" transform="translate(0.000000, 24.000000)">
+            {{#each product.creators}}
+            <g id="user" transform="translate(0.000000, {{offset @index}})">
                 <text id="username" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#363636">
-                    <tspan x="40" y="21">腾飞</tspan>
+                    <tspan x="40" y="21">{{nickname this}}</tspan>
                 </text>
                 <g id="avatar">
                     <mask id="mask-12" fill="white">
                         <use xlink:href="#path-11"></use>
                     </mask>
                     <use id="avatarMasker" fill="#D8D8D8" xlink:href="#path-11"></use>
-                    <image mask="url(#mask-12)" x="0" y="0" width="32" height="32" ></image>
+                    <image mask="url(#mask-12)" x="0" y="0" width="32" height="32" xlink:href="{{avatar this}}"></image>
                 </g>
             </g>
-            <g id="user" transform="translate(0.000000, 64.000000)">
-                <text id="username" font-family="PingFangSC-Semibold, PingFang SC" font-size="14" font-weight="500" fill="#363636">
-                    <tspan x="40" y="21">日报测试君</tspan>
-                </text>
-                <g id="avatar">
-                    <mask id="mask-14" fill="white">
-                        <use xlink:href="#path-13"></use>
-                    </mask>
-                    <use id="avatarMasker" fill="#D8D8D8" xlink:href="#path-13"></use>
-                    <image mask="url(#mask-14)" x="0" y="0" width="32" height="32" ></image>
-                </g>
-            </g>
+            {{/each}}
         </g>
+        {{/if}}
         <g id="image" filter="url(#filter-15)" transform="translate(360.000000, 56.000000)">
             <mask id="mask-17" fill="white">
                 <use xlink:href="#path-16"></use>
