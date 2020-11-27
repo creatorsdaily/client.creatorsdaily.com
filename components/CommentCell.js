@@ -35,6 +35,9 @@ margin-left: 10px;
 const CommentContent = styled.div`
 margin-left: 44px;
 margin-top: 10px;
+img {
+  max-width: 100%;
+}
 p:last-child {
   margin-bottom: 0;
 }

@@ -1,10 +1,10 @@
 import styled from 'styled-components'
 import Link from 'next/link'
+import ReactMarkdown from 'react-markdown'
 import Box from './Box'
 import UserCell from './UserCell'
 import Time from './Time'
 import ProductCell from './ProductCell'
-import ReactMarkdown from 'react-markdown'
 import CommentCell from './CommentCell'
 
 const Container = styled(Box)`
@@ -15,6 +15,9 @@ const Content = styled.div`
 font-size: 12px;
 margin-top: 12px;
 margin-left: 44px;
+img {
+  max-width: 100%;
+}
 `
 const TimeContainer = styled.div`
 margin-top: 12px;
