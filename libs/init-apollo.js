@@ -3,7 +3,6 @@ import { getMainDefinition } from '@apollo/client/utilities'
 import { WebSocketLink } from '@apollo/client/link/ws'
 import fetch from 'isomorphic-unfetch'
 import possibleTypes from '../possibleTypes'
-// import { persistCache } from 'apollo-cache-persist'
 
 let apolloClient = null
 
@@ -65,7 +64,6 @@ function create (initialState, {
   const cache = new InMemoryCache({
     possibleTypes
   }).restore(initialState)
-  // if (isBrowser) persistCache({ cache, storage: localStorage })
   return new ApolloClient({
     connectToDevTools: isBrowser,
     ssrMode: !isBrowser,
