@@ -49,7 +49,11 @@ const styles = {
     lineHeight: 1.5,
     fontSize: '18px',
     paddingTop: 30,
+    marginBottom: 12,
     fontFamily
+  },
+  productDescription: {
+    marginBottom: 12
   },
   icon: {
     width: 80,
@@ -70,13 +74,6 @@ export default withApollo(() => {
   })
   const list = get(data, 'getProducts.data', [])
   console.log(list, loading)
-  const renderMedia = media => {
-    if (!media) return null
-    const { ext, hash } = media
-    return (
-      <img style={styles.icon} src={`${process.env.NEXT_PUBLIC_FILES}/${hash}-160-160-contain.${ext || 'png'}`} />
-    )
-  }
   return (
     <WeChat>
       <div style={styles.container}>
@@ -88,8 +85,7 @@ export default withApollo(() => {
         {list.map(x => (
           <section style={styles.product} key={x.id}>
             <h3 style={styles.productName}>{x.name}</h3>
-            <div>{x.description}</div>
-            {renderMedia(x.icon)}
+            <div style={styles.productDescription}>{x.description}</div>
             <embed style={styles.card} src={`/api/${x.id}/card.svg`} />
           </section>
         ))}
