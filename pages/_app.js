@@ -53,7 +53,7 @@ const CreatorsApp = ({ pageProps, Component }) => {
         <meta key='og-url' property='og:url' content={process.env.NEXT_PUBLIC_INDEX} />
         <meta key='og-site-name' property='og:site_name' content={process.env.NEXT_PUBLIC_NAME} />
         <meta key='og-image' property='og:image' content='/icon.png' />
-        <meta name='baidu_union_verify' content='c4041099af1c691ef4c60621c998d08f' />
+        <meta name='baidu_union_verify' content='6263577bc5514a2211f5a5844008b374' />
         <link rel='apple-touch-icon' sizes='57x57' href='/apple-icon-57x57.png' />
         <link rel='apple-touch-icon' sizes='60x60' href='/apple-icon-60x60.png' />
         <link rel='apple-touch-icon' sizes='72x72' href='/apple-icon-72x72.png' />
