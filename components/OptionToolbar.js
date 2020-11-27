@@ -26,9 +26,9 @@ background-image: repeating-linear-gradient(60deg, rgba(255,255,255,.8), rgba(25
 }
 `
 
-const OptionToolbar = ({ value, disabled = false, onVote = noop }) => {
+const OptionToolbar = ({ value, disabled = false, onVote = noop, ...rest }) => {
   return (
-    <Container>
+    <Container {...rest}>
       <Space>
         <Button
           type='text' disabled={disabled} icon={<CaretUpOutlined />} onClick={() => onVote(true)}

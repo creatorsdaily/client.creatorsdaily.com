@@ -65,6 +65,10 @@ const StyledReasonList = styled(ReasonList)`
 padding: 0 16px;
 `
 
+const StyledOptionToolbar = styled(OptionToolbar)`
+margin-top: 12px;
+`
+
 const OptionBoxV2 = ({ option, onVote = noop }) => {
   const { viewer } = useViewer()
   const { product, value, ups, downs } = option
@@ -85,7 +89,7 @@ const OptionBoxV2 = ({ option, onVote = noop }) => {
       <StyledProductContent content={product.content} />
       <StyledReasonList id={`product-${product.id}-ups`} list={ups} positive />
       <StyledReasonList id={`product-${product.id}-downs`} list={downs} />
-      <OptionToolbar
+      <StyledOptionToolbar
         value={value}
         disabled={disabled}
         onVote={onVote}
