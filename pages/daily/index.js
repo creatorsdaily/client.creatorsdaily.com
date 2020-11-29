@@ -44,6 +44,10 @@ const Product = styled.section`
 border-bottom: 1px solid #C0C0C0;
 margin-bottom: 48px;
 padding-bottom: 48px;
+h1, h2, h3, h4, h5, h6 {
+  font-size: 16px;
+  font-weight: bold;
+}
 p:last-child {
   margin: 0;
 }
@@ -53,7 +57,7 @@ const ProductName = styled.h3`
 break-inside: avoid;
 color: rgb(54, 54, 54);
 line-height: 1.5;
-font-size: 18px;
+font-size: 20px !important;
 margin-bottom: 12px;
 `
 
@@ -99,9 +103,22 @@ span {
 }
 `
 
+const More = styled.p`
+text-align: center;
+font-size: 12px;
+line-height: 20px;
+color: #808080;
+span {
+  font-weight: bold;
+  color: rgb(52, 53, 54);
+}
+`
+
 export default withApollo(() => {
   const end = day().startOf('date').valueOf()
   const start = day(end).subtract(1, 'day').valueOf()
+  // const start = day().startOf('date').valueOf()
+  // const end = day(start).add(1, 'day').valueOf()
   console.log(new Date(start))
   console.log(new Date(end))
   const { data } = useQuery(ProductListDetail, {
@@ -122,6 +139,24 @@ export default withApollo(() => {
       </ProductTopics>
     )
   }
+  const renderContent = content => {
+    let source = content.slice(0, 300)
+    if (content.length > 300) {
+      source += '...'
+    }
+    const result = (
+      <ReactMarkdown source={source} />
+    )
+    if (content.length > 300) {
+      return (
+        <>
+          {result}
+          <More>更多内容请打开「创造者日报」查看</More>
+        </>
+      )
+    }
+    return result
+  }
   return (
     <WeChat>
       <Container>
@@ -138,7 +173,7 @@ export default withApollo(() => {
             <ProductDescription>{x.description}</ProductDescription>
             {renderProductTopics(x.topics)}
             <ProductCard src={`/api/${x.id}/card.png`} />
-            <ReactMarkdown source={x.content} />
+            {renderContent(x.content)}
           </Product>
         ))}
         <Tip>
