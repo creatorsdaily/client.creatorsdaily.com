@@ -3,6 +3,7 @@ import get from 'lodash/get'
 import ReactMarkdown from 'react-markdown'
 import styled from 'styled-components'
 import day from 'dayjs'
+import { useRouter } from 'next/router'
 import withApollo from '../../libs/with-apollo'
 import WeChat from '../../layouts/WeChat'
 import ProductListDetail from '../../queries/ProductListDetail.gql'
@@ -115,17 +116,24 @@ span {
 `
 
 export default withApollo(() => {
+  const { query: { ids } } = useRouter()
   const end = day().startOf('date').valueOf()
   const start = day(end).subtract(1, 'day').valueOf()
   // const start = day().startOf('date').valueOf()
   // const end = day(start).add(1, 'day').valueOf()
-  console.log(new Date(start))
-  console.log(new Date(end))
+  let variables = {
+    startTime: start,
+    endTime: end
+  }
+  if (ids) {
+    variables = {
+      ids: typeof ids === 'string' ? [ids] : ids
+    }
+  }
   const { data } = useQuery(ProductListDetail, {
     variables: {
       size: 10,
-      startTime: start,
-      endTime: end
+      ...variables
     }
   })
   const list = get(data, 'getProducts.data', [])
