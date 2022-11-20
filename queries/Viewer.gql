@@ -3,6 +3,5 @@ query {
   viewer {
     ...UserFields
     token
-    oneSignal
   }
 }

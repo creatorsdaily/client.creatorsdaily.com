@@ -242,30 +242,22 @@ const RightSide = ({ onQuestion = noop, onProduct = noop }) => {
         <Contact>
           <WeChatButton>
             <img src='/wechat.png' alt='微信' />
-            <div>官方「微信」群</div>
+            <div>联系「微信」</div>
           </WeChatButton>
         </Contact>
-        <Contact>
+        {/* <Contact>
           <a href='https://t.me/creatorsdaily' rel='noopener noreferrer' target='_blank'>
             <Button type='link'>
               <img src='/telegram.png' alt='Telegram' />
               <div>加入「Telegram」群组</div>
             </Button>
           </a>
-        </Contact>
+        </Contact> */}
         <Contact>
           <a href='https://twitter.com/@creators_daily' rel='noopener noreferrer' target='_blank'>
             <Button type='link'>
               <img src='/twitter.png' alt='Twitter' />
               <div>关注「Twitter」</div>
-            </Button>
-          </a>
-        </Contact>
-        <Contact>
-          <a href='https://kz.sync163.com/web/topic/vqNzr253b46Yk?uid=ZNlYrg5BAReny' rel='noopener noreferrer' target='_blank'>
-            <Button type='link'>
-              <KuaizhiImg src='/kuaizhi.png' alt='快知' />
-              <div>在「快知」订阅产品通知</div>
             </Button>
           </a>
         </Contact>

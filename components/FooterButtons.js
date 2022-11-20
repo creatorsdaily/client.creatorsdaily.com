@@ -51,23 +51,6 @@ const FooterButtons = () => {
   const [permission, setPermission] = useState('loading')
 
   useEffect(() => {
-    const OneSignal = window.OneSignal
-    OneSignal.push(async () => {
-      const _isPushSupported = OneSignal.isPushNotificationsSupported()
-      setIsPushSupported(_isPushSupported)
-      if (!_isPushSupported) return
-      const _permission = await OneSignal.getNotificationPermission()
-      setPermission(_permission)
-    })
-  }, [])
-
-  useEffect(() => {
-    const OneSignal = window.OneSignal
-    OneSignal.push(() => OneSignal.on('notificationPermissionChange', changed => setPermission(changed.to)))
-    return () => OneSignal.push(() => OneSignal.off('notificationPermissionChange'))
-  }, [])
-
-  useEffect(() => {
     window.addEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
     return () => window.removeEventListener('beforeinstallprompt', handleBeforeInstallPrompt)
   }, [])
@@ -95,10 +78,7 @@ const FooterButtons = () => {
   }
 
   const handleOpenPush = () => {
-    const OneSignal = window.OneSignal
-    OneSignal.push(() => {
-      OneSignal.showNativePrompt()
-    })
+    
   }
 
   const handleInstall = () => {

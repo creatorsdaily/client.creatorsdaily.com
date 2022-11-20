@@ -64,7 +64,6 @@ query {
       data
     }
     token
-    oneSignal
   }
 }
 `

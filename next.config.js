@@ -37,16 +37,6 @@ module.exports = withPlugins([
           }
         }
       }, {
-        urlPattern: /^https:\/\/cdn\.onesignal\.com\/.*/i,
-        handler: 'CacheFirst',
-        options: {
-          cacheName: 'one-signal',
-          expiration: {
-            maxEntries: 8,
-            maxAgeSeconds: 24 * 60 * 60 * 3
-          }
-        }
-      }, {
         urlPattern: /^https:\/\/media\.creatorsdaily\.com\/.*/i,
         handler: 'CacheFirst',
         options: {

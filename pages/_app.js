@@ -5,7 +5,6 @@ import { ConfigProvider, Empty } from 'antd'
 import { gql } from '@apollo/client'
 import zhCN from 'antd/lib/locale-provider/zh_CN'
 import { Router } from 'next/router'
-import OneSignal from '../components/OneSignal'
 import BaiduTongji from '../components/BaiduTongji'
 import Viewer from '../queries/Viewer.gql'
 import Error from './_error'
@@ -72,7 +71,6 @@ const CreatorsApp = ({ pageProps, Component }) => {
         <meta name='theme-color' content='#ffffff' />
         <meta name='apple-mobile-web-app-status-bar-style' content='black-translucent' />
         <BaiduTongji id={process.env.NEXT_PUBLIC_BAIDU_TONGJI} />
-        <OneSignal />
       </Head>
       <Component {...pageProps} />
     </ConfigProvider>
@@ -82,34 +80,6 @@ const CreatorsApp = ({ pageProps, Component }) => {
 class Creators extends App {
   constructor (props) {
     super(props)
-    if (!props.pageProps.apolloClient) return
-    props.pageProps.apolloClient.query({
-      query: Viewer
-    })
-      .catch(() => ({}))
-      .then(({ data }) => {
-        const viewer = data && data.viewer
-        if (!process.browser || !viewer) return
-        const OneSignal = window.OneSignal || []
-        OneSignal.push(function () {
-          if (viewer.email) {
-            OneSignal.setEmail(viewer.email)
-          }
-          OneSignal.setExternalUserId(viewer.id)
-          OneSignal.getUserId(id => {
-            if (id === viewer.oneSignal) return
-            props.apolloClient.mutate({
-              mutation: UPDATE_USER,
-              variables: {
-                user: {
-                  id: viewer.id,
-                  oneSignal: id
-                }
-              }
-            })
-          })
-        })
-      })
   }
 
   render () {
