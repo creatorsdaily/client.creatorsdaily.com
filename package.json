@@ -37,7 +37,7 @@
     "next-offline": "^5.0.3",
     "null-loader": "^4.0.1",
     "qrcode": "^1.4.4",
-    "qs": "^6.9.4",
+    "qs": "^6.9.7",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-dropzone": "^11.2.4",
